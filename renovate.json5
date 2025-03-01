@@ -20,7 +20,7 @@
       // # renovate: datasource=github-releases depName="jkroepke/helm-secrets"
       // tag: 1.2.3
       matchStrings: [
-        "#\\s+renovate:\\s+datasource=(?<datasource>github-releases)\\s+depName=\"(?<depName>\\S+)\"\\ntag:\\s+(?<currentValue>\\S+)"
+        "#\\s+renovate:\\s+datasource=(?<datasource>github-releases)\\s+depName=\"(?<depName>\\S+)\"\\n\\s+tag:\\s+(?<currentValue>\\S+)"
       ]
     }
   ],
