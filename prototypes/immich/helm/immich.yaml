@@ -5,7 +5,7 @@ immich:
 
 image:
   # renovate: datasource=github-releases depName="immich-app/immich"
-  tag: v1.122.0
+  tag: v1.128.0
 
 postgresql:
   enabled: true
