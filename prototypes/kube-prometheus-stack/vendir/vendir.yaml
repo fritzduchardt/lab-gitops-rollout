@@ -8,6 +8,6 @@ directories:
         helmChart:
           #! renovate: datasource=helm
           name: kube-prometheus-stack
-          version: 66.2.1
+          version: 69.6.0
           repository:
             url: https://prometheus-community.github.io/helm-charts
