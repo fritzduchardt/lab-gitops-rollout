@@ -16,7 +16,7 @@
       ]
     },
     {
-      "fileMatch": ["^/*\\.yaml"],
+      "fileMatch": ["^/.*\\.yaml"],
       // # renovate: datasource=github-releases depName="jkroepke/helm-secrets"
       // tag: 1.2.3
       matchStrings: [
