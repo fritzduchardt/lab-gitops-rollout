@@ -1,0 +1,13 @@
+ingress:
+  enabled: true
+  className: nginx
+  path: /
+  pathType: ImplementationSpecific
+  hosts:
+  - pushgateway.friclu
+serviceMonitor:
+  enabled: true
+  namespace: kube-prometheus-stack
+  additionalLabels:
+    release: kube-prometheus-stack
+  metricRelabelings: []

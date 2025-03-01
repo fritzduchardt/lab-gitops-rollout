@@ -1,0 +1,13 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+    - contents:
+        - helmChart:
+            name: metallb
+            repository:
+                url: https://metallb.github.io/metallb
+            version: 0.14.5
+          lazy: true
+          path: .
+      path: .myks/vendir-cache/helm-metallb-0.14.5-841a6c5a26812c07/data
+      permissions: null
+kind: Config

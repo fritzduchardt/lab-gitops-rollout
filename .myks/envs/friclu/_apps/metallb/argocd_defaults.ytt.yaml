@@ -1,0 +1,10 @@
+
+#@data/values-schema
+---
+argocd:
+  app:
+    name: "metallb"
+    source:
+      path: "gitops/rendered/envs/friclu/metallb"
+      repoURL: "git@github.com:fritzduchardt/m5-cluster.git"
+      targetRevision: "master"

@@ -1,0 +1,24 @@
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+directories:
+- path: charts
+  contents:
+  - path: cert-manager
+    lazy: true
+    helmChart:
+      name: cert-manager
+      version: v1.14.3
+      repository:
+        url: https://charts.jetstack.io
+  - path: cert-manager-webhook-duckdns-google
+    lazy: true
+    git:
+      ref: origin/v1.2.3
+      url: https://github.com/ebrianne/cert-manager-webhook-duckdns
+    newRootPath: deploy/cert-manager-webhook-duckdns
+  - path: cert-manager-webhook-duckdns-github
+    lazy: true
+    git:
+      ref: origin/v1.2.3
+      url: https://github.com/ebrianne/cert-manager-webhook-duckdns
+    newRootPath: deploy/cert-manager-webhook-duckdns

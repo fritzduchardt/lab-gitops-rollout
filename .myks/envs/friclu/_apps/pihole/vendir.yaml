@@ -1,0 +1,12 @@
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+directories:
+- path: charts
+  contents:
+  - path: pihole
+    lazy: true
+    helmChart:
+      name: pihole
+      version: 2.27.0
+      repository:
+        url: https://mojo2600.github.io/pihole-kubernetes/

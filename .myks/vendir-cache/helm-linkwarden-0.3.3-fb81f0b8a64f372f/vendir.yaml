@@ -1,0 +1,13 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+    - contents:
+        - helmChart:
+            name: linkwarden
+            repository:
+                url: https://fmjstudios.github.io/helm
+            version: 0.3.3
+          lazy: true
+          path: .
+      path: .myks/vendir-cache/helm-linkwarden-0.3.3-fb81f0b8a64f372f/data
+      permissions: null
+kind: Config

@@ -1,0 +1,10 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+- contents:
+  - configDigest: dff3476f1ac1146d9398d51a9228b82c2f5e0a062b8c806003739839ef6c7e60
+    helmChart:
+      appVersion: 2.5.3
+      version: 0.3.3
+    path: .
+  path: .myks/vendir-cache/helm-linkwarden-0.3.3-fb81f0b8a64f372f/data
+kind: LockConfig

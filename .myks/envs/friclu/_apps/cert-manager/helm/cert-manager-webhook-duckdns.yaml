@@ -1,0 +1,7 @@
+clusterIssuer:
+  email: fritz@duchardt.net
+  production:
+    create: true
+secret:
+  existingSecret: true
+  existingSecretName: duckdns-secret

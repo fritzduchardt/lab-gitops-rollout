@@ -1,0 +1,13 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+    - contents:
+        - helmChart:
+            name: docker-registry
+            repository:
+                url: https://helm.twun.io
+            version: 2.2.3
+          lazy: true
+          path: .
+      path: .myks/vendir-cache/helm-docker-registry-2.2.3-58a4b113e0f0f025/data
+      permissions: null
+kind: Config

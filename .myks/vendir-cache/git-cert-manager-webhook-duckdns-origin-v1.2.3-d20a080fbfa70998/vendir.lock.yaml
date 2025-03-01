@@ -1,0 +1,12 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+- contents:
+  - configDigest: 53bdd5b7ce9e832800336d96689528993dd17c01748f3601165f5f214623b248
+    git:
+      commitTitle: Updating Chart to v1.2.3
+      sha: bbda4a2b5b1f2b81954d6b6d4093fc652a9dc7dd
+      tags:
+      - v1.2.3
+    path: .
+  path: .myks/vendir-cache/git-cert-manager-webhook-duckdns-origin-v1.2.3-d20a080fbfa70998/data
+kind: LockConfig

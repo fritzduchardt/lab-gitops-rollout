@@ -1,0 +1,76 @@
+application: {}
+argocd:
+  enabled: false
+  namespace: argocd
+  app:
+    name: ""
+    prefix: ""
+    finalizers:
+    - resources-finalizer.argocd.argoproj.io
+    destination:
+      name: ""
+      server: ""
+      namespace: ""
+    source:
+      path: ""
+      plugin: null
+      repoURL: ""
+      targetRevision: ""
+  env:
+    name: ""
+    prefix: ""
+    generateSecret: true
+  project:
+    name: ""
+    prefix: ""
+    destination:
+      name: ""
+      server: ""
+      namespace: '*'
+environment:
+  id: friclu
+  applications:
+  - proto: coredns
+    name: ""
+  - proto: localdns
+    name: ""
+  - proto: nginx
+    name: ""
+  - proto: local-path-provisioner
+    name: ""
+  - proto: cert-manager
+    name: ""
+  - proto: registry
+    name: ""
+  - proto: immich
+    name: ""
+  - proto: home-assistant
+    name: ""
+  - proto: syncthing
+    name: ""
+  - proto: pihole
+    name: ""
+  - proto: linkding
+    name: ""
+  - proto: kube-prometheus-stack
+    name: ""
+  - proto: pushgateway
+    name: ""
+helm:
+  buildDependencies: false
+  capabilities: []
+  includeCRDs: true
+  kubeVersion: ""
+  namespace: ""
+  charts: []
+yttPkg:
+  dirs: []
+render:
+  includeNamespace: false
+myks:
+  gitRepoBranch: ""
+  gitRepoUrl: ""
+  context:
+    app: ""
+    prototype: ""
+    step: ""

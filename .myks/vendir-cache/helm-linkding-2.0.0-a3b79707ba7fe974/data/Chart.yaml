@@ -1,0 +1,27 @@
+annotations:
+  artifacthub.io/changes: |
+    - kind: removed
+      description: 'Remove support for CRDs from "traefik.containo.us".'
+    - kind: added
+      description: 'Add support for CRDs from "traefik.io".'
+apiVersion: v2
+appVersion: 1.22.1
+dependencies:
+- name: base
+  repository: https://charts.pascaliske.dev
+  version: 1.2.0
+description: A Helm chart for linkding
+home: https://charts.pascaliske.dev/charts/linkding/
+keywords:
+- linkding
+- bookmarks
+maintainers:
+- email: info@pascaliske.dev
+  name: pascaliske
+  url: https://pascaliske.dev
+name: linkding
+sources:
+- https://github.com/pascaliske/helm-charts
+- https://github.com/sissbruecker/linkding
+type: application
+version: 2.0.0

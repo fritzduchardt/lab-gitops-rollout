@@ -1,0 +1,13 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+    - contents:
+        - helmChart:
+            name: ingress-nginx
+            repository:
+                url: https://kubernetes.github.io/ingress-nginx
+            version: 4.10.1
+          lazy: true
+          path: .
+      path: .myks/vendir-cache/helm-ingress-nginx-4.10.1-fc77b2507764a0da/data
+      permissions: null
+kind: Config

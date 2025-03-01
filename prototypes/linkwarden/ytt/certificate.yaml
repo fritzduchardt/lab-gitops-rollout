@@ -1,0 +1,16 @@
+  apiVersion: cert-manager.io/v1
+  kind: Certificate
+  metadata:
+    name: lw-certificate
+  spec:
+    secretName: lw-certificate
+    duration: 2160h
+    renewBefore: 360h
+    subject:
+      organizations:
+        - friclu
+    dnsNames:
+      - lw-friclu.duckdns.org
+    issuerRef:
+      name: duckdns-google-production
+      kind: ClusterIssuer

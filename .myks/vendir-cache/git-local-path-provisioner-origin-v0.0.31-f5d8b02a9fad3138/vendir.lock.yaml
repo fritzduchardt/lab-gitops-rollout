@@ -1,0 +1,12 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+- contents:
+  - configDigest: 7751ba693aa8f692bf92c81d4f1a63413668b935ded68b23db642a4204b2810d
+    git:
+      commitTitle: 'chore(release): bump to v0.0.31...'
+      sha: 7b1dad8fbdc8f7df05e221e29e0062d1efd1a56a
+      tags:
+      - v0.0.31
+    path: .
+  path: .myks/vendir-cache/git-local-path-provisioner-origin-v0.0.31-f5d8b02a9fad3138/data
+kind: LockConfig

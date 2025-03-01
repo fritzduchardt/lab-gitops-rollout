@@ -1,0 +1,82 @@
+global:
+  edition: ce
+  gitlabVersion: 16.11.1
+  hosts:
+    domain: gitlab.friclu
+    https: false
+    pages:
+      name: pages
+  hpa:
+    apiVersion: autoscaling/v2
+  keda:
+    enabled: false
+  pdb:
+    apiVersion: policy/v1
+  ingress:
+    apiVersion: networking.k8s.io/v1
+    enabled: true
+    configureCertmanager: false
+  monitoring:
+    enabled: true
+  initialRootPassword:
+    secret: gitlab-initial-root-password
+    key: password
+  rails:
+    bootsnap:
+      enabled: true
+  pages:
+    enabled: true
+upgradeCheck:
+  enabled: false
+certmanager:
+  installCRDs: false
+  install: false
+  rbac:
+    create: false
+nginx-ingress:
+  enabled: false
+nginx-ingress-geo:
+  enabled: false
+haproxy:
+  install: false
+prometheus:
+  install: false
+redis:
+  install: true
+postgresql:
+  install: true
+shared-secrets:
+  enabled: true
+gitlab-runner:
+  install: true
+  rbac:
+    create: true
+  runners:
+    locked: false
+    secret: nonempty
+    config: |
+      [[runners]]
+        [runners.kubernetes]
+        image = "ubuntu:22.04"
+        {{- if .Values.global.minio.enabled }}
+        [runners.cache]
+          Type = "s3"
+          Path = "gitlab-runner"
+          Shared = true
+          [runners.cache.s3]
+            ServerAddress = {{ include "gitlab-runner.cache-tpl.s3ServerAddress" . }}
+            BucketName = "runner-cache"
+            BucketLocation = "us-east-1"
+            Insecure = false
+        {{ end }}
+  podAnnotations:
+    gitlab.com/prometheus_scrape: "true"
+    gitlab.com/prometheus_port: 9252
+gitlab:
+  toolbox:
+    replicas: 1
+    antiAffinityLabels:
+      matchLabels:
+        app: gitaly
+gitlab-zoekt:
+  install: false

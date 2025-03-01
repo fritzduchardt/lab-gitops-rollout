@@ -1,0 +1,7 @@
+ingress:
+  enabled: true
+  path: /
+  hosts:
+  - registry.friclu
+service:
+  port: 80

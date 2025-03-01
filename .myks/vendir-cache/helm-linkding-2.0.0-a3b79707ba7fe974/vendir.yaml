@@ -1,0 +1,13 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+    - contents:
+        - helmChart:
+            name: linkding
+            repository:
+                url: https://charts.pascaliske.dev
+            version: 2.0.0
+          lazy: true
+          path: .
+      path: .myks/vendir-cache/helm-linkding-2.0.0-a3b79707ba7fe974/data
+      permissions: null
+kind: Config

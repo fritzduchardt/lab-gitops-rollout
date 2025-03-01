@@ -1,0 +1,37 @@
+immich:
+  persistence:
+    library:
+      existingClaim: immich-library
+image:
+  tag: v1.122.3
+postgresql:
+  enabled: true
+  global:
+    storageClass: local-path
+  primary:
+    resources:
+      requests:
+        cpu: 2
+        memory: 512Mi
+      limits:
+        memory: 1024Mi
+common:
+  nodeSelector:
+    kubernetes.io/hostname: friclu-1
+redis:
+  enabled: true
+  global:
+    storageClass: local-path
+server:
+  ingress:
+    main:
+      enabled: true
+      ingressClassName: nginx
+      hosts:
+      - host: immich-friclu.duckdns.org
+        paths:
+        - path: /
+      tls:
+      - hosts:
+        - immich-friclu.duckdns.org
+        secretName: immich-certificate

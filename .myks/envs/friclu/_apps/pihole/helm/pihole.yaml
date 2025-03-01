@@ -1,0 +1,28 @@
+serviceDhcp:
+  enabled: false
+admin:
+  existingSecret: pihole
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - pihole-friclu.duckdns.org
+    secretName: pihole-certificate
+  hosts:
+  - pihole-friclu.duckdns.org
+DNS1: 8.8.8.8
+DNS2: 8.8.4.4
+dnsmasq:
+  upstreamServers: []
+  customDnsEntries:
+  - address=/friclu/192.168.0.21
+  additionalHostsEntries: []
+adlists: {}
+whitelist: {}
+blacklist: {}
+regex: {}
+persistentVolumeClaim:
+  enabled: true
+nodeSelector:
+  kubernetes.io/hostname: friclu-1

@@ -1,0 +1,20 @@
+#@data/values
+---
+argocd:
+  enabled: false
+environment:
+  id: friclu
+  applications:
+    - proto: coredns
+    - proto: localdns
+    - proto: nginx
+    - proto: local-path-provisioner
+    - proto: cert-manager
+    - proto: registry
+    - proto: immich
+    - proto: home-assistant
+    - proto: syncthing
+    - proto: pihole
+    - proto: linkding
+    - proto: kube-prometheus-stack
+    - proto: pushgateway

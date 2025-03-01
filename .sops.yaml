@@ -1,0 +1,11 @@
+_:
+  - &common
+    encryption_method: age
+    # Fritz Duchardt
+    age: >-
+      age1mx6gqtque52ytw5ptc6pjnu0d06lye6tztjhhj4mjrx79qgc69tqgc4vz5
+
+creation_rules:
+  - <<: *common
+    path_regex: .*\.sops\.ya?ml$
+    encrypted_regex: .

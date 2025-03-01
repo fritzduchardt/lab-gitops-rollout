@@ -1,0 +1,9 @@
+#@ load("@ytt:data", "data")
+#@ load("@ytt:overlay", "overlay")
+
+#@ if/end hasattr(data.values.application, "namespace") and data.values.application.namespace.create:
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: #@ data.values.helm.namespace

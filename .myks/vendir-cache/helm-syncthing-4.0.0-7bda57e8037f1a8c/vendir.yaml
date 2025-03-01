@@ -1,0 +1,13 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+    - contents:
+        - helmChart:
+            name: syncthing
+            repository:
+                url: https://k8s-home-lab.github.io/helm-charts/
+            version: 4.0.0
+          lazy: true
+          path: .
+      path: .myks/vendir-cache/helm-syncthing-4.0.0-7bda57e8037f1a8c/data
+      permissions: null
+kind: Config

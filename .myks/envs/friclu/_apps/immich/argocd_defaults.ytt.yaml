@@ -1,0 +1,10 @@
+
+#@data/values-schema
+---
+argocd:
+  app:
+    name: "immich"
+    source:
+      path: "gitops/rendered/envs/friclu/immich"
+      repoURL: "git@github.com:fritzduchardt/m5-cluster.git"
+      targetRevision: "master"

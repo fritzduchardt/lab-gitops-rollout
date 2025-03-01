@@ -1,0 +1,11 @@
+defaultSettings:
+  logLevel: Debug
+  backupTargetCredentialSecret: aws-secret-break
+  backupTarget: s3://friclu-backups@us-west-2/
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  host: longhorn.friclu
+persistence:
+  defaultClassReplicaCount: 1
+  defaultDataLocality: best-effort

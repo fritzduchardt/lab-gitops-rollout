@@ -1,0 +1,11 @@
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+directories:
+- path: charts
+  contents:
+  - path: local-path-provisioner
+    lazy: true
+    git:
+      ref: origin/v0.0.31
+      url: https://github.com/rancher/local-path-provisioner
+    newRootPath: deploy/chart/local-path-provisioner

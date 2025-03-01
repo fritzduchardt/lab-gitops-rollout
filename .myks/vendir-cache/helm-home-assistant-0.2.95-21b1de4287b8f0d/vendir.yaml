@@ -1,0 +1,13 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+    - contents:
+        - helmChart:
+            name: home-assistant
+            repository:
+                url: http://pajikos.github.io/home-assistant-helm-chart/
+            version: 0.2.95
+          lazy: true
+          path: .
+      path: .myks/vendir-cache/helm-home-assistant-0.2.95-21b1de4287b8f0d/data
+      permissions: null
+kind: Config

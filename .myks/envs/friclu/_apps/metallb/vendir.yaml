@@ -1,0 +1,12 @@
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+directories:
+- path: charts
+  contents:
+  - path: metallb
+    lazy: true
+    helmChart:
+      name: metallb
+      version: 0.14.5
+      repository:
+        url: https://metallb.github.io/metallb

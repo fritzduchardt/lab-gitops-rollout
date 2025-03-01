@@ -1,0 +1,12 @@
+ingress:
+  enabled: true
+  tls: true
+  hostname: vault-friclu.duckdns.org
+storage:
+  data:
+    name: vaultwarden-data
+    size: 1Gi
+    class: longhorn-redundant
+    path: /data
+    keepPvc: false
+    accessMode: ReadWriteOnce

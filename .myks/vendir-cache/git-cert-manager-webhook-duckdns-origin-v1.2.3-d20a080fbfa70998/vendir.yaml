@@ -1,0 +1,12 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+    - contents:
+        - git:
+            ref: origin/v1.2.3
+            url: https://github.com/ebrianne/cert-manager-webhook-duckdns
+          lazy: true
+          newRootPath: deploy/cert-manager-webhook-duckdns
+          path: .
+      path: .myks/vendir-cache/git-cert-manager-webhook-duckdns-origin-v1.2.3-d20a080fbfa70998/data
+      permissions: null
+kind: Config

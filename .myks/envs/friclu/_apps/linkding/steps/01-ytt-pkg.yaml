@@ -1,0 +1,97 @@
+
+---
+---
+# Source: linkding/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: linkding
+  labels:
+    helm.sh/chart: linkding-2.0.0
+    app.kubernetes.io/name: linkding
+    app.kubernetes.io/instance: linkding
+    app.kubernetes.io/version: "1.22.1"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - name: "http"
+      port: 9090
+      targetPort: "http"
+      protocol: "TCP"
+  selector:
+    app.kubernetes.io/name: linkding
+    app.kubernetes.io/instance: linkding
+---
+# Source: linkding/templates/controller.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: linkding
+  labels:
+    helm.sh/chart: linkding-2.0.0
+    app.kubernetes.io/name: linkding
+    app.kubernetes.io/instance: linkding
+    app.kubernetes.io/version: "1.22.1"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: linkding
+      app.kubernetes.io/instance: linkding
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: linkding
+        app.kubernetes.io/instance: linkding
+    spec:
+      serviceAccountName: default
+      containers:
+        - name: linkding
+          image: "sissbruecker/linkding:1.22.1"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: "http"
+              containerPort: 9090
+              protocol: "TCP"
+          env:
+            - name: "TZ"
+              value: "ECT"
+            - name: "LD_SUPERUSER_NAME"
+              valueFrom:
+                secretKeyRef:
+                  key: LD_SUPERUSER_NAME
+                  name: linkding-secret
+            - name: "LD_SUPERUSER_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  key: LD_SUPERUSER_PASSWORD
+                  name: linkding-secret
+          volumeMounts:
+            - name: linkding-storage
+              mountPath: /etc/linkding/data
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+          resources: {}
+      volumes:
+        - name: linkding-storage
+          persistentVolumeClaim:
+            claimName: linkding
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - friclu-1
+
+---

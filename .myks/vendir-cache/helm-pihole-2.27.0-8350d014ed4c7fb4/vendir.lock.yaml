@@ -1,0 +1,10 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+- contents:
+  - configDigest: 5dd744053911e2b1969050f90b68f3a3f1f9372e4f295fbfe4413ba5b2dc57f0
+    helmChart:
+      appVersion: 2024.07.0
+      version: 2.27.0
+    path: .
+  path: .myks/vendir-cache/helm-pihole-2.27.0-8350d014ed4c7fb4/data
+kind: LockConfig

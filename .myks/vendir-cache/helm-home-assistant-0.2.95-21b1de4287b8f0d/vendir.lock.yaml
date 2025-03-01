@@ -1,0 +1,10 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+- contents:
+  - configDigest: 3a73830cd29fdce16a952a2985f32a3f1c9e7c60561bb88f62055986bbb3df79
+    helmChart:
+      appVersion: 2024.12.5
+      version: 0.2.95
+    path: .
+  path: .myks/vendir-cache/helm-home-assistant-0.2.95-21b1de4287b8f0d/data
+kind: LockConfig

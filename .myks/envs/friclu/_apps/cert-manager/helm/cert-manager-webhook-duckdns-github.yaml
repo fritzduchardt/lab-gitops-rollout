@@ -1,0 +1,9 @@
+clusterIssuer:
+  email: fritz@duchardt.net
+  production:
+    create: true
+fullnameOverride: duckdns-github
+groupName: acme.friclu-github.org
+secret:
+  existingSecret: true
+  existingSecretName: duckdns-github-secret

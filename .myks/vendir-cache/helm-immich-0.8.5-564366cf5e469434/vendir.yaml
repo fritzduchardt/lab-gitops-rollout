@@ -1,0 +1,13 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+    - contents:
+        - helmChart:
+            name: immich
+            repository:
+                url: https://immich-app.github.io/immich-charts
+            version: 0.8.5
+          lazy: true
+          path: .
+      path: .myks/vendir-cache/helm-immich-0.8.5-564366cf5e469434/data
+      permissions: null
+kind: Config

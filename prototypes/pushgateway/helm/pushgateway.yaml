@@ -1,0 +1,17 @@
+ingress:
+  enabled: true
+  className: "nginx"
+  hosts:
+    - pushgateway.friclu
+
+serviceMonitor:
+  enabled: true
+  namespace: kube-prometheus-stack
+  additionalLabels:
+    release: kube-prometheus-stack
+  ## Metric relabel configs to apply to samples before ingestion.
+  ## [Metric Relabeling](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#metric_relabel_configs)
+  metricRelabelings: []
+  # - action: keep
+  #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
+  #   sourceLabels: [__name__]

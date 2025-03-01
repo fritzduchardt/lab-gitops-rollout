@@ -1,0 +1,13 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+    - contents:
+        - helmChart:
+            name: vaultwarden
+            repository:
+                url: https://guerzon.github.io/vaultwarden
+            version: 0.31.2
+          lazy: true
+          path: .
+      path: .myks/vendir-cache/helm-vaultwarden-0.31.2-7b999796100d4226/data
+      permissions: null
+kind: Config

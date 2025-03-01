@@ -1,0 +1,25 @@
+ingress:
+  enabled: true
+  className: nginx
+  tls:
+  - hosts:
+    - lw-friclu.duckdns.org
+    secretName: lw-certificate
+  extraHosts:
+  - host: lw-friclu.duckdns.org
+    paths:
+    - path: /
+      pathType: ImplementationSpecific
+linkwarden:
+  nextAuthSecret:
+    existingSecret:
+      name: linkwarden-secret
+      key: secret
+  data:
+    storageType: filesystem
+    filesystem:
+      pvc:
+        storageClass: ""
+        existingClaim: linkwarden
+nodeSelector:
+  kubernetes.io/hostname: friclu-1

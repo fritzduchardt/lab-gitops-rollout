@@ -1,0 +1,60 @@
+#! /usr/bin/env bash
+function prepare() {
+  local action="$1"
+  local exit_code=0
+  if [[ -e "$MYKS_RENDERED_APP_DIR"/static ]]; then
+    case "$action" in
+    "encrypt")
+      echo "Encrypting secrets"
+      find "$MYKS_RENDERED_APP_DIR"/static -type f -name "*.sops.yaml" -exec sops -e -i {} \;
+      exit_code=$?
+      ;;
+    "decrypt")
+      echo "Decrypting secrets"
+      find "$MYKS_RENDERED_APP_DIR"/static -type f -name "*.sops.yaml" -exec sops -d -i {} \;
+      exit_code=$?
+      ;;
+    esac
+  fi
+  if [[ "$exit_code" == 1 ]]; then
+    echo "Failed to $action secrets"
+  fi
+  return $exit_code
+}
+
+function validate() {
+  echo "Validating Kubernetes manifests"
+  set -x
+  kubeconform \
+    -schema-location 'https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/{{.NormalizedKubernetesVersion}}-standalone{{.StrictSuffix}}/{{.ResourceKind}}{{.KindSuffix}}.json' \
+    -strict \
+    -skip "CustomResourceDefinition,NetworkAttachmentDefinition,NetworkTopology,ClusterIssuer,Certificate,IPAddressPool,L2Advertisement" \
+    "$MYKS_RENDERED_APP_DIR"
+  set +x
+  return $?
+}
+
+function apply() {
+  echo "Applying Kubernetes manifests"
+  set -x
+  kapp --yes deploy --wait -a "$MYKS_APP" -f "$MYKS_RENDERED_APP_DIR"
+  set +x
+  return $?
+}
+
+main() {
+  if ! prepare "decrypt"; then
+    exit 1
+  fi
+  trap "prepare encrypt" EXIT
+  if ! validate; then
+    echo "Validation failed"
+    exit 1
+  fi
+  if ! apply; then
+    echo "Failed to apply manifests"
+    exit 1
+  fi
+}
+
+main

@@ -1,0 +1,3 @@
+ingress:
+  hosts:
+    core: harbor.friclu

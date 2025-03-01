@@ -1,0 +1,9 @@
+#@data/values-schema
+#@overlay/match-child-defaults missing_ok=True
+---
+helm:
+  namespace: cert-manager
+application:
+  namespace:
+    create: true
+  email: fritz@duchardt.net

@@ -1,0 +1,38 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: friclu-certificate
+spec:
+  secretName: friclu-certificate
+  duration: 2160h
+  renewBefore: 360h
+  subject:
+    organizations:
+    - friclu
+  dnsNames:
+  - friclu.duckdns.org
+  issuerRef:
+    name: cert-manager-webhook-duckdns-production
+    kind: ClusterIssuer
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kubernetes
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: friclu.duckdns.org
+    http:
+      paths:
+      - backend:
+          service:
+            name: kubernetes
+            port:
+              number: 443
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - friclu.duckdns.org
+    secretName: friclu-certificate

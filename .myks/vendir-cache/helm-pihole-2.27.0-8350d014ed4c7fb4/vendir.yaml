@@ -1,0 +1,13 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+    - contents:
+        - helmChart:
+            name: pihole
+            repository:
+                url: https://mojo2600.github.io/pihole-kubernetes/
+            version: 2.27.0
+          lazy: true
+          path: .
+      path: .myks/vendir-cache/helm-pihole-2.27.0-8350d014ed4c7fb4/data
+      permissions: null
+kind: Config

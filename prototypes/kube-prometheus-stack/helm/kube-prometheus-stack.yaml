@@ -1,0 +1,29 @@
+alertmanager:
+  enabled: false
+
+grafana:
+  ingress:
+    enabled: true
+    ingressClassName: "nginx"
+    hosts:
+      - grafana-friclu.duckdns.org
+    tls:
+     - secretName: grafana-certificate
+       hosts:
+        - grafana-friclu.duckdns.org
+  admin:
+    existingSecret: grafana-secret
+  persistence:
+    enabled: true
+  sidecar:
+    datasources:
+      url: http://prometheus-operated:9090/
+      alertmanager:
+        enabled: false
+
+prometheus:
+  ingress:
+    ingressClassName: "nginx"
+    enabled: true
+    hosts:
+      - prometheus.friclu

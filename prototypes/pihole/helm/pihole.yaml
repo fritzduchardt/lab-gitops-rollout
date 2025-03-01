@@ -1,0 +1,64 @@
+serviceDhcp:
+  enabled: false
+
+admin:
+  existingSecret: "pihole"
+
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - pihole-friclu.duckdns.org
+      secretName: pihole-certificate
+  hosts:
+    - pihole-friclu.duckdns.org
+
+# -- default upstream DNS 1 server to use
+DNS1: "8.8.8.8"
+# -- default upstream DNS 2 server to use
+DNS2: "8.8.4.4"
+
+# -- DNS MASQ settings
+dnsmasq:
+  # -- Add upstream dns servers. All lines will be added to the pihole dnsmasq configuration
+  upstreamServers: []
+  # - server=/foo.bar/192.168.178.10
+  # - server=/bar.foo/192.168.178.11
+
+  # -- Add custom dns entries to override the dns resolution. All lines will be added to the pihole dnsmasq configuration.
+  customDnsEntries:
+    - address=/friclu/192.168.0.21
+  # - address=/foo.bar/192.168.178.10
+  # - address=/bar.foo/192.168.178.11
+
+  # -- Dnsmasq reads the /etc/hosts file to resolve ips. You can add additional entries if you like
+  additionalHostsEntries: []
+  # - 192.168.0.3     host4
+  # - 192.168.0.4     host5
+
+# -- list of adlists to import during initial start of the container
+adlists: {}
+  # If you want to provide blocklists, add them here.
+  # - https://hosts-file.net/grm.txt
+# - https://reddestdream.github.io/Projects/MinimalHosts/etc/MinimalHostsBlocker/minimalhosts
+
+# -- list of whitelisted domains to import during initial start of the container
+whitelist: {}
+  # If you want to provide whitelisted domains, add them here.
+# - clients4.google.com
+
+# -- list of blacklisted domains to import during initial start of the container
+blacklist: {}
+  # If you want to have special domains blacklisted, add them here
+# - *.blackist.com
+
+# -- list of blacklisted regex expressions to import during initial start of the container
+regex: {}
+  # Add regular expression blacklist items
+# - (^|\.)facebook\.com$
+persistentVolumeClaim:
+  enabled: true
+
+nodeSelector:
+  kubernetes.io/hostname: friclu-1

@@ -1,0 +1,10 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+- contents:
+  - configDigest: 5c5de0bc24fb297aca24a6b267b1fe5396b872579b67d2f98f8f871468650da8
+    helmChart:
+      appVersion: v1.11.0
+      version: 3.0.0
+    path: .
+  path: .myks/vendir-cache/helm-prometheus-pushgateway-3.0.0-aa83dd3685f33315/data
+kind: LockConfig

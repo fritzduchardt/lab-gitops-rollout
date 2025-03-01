@@ -1,0 +1,13 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+    - contents:
+        - helmChart:
+            name: longhorn
+            repository:
+                url: https://charts.longhorn.io
+            version: 1.6.2
+          lazy: true
+          path: .
+      path: .myks/vendir-cache/helm-longhorn-1.6.2-efd94ce36ddf7eb4/data
+      permissions: null
+kind: Config

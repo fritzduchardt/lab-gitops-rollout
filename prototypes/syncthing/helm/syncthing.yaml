@@ -1,0 +1,26 @@
+ingress:
+  # -- Enable and configure ingress settings for the chart under this key.
+  # @default -- See values.yaml
+  main:
+    enabled: true
+    ingressClassName: "nginx"
+
+    ## Configure the hosts for the ingress
+    hosts:
+      - host: syncthing-friclu.duckdns.org
+        paths:
+          - path: /
+            pathType: Prefix
+    tls:
+      - hosts:
+          - syncthing-friclu.duckdns.org
+        secretName: syncthing-certificate
+
+nodeSelector:
+  kubernetes.io/hostname: friclu-1
+
+persistence:
+  data:
+    enabled: true
+    hostPath: /volumes/syncthing
+    type: hostPath
