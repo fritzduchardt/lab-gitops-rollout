@@ -3,10 +3,10 @@ kind: ServiceAccount
 metadata:
   name: home-assistant
   labels:
-    helm.sh/chart: home-assistant-0.2.95
+    helm.sh/chart: home-assistant-0.2.110
     app.kubernetes.io/name: home-assistant
     app.kubernetes.io/instance: home-assistant
-    app.kubernetes.io/version: 2024.12.5
+    app.kubernetes.io/version: 2025.2.5
     app.kubernetes.io/managed-by: Helm
   namespace: home-assistant
 ---
@@ -57,6 +57,12 @@ data:
       current_time=$(date +%Y%m%d_%H%M%S)
       echo "Backup the current configuration file to configuration.yaml.$current_time"
       cp /config/configuration.yaml /config/configuration.yaml.$current_time
+      echo "Before cleanup - all backup files:"
+      ls -l /config/configuration.yaml.*
+      echo "Cleaning up - keeping only 10 most recent backups..."
+      ls -t /config/configuration.yaml.* 2>/dev/null | tail -n +11 | xargs -r rm
+      echo "After cleanup - remaining backup files:"
+      ls -l /config/configuration.yaml.*
       echo "The current configuration file will be merged with the default configuration file with this content:"
       cat /config-templates/configuration.yaml
       if [[ ! -s /config/configuration.yaml ]]; then
@@ -92,10 +98,10 @@ kind: Service
 metadata:
   name: home-assistant
   labels:
-    helm.sh/chart: home-assistant-0.2.95
+    helm.sh/chart: home-assistant-0.2.110
     app.kubernetes.io/name: home-assistant
     app.kubernetes.io/instance: home-assistant
-    app.kubernetes.io/version: 2024.12.5
+    app.kubernetes.io/version: 2025.2.5
     app.kubernetes.io/managed-by: Helm
   namespace: home-assistant
 spec:
@@ -114,10 +120,10 @@ kind: StatefulSet
 metadata:
   name: home-assistant
   labels:
-    helm.sh/chart: home-assistant-0.2.95
+    helm.sh/chart: home-assistant-0.2.110
     app.kubernetes.io/name: home-assistant
     app.kubernetes.io/instance: home-assistant
-    app.kubernetes.io/version: 2024.12.5
+    app.kubernetes.io/version: 2025.2.5
     app.kubernetes.io/managed-by: Helm
   namespace: home-assistant
 spec:
@@ -133,7 +139,7 @@ spec:
         app.kubernetes.io/name: home-assistant
         app.kubernetes.io/instance: home-assistant
       annotations:
-        checksum/init-script: 14801f270793f75cc46aae4ffc5b76451529150ff248107f6c3f7395f8614ae1
+        checksum/init-script: 495e927a6986fb8e0bd38f54c81c5cb25cabad179b8c61e53db1ed6405f8007b
         checksum/hass-configuration: 24e473b916085ad398aa2945119700d726c3a6814c503170bdaa366988a3cd4a
     spec:
       serviceAccountName: home-assistant
@@ -142,7 +148,7 @@ spec:
       - name: home-assistant
         securityContext:
           privileged: true
-        image: ghcr.io/home-assistant/home-assistant:2024.12.5
+        image: ghcr.io/home-assistant/home-assistant:2025.2.5
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
@@ -210,10 +216,10 @@ kind: Ingress
 metadata:
   name: home-assistant
   labels:
-    helm.sh/chart: home-assistant-0.2.95
+    helm.sh/chart: home-assistant-0.2.110
     app.kubernetes.io/name: home-assistant
     app.kubernetes.io/instance: home-assistant
-    app.kubernetes.io/version: 2024.12.5
+    app.kubernetes.io/version: 2025.2.5
     app.kubernetes.io/managed-by: Helm
   namespace: home-assistant
 spec:

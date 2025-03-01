@@ -129,7 +129,7 @@ metadata:
     helm.sh/chart: postgresql-16.0.0
 type: Opaque
 data:
-  postgres-password: azZGTzJqY0tEbQ==
+  postgres-password: ZTZLNXQ4Q3ZQUg==
   password: aW1taWNo
 ---
 apiVersion: v1
@@ -425,7 +425,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: machine-learning
     app.kubernetes.io/version: v1.119.0
-    helm.sh/chart: immich-0.8.5
+    helm.sh/chart: immich-0.9.0
   annotations: null
   namespace: immich
 spec:
@@ -449,7 +449,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: server
     app.kubernetes.io/version: v1.119.0
-    helm.sh/chart: immich-0.8.5
+    helm.sh/chart: immich-0.9.0
   annotations: null
   namespace: immich
 spec:
@@ -472,7 +472,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: machine-learning
     app.kubernetes.io/version: v1.119.0
-    helm.sh/chart: immich-0.8.5
+    helm.sh/chart: immich-0.9.0
   namespace: immich
 spec:
   revisionHistoryLimit: 3
@@ -495,7 +495,7 @@ spec:
       enableServiceLinks: true
       containers:
       - name: immich-machine-learning
-        image: ghcr.io/immich-app/immich-machine-learning:v1.122.3
+        image: ghcr.io/immich-app/immich-machine-learning:v1.128.0
         imagePullPolicy: IfNotPresent
         env:
         - name: DB_DATABASE_NAME
@@ -558,7 +558,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: server
     app.kubernetes.io/version: v1.119.0
-    helm.sh/chart: immich-0.8.5
+    helm.sh/chart: immich-0.9.0
   namespace: immich
 spec:
   revisionHistoryLimit: 3
@@ -581,7 +581,7 @@ spec:
       enableServiceLinks: true
       containers:
       - name: immich-server
-        image: ghcr.io/immich-app/immich-server:v1.122.3
+        image: ghcr.io/immich-app/immich-server:v1.128.0
         imagePullPolicy: IfNotPresent
         env:
         - name: DB_DATABASE_NAME
@@ -997,7 +997,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: server
     app.kubernetes.io/version: v1.119.0
-    helm.sh/chart: immich-0.8.5
+    helm.sh/chart: immich-0.9.0
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
   namespace: immich
@@ -1084,14 +1084,3 @@ spec:
               number: 2283
         path: /
         pathType: Prefix
----
-apiVersion: longhorn.io/v1beta1
-kind: RecurringJob
-metadata:
-  namespace: immich
-  name: immich-library
-spec:
-  cron: 0 0 0 * *
-  task: backup
-  retain: 12
-  concurrency: 1

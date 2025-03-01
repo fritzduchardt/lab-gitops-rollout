@@ -6,7 +6,7 @@ directories:
       - path: syncthing
         lazy: true
         helmChart:
-          #! renovate: datasource=helm
+          # renovate: datasource=helm
           name: syncthing
           version: 4.0.0
           repository:

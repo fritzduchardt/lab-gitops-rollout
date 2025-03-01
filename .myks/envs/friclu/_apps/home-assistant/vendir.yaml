@@ -7,6 +7,6 @@ directories:
     lazy: true
     helmChart:
       name: home-assistant
-      version: 0.2.95
+      version: 0.2.110
       repository:
         url: http://pajikos.github.io/home-assistant-helm-chart/

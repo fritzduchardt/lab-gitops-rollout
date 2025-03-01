@@ -3,7 +3,7 @@ immich:
     library:
       existingClaim: immich-library
 image:
-  tag: v1.122.3
+  tag: v1.128.0
 postgresql:
   enabled: true
   global:
@@ -35,3 +35,4 @@ server:
       - hosts:
         - immich-friclu.duckdns.org
         secretName: immich-certificate
+useDeprecatedPostgresChart: true

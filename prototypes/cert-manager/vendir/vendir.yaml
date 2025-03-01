@@ -6,7 +6,7 @@ directories:
       - path: cert-manager
         lazy: true
         helmChart:
-          #! renovate: datasource=helm
+          # renovate: datasource=helm
           name: cert-manager
           version: v1.14.3
           repository:

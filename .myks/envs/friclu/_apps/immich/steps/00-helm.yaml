@@ -140,7 +140,7 @@ metadata:
     helm.sh/chart: postgresql-16.0.0
 type: Opaque
 data:
-  postgres-password: "azZGTzJqY0tEbQ=="
+  postgres-password: "ZTZLNXQ4Q3ZQUg=="
   password: "aW1taWNo"
   # We don't auto-generate LDAP password when it's not provided as we do for other passwords
 ---
@@ -449,7 +449,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: machine-learning
     app.kubernetes.io/version: v1.119.0
-    helm.sh/chart: immich-0.8.5
+    helm.sh/chart: immich-0.9.0
   annotations:
 spec:
   type: ClusterIP
@@ -473,7 +473,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: server
     app.kubernetes.io/version: v1.119.0
-    helm.sh/chart: immich-0.8.5
+    helm.sh/chart: immich-0.9.0
   annotations:
 spec:
   type: ClusterIP
@@ -496,7 +496,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: machine-learning
     app.kubernetes.io/version: v1.119.0
-    helm.sh/chart: immich-0.8.5
+    helm.sh/chart: immich-0.9.0
 spec:
   revisionHistoryLimit: 3
   replicas: 1
@@ -519,7 +519,7 @@ spec:
       enableServiceLinks: true
       containers:
         - name: immich-machine-learning
-          image: ghcr.io/immich-app/immich-machine-learning:v1.122.3
+          image: ghcr.io/immich-app/immich-machine-learning:v1.128.0
           imagePullPolicy: IfNotPresent
           env:
             - name: DB_DATABASE_NAME
@@ -584,7 +584,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: server
     app.kubernetes.io/version: v1.119.0
-    helm.sh/chart: immich-0.8.5
+    helm.sh/chart: immich-0.9.0
 spec:
   revisionHistoryLimit: 3
   replicas: 1
@@ -607,7 +607,7 @@ spec:
       enableServiceLinks: true
       containers:
         - name: immich-server
-          image: ghcr.io/immich-app/immich-server:v1.122.3
+          image: ghcr.io/immich-app/immich-server:v1.128.0
           imagePullPolicy: IfNotPresent
           env:
             - name: DB_DATABASE_NAME
@@ -1038,7 +1038,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: server
     app.kubernetes.io/version: v1.119.0
-    helm.sh/chart: immich-0.8.5
+    helm.sh/chart: immich-0.9.0
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
 spec:

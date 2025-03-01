@@ -68,8 +68,8 @@ yttPkg:
 render:
   includeNamespace: false
 myks:
-  gitRepoBranch: ""
-  gitRepoUrl: ""
+  gitRepoBranch: master
+  gitRepoUrl: git@github.com:fritzduchardt/lab-gitops-rollout.git
   context:
     app: ""
     prototype: ""

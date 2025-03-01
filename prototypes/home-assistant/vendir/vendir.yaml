@@ -6,7 +6,7 @@ directories:
       - path: home-assistant
         lazy: true
         helmChart:
-          #! renovate: datasource=helm
+          # renovate: datasource=helm
           name: home-assistant
           version: 0.2.110
           repository:
