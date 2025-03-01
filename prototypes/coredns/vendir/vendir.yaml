@@ -6,6 +6,7 @@ directories:
       - path: coredns
         lazy: true
         helmChart:
+          #! renovate: datasource=helm
           name: coredns
           version: 1.36.1
           repository:

@@ -6,6 +6,7 @@ directories:
       - path: kube-prometheus-stack
         lazy: true
         helmChart:
+          #! renovate: datasource=helm
           name: kube-prometheus-stack
           version: 66.2.1
           repository:

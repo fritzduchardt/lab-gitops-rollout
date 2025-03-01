@@ -6,6 +6,7 @@ directories:
       - path: pushgateway
         lazy: true
         helmChart:
+          #! renovate: datasource=helm
           name: prometheus-pushgateway
           version: 3.0.0
           repository:

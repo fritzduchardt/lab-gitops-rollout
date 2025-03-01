@@ -6,6 +6,7 @@ directories:
       - path: immich
         lazy: true
         helmChart:
+          #! renovate: datasource=helm
           name: immich
           version: 0.8.5
           repository:

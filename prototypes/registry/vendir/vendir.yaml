@@ -6,6 +6,7 @@ directories:
       - path: registry
         lazy: true
         helmChart:
+          #! renovate: datasource=helm
           name: docker-registry
           version: 2.2.3
           repository:

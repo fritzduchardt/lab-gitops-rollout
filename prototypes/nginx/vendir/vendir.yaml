@@ -6,6 +6,7 @@ directories:
       - path: nginx
         lazy: true
         helmChart:
+          #! renovate: datasource=helm
           name: ingress-nginx
           version: 4.10.1
           repository:
