@@ -8,6 +8,6 @@ directories:
         helmChart:
           #! renovate: datasource=helm
           name: immich
-          version: 0.8.5
+          version: 0.9.0
           repository:
             url: https://immich-app.github.io/immich-charts
