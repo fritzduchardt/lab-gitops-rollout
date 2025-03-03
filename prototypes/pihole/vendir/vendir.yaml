@@ -8,6 +8,6 @@ directories:
         helmChart:
           # renovate: datasource=helm
           name: pihole
-          version: 2.27.0
+          version: 2.28.0
           repository:
             url: https://mojo2600.github.io/pihole-kubernetes/
