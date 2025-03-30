@@ -1,0 +1,95 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app.kubernetes.io/instance: home-assistant
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: home-assistant
+    app.kubernetes.io/version: 2025.2.5
+    helm.sh/chart: home-assistant-0.2.110
+  name: home-assistant
+  namespace: home-assistant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: home-assistant
+      app.kubernetes.io/name: home-assistant
+  serviceName: home-assistant
+  template:
+    metadata:
+      annotations:
+        checksum/hass-configuration: 24e473b916085ad398aa2945119700d726c3a6814c503170bdaa366988a3cd4a
+        checksum/init-script: 495e927a6986fb8e0bd38f54c81c5cb25cabad179b8c61e53db1ed6405f8007b
+      labels:
+        app.kubernetes.io/instance: home-assistant
+        app.kubernetes.io/name: home-assistant
+    spec:
+      containers:
+        - image: ghcr.io/home-assistant/home-assistant:2025.2.5
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: http
+              scheme: HTTP
+            periodSeconds: 20
+            successThreshold: 1
+            timeoutSeconds: 2
+          name: home-assistant
+          ports:
+            - containerPort: 8123
+              name: http
+              protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: http
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - mountPath: /config
+              name: home-assistant
+            - mountPath: /dev/ttyUSB0
+              name: usb
+      initContainers:
+        - args:
+            - /bin/sh /mnt/init/init.sh
+          command:
+            - /bin/sh
+            - -c
+          image: mikefarah/yq:4
+          name: setup-config
+          securityContext:
+            runAsUser: 0
+          volumeMounts:
+            - mountPath: /mnt/init/init.sh
+              name: init-volume
+              subPath: init.sh
+            - mountPath: /config-templates
+              name: config-volume
+            - mountPath: /config
+              name: home-assistant
+      nodeSelector:
+        kubernetes.io/hostname: friclu-1
+      securityContext: {}
+      serviceAccountName: home-assistant
+      volumes:
+        - configMap:
+            name: init-script
+          name: init-volume
+        - configMap:
+            name: hass-configuration
+          name: config-volume
+        - hostPath:
+            path: /dev/ttyUSB0
+          name: usb
+        - name: home-assistant
+          persistentVolumeClaim:
+            claimName: home-assistant

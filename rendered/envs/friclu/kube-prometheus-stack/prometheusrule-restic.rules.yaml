@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: restic.rules
+  namespace: kube-prometheus-stack
+spec:
+  groups:
+    - name: restic.rules
+      rules:
+        - alert: Restic Backup Failed
+          annotations:
+            description: Restic Backup has failed for folder {{ $labels.dir }}
+          expr: restic_backup_success{success!="0"}
+          for: 1m
+          labels:
+            severity: critical

@@ -1,0 +1,16 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app: cert-manager-webhook-duckdns
+    chart: cert-manager-webhook-duckdns-v1.2.3
+    heritage: Helm
+    release: cert-manager-webhook-duckdns-github
+  name: duckdns-github:domain-solver
+rules:
+  - apiGroups:
+      - acme.friclu-github.org
+    resources:
+      - '*'
+    verbs:
+      - create

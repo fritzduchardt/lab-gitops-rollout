@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations: null
+  labels:
+    app: docker-registry
+    chart: docker-registry-2.2.3
+    heritage: Helm
+    release: registry
+  name: registry-docker-registry
+  namespace: registry
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: registry.friclu
+      http:
+        paths:
+          - backend:
+              service:
+                name: registry-docker-registry
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix

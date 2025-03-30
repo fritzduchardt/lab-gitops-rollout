@@ -1,0 +1,19 @@
+apiVersion: apiregistration.k8s.io/v1
+kind: APIService
+metadata:
+  annotations:
+    cert-manager.io/inject-ca-from: cert-manager/duckdns-github-webhook-tls
+  labels:
+    app: cert-manager-webhook-duckdns
+    chart: cert-manager-webhook-duckdns-v1.2.3
+    heritage: Helm
+    release: cert-manager-webhook-duckdns-github
+  name: v1alpha1.acme.friclu-github.org
+spec:
+  group: acme.friclu-github.org
+  groupPriorityMinimum: 1000
+  service:
+    name: duckdns-github
+    namespace: cert-manager
+  version: v1alpha1
+  versionPriority: 15

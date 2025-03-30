@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  labels:
+    app.kubernetes.io/instance: pushgateway
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: prometheus-pushgateway
+    app.kubernetes.io/version: v1.11.0
+    helm.sh/chart: prometheus-pushgateway-3.0.0
+  name: pushgateway-prometheus-pushgateway
+  namespace: pushgateway
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: pushgateway.friclu
+      http:
+        paths:
+          - backend:
+              service:
+                name: pushgateway-prometheus-pushgateway
+                port:
+                  number: 9091
+            path: /
+            pathType: ImplementationSpecific

@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: docker-registry
+    chart: docker-registry-2.2.3
+    heritage: Helm
+    release: registry
+  name: registry-docker-registry
+  namespace: registry
+spec:
+  ports:
+    - name: http-80
+      port: 80
+      protocol: TCP
+      targetPort: 5000
+  selector:
+    app: docker-registry
+    release: registry
+  type: ClusterIP

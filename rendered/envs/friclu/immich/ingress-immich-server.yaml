@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+  labels:
+    app.kubernetes.io/instance: immich
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: server
+    app.kubernetes.io/version: v1.119.0
+    helm.sh/chart: immich-0.9.0
+  name: immich-server
+  namespace: immich
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: immich-friclu.duckdns.org
+      http:
+        paths:
+          - backend:
+              service:
+                name: immich-server
+                port:
+                  number: 2283
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - immich-friclu.duckdns.org
+      secretName: immich-certificate

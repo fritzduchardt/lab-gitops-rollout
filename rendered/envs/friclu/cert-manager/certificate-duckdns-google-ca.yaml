@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  labels:
+    app: cert-manager-webhook-duckdns
+    chart: cert-manager-webhook-duckdns-v1.2.3
+    heritage: Helm
+    release: cert-manager-webhook-duckdns-google
+  name: duckdns-google-ca
+  namespace: cert-manager
+spec:
+  commonName: ca.cert-manager-webhook-duckdns.cert-manager
+  duration: 43800h
+  isCA: true
+  issuerRef:
+    name: duckdns-google-selfsign
+  secretName: duckdns-google-ca

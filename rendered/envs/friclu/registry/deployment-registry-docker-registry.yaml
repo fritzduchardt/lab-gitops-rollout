@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: docker-registry
+    chart: docker-registry-2.2.3
+    heritage: Helm
+    release: registry
+  name: registry-docker-registry
+  namespace: registry
+spec:
+  minReadySeconds: 5
+  replicas: 1
+  selector:
+    matchLabels:
+      app: docker-registry
+      release: registry
+  template:
+    metadata:
+      annotations:
+        checksum/config: d27e7d4b51d544196ea2812b38987aed8f314a7a7a648fe5cdadb36dffb0d12d
+        checksum/secret: 3b1bd03f08ab9fa263e1a6658c53a6c5f0ddd933fe4e91b7401254217dd9f959
+      labels:
+        app: docker-registry
+        release: registry
+    spec:
+      containers:
+        - command:
+            - /bin/registry
+            - serve
+            - /etc/docker/registry/config.yml
+          env:
+            - name: REGISTRY_HTTP_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: haSharedSecret
+                  name: registry-docker-registry-secret
+            - name: REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY
+              value: /var/lib/registry
+          image: registry:2.8.1
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5000
+          name: docker-registry
+          ports:
+            - containerPort: 5000
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5000
+          resources: {}
+          volumeMounts:
+            - mountPath: /etc/docker/registry
+              name: registry-docker-registry-config
+            - mountPath: /var/lib/registry/
+              name: data
+      securityContext:
+        fsGroup: 1000
+        runAsUser: 1000
+      volumes:
+        - configMap:
+            name: registry-docker-registry-config
+          name: registry-docker-registry-config
+        - emptyDir: {}
+          name: data
