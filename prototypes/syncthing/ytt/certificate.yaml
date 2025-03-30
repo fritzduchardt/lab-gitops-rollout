@@ -1,0 +1,16 @@
+  apiVersion: cert-manager.io/v1
+  kind: Certificate
+  metadata:
+    name: syncthing-certificate
+  spec:
+    secretName: syncthing-certificate
+    duration: 2160h
+    renewBefore: 360h
+    subject:
+      organizations:
+        - friclu
+    dnsNames:
+      - syncthing-friclu.duckdns.org
+    issuerRef:
+      name: duckdns-google-production
+      kind: ClusterIssuer

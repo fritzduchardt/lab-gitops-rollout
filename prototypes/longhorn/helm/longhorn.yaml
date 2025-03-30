@@ -1,0 +1,7 @@
+ingress:
+  enabled: true
+  ingressClassName: "nginx"
+  host: longhorn.friclu
+persistence:
+  defaultClassReplicaCount: 1
+  defaultDataLocality: best-effort

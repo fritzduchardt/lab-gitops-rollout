@@ -1,0 +1,7 @@
+controller:
+  service:
+    type: NodePort
+  config: {
+    # don't restrict body size
+    proxy-body-size: 0
+  }

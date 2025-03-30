@@ -1,0 +1,8 @@
+#@data/values-schema
+#@overlay/match-child-defaults missing_ok=True
+---
+helm:
+  namespace: longhorn-system
+application:
+  namespace:
+    create: true

@@ -1,0 +1,19 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: grafana-certificate
+  namespace: #@ data.values.helm.namespace
+spec:
+  secretName: grafana-certificate
+  duration: 2160h
+  renewBefore: 360h
+  subject:
+    organizations:
+      - friclu
+  dnsNames:
+    - grafana-friclu.duckdns.org
+  issuerRef:
+    name: duckdns-github-production
+    kind: ClusterIssuer

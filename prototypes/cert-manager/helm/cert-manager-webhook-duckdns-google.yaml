@@ -1,0 +1,12 @@
+clusterIssuer:
+  email: fritz@duchardt.net
+  production:
+    create: true
+
+fullnameOverride: duckdns-google
+
+groupName: acme.friclu-google.org
+
+secret:
+  existingSecret: true
+  existingSecretName: "duckdns-google-secret"

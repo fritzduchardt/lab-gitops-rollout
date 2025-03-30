@@ -1,0 +1,38 @@
+additionalVolumes:
+  - hostPath:
+      path: /dev/ttyUSB0
+    name: usb
+  - name: home-assistant
+    persistentVolumeClaim:
+      claimName: home-assistant
+
+additionalMounts:
+  - mountPath: /dev/ttyUSB0
+    name: usb
+
+configuration:
+  enabled: true
+  forceInit: true
+
+ingress:
+  enabled: true
+  className: "nginx"
+  hosts:
+    - host: ha-friclu.duckdns.org
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+    - hosts:
+        - ha-friclu.duckdns.org
+      secretName: ha-certificate
+
+nodeSelector:
+  kubernetes.io/hostname: friclu-1
+
+persistence:
+  enabled: true
+  existingVolume: home-assistant
+
+securityContext:
+  privileged: true

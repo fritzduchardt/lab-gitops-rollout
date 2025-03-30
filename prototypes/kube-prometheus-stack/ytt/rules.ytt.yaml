@@ -1,0 +1,19 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: restic.rules
+  namespace: #@ data.values.helm.namespace
+spec:
+  groups:
+    - name: restic.rules
+      rules:
+        - alert: Restic Backup Failed
+          annotations:
+            description: Restic Backup has failed for folder {{ $labels.dir }}
+          expr: |-
+            restic_backup_success{success!="0"}
+          for: 1m
+          labels:
+            severity: critical

@@ -1,0 +1,9 @@
+
+#@data/values-schema
+#@overlay/match-child-defaults missing_ok=True
+---
+helm:
+  namespace: kube-prometheus-stack
+application:
+  namespace:
+    create: true

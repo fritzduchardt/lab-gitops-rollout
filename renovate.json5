@@ -1,0 +1,67 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "regexManagers": [
+    {
+      fileMatch: ["(^|/)vendir\\.yaml$"],
+      matchStrings: [
+        // # renovate: datasource=helm
+        // name: immich
+        // version: 0.8.5
+        // repository:
+        //   url: https://immich-app.github.io/immich-charts
+        "#\\s+renovate:\\s+datasource=(?<datasource>helm)\\n\\s+name:\\s+(?<depName>\\S+)\\n\\s+version:\\s+(?<currentValue>\\S+)\\n\\s+repository:\\n\\s+url:\\s+(?<registryUrl>\\S+)",
+      ]
+    },
+    {
+      "fileMatch": ["/.*\\.yaml$"],
+      // # renovate: datasource=github-releases depName="jkroepke/helm-secrets"
+      // tag: 1.2.3
+      matchStrings: [
+        "#\\s+renovate:\\s+datasource=(?<datasource>github-releases)\\s+depName=\"(?<depName>\\S+)\"\\n\\s+tag:\\s+(?<currentValue>\\S+)"
+      ]
+    }
+  ],
+  ignorePaths: ["**/.myks/**"],
+  packageRules: [
+    // default
+    {
+      matchUpdateTypes: ["minor", "patch"],
+      automerge: true,
+    },
+    // more interesting
+    {
+      matchFileNames: ["prototypes/pihole/**"],
+      matchUpdateTypes: ["minor", "patch"],
+      automerge: true,
+    },
+    {
+      matchFileNames: ["prototypes/ollama/**"],
+      matchUpdateTypes: ["patch"],
+      automerge: true,
+    },
+    {
+      matchFileNames: ["prototypes/immich-app/**"],
+      matchUpdateTypes: ["patch"],
+      automerge: true,
+    },
+    {
+      matchFileNames: ["prototypes/syncthing/**"],
+      matchUpdateTypes: ["patch"],
+      automerge: true,
+    },
+    // less interesting
+    {
+      matchFileNames: ["prototypes/knative/**"],
+      matchUpdateTypes: ["major", "minor", "patch"],
+      automerge: true,
+    },
+    {
+      matchFileNames: ["prototypes/longhorn/**"],
+      matchUpdateTypes: ["major", "minor", "patch"],
+      automerge: true,
+    },
+  ]
+}

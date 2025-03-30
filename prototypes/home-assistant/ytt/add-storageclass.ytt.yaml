@@ -1,0 +1,10 @@
+
+#@ load("@ytt:overlay", "overlay")
+#@ load("@ytt:data", "data")
+
+#@overlay/match by=overlay.subset({"kind": "StatefulSet"}), expects="1+"
+---
+spec:
+    #@overlay/match missing_ok=True
+    #@overlay/remove
+    volumeClaimTemplates:

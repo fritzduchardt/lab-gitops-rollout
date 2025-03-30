@@ -1,0 +1,13 @@
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+directories:
+  - path: charts
+    contents:
+      - path: knative
+        lazy: true
+        helmChart:
+          # renovate: datasource=helm
+          name: knative-operator
+          version: v1.17.5
+          repository:
+            url: https://knative.github.io/operator

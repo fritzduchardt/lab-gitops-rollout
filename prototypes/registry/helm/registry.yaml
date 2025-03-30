@@ -1,0 +1,8 @@
+ingress:
+  enabled: true
+  path: /
+  # Used to create an Ingress record.
+  hosts:
+    - registry.friclu
+service:
+  port: 80

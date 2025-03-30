@@ -1,0 +1,13 @@
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+directories:
+  - path: charts
+    contents:
+      - path: ollama
+        lazy: true
+        helmChart:
+          # renovate: datasource=helm
+          name: ollama
+          version: 1.12.0
+          repository:
+            url: https://otwld.github.io/ollama-helm/
