@@ -31,37 +31,5 @@
       matchUpdateTypes: ["minor", "patch"],
       automerge: true,
     },
-    // more interesting
-    {
-      matchFileNames: ["prototypes/pihole/**"],
-      matchUpdateTypes: ["minor", "patch"],
-      automerge: true,
-    },
-    {
-      matchFileNames: ["prototypes/ollama/**"],
-      matchUpdateTypes: ["patch"],
-      automerge: true,
-    },
-    {
-      matchFileNames: ["prototypes/immich-app/**"],
-      matchUpdateTypes: ["patch"],
-      automerge: true,
-    },
-    {
-      matchFileNames: ["prototypes/syncthing/**"],
-      matchUpdateTypes: ["patch"],
-      automerge: true,
-    },
-    // less interesting
-    {
-      matchFileNames: ["prototypes/knative/**"],
-      matchUpdateTypes: ["major", "minor", "patch"],
-      automerge: true,
-    },
-    {
-      matchFileNames: ["prototypes/longhorn/**"],
-      matchUpdateTypes: ["major", "minor", "patch"],
-      automerge: true,
-    },
   ]
 }
