@@ -8,6 +8,6 @@ directories:
         helmChart:
           # renovate: datasource=helm
           name: ollama
-          version: 1.12.0
+          version: 1.18.0
           repository:
             url: https://otwld.github.io/ollama-helm/
