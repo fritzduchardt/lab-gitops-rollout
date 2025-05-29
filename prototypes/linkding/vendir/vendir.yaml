@@ -8,6 +8,6 @@ directories:
         helmChart:
           # renovate: datasource=helm
           name: linkding
-          version: 2.0.0
+          version: 2.1.0
           repository:
             url: https://charts.pascaliske.dev
