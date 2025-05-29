@@ -5,8 +5,8 @@ metadata:
     app.kubernetes.io/instance: linkding
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: linkding
-    app.kubernetes.io/version: 1.22.1
-    helm.sh/chart: linkding-2.0.0
+    app.kubernetes.io/version: 1.40.0
+    helm.sh/chart: linkding-2.1.0
   name: linkding
   namespace: linkding
 spec:
@@ -33,18 +33,8 @@ spec:
       containers:
         - env:
             - name: TZ
-              value: ECT
-            - name: LD_SUPERUSER_NAME
-              valueFrom:
-                secretKeyRef:
-                  key: LD_SUPERUSER_NAME
-                  name: linkding-secret
-            - name: LD_SUPERUSER_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  key: LD_SUPERUSER_PASSWORD
-                  name: linkding-secret
-          image: sissbruecker/linkding:1.22.1
+              value: UTC
+          image: ghcr.io/sissbruecker/linkding:1.40.0
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

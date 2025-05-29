@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: coredns
     app.kubernetes.io/version: 1.12.0
-    helm.sh/chart: coredns-1.39.1
+    helm.sh/chart: coredns-1.42.2
     k8s-app: coredns
     kubernetes.io/cluster-service: "true"
     kubernetes.io/name: CoreDNS
@@ -27,7 +27,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: ba6c58edf97ebff63dc6b71ae326d8b29971c4950f18ef19aaee6fb07dd2ca03
+        checksum/config: 13fd0a4141b57dd3853a225f00e91423b35ee20f1dd8c7d26a6c5702bbf29d0b
         scheduler.alpha.kubernetes.io/tolerations: '[{"key":"CriticalAddonsOnly", "operator":"Exists"}]'
       labels:
         app.kubernetes.io/instance: coredns
@@ -55,20 +55,17 @@ spec:
             - containerPort: 53
               name: udp-53
               protocol: UDP
-            - containerPort: 53
-              name: tcp-53
-              protocol: TCP
             - containerPort: 9153
               name: tcp-9153
               protocol: TCP
           readinessProbe:
-            failureThreshold: 5
+            failureThreshold: 1
             httpGet:
               path: /ready
               port: 8181
               scheme: HTTP
             initialDelaySeconds: 30
-            periodSeconds: 10
+            periodSeconds: 5
             successThreshold: 1
             timeoutSeconds: 5
           resources:

@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   labels:
     app: pihole
-    chart: pihole-2.27.0
+    chart: pihole-2.31.0
     heritage: Helm
     release: pihole
   name: pihole

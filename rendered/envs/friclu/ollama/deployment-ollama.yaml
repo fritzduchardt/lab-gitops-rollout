@@ -5,8 +5,8 @@ metadata:
     app.kubernetes.io/instance: ollama
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: ollama
-    app.kubernetes.io/version: 0.6.0
-    helm.sh/chart: ollama-1.9.0
+    app.kubernetes.io/version: 0.7.1
+    helm.sh/chart: ollama-1.18.0
   name: ollama
   namespace: ollama
 spec:
@@ -23,14 +23,16 @@ spec:
         app.kubernetes.io/instance: ollama
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: ollama
-        app.kubernetes.io/version: 0.6.0
-        helm.sh/chart: ollama-1.9.0
+        app.kubernetes.io/version: 0.7.1
+        helm.sh/chart: ollama-1.18.0
     spec:
       containers:
         - args: null
-          env: null
+          env:
+            - name: OLLAMA_HOST
+              value: 0.0.0.0:11434
           envFrom: null
-          image: ollama/ollama:0.6.0
+          image: ollama/ollama:0.7.1
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 6

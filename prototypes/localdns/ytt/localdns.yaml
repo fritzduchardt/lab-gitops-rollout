@@ -52,7 +52,7 @@ data:
         reload
         loop
         bind 169.254.25.10
-        forward . 10.233.11.200 {
+        forward . 10.233.126.83 {
                 force_tcp
         }
         prometheus :9253

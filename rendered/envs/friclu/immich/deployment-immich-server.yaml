@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: server
     app.kubernetes.io/version: v1.119.0
-    helm.sh/chart: immich-0.9.0
+    helm.sh/chart: immich-0.9.3
   name: immich-server
   namespace: immich
 spec:
@@ -17,7 +17,7 @@ spec:
       app.kubernetes.io/instance: immich
       app.kubernetes.io/name: server
   strategy:
-    type: Recreate
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -39,7 +39,7 @@ spec:
               value: http://immich-machine-learning:3003
             - name: REDIS_HOSTNAME
               value: immich-redis-master
-          image: ghcr.io/immich-app/immich-server:v1.130.3
+          image: ghcr.io/immich-app/immich-server:v1.134.0
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3

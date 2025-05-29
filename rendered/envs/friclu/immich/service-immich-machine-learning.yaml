@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: machine-learning
     app.kubernetes.io/service: immich-machine-learning
     app.kubernetes.io/version: v1.119.0
-    helm.sh/chart: immich-0.9.0
+    helm.sh/chart: immich-0.9.3
   name: immich-machine-learning
   namespace: immich
 spec:

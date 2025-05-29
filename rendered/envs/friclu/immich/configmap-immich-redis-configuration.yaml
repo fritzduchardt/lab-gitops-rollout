@@ -19,13 +19,14 @@ data:
     rename-command FLUSHDB ""
     rename-command FLUSHALL ""
     # End of replica configuration
+  users.acl: ""
 kind: ConfigMap
 metadata:
   labels:
     app.kubernetes.io/instance: immich
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: redis
-    app.kubernetes.io/version: 7.2.5
-    helm.sh/chart: redis-19.5.3
+    app.kubernetes.io/version: 7.4.3
+    helm.sh/chart: redis-20.13.2
   name: immich-redis-configuration
   namespace: immich

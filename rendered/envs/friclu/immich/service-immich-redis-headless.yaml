@@ -5,8 +5,8 @@ metadata:
     app.kubernetes.io/instance: immich
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: redis
-    app.kubernetes.io/version: 7.2.5
-    helm.sh/chart: redis-19.5.3
+    app.kubernetes.io/version: 7.4.3
+    helm.sh/chart: redis-20.13.2
   name: immich-redis-headless
   namespace: immich
 spec:

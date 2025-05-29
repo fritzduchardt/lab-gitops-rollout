@@ -5,8 +5,8 @@ metadata:
     app.kubernetes.io/instance: linkding
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: linkding
-    app.kubernetes.io/version: 1.22.1
-    helm.sh/chart: linkding-2.0.0
+    app.kubernetes.io/version: 1.40.0
+    helm.sh/chart: linkding-2.1.0
   name: linkding
   namespace: linkding
 spec:
