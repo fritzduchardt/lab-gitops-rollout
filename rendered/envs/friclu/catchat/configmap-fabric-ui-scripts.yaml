@@ -95,19 +95,6 @@ data:
       container.appendChild(searchInput);
       container.appendChild(dropdownMenu);
 
-      // Add show dropdown button
-      const showBtn = document.createElement('button');
-      showBtn.type = 'button';
-      showBtn.className = 'toggle-dropdown btn btn-secondary btn-sm';
-      showBtn.textContent = 'Show';
-      showBtn.addEventListener('click', e => {
-        e.preventDefault();
-        e.stopPropagation();
-        dropdownMenu.classList.toggle('show');
-        searchInput.focus();
-      });
-      container.appendChild(showBtn);
-
       searchInput.addEventListener('focus', () => {
         dropdownMenu.classList.add('show');
       });
@@ -188,12 +175,17 @@ data:
 
             // Add show button for obsidian files
             if (id === 'obsidian-select' && item !== '(no file)') {
-              const showBtnFile = document.createElement('button');
-              showBtnFile.className = 'show-file-button';
-              showBtnFile.textContent = 'Show';
-              showBtnFile.addEventListener('click', async (e) => {
+              const showBtn = document.createElement('button');
+              showBtn.className = 'show-file-button';
+              showBtn.textContent = 'Show';
+              showBtn.addEventListener('click', async (e) => {
                 e.preventDefault();
                 e.stopPropagation();
+                // select this file in dropdown
+                searchInput.value = item;
+                searchInput.dataset.value = item;
+                const changeEvent = new Event('change', { bubbles: true });
+                searchInput.dispatchEvent(changeEvent);
                 dropdownMenu.classList.remove('show');
                 try {
                   const res = await fetch(`${obsidianFileUrl}/${encodeURIComponent(item)}`);
@@ -205,7 +197,7 @@ data:
                   addMessage(`Error loading file: ${err.message}`, 'bot');
                 }
               });
-              dropdownItem.appendChild(showBtnFile);
+              dropdownItem.appendChild(showBtn);
             }
 
             // Add show button for patterns
@@ -216,6 +208,11 @@ data:
               showPatternBtn.addEventListener('click', async (e) => {
                 e.preventDefault();
                 e.stopPropagation();
+                // select this pattern in dropdown
+                searchInput.value = item;
+                searchInput.dataset.value = item;
+                const changeEvent = new Event('change', { bubbles: true });
+                searchInput.dispatchEvent(changeEvent);
                 dropdownMenu.classList.remove('show');
                 try {
                   const res = await fetch(`${patternsUrl}/${encodeURIComponent(item)}`);
@@ -587,9 +584,6 @@ data:
 
       const style = document.createElement('style');
       style.textContent = `
-        .enhanced-select { position: relative; width: 100%; }
-        .enhanced-select input { padding-right: 2.5rem; }
-        .toggle-dropdown { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); padding: 2px 4px; font-size: 0.75rem; }
         .message { position: relative; }
         .bubble { position: relative; }
         .store-message-button {
@@ -622,6 +616,10 @@ data:
           font-size: 0.75rem;
           padding: 2px 4px;
           margin-left: 4px;
+        }
+        .enhanced-select {
+          position: relative;
+          width: 100%;
         }
         .enhanced-select .form-control {
           width: 100%;
