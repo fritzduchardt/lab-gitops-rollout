@@ -1,0 +1,15 @@
+  backend:
+    personalName: "Elke"
+    fabricFiles: /volumes/syncthing/ElkeSync
+  ui:
+    title: "CatChat"
+    iconPath: "icons/cat"
+  ingress:
+    host: catchat-friclu.duckdns.org
+    tls:
+      secretName: fabric-certificate
+  service:
+    type: ClusterIP
+  basicAuth:
+    create: false
+    secretName: "catchat-basic-auth"

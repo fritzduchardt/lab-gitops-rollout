@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: fabric
+    component: backend
+  name: fabric-backend
+  namespace: fritzgpt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fabric
+      component: backend
+  template:
+    metadata:
+      labels:
+        app: fabric
+        component: backend
+    spec:
+      containers:
+        - env:
+            - name: FABRIC_CONFIG_HOME
+              value: /home/fabric/.config/fabric
+            - name: OBSIDIAN_VAULT_PATH
+              value: /home/fabric/obsidian/private
+            - name: FABRIC_PATTERN_PATH
+              value: /home/fabric/obsidian/patterns
+            - name: PERSONAL_NAME
+              value: Fritz
+          image: ghcr.io/fritzduchardt/fabric:main
+          imagePullPolicy: Always
+          name: fabric-backend
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - mountPath: /home/fabric/.config/fabric/.env
+              name: fabric-env
+              subPath: .env
+            - mountPath: /home/fabric/obsidian
+              name: sync
+      nodeSelector:
+        kubernetes.io/hostname: friclu-1
+      volumes:
+        - name: fabric-env
+          secret:
+            secretName: fabric
+        - name: sync
+          persistentVolumeClaim:
+            claimName: sync

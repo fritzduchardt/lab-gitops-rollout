@@ -19,3 +19,7 @@ environment:
     - proto: kube-prometheus-stack
     - proto: pushgateway
     - proto: ollama
+    - name: fritzgpt
+      proto: fabric
+    - name: catchat
+      proto: fabric

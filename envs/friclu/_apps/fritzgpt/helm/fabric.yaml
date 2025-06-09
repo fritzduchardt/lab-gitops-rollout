@@ -1,0 +1,14 @@
+backend:
+  personalName: "Fritz"
+ui:
+  title: "FritzGPT"
+  iconPath: "icons/turtle"
+ingress:
+  host: fabric-friclu.duckdns.org
+  tls:
+    secretName: fabric-certificate
+service:
+  type: ClusterIP
+basicAuth:
+  create: false
+  secretName: "fritzgpt-basic-auth"

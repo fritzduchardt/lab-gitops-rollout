@@ -26,7 +26,6 @@ concat_yamls () {
 
 # MINOR: Added error message for kapp command failure
 apply() {
-	echo "Applying Kubernetes manifests"
 	local -a kapp_cmd=(kapp --yes deploy --default-label-scoping-rules=false --apply-default-update-strategy=fallback-on-replace --dangerous-override-ownership-of-existing-resources -a "$MYKS_APP" -f -)
 	concat_yamls "$MYKS_RENDERED_APP_DIR" | "${kapp_cmd[@]}" || {
 		echo "kapp command failed" >&2
