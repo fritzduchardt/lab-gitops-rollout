@@ -26,7 +26,8 @@ concat_yamls () {
 
 # MINOR: Added error message for kapp command failure
 apply() {
-	local -a kapp_cmd=(kapp --yes deploy --default-label-scoping-rules=false --apply-default-update-strategy=fallback-on-replace --dangerous-override-ownership-of-existing-resources -a "$MYKS_APP" -f -)
+	echo "Applying Kubernetes manifests"
+	local -a kapp_cmd=(kapp --wait-timeout=10s --wait=false --yes deploy --default-label-scoping-rules=false --apply-default-update-strategy=fallback-on-replace --dangerous-override-ownership-of-existing-resources -a "$MYKS_APP" -f -)
 	concat_yamls "$MYKS_RENDERED_APP_DIR" | "${kapp_cmd[@]}" || {
 		echo "kapp command failed" >&2
 		return 1
@@ -34,6 +35,10 @@ apply() {
 }
 
 main() {
+  if ! kubectl cluster-info; then
+    echo "Not connected to cluster"
+    exit 1
+  fi
 	if ! apply; then
 		echo "Failed to apply manifests" >&2
 		exit 1

@@ -1,8 +1,23 @@
-apiVersion: v1
-kind: Secret
+apiVersion: ENC[AES256_GCM,data:6/Y=,iv:lYqRrooQagUhBPflVGRyEk0p//gVEfv+sLdt3kadSfs=,tag:tIFiF8q79vTWJfPn+Jxg4g==,type:str]
+kind: ENC[AES256_GCM,data:u9u33eI5,iv:26YWSmPf0tsD0M0ZYFcLHzVedwz8GJjqQKfTITAqrsM=,tag:5vWgMVu28qXXLZPgPeH40Q==,type:str]
 metadata:
-    name: fritzgpt-basic-auth
-    namespace: fritzgpt
-type: Opaque
+    name: ENC[AES256_GCM,data:hv/DcOHgdryAOsQkV4ZneJ1UPQ==,iv:d0+zO3xnIpFIsEwsRScIthI0zcSFY1adj79NRJLvi1k=,tag:dx7Z8r0UlK9S0n/55Grseg==,type:str]
+    namespace: ENC[AES256_GCM,data:r20h/tBtD8A=,iv:MxqV080o6boScN1ZEN6GnGCeOSCMyql9Vt7mRA0ksag=,tag:YIhTxMQJiqScN1gQRCLjvA==,type:str]
+type: ENC[AES256_GCM,data:uZU3DpXi,iv:FU7Ld5vvpu4VtMhBjSbpGOqLrR8pObbwuujWcfvcQ+U=,tag:uQNk96sizAFQTW5naJZ2oQ==,type:str]
 data:
-    auth: ZnJpdHo6JGFwcjEka1kwbWIvLi4kMnRaakZoMXR4MnhWd1FrL25CdVhtMAo=
+    auth: ENC[AES256_GCM,data:MYNV5l3wC8HHqCgSxRcwEAvdCCAp3qhrrmMJuhwSwNKkWWvA+0c5cSBdkSTir1gDFNfmMXwYWzXRt2Yw,iv:QlZru4gC/uDbddr6p1ht1+vF2Fuct04d6U3I3wbyS+E=,tag:5afRTjgyUQSAleYN0HSweg==,type:str]
+sops:
+    age:
+        - recipient: age1mx6gqtque52ytw5ptc6pjnu0d06lye6tztjhhj4mjrx79qgc69tqgc4vz5
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBuWkliQmZkM1hSY3c3N0lj
+            YmYzZzhlaXA5d2RZNG9FaVVtdnJJbVIxZWhnClhJV2ZZZVc4dzkyaGJkU1liSDhH
+            YnhlOFBQK2lldHdobU5MOElsWStudUUKLS0tIC9WbVdqT2ZQOHRWQ2pYS1Mxc2U3
+            STVVS2ZadlZzV0xFUzl6MHZnaU9XSncK4faIudCRg3PGndvWHocvyjEQ/w4TiArq
+            0o+RaDCrvlljvilqY4bTcVBhCvlU78ddYlRp+hP45l+q1Qn+OKTjMQ==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-06-09T13:43:19Z"
+    mac: ENC[AES256_GCM,data:pf+kzgPRijrGAzDH0CyV8DTxjb3xqJlYm1ocRX0nrWPYVMuzyYWScIKb88t0Hr2votgHcVmAhYXeUzcsx4GzlldijIT8kwhfCAuKjkW0twT0gD1g4aMz3/nsW9lxPd+KldGQ8nAByQsrI1lezvfxuNWNZCGtOWgBWvvk0IYcwM8=,iv:87gb1fnj1IvzVzjiluKgoriZOBCohjw+D143rcjF1As=,tag:9g45VdEfZ1x6ZtzdVIbvkQ==,type:str]
+    encrypted_regex: .
+    version: 3.10.2

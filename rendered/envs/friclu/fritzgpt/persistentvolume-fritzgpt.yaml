@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: sync
-  namespace: catchat
+  name: fritzgpt
+  namespace: fritzgpt
 spec:
   accessModes:
     - ReadWriteOnce
   capacity:
     storage: 2Gi
   hostPath:
-    path: /volumes/syncthing/ElkeSync
+    path: /volumes/syncthing/Sync
     type: ""
   persistentVolumeReclaimPolicy: Retain
   volumeMode: Filesystem
