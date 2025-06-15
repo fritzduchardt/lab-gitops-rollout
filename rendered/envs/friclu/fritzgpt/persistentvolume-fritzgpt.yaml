@@ -9,7 +9,7 @@ spec:
   capacity:
     storage: 2Gi
   hostPath:
-    path: /volumes/syncthing/Sync
+    path: /volumes/syncthing/FritzSync
     type: ""
   persistentVolumeReclaimPolicy: Retain
   volumeMode: Filesystem

@@ -1,0 +1,13 @@
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+directories:
+  - path: charts
+    contents:
+      - path: nextcloud
+        lazy: true
+        helmChart:
+          # renovate: datasource=helm
+          name: nextcloud
+          version: 6.6.10
+          repository:
+            url: https://nextcloud.github.io/helm/

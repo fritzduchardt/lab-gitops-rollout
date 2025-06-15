@@ -1,8 +1,11 @@
 backend:
   personalName: "Fritz"
+  fabricFiles: /volumes/syncthing/FritzSync
 ui:
   title: "FritzGPT"
   iconPath: "icons/turtle"
+  defaultModel: "claude-3-7-sonnet-latest"
+  defaultPattern: "general"
 ingress:
   host: fabric-friclu.duckdns.org
   tls:
