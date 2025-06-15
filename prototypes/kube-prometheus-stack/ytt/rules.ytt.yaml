@@ -9,11 +9,42 @@ spec:
   groups:
     - name: restic.rules
       rules:
-        - alert: Restic Backup Failed
+        - alert: ResticBackupAbsentSyncthing
+          annotations:
+            description: Restic Backup absent for folder {{ $labels.dir }}
+          expr: |-
+            absent(restic_backup_success{dir="/volumes/syncthing",success="0"})
+          for: 48h
+          labels:
+            severity: critical
+        - alert: ResticBackupAbsentLinkding
+          annotations:
+            description: Restic Backup absent for folder {{ $labels.dir }}
+          expr: |-
+            absent(restic_backup_success{dir="/volumes/linkding",success="0"})
+          for: 48h
+          labels:
+            severity: critical
+        - alert: ResticBackupAbsentImmich
+          annotations:
+            description: Restic Backup absent for folder {{ $labels.dir }}
+          expr: |-
+            absent(restic_backup_success{dir="/volumes/immich",success="0"})
+          for: 48h
+          labels:
+            severity: critical
+        - alert: ResticBackupAbsentTest
+          annotations:
+            description: Restic Backup absent for folder {{ $labels.dir }}
+          expr: |-
+            absent(restic_backup_success{dir="/volumes/test",success="0"})
+          for: 48h
+          labels:
+            severity: critical
+        - alert: ResticBackupFailed
           annotations:
             description: Restic Backup has failed for folder {{ $labels.dir }}
           expr: |-
-            restic_backup_success{success!="0"}
-          for: 1m
+            restic_backup_success == 1
           labels:
             severity: critical

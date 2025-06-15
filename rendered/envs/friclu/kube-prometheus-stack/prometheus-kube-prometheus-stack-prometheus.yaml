@@ -29,6 +29,13 @@ spec:
                     - kube-prometheus-stack-prometheus
             topologyKey: kubernetes.io/hostname
           weight: 100
+  alerting:
+    alertmanagers:
+      - apiVersion: v2
+        name: kube-prometheus-stack-alertmanager
+        namespace: kube-prometheus-stack
+        pathPrefix: /
+        port: http-web
   automountServiceAccountToken: true
   enableAdminAPI: false
   externalUrl: http://prometheus.friclu/
@@ -50,10 +57,10 @@ spec:
   replicas: 1
   retention: 10d
   routePrefix: /
-  ruleNamespaceSelector: {}
-  ruleSelector:
-    matchLabels:
-      release: kube-prometheus-stack
+  ruleNamespaceSelector:
+    matchNames:
+      - kube-prometheus-stack
+  ruleSelector: {}
   scrapeConfigNamespaceSelector: {}
   scrapeConfigSelector:
     matchLabels:

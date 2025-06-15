@@ -1,5 +1,17 @@
 alertmanager:
-  enabled: false
+  enabled: true
+  alertmanagerSpec:
+    secrets:
+    - alertmanager-smtp
+    alertmanagerConfigMatcherStrategy:
+      type: None
+  config:
+    global:
+      smtp_smarthost: 'smtp.easyname.com:465'
+      smtp_from: 'fritz@duchardt.net'
+      smtp_require_tls: false
+      smtp_auth_username: 'fritz@duchardt.net'
+      smtp_auth_password_file: /etc/alertmanager/secrets/alertmanager-smtp/smtp_auth_password
 
 grafana:
   ingress:
@@ -21,9 +33,37 @@ grafana:
       alertmanager:
         enabled: false
 
+
 prometheus:
   ingress:
     ingressClassName: "nginx"
     enabled: true
     hosts:
       - prometheus.friclu
+  prometheusSpec:
+    ruleNamespaceSelector:
+      matchNames:
+        - kube-prometheus-stack
+    ruleSelectorNilUsesHelmValues: false
+    ruleSelector: {}
+
+defaultRules:
+  rules:
+#    alertmanager: true
+#    etcd: true
+#    configReloaders: true
+#    general: true
+#    k8sContainerCpuUsageSecondsTotal: true
+#    k8sContainerMemoryCache: true
+#    k8sContainerMemoryRss: true
+#    k8sContainerMemorySwap: true
+#    k8sContainerResource: true
+#    k8sContainerMemoryWorkingSetBytes: true
+#    k8sPodOwner: true
+#    kubeApiserverAvailability: true
+#    kubeApiserverBurnrate: true
+#    kubeApiserverHistogram: true
+#    kubeApiserverSlos: true
+#    kubeControllerManager: true
+#    kubelet: true
+    kubeProxy: false
