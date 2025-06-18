@@ -13,7 +13,7 @@ spec:
           annotations:
             description: Restic Backup absent for folder {{ $labels.dir }}
           expr: |-
-            absent(restic_backup_success{dir="/volumes/syncthing",success="0"})
+            absent(restic_backup_success{dir="/volumes/syncthing"} == 0)
           for: 48h
           labels:
             severity: critical
@@ -21,7 +21,7 @@ spec:
           annotations:
             description: Restic Backup absent for folder {{ $labels.dir }}
           expr: |-
-            absent(restic_backup_success{dir="/volumes/linkding",success="0"})
+            absent(restic_backup_success{dir="/volumes/linkding"} == 0)
           for: 48h
           labels:
             severity: critical
@@ -29,15 +29,7 @@ spec:
           annotations:
             description: Restic Backup absent for folder {{ $labels.dir }}
           expr: |-
-            absent(restic_backup_success{dir="/volumes/immich",success="0"})
-          for: 48h
-          labels:
-            severity: critical
-        - alert: ResticBackupAbsentTest
-          annotations:
-            description: Restic Backup absent for folder {{ $labels.dir }}
-          expr: |-
-            absent(restic_backup_success{dir="/volumes/test",success="0"})
+            absent(restic_backup_success{dir="/volumes/immich"} == 0)
           for: 48h
           labels:
             severity: critical

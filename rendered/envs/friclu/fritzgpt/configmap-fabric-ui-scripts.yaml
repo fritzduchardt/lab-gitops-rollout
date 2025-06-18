@@ -259,10 +259,13 @@ data:
 
     async function loadPatterns() {
       try {
+        // Save previously selected pattern
+        const prevPattern = patternSelect.getValue();
         const res = await fetch(`${patternsUrl}/names`);
         if (!res.ok) throw new Error(`Status ${res.status}`);
         const patterns = await res.json();
-        const defaultPattern = 'general';
+        // Determine default: restore previous if still available, else 'general'
+        const defaultPattern = prevPattern && patterns.includes(prevPattern) ? prevPattern : 'general';
         patternSelect.setItems(patterns, defaultPattern);
       } catch (e) {
         console.error(e);
@@ -325,7 +328,6 @@ data:
         btn.addEventListener('click', async (e) => {
           e.preventDefault();
           e.stopPropagation();
-          const prevInputValue = input.value; // preserve current prompt
           btn.disabled = true;
           const spinner = document.createElement('span');
           spinner.className = 'spinner-border spinner-border-sm ms-2';
@@ -355,7 +357,6 @@ data:
             btn.disabled = false;
           } finally {
             spinner.remove();
-            input.value = prevInputValue; // restore prompt
           }
         });
         b.appendChild(btn);
@@ -500,7 +501,6 @@ data:
                     storeMsgBtn.addEventListener('click', async (ev) => {
                       ev.preventDefault();
                       ev.stopPropagation();
-                      const prevInput = input.value; // preserve prompt
                       storeMsgBtn.disabled = true;
                       const sp = document.createElement('span');
                       sp.className = 'spinner-border spinner-border-sm ms-2';
@@ -530,7 +530,6 @@ data:
                         storeMsgBtn.disabled = false;
                       } finally {
                         sp.remove();
-                        input.value = prevInput; // restore prompt
                       }
                     });
                     b.appendChild(storeMsgBtn);
