@@ -1,0 +1,17 @@
+backend:
+  personalName: "Buba"
+  fabricFiles: /volumes/syncthing/BubaSync
+ui:
+  title: "MunchkinChat"
+  iconPath: "icons/munchkin"
+  defaultModel: "o4-mini"
+  defaultPattern: "news"
+ingress:
+  host: munchkinchat-friclu.duckdns.org
+  tls:
+    secretName: fabric-certificate
+service:
+  type: ClusterIP
+basicAuth:
+  create: false
+  secretName: "munchkinchat-basic-auth"

@@ -23,3 +23,5 @@ environment:
       proto: fabric
     - name: catchat
       proto: fabric
+    - name: munchkinchat
+      proto: fabric

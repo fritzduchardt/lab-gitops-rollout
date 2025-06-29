@@ -5,7 +5,7 @@ metadata:
     app: fabric
     component: ui
   name: fabric-ui
-  namespace: fritzgpt
+  namespace: munchkinchat
 spec:
   replicas: null
   selector:
@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/scripts-config: e0048a0cc33f3518243b5deac7d6e650c92cd28cc5a201ef791652aeb0f03eb7
+        checksum/scripts-config: a57b49c0a61a45e5be73f5801814e150bca2f65c8a945b89076a2f100eea8eb0
       labels:
         app: fabric
         component: ui
