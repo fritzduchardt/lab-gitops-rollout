@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/scripts-config: 14c8cf5b71d61f7ada0468a9e94562b00f682eeb97fdc56b6bbb23b34a980efe
+        checksum/scripts-config: de4fbf665cd2130978e0163539f6ad077e84589fc5b46bc4674b2a14172ece4d
       labels:
         app: fabric
         component: ui
@@ -33,6 +33,9 @@ spec:
             - mountPath: /usr/share/nginx/html/app.js
               name: ui-scripts
               subPath: app.js
+            - mountPath: /usr/share/nginx/html/lib.js
+              name: ui-scripts
+              subPath: lib.js
             - mountPath: /usr/share/nginx/html/index.html
               name: ui-scripts
               subPath: index.html
