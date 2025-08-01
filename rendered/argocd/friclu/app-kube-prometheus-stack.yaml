@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  name: friclu-kube-prometheus-stack
+  namespace: argocd
+spec:
+  destination:
+    name: friclu
+    namespace: kube-prometheus-stack
+  project: friclu
+  source:
+    path: rendered/envs/friclu/kube-prometheus-stack
+    repoURL: git@github.com:fritzduchardt/lab-gitops-rollout.git
+    targetRevision: master
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true

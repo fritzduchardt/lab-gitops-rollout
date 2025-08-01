@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  name: friclu-registry
+  namespace: argocd
+spec:
+  destination:
+    name: friclu
+    namespace: registry
+  project: friclu
+  source:
+    path: rendered/envs/friclu/registry
+    repoURL: git@github.com:fritzduchardt/lab-gitops-rollout.git
+    targetRevision: master
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true

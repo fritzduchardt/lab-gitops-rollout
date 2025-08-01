@@ -22,10 +22,14 @@ spec:
         - env:
             - name: FABRIC_CONFIG_HOME
               value: /home/fabric/.config/fabric
-            - name: OBSIDIAN_VAULT_PATH
-              value: /home/fabric/obsidian/private
+            - name: OBSIDIAN_VAULT_PATH_1
+              value: /home/fabric/sync/FritzSync/private
+            - name: OBSIDIAN_VAULT_PATH_2
+              value: /home/fabric/sync/BubaFritzShare
+            - name: OBSIDIAN_VAULT_PATH_3
+              value: /home/fabric/sync/FritzElkeShare
             - name: FABRIC_PATTERN_PATH
-              value: /home/fabric/obsidian/patterns
+              value: /home/fabric/sync/FritzSync/patterns
             - name: PERSONAL_NAME
               value: Fritz
           image: ghcr.io/fritzduchardt/fabric:main
@@ -37,7 +41,7 @@ spec:
             - mountPath: /home/fabric/.config/fabric/.env
               name: fabric-env
               subPath: .env
-            - mountPath: /home/fabric/obsidian
+            - mountPath: /home/fabric/sync
               name: sync
       nodeSelector:
         kubernetes.io/hostname: friclu-1

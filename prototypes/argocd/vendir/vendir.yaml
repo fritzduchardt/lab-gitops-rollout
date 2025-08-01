@@ -3,11 +3,11 @@ kind: Config
 directories:
   - path: charts
     contents:
-      - path: knative
+      - path: argo-cd
         lazy: true
         helmChart:
           # renovate: datasource=helm
-          name: knative-operator
-          version: v1.18.1
+          name: argo-cd
+          version: 8.1.2
           repository:
-            url: https://knative.github.io/operator
+            url: https://argoproj.github.io/argo-helm

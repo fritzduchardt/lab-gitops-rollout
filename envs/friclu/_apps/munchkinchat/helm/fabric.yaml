@@ -1,11 +1,14 @@
 backend:
   personalName: "Buba"
-  fabricFiles: /volumes/syncthing/BubaSync
+  patternFolder: "BubaSync/patterns"
+  obsidianFolders:
+    - "BubaSync/private"
+    - "BubaFritzShare"
 ui:
   title: "MunchkinChat"
   iconPath: "icons/munchkin"
   defaultModel: "o4-mini"
-  defaultPattern: "news"
+  defaultPattern: "journal"
 ingress:
   host: munchkinchat-friclu.duckdns.org
   tls:

@@ -1,0 +1,144 @@
+
+## Globally shared configuration
+global:
+  # -- Default domain used by all components
+  ## Used for ingresses, certificates, SSO, notifications, etc.
+  domain: argo-friclu.duckdns.org
+
+## Argo Configs
+configs:
+  # Argo CD configuration parameters
+  ## Ref: https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/argocd-cmd-params-cm.yaml
+  params:
+    # -- Number of application status processors
+    controller.status.processors: 20
+    # -- Number of application operation processors
+    controller.operation.processors: 10
+    server.insecure: true
+  repositories:
+     lab-gitops-rollout:
+       url: https://github.com/fritzduchardt/lab-gitops-rollout
+       name: lab-gitops-rollout
+       type: git
+  tls:
+    create: false
+  cmp:
+    create: true
+    plugins:
+       argocd-vault-plugin:
+         generate:
+           command: [sh, -c, "argocd-vault-plugin generate . -s vault-configuration"]
+         discover:
+           command: [sh, -c, "find . -name '*.yaml' | xargs -I {} grep \"<path\\|avp\\.kubernetes\\.io\" {} | grep ."]
+
+## Application controller
+controller:
+  # -- Application controller name string
+  name: application-controller
+
+  # -- The number of application controller pods to run.
+  # Additional replicas will cause sharding of managed clusters across number of replicas.
+  ## With dynamic cluster distribution turned on, sharding of the clusters will gracefully
+  ## rebalance if the number of replica's changes or one becomes unhealthy. (alpha)
+  replicas: 1
+
+  ## Application controller metrics configuration
+  metrics:
+    # -- Deploy metrics service
+    enabled: true
+    serviceMonitor:
+      # -- Enable a prometheus ServiceMonitor
+      enabled: true
+      spec:
+       - alert: ArgoAppMissing
+         expr: |
+           absent(argocd_app_info) == 1
+         for: 15m
+         labels:
+           severity: critical
+         annotations:
+           summary: "[Argo CD] No reported applications"
+           description: >
+             Argo CD has not reported any applications data for the past 15 minutes which
+             means that it must be down or not functioning properly.  This needs to be
+             resolved for this cloud to continue to maintain state.
+       - alert: ArgoAppNotSynced
+         expr: |
+           argocd_app_info{sync_status!="Synced"} == 1
+         for: 12h
+         labels:
+           severity: warning
+         annotations:
+           summary: "[{{`{{$labels.name}}`}}] Application not synchronized"
+           description: >
+             The application [{{`{{$labels.name}}`}} has not been synchronized for over
+             12 hours which means that the state of this cloud has drifted away from the
+             state inside Git.
+
+## Dex
+dex:
+  # -- Enable dex
+  enabled: false
+
+## Server
+server:
+  # -- Argo CD server name
+  name: server
+
+  # -- The number of server pods to run
+  replicas: 1
+
+  ingress:
+    # -- Enable an ingress resource for the Argo CD server
+    enabled: true
+    ingressClassName: "nginx"
+    tls: true
+
+  certificate:
+    enabled: true
+    issuer:
+      name: duckdns-google-production
+      group: ""
+      kind: ClusterIssuer
+
+## Repo Server
+repoServer:
+  # -- The number of repo server pods to run
+  replicas: 1
+  volumeMounts:
+    - name: custom-tools
+      mountPath: /usr/local/bin/argocd-vault-plugin
+      subPath: argocd-vault-plugin
+  volumes:
+    - name: custom-tools
+      emptyDir: {}
+  initContainers:
+    - name: download-tools
+      image: alpine:3.8
+      command: [sh, -c]
+      env:
+        - name: AVP_VERSION
+          value: "1.18.1"
+      args:
+        - >-
+          wget -O argocd-vault-plugin
+          https://github.com/argoproj-labs/argocd-vault-plugin/releases/download/v${AVP_VERSION}/argocd-vault-plugin_${AVP_VERSION}_linux_amd64 &&
+          chmod +x argocd-vault-plugin &&
+          mv argocd-vault-plugin /custom-tools/
+      volumeMounts:
+        - mountPath: /custom-tools
+          name: custom-tools
+
+## ApplicationSet controller
+applicationSet:
+  # -- The number of ApplicationSet controller pods to run
+  replicas: 1
+
+## Notifications controller
+notifications:
+  # -- Enable notifications controller
+  enabled: false
+
+commitServer:
+  # -- Enable commit server
+  enabled: false

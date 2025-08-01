@@ -9,7 +9,7 @@ spec:
   capacity:
     storage: 2Gi
   hostPath:
-    path: /volumes/syncthing/ElkeSync
+    path: /volumes/syncthing
     type: ""
   persistentVolumeReclaimPolicy: Retain
   volumeMode: Filesystem

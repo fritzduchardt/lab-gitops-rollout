@@ -1,15 +1,20 @@
-  backend:
+backend:
     personalName: "Elke"
-    fabricFiles: /volumes/syncthing/ElkeSync
-  ui:
+    patternFolder: "ElkeSync/patterns"
+    obsidianFolders:
+        - "ElkeSync/private"
+        - "FritzElkeShare"
+ui:
     title: "CatChat"
     iconPath: "icons/cat"
-  ingress:
+    defaultModel: "o4-mini"
+    defaultPattern: "general"
+ingress:
     host: catchat-friclu.duckdns.org
     tls:
-      secretName: fabric-certificate
-  service:
+        secretName: fabric-certificate
+service:
     type: ClusterIP
-  basicAuth:
+basicAuth:
     create: false
     secretName: "catchat-basic-auth"

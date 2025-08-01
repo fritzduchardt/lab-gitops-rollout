@@ -1,0 +1,26 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  labels:
+    app.kubernetes.io/component: server
+    app.kubernetes.io/instance: argo-cd
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: argocd-server
+    app.kubernetes.io/part-of: argocd
+    app.kubernetes.io/version: v3.0.6
+    helm.sh/chart: argo-cd-8.1.2
+  name: argo-cd-argocd-server
+  namespace: argocd
+spec:
+  commonName: argo-friclu.duckdns.org
+  dnsNames:
+    - argo-friclu.duckdns.org
+  issuerRef:
+    kind: ClusterIssuer
+    name: duckdns-google-production
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    rotationPolicy: Never
+    size: 2048
+  secretName: argocd-server-tls

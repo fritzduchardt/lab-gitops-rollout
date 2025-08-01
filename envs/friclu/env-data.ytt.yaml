@@ -1,10 +1,11 @@
 #@data/values
 ---
 argocd:
-  enabled: false
+  enabled: true
 environment:
   id: friclu
   applications:
+    - proto: argocd
     - proto: coredns
     - proto: localdns
     - proto: nginx
@@ -25,3 +26,5 @@ environment:
       proto: fabric
     - name: munchkinchat
       proto: fabric
+    - name: vault
+      proto: vault
