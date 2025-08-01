@@ -1,24 +1,3 @@
-apiVersion: argoproj.io/v1alpha1
-kind: AppProject
-metadata:
-  name: default
-  namespace: argocd
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
-spec:
-  description: Project for "friclu" environment
-  clusterResourceWhitelist:
-  - group: '*'
-    kind: '*'
-  destinations:
-  - namespace: '*'
-    name: friclu
-  namespaceResourceWhitelist:
-  - group: '*'
-    kind: '*'
-  sourceRepos:
-  - '*'
----
 apiVersion: v1
 kind: Secret
 metadata:
@@ -29,5 +8,5 @@ metadata:
 stringData:
   config: ARGOCD_CLUSTER_CONNECT_CONFIG
   name: friclu
-  project: default
+  project: friclu
   server: ARGOCD_CLUSTER_SERVER_URL

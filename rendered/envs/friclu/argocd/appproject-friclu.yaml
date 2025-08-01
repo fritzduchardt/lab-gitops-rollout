@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: friclu
+spec:
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  description: Project for "friclu" environment
+  destinations:
+    - name: friclu
+      namespace: '*'
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  sourceRepos:
+    - '*'
