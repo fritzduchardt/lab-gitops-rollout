@@ -1,7 +1,9 @@
 #@data/values
 ---
 argocd:
-  enabled: true
+  app:
+    destination:
+      name: "in-cluster"
 environment:
   id: friclu
   applications:
