@@ -12,8 +12,8 @@ spec:
   project: default
   source:
     path: rendered/argocd/friclu
-    repoURL: git@github.com:fritzduchardt/lab-gitops-rollout.git
-    targetRevision: master
+    repoURL: https://github.com/fritzduchardt/lab-gitops-rollout.git
+    targetRevision: HEAD
   syncPolicy:
     automated:
       prune: true

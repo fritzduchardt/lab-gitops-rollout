@@ -12,8 +12,8 @@ spec:
   project: friclu
   source:
     path: rendered/envs/friclu/pihole
-    repoURL: git@github.com:fritzduchardt/lab-gitops-rollout.git
-    targetRevision: master
+    repoURL: https://github.com/fritzduchardt/lab-gitops-rollout.git
+    targetRevision: HEAD
   syncPolicy:
     automated:
       prune: true

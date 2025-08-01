@@ -4,6 +4,9 @@ argocd:
   app:
     destination:
       name: "in-cluster"
+    source:
+      repoURL: "https://github.com/fritzduchardt/lab-gitops-rollout.git"
+      targetRevision: "HEAD"
 environment:
   id: friclu
   applications:
