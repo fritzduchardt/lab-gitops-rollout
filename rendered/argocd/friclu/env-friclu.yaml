@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: friclu
+  name: default
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -29,5 +29,5 @@ metadata:
 stringData:
   config: ARGOCD_CLUSTER_CONNECT_CONFIG
   name: friclu
-  project: friclu
+  project: default
   server: ARGOCD_CLUSTER_SERVER_URL

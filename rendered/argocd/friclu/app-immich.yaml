@@ -9,7 +9,7 @@ spec:
   destination:
     name: in-cluster
     namespace: immich
-  project: friclu
+  project: default
   source:
     path: rendered/envs/friclu/immich
     repoURL: https://github.com/fritzduchardt/lab-gitops-rollout.git

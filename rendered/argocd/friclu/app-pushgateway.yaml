@@ -9,7 +9,7 @@ spec:
   destination:
     name: in-cluster
     namespace: pushgateway
-  project: friclu
+  project: default
   source:
     path: rendered/envs/friclu/pushgateway
     repoURL: https://github.com/fritzduchardt/lab-gitops-rollout.git
