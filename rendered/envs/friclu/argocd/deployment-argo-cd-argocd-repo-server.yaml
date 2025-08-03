@@ -23,7 +23,7 @@ spec:
       annotations:
         checksum/cm: 5456b3d2061c7c5a15338b51a953f1557b4bc1e6f855437274129e7b1c3e8b49
         checksum/cmd-params: 8c02c8ced7ba61d64c28d52118d9295de7dd04bb5ac2f953c48a3f6e76c449c5
-        checksum/cmp-cm: 42510ad3ff96ce3a9e91a5d93cad50cedd5e2b4af5e98e8d939c578d39da5693
+        checksum/cmp-cm: ad38391a2f66ee47cfc4a910df366c88b618a615ab71d0261f48c001baa9cc8f
       labels:
         app.kubernetes.io/component: repo-server
         app.kubernetes.io/instance: argo-cd
@@ -279,6 +279,9 @@ spec:
               value: /helm-working-dir
             - name: HELM_DATA_HOME
               value: /helm-working-dir
+          envFrom:
+            - secretRef:
+                name: vault-configuration
           image: quay.io/argoproj/argocd:v3.0.6
           imagePullPolicy: IfNotPresent
           livenessProbe:
@@ -321,6 +324,9 @@ spec:
             - mountPath: /usr/local/bin/argocd-vault-plugin
               name: custom-tools
               subPath: argocd-vault-plugin
+            - mountPath: /home/argocd/cmp-server/config/plugin.yaml
+              name: argocd-cmp-cm
+              subPath: argocd-vault-plugin.yaml
             - mountPath: /app/config/ssh
               name: ssh-known-hosts
             - mountPath: /app/config/tls
@@ -361,7 +367,7 @@ spec:
             - mountPath: /var/run/argocd
               name: var-files
         - args:
-            - wget -O argocd-vault-plugin https://github.com/argoproj-labs/argocd-vault-plugin/releases/download/v${AVP_VERSION}/argocd-vault-plugin_${AVP_VERSION}_linux_amd64 && chmod +x argocd-vault-plugin && mv argocd-vault-plugin /custom-tools/
+            - wget -O argocd-vault-plugin https://github.com/argoproj-labs/argocd-vault-plugin/releases/download/v${AVP_VERSION}/argocd-vault-plugin_${AVP_VERSION}_linux_arm64 && chmod +x argocd-vault-plugin && mv argocd-vault-plugin /custom-tools/
           command:
             - sh
             - -c
@@ -380,6 +386,9 @@ spec:
       volumes:
         - emptyDir: {}
           name: custom-tools
+        - configMap:
+            name: argocd-cmp-cm
+          name: argocd-cmp-cm
         - emptyDir: {}
           name: helm-working-dir
         - emptyDir: {}

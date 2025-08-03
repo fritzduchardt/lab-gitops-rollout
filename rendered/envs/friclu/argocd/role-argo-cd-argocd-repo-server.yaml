@@ -11,4 +11,12 @@ metadata:
     helm.sh/chart: argo-cd-8.1.2
   name: argo-cd-argocd-repo-server
   namespace: argocd
-rules: null
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - secrets
+    verbs:
+      - get
+      - list
+      - watch

@@ -25,11 +25,11 @@ configs:
   cmp:
     create: true
     plugins:
-       argocd-vault-plugin:
-         generate:
-           command: [sh, -c, "argocd-vault-plugin generate . -s vault-configuration"]
-         discover:
-           command: [sh, -c, "find . -name '*.yaml' | xargs -I {} grep \"<path\\|avp\\.kubernetes\\.io\" {} | grep ."]
+      argocd-vault-plugin:
+        generate:
+          command: [sh, -c, "argocd-vault-plugin generate . -s vault-configuration"]
+        discover:
+          command: [sh, -c, "find . -name '*.yaml' | xargs -I {} grep \"<path\" {} | grep ."]
 
 ## Application controller
 controller:
@@ -109,9 +109,15 @@ repoServer:
     - name: custom-tools
       mountPath: /usr/local/bin/argocd-vault-plugin
       subPath: argocd-vault-plugin
+    - mountPath: /home/argocd/cmp-server/config/plugin.yaml
+      subPath: argocd-vault-plugin.yaml
+      name: argocd-cmp-cm
   volumes:
     - name: custom-tools
       emptyDir: {}
+    - configMap:
+        name: argocd-cmp-cm
+      name: argocd-cmp-cm
   initContainers:
     - name: download-tools
       image: alpine:3.8
@@ -122,12 +128,24 @@ repoServer:
       args:
         - >-
           wget -O argocd-vault-plugin
-          https://github.com/argoproj-labs/argocd-vault-plugin/releases/download/v${AVP_VERSION}/argocd-vault-plugin_${AVP_VERSION}_linux_amd64 &&
+          https://github.com/argoproj-labs/argocd-vault-plugin/releases/download/v${AVP_VERSION}/argocd-vault-plugin_${AVP_VERSION}_linux_arm64 &&
           chmod +x argocd-vault-plugin &&
           mv argocd-vault-plugin /custom-tools/
       volumeMounts:
         - mountPath: /custom-tools
           name: custom-tools
+  envFrom:
+   - secretRef:
+       name: vault-configuration
+  rbac:
+     - apiGroups:
+       - ""
+       resources:
+       - secrets
+       verbs:
+       - get
+       - list
+       - watch
 
 ## ApplicationSet controller
 applicationSet:
