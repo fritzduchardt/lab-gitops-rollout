@@ -8,8 +8,8 @@ metadata:
 spec:
   destination:
     name: in-cluster
-    namespace: kube-prometheus-stack
-  project: friclu
+    namespace: argoapps
+  project: default
   source:
     path: rendered/envs/friclu/kube-prometheus-stack
     repoURL: https://github.com/fritzduchardt/lab-gitops-rollout.git

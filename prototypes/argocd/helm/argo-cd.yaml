@@ -15,6 +15,7 @@ configs:
     # -- Number of application operation processors
     controller.operation.processors: 10
     server.insecure: true
+    application.namespaces: "argocd, argoapps"
   repositories:
      lab-gitops-rollout:
        url: https://github.com/fritzduchardt/lab-gitops-rollout

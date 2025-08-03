@@ -8,8 +8,8 @@ metadata:
 spec:
   destination:
     name: in-cluster
-    namespace: cert-manager
-  project: friclu
+    namespace: argoapps
+  project: default
   source:
     path: rendered/envs/friclu/cert-manager
     repoURL: https://github.com/fritzduchardt/lab-gitops-rollout.git

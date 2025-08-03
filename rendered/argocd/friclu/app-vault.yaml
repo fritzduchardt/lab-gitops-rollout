@@ -8,8 +8,8 @@ metadata:
 spec:
   destination:
     name: in-cluster
-    namespace: vault
-  project: friclu
+    namespace: argoapps
+  project: default
   source:
     path: rendered/envs/friclu/vault
     repoURL: https://github.com/fritzduchardt/lab-gitops-rollout.git

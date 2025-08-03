@@ -1,14 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
   name: root-app
-  namespace: argocd
+  namespace: argoapps
 spec:
   destination:
     name: in-cluster
-    namespace: argocd
+    namespace: argoapps
   project: default
   source:
     path: rendered/argocd/friclu

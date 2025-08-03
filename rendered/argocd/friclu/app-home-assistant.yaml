@@ -8,8 +8,8 @@ metadata:
 spec:
   destination:
     name: in-cluster
-    namespace: home-assistant
-  project: friclu
+    namespace: argoapps
+  project: default
   source:
     path: rendered/envs/friclu/home-assistant
     repoURL: https://github.com/fritzduchardt/lab-gitops-rollout.git

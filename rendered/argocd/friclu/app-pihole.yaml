@@ -8,8 +8,8 @@ metadata:
 spec:
   destination:
     name: in-cluster
-    namespace: pihole
-  project: friclu
+    namespace: argoapps
+  project: default
   source:
     path: rendered/envs/friclu/pihole
     repoURL: https://github.com/fritzduchardt/lab-gitops-rollout.git

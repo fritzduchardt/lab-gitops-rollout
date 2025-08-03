@@ -4,11 +4,13 @@ argocd:
   app:
     destination:
       name: "in-cluster"
+      namespace: argoapps
     source:
       repoURL: "https://github.com/fritzduchardt/lab-gitops-rollout.git"
       targetRevision: "HEAD"
   project:
-    enabled: false
+    enabled: true
+    name: default
 environment:
   id: friclu
   applications:
