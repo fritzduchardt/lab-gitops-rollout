@@ -2,11 +2,10 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: root-app
-  namespace: argoapps
+  namespace: argocd
 spec:
   destination:
     name: in-cluster
-    namespace: argoapps
   project: friclu
   source:
     path: rendered/argocd/friclu

@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
   name: friclu
-  namespace: argoapps
+  namespace: argocd
 spec:
   clusterResourceWhitelist:
     - group: '*'
@@ -10,7 +10,5 @@ spec:
   destinations:
     - namespace: '*'
       server: '*'
-  sourceNamespaces:
-    - argoapps
   sourceRepos:
     - '*'
