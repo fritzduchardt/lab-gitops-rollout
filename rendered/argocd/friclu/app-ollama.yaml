@@ -9,7 +9,7 @@ spec:
   destination:
     name: in-cluster
     namespace: argoapps
-  project: default
+  project: friclu
   source:
     path: rendered/envs/friclu/ollama
     repoURL: https://github.com/fritzduchardt/lab-gitops-rollout.git
