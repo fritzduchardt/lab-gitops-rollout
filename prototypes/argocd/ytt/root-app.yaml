@@ -11,10 +11,4 @@ spec:
     path: rendered/argocd/friclu
     repoURL: https://github.com/fritzduchardt/lab-gitops-rollout.git
     targetRevision: HEAD
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: false
-    syncOptions:
-      - CreateNamespace=true
-      - ServerSideApply=true
+  syncPolicy: {}
