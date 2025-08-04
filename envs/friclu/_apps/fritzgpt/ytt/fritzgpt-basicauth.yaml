@@ -3,5 +3,5 @@ kind: Secret
 metadata:
     name: fritzgpt-basic-auth
 type: Opaque
-data:
+stringData:
     auth: "<path:kv/data/fritzgpt/fritzgpt-basic-auth>"
