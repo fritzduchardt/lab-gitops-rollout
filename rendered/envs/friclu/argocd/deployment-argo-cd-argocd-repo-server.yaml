@@ -23,7 +23,7 @@ spec:
       annotations:
         checksum/cm: 5456b3d2061c7c5a15338b51a953f1557b4bc1e6f855437274129e7b1c3e8b49
         checksum/cmd-params: 8c02c8ced7ba61d64c28d52118d9295de7dd04bb5ac2f953c48a3f6e76c449c5
-        checksum/cmp-cm: ad38391a2f66ee47cfc4a910df366c88b618a615ab71d0261f48c001baa9cc8f
+        checksum/cmp-cm: caa19cd8052e806083f9e776d93a40b7d29a17ae87dd24377f53c7bf8e3bbaa8
       labels:
         app.kubernetes.io/component: repo-server
         app.kubernetes.io/instance: argo-cd
@@ -321,12 +321,6 @@ spec:
             seccompProfile:
               type: RuntimeDefault
           volumeMounts:
-            - mountPath: /usr/local/bin/argocd-vault-plugin
-              name: custom-tools
-              subPath: argocd-vault-plugin
-            - mountPath: /home/argocd/cmp-server/config/plugin.yaml
-              name: argocd-cmp-cm
-              subPath: argocd-vault-plugin.yaml
             - mountPath: /app/config/ssh
               name: ssh-known-hosts
             - mountPath: /app/config/tls
@@ -341,6 +335,26 @@ spec:
               name: helm-working-dir
             - mountPath: /home/argocd/cmp-server/plugins
               name: plugins
+            - mountPath: /tmp
+              name: tmp
+        - command:
+            - /var/run/argocd/argocd-cmp-server
+          image: busybox
+          name: avp
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 999
+          volumeMounts:
+            - mountPath: /var/run/argocd
+              name: var-files
+            - mountPath: /home/argocd/cmp-server/plugins
+              name: plugins
+            - mountPath: /home/argocd/cmp-server/config/plugin.yaml
+              name: argocd-cmp-cm
+              subPath: argocd-vault-plugin.yaml
+            - mountPath: /usr/local/bin/argocd-vault-plugin
+              name: custom-tools
+              subPath: argocd-vault-plugin
             - mountPath: /tmp
               name: tmp
       dnsPolicy: ClusterFirst

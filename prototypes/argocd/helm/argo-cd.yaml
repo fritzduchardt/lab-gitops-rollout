@@ -29,7 +29,9 @@ configs:
         generate:
           command: [sh, -c, "argocd-vault-plugin generate . -s vault-configuration"]
         discover:
-          command: [sh, -c, "find . -name '*.yaml' | xargs -I {} grep \"<path\" {} | grep ."]
+          find:
+            glob: "**/*.yaml"
+            command: [sh, -c, "find . -name '*.yaml' | xargs -I {} grep \"<path\" {} | grep ."]
 
 ## Application controller
 controller:
@@ -105,19 +107,35 @@ server:
 repoServer:
   # -- The number of repo server pods to run
   replicas: 1
-  volumeMounts:
-    - name: custom-tools
-      mountPath: /usr/local/bin/argocd-vault-plugin
-      subPath: argocd-vault-plugin
-    - mountPath: /home/argocd/cmp-server/config/plugin.yaml
-      subPath: argocd-vault-plugin.yaml
-      name: argocd-cmp-cm
   volumes:
     - name: custom-tools
       emptyDir: {}
     - configMap:
         name: argocd-cmp-cm
       name: argocd-cmp-cm
+  extraContainers:
+   - name: avp
+     command:
+       - "/var/run/argocd/argocd-cmp-server"
+     image: busybox
+     securityContext:
+       runAsNonRoot: true
+       runAsUser: 999
+     volumeMounts:
+       - mountPath: /var/run/argocd
+         name: var-files
+       - mountPath: /home/argocd/cmp-server/plugins
+         name: plugins
+       - mountPath: /home/argocd/cmp-server/config/plugin.yaml
+         subPath: argocd-vault-plugin.yaml
+         name: argocd-cmp-cm
+       - name: custom-tools
+         mountPath: /usr/local/bin/argocd-vault-plugin
+         subPath: argocd-vault-plugin
+       # Starting with v2.4, do NOT mount the same tmp volume as the repo-server container. The filesystem separation helps
+       # mitigate path traversal attacks.
+       - mountPath: /tmp
+         name: tmp
   initContainers:
     - name: download-tools
       image: alpine:3.8

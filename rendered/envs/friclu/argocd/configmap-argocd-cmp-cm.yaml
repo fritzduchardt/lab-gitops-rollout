@@ -7,10 +7,12 @@ data:
       name: argocd-vault-plugin
     spec:
       discover:
-        command:
-        - sh
-        - -c
-        - find . -name '*.yaml' | xargs -I {} grep "<path" {} | grep .
+        find:
+          command:
+          - sh
+          - -c
+          - find . -name '*.yaml' | xargs -I {} grep "<path" {} | grep .
+          glob: '**/*.yaml'
       generate:
         command:
         - sh
