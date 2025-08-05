@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/scripts-config: 9a111fad75faf9307f0e3fea0ab39c4830a96b11a41ee5a69f4b1ab8387cd351
+        checksum/scripts-config: ca8b7b9ab3cc7c1720ecce2dde51003dddfb83c1abb8a914d68c4f94d094b20f
       labels:
         app: fabric
         component: ui
