@@ -1,8 +1,0 @@
-#@data/values-schema
-#@overlay/match-child-defaults missing_ok=True
----
-helm:
-  namespace: nextcloud
-application:
-  namespace:
-    create: true
