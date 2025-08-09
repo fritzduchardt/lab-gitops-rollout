@@ -5,4 +5,4 @@ metadata:
     namespace: munchkinchat
 type: Opaque
 stringData:
-    auth: "<path:kv/data/munchkinchat/munchkinchat-basic-auth#auth"
+    auth: "<path:kv/data/munchkinchat/munchkinchat-basic-auth#auth>"
