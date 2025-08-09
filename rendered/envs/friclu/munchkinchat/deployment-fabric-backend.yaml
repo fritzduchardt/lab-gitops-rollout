@@ -30,6 +30,8 @@ spec:
               value: /home/fabric/sync/BubaSync/patterns
             - name: PERSONAL_NAME
               value: Buba
+            - name: JOURNAL_FILE_RETRO_MONTHS
+              value: "3"
           image: ghcr.io/fritzduchardt/fabric:main
           imagePullPolicy: Always
           name: fabric-backend

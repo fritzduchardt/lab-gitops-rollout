@@ -5,7 +5,7 @@ metadata:
     app: fabric
     component: backend
   name: fabric-backend
-  namespace: fritzgpt
+  namespace: isabellabot
 spec:
   replicas: 1
   selector:
@@ -23,15 +23,13 @@ spec:
             - name: FABRIC_CONFIG_HOME
               value: /home/fabric/.config/fabric
             - name: OBSIDIAN_VAULT_PATH_1
-              value: /home/fabric/sync/FritzSync/private
+              value: /home/fabric/sync/IsabellaSync/private
             - name: OBSIDIAN_VAULT_PATH_2
-              value: /home/fabric/sync/BubaFritzShare
-            - name: OBSIDIAN_VAULT_PATH_3
-              value: /home/fabric/sync/FritzElkeShare
+              value: /home/fabric/sync/IsabellaFritzShare
             - name: FABRIC_PATTERN_PATH
-              value: /home/fabric/sync/FritzSync/patterns
+              value: /home/fabric/sync/IsabellaSync/patterns
             - name: PERSONAL_NAME
-              value: Fritz
+              value: Isabella
             - name: JOURNAL_FILE_RETRO_MONTHS
               value: "3"
           image: ghcr.io/fritzduchardt/fabric:main

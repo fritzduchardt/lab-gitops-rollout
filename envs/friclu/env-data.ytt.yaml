@@ -36,5 +36,7 @@ environment:
       proto: fabric
     - name: munchkinchat
       proto: fabric
+    - name: isabellabot
+      proto: fabric
     - name: vault
       proto: vault

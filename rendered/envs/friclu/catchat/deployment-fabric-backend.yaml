@@ -30,6 +30,8 @@ spec:
               value: /home/fabric/sync/ElkeSync/patterns
             - name: PERSONAL_NAME
               value: Elke
+            - name: JOURNAL_FILE_RETRO_MONTHS
+              value: "3"
           image: ghcr.io/fritzduchardt/fabric:main
           imagePullPolicy: Always
           name: fabric-backend

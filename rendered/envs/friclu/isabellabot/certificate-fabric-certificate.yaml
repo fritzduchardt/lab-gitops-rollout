@@ -2,10 +2,10 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: fabric-certificate
-  namespace: fritzgpt
+  namespace: isabellabot
 spec:
   dnsNames:
-    - fritzgpt.duckdns.org
+    - isabellabot.duckdns.org
   duration: 2160h
   issuerRef:
     kind: ClusterIssuer

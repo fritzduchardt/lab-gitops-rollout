@@ -5,7 +5,7 @@ metadata:
     app: fabric
     component: ui
   name: fabric-ui
-  namespace: munchkinchat
+  namespace: isabellabot
 spec:
   replicas: null
   selector:
