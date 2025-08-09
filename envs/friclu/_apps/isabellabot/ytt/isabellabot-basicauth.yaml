@@ -5,4 +5,4 @@ metadata:
     namespace: isabellabot
 type: Opaque
 stringData:
-    auth: "<path:kv/data/isabellabot/isabellabot-basic-auth#auth"
+    auth: "<path:kv/data/isabellabot/isabellabot-basic-auth#auth>"
