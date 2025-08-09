@@ -7,7 +7,7 @@ backend:
 ui:
   title: "MunchkinChat"
   iconPath: "icons/munchkin"
-  defaultModel: "o4-mini"
+  defaultModel: "gemini-2.5-pro"
   defaultPattern: "journal"
 ingress:
   host: munchkinchat-friclu.duckdns.org
