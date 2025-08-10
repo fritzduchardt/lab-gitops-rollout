@@ -21,10 +21,7 @@ spec:
         component: ui
     spec:
       containers:
-        - env:
-            - name: API_DOMAIN
-              value: https://{{ .Values.ingress.host }}/api
-          image: ghcr.io/fritzduchardt/fabric-ui:master
+        - image: ghcr.io/fritzduchardt/fabric-ui:master
           imagePullPolicy: Always
           name: fabric-ui
           ports:

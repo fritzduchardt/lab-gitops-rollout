@@ -11,7 +11,7 @@ ui:
   defaultModel: "03-mini"
   defaultPattern: "general"
 ingress:
-  host: fritzgpt.duckdns.org
+  host: "fritzgpt.duckdns.org"
   tls:
     secretName: fabric-certificate
 service:
