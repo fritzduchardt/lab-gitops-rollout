@@ -33,7 +33,7 @@ spec:
             - name: PERSONAL_NAME
               value: Fritz
             - name: TELEGRAM_BOT_TOKEN
-              value: ""
+              value: <path:kv/data/shared/telegramBotToken>
             - name: JOURNAL_FILE_RETRO_MONTHS
               value: "3"
           image: ghcr.io/fritzduchardt/fabric:main
