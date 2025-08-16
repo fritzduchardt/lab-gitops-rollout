@@ -1,3 +1,2 @@
 backend:
   telegramBotToken: <path:kv/data/shared/telegram#botToken>
-  sha: sha256:b1dd0d97bb602047a1ca61ad7d68ec7d559638349b4726458217ee8935d0d3b4

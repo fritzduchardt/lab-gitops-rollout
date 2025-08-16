@@ -30,6 +30,8 @@ spec:
               value: /home/fabric/sync/ElkeSync/patterns
             - name: PERSONAL_NAME
               value: Elke
+            - name: TELEGRAM_BOT_TOKEN
+              value: <path:kv/data/shared/telegram#botToken>
             - name: JOURNAL_FILE_RETRO_MONTHS
               value: "3"
           image: ghcr.io/fritzduchardt/fabric:main
