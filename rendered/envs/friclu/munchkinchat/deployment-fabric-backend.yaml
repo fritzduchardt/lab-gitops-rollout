@@ -30,6 +30,8 @@ spec:
               value: /home/fabric/sync/BubaSync/patterns
             - name: PERSONAL_NAME
               value: Buba
+            - name: TELEGRAM_BOT_TOKEN
+              value: ""
             - name: JOURNAL_FILE_RETRO_MONTHS
               value: "3"
           image: ghcr.io/fritzduchardt/fabric:main
