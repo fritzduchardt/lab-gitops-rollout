@@ -1,2 +1,2 @@
 backend:
-  telegramBotToken: <path:kv/data/shared/telegramBotToken>
+  telegramBotToken: <path:kv/data/shared/telegram#botToken>
