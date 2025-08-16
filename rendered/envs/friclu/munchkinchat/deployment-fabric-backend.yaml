@@ -34,7 +34,7 @@ spec:
               value: <path:kv/data/shared/telegram#botToken>
             - name: JOURNAL_FILE_RETRO_MONTHS
               value: "3"
-          image: ghcr.io/fritzduchardt/fabric:main
+          image: ghcr.io/fritzduchardt/fabric@sha256:6f12d844393e50bb81e1493e47aca265976cec65cd54f53a9b2d0ec6de8fafb3
           imagePullPolicy: Always
           name: fabric-backend
           ports:
