@@ -4,7 +4,7 @@ This repository contains the GitOps configuration for managing a personal Kubern
 
 ## Tooling
 
-*   **GitOps Rendering:** [Myks](https://github.com/mykso/myks)
+*   **Gitops Rendering:** [Myks](https://github.com/mykso/myks)
 *   **GitOps Orchestration:** ArgoCD
 *   **Templating:** Carvel `ytt`
 *   **Package Management:** Helm & Carvel `vendir`
