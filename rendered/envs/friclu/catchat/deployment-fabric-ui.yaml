@@ -15,9 +15,9 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/app-js: 79b074169e68b7d846dcf0b8986cdda8aa73d3430cba71fd1eca0f68474b6ab2
-        checksum/index-html: 01a56fd3a4ac145780e9e2a3663536c00eae45d923adfac0f0fe70626a2f7be0
-        checksum/lib-js: 6309042060257477b2c86d455c5d9d00ea152babbec87c86d2fcb6a38af29afb
+        checksum/app-js: 6cf57308dd739addb24b700aa477b8a7968405609b3042f19e1ab1e392bdf133
+        checksum/index-html: df18633dff712e1b24268a30617b71aa98df409d7a3b7cf5d84746034a9762e5
+        checksum/lib-js: 1edc41dfc0eb643e2a57915fef9bd8c06e9bb3856641d201385194357513b4a3
         checksum/service-worker-js: defaa6683c6f8b0a62de0b14b6528484344695f078aafc62685d3af6af4386bb
       labels:
         app: fabric
