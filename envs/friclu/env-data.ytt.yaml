@@ -25,7 +25,6 @@ environment:
     - proto: immich
     - proto: home-assistant
     - proto: syncthing
-    - proto: pihole
     - proto: linkding
     - proto: kube-prometheus-stack
     - proto: pushgateway

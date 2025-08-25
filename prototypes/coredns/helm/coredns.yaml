@@ -1,4 +1,3 @@
-serviceType: NodePort
 servers:
   - zones:
       - zone: .
