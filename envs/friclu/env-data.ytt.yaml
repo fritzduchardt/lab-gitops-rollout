@@ -17,7 +17,6 @@ environment:
   applications:
     - proto: argocd
     - proto: coredns
-    - proto: localdns
     - proto: nginx
     - proto: local-path-provisioner
     - proto: cert-manager
