@@ -46,7 +46,7 @@ configs:
       p, role:admin, *, *, */*, allow
   secret:
     extra:
-      oidc.okta.clientSecret: "<path:kv/data/argocd/keycloak#client-secret>"
+      oidc.keycloak.clientSecret: "<path:kv/data/argocd/keycloak#client-secret>"
 
 ## Application controller
 controller:
