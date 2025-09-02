@@ -7,3 +7,5 @@ helm:
 application:
   namespace:
     create: true
+certificate:
+    enabled: false

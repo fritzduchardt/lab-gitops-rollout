@@ -1,5 +1,6 @@
 #@ load("@ytt:data", "data")
 ---
+#@ if data.values.certificate.enabled:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
@@ -17,3 +18,4 @@ spec:
   issuerRef:
     name: duckdns-github-production
     kind: ClusterIssuer
+#@ end
