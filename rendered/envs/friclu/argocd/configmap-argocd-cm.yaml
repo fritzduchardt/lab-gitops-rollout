@@ -6,7 +6,7 @@ data:
   exec.enabled: "false"
   oidc.config: |
     name: Keycloak
-    issuer: https://catchat-friclu.duckdns.org/realms/master
+    issuer: https://fricloak.duckdns.org/auth/realms/master
     clientId: argocd
     clientSecret: $oidc.keycloak.clientSecret
     requestedScopes: ["openid", "profile", "email", "groups"]

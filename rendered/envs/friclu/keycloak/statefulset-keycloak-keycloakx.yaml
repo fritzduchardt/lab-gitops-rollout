@@ -93,7 +93,7 @@ spec:
             - name: KC_BOOTSTRAP_ADMIN_USERNAME
               value: admin
             - name: KC_BOOTSTRAP_ADMIN_PASSWORD
-              value: admin
+              value: <path:kv/data/keycloak/keycloak#admin-password>
             - name: JAVA_OPTS_APPEND
               value: -Djgroups.dns.query=keycloak-keycloakx-headless
           envFrom: null
