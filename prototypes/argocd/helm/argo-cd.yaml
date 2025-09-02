@@ -40,6 +40,9 @@ configs:
       clientSecret: $oidc.keycloak.clientSecret
       requestedScopes: ["openid", "profile", "email", "groups"]
       requestedIDTokenClaims: {"groups": {"essential": true}}
+  rbac:
+    policy.csv: |
+      g, friclu, role:admin
 
 ## Application controller
 controller:
