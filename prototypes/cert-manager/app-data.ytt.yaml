@@ -7,3 +7,5 @@ application:
   namespace:
     create: true
   email: fritz@duchardt.net
+render:
+  includeNamespace: true
