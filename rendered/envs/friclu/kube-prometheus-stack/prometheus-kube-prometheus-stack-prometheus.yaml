@@ -38,7 +38,7 @@ spec:
         port: http-web
   automountServiceAccountToken: true
   enableAdminAPI: false
-  externalUrl: http://prometheus.friclu/
+  externalUrl: http://kube-prometheus-stack-prometheus.kube-prometheus-stack:9090
   hostNetwork: false
   image: quay.io/prometheus/prometheus:v3.4.0
   listenLocal: false

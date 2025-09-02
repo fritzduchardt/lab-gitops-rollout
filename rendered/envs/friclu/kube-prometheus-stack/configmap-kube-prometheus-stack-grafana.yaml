@@ -13,7 +13,7 @@ data:
     plugins = /var/lib/grafana/plugins
     provisioning = /etc/grafana/provisioning
     [server]
-    domain = grafana-friclu.duckdns.org
+    domain = ''
 kind: ConfigMap
 metadata:
   labels:

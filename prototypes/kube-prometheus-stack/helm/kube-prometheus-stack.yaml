@@ -15,7 +15,7 @@ alertmanager:
 
 grafana:
   ingress:
-    enabled: true
+    enabled: false
     ingressClassName: "nginx"
     hosts:
       - grafana-friclu.duckdns.org
@@ -37,7 +37,7 @@ grafana:
 prometheus:
   ingress:
     ingressClassName: "nginx"
-    enabled: true
+    enabled: false
     hosts:
       - prometheus.friclu
   prometheusSpec:
