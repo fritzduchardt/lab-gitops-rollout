@@ -43,6 +43,10 @@ configs:
   rbac:
     policy.csv: |
       g, friclu, role:admin
+      p, role:admin, *, *, */*, allow
+  secret:
+    extra:
+      oidc.okta.clientSecret: "<path:kv/data/argocd/keycloak#client-secret>"
 
 ## Application controller
 controller:

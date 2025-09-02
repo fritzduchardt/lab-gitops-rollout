@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: grafana-certificate
+  namespace: kube-prometheus-stack
+spec:
+  dnsNames:
+    - frifana.duckdns.org
+  duration: 2160h
+  issuerRef:
+    kind: ClusterIssuer
+    name: duckdns-github-production
+  renewBefore: 360h
+  secretName: grafana-certificate
+  subject:
+    organizations:
+      - friclu
