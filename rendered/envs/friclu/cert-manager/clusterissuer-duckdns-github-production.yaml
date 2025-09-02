@@ -7,7 +7,6 @@ metadata:
     heritage: Helm
     release: cert-manager-webhook-duckdns-github
   name: duckdns-github-production
-  namespace: cert-manager
 spec:
   acme:
     email: fritz@duchardt.net

@@ -7,7 +7,6 @@ metadata:
     heritage: Helm
     release: cert-manager-webhook-duckdns-github
   name: duckdns-github:domain-solver
-  namespace: cert-manager
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole

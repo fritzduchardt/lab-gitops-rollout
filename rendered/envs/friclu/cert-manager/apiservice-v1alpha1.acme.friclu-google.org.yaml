@@ -9,7 +9,6 @@ metadata:
     heritage: Helm
     release: cert-manager-webhook-duckdns-google
   name: v1alpha1.acme.friclu-google.org
-  namespace: cert-manager
 spec:
   group: acme.friclu-google.org
   groupPriorityMinimum: 1000
