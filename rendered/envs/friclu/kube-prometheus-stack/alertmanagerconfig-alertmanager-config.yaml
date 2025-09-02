@@ -10,7 +10,7 @@ spec:
         - to: fritz@duchardt.net
       name: critical-email
   route:
-    group_by:
+    groupBy:
       - alertname
       - severity
     groupInterval: 5s

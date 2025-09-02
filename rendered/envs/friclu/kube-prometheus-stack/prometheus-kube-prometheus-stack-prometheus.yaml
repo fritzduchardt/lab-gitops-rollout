@@ -57,9 +57,7 @@ spec:
   replicas: 1
   retention: 10d
   routePrefix: /
-  ruleNamespaceSelector:
-    matchNames:
-      - kube-prometheus-stack
+  ruleNamespaceSelector: {}
   ruleSelector: {}
   scrapeConfigNamespaceSelector: {}
   scrapeConfigSelector:
