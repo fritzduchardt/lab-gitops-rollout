@@ -7,7 +7,7 @@ metadata:
   namespace: #@ data.values.helm.namespace
 spec:
   route:
-    group_by: ['alertname', 'severity']
+    groupBy: ['alertname', 'severity']
     groupWait: 5s
     groupInterval: 5s
     repeatInterval: 24h
