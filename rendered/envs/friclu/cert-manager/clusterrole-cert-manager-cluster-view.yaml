@@ -11,6 +11,7 @@ metadata:
     helm.sh/chart: cert-manager-v1.17.2
     rbac.authorization.k8s.io/aggregate-to-cluster-reader: "true"
   name: cert-manager-cluster-view
+  namespace: cert-manager
 rules:
   - apiGroups:
       - cert-manager.io

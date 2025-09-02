@@ -12,6 +12,7 @@ metadata:
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
     rbac.authorization.k8s.io/aggregate-to-edit: "true"
   name: cert-manager-edit
+  namespace: cert-manager
 rules:
   - apiGroups:
       - cert-manager.io

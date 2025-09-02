@@ -7,6 +7,7 @@ metadata:
     heritage: Helm
     release: cert-manager-webhook-duckdns-google
   name: duckdns-google:domain-solver
+  namespace: cert-manager
 rules:
   - apiGroups:
       - acme.friclu-google.org
