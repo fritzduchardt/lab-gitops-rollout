@@ -4,15 +4,17 @@ image:
 ingress:
   enabled: true
   ingressClassName: "nginx"
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
   rules:
     -
-      host: 'catchat-friclu.duckdns.org'
+      host: 'fricloak.duckdns.org'
       paths:
-        - path: '{{ tpl .Values.http.relativePath $ | trimSuffix "/" }}/'
+        - path: '{{ tpl .Values.http.relativePath $ | trimSuffix "/" }}'
           pathType: Prefix
   tls:
     - hosts:
-        - catchat-friclu.duckdns.org
+        - fricloak.duckdns.org
       secretName: "keycloak-certificate"
 
 database:
@@ -27,8 +29,10 @@ command:
   - "/opt/keycloak/bin/kc.sh"
   - "start"
   - "--http-port=8080"
-  - "--hostname-strict=false"
+  - "--hostname=https://fricloak.duckdns.org/auth"
 extraEnv: |
+  - name: KC_PROXY
+    value: "passthrough"
   - name: KC_BOOTSTRAP_ADMIN_USERNAME
     value: admin
   - name: KC_BOOTSTRAP_ADMIN_PASSWORD

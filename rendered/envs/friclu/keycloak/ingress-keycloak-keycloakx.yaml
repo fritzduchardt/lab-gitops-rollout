@@ -1,6 +1,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
   labels:
     app.kubernetes.io/instance: keycloak
     app.kubernetes.io/managed-by: Helm
@@ -20,7 +22,7 @@ spec:
                 name: keycloak-keycloakx-http
                 port:
                   name: http
-            path: /auth/
+            path: /auth
             pathType: Prefix
   tls:
     - hosts:

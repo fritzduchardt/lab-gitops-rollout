@@ -57,7 +57,7 @@ spec:
             - /opt/keycloak/bin/kc.sh
             - start
             - --http-port=8080
-            - --hostname-strict=false
+            - --hostname=https://catchat-friclu.duckdns.org/auth
           env:
             - name: KC_HTTP_RELATIVE_PATH
               value: /auth
@@ -88,6 +88,8 @@ spec:
               value: "true"
             - name: KC_HEALTH_ENABLED
               value: "true"
+            - name: KC_PROXY
+              value: passthrough
             - name: KC_BOOTSTRAP_ADMIN_USERNAME
               value: admin
             - name: KC_BOOTSTRAP_ADMIN_PASSWORD
