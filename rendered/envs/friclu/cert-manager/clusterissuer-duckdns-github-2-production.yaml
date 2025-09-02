@@ -1,0 +1,25 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  labels:
+    app: cert-manager-webhook-duckdns
+    chart: cert-manager-webhook-duckdns-v1.2.3
+    heritage: Helm
+    release: cert-manager-webhook-duckdns-github-2
+  name: duckdns-github-2-production
+spec:
+  acme:
+    email: fritz@duchardt.net
+    preferredChain: ISRG Root X1
+    privateKeySecretRef:
+      name: duckdns-github-2-production
+    server: https://acme-v02.api.letsencrypt.org/directory
+    solvers:
+      - dns01:
+          webhook:
+            config:
+              apiTokenSecretRef:
+                key: token
+                name: duckdns-github-secret-2
+            groupName: acme.friclu-github.org
+            solverName: duckdns
