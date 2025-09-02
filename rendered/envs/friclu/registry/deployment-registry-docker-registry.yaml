@@ -19,7 +19,7 @@ spec:
     metadata:
       annotations:
         checksum/config: d27e7d4b51d544196ea2812b38987aed8f314a7a7a648fe5cdadb36dffb0d12d
-        checksum/secret: d00ea1849f07cfa5b9c74ddea3081c8661bd4e7a4ff512275d026a327d2997c5
+        checksum/secret: 7026cf2d8877c9f1efe2871c662aba9a79eb9dd9646d76b8b748dda9064f2385
       labels:
         app: docker-registry
         release: registry

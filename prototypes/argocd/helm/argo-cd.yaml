@@ -32,6 +32,14 @@ configs:
           find:
             glob: "**/*.yaml"
             command: [sh, -c, "find . -name '*.yaml' | xargs -I {} grep \"<path\" {} | grep ."]
+  cm:
+     oidc.config: |
+      name: Keycloak
+      issuer: https://catchat-friclu.duckdns.org/realms/master
+      clientId: argocd
+      clientSecret: $oidc.keycloak.clientSecret
+      requestedScopes: ["openid", "profile", "email", "groups"]
+      requestedIDTokenClaims: {"groups": {"essential": true}}
 
 ## Application controller
 controller:

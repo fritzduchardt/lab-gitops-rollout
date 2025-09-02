@@ -4,6 +4,13 @@ data:
   application.instanceLabelKey: argocd.argoproj.io/instance
   application.sync.impersonation.enabled: "false"
   exec.enabled: "false"
+  oidc.config: |
+    name: Keycloak
+    issuer: https://catchat-friclu.duckdns.org/realms/master
+    clientId: argocd
+    clientSecret: $oidc.keycloak.clientSecret
+    requestedScopes: ["openid", "profile", "email", "groups"]
+    requestedIDTokenClaims: {"groups": {"essential": true}}
   resource.customizations.ignoreResourceUpdates.ConfigMap: |
     jqPathExpressions:
       # Ignore the cluster-autoscaler status

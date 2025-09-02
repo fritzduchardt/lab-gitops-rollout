@@ -30,8 +30,6 @@ environment:
     - proto: ollama
     - name: fritzgpt
       proto: fabric
-    - name: catchat
-      proto: fabric
     - name: munchkinchat
       proto: fabric
     - name: isabellabot
