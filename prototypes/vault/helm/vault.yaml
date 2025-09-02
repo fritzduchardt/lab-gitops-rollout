@@ -1,0 +1,13 @@
+server:
+  ingress:
+    enabled: true
+    annotations:
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    ingressClassName: "nginx"
+    hosts:
+      - host: frault.duckdns.org
+        paths: []
+    tls:
+      - secretName: vault-certificate
+        hosts:
+          - frault.duckdns.org

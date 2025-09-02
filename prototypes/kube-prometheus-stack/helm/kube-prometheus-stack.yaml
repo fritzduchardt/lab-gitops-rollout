@@ -15,14 +15,14 @@ alertmanager:
 
 grafana:
   ingress:
-    enabled: false
+    enabled: true
     ingressClassName: "nginx"
     hosts:
-      - grafana-friclu.duckdns.org
+      - frifana.duckdns.org
     tls:
      - secretName: grafana-certificate
        hosts:
-        - grafana-friclu.duckdns.org
+        - frifana.duckdns.org
   admin:
     existingSecret: grafana-secret
   persistence:

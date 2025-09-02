@@ -1,21 +1,19 @@
 #@ load("@ytt:data", "data")
 ---
-#@ if data.values.certificate.enabled:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: grafana-certificate
+  name: vault-certificate
   namespace: #@ data.values.helm.namespace
 spec:
-  secretName: grafana-certificate
+  secretName: vault-certificate
   duration: 2160h
   renewBefore: 360h
   subject:
     organizations:
       - friclu
   dnsNames:
-    - frifana.duckdns.org
+    - frault.duckdns.org
   issuerRef:
-    name: duckdns-github-production
+    name: duckdns-github-2-production
     kind: ClusterIssuer
-#@ end

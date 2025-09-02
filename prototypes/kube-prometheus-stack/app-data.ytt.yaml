@@ -8,4 +8,4 @@ application:
   namespace:
     create: true
 certificate:
-    enabled: false
+    enabled: true
