@@ -38,3 +38,7 @@ environment:
       proto: fabric
     - name: vault
       proto: vault
+    - name: keycloak
+      proto: keycloak
+    - name: cloudnative-pg
+      proto: cloudnative-pg
