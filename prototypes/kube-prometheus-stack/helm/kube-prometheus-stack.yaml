@@ -14,6 +14,7 @@ alertmanager:
       smtp_auth_password_file: /etc/alertmanager/secrets/alertmanager-smtp/smtp_auth_password
 
 grafana:
+  assertNoLeakedSecrets: false
   ingress:
     enabled: true
     ingressClassName: "nginx"
@@ -32,7 +33,21 @@ grafana:
       url: http://prometheus-operated:9090/
       alertmanager:
         enabled: false
-
+  grafana.ini:
+    auth.generic_oauth:
+      enabled: true
+      name: Keycloak-OAuth
+      allow_sign_up: true
+      client_id: grafana
+      client_secret: '<path:kv/data/kube-prometheus-stack/grafana-client-secret#secret>'
+      scopes: "openid email profile offline_access roles"
+      email_attribute_path: email
+      login_attribute_path: username
+      name_attribute_path: full_name
+      auth_url: https://fricloak.duckdns.org/realms/master/protocol/openid-connect/auth
+      token_url: https://fricloak.duckdns.org/realms/master/protocol/openid-connect/token
+      api_url: https://fricloak.duckdns.org/realms/master/protocol/openid-connect/userinfo
+      role_attribute_path: "contains(roles[*], 'admin') && 'Admin' || contains(roles[*], 'editor') && 'Editor' || 'Viewer'"
 
 prometheus:
   ingress:
