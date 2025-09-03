@@ -58,7 +58,7 @@ spec:
             - name: OAUTH2_PROXY_CLIENT_SECRET
               value: <path:kv/data/shared/fabric#clientSecret>
             - name: OAUTH2_PROXY_COOKIE_SECRET
-              value: <path:kv/data/shared/fabric#cookieSecret2>
+              value: <path:kv/data/shared/fabric#cookieSecret>
             - name: OAUTH2_PROXY_COOKIE_SECURE
               value: "true"
             - name: OAUTH2_PROXY_UPSTREAM
