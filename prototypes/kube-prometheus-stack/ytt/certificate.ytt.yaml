@@ -16,6 +16,6 @@ spec:
   dnsNames:
     - frifana.duckdns.org
   issuerRef:
-    name: duckdns-github-production
+    name: duckdns-github-2-production
     kind: ClusterIssuer
 #@ end
