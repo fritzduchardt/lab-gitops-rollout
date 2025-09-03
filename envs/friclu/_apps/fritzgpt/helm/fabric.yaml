@@ -19,3 +19,5 @@ service:
 basicAuth:
   create: false
   secretName: "fritzgpt-basic-auth"
+oauth2Proxy:
+  redirectUrl: "https://fritzgpt.duckdns.org/"

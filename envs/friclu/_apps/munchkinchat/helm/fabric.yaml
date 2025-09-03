@@ -18,3 +18,5 @@ service:
 basicAuth:
   create: false
   secretName: "munchkinchat-basic-auth"
+oauth2Proxy:
+  redirectUrl: "https://munchkinchat-friclu.duckdns.org/"

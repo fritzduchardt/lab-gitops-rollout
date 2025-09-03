@@ -1,2 +1,8 @@
 backend:
   telegramBotToken: <path:kv/data/shared/telegram#botToken>
+oauth2Proxy:
+  enabled: true
+  issuerUrl: "https://fricloak.duckdns.org/auth/realms/master/protocol/openid-connect/auth"
+  clientID: "fabric"
+  clientSecret: "<path:kv/data/shared/fabric#clientSecret>"
+  cookieSecret: "<path:kv/data/shared/fabric#cookieSecret>"
