@@ -28,6 +28,7 @@ data:
     provisioning = /etc/grafana/provisioning
     [server]
     domain = frifana.duckdns.org
+    root_url = https://frifana.duckdns.org
 kind: ConfigMap
 metadata:
   labels:

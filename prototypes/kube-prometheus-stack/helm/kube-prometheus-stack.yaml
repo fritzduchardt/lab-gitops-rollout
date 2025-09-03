@@ -34,6 +34,8 @@ grafana:
       alertmanager:
         enabled: false
   grafana.ini:
+    server:
+      root_url: https://frifana.duckdns.org
     auth.generic_oauth:
       enabled: true
       name: Keycloak-OAuth
