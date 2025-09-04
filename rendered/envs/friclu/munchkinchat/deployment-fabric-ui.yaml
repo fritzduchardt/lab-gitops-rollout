@@ -63,10 +63,10 @@ spec:
               value: "true"
             - name: OAUTH2_PROXY_HTTP_ADDRESS
               value: http://0.0.0.0:8888
-            - name: OAUTH2_PROXY_UPSTREAM
+            - name: OAUTH2_PROXY_UPSTREAMS
               value: http://127.0.0.1:8080
             - name: OAUTH2_PROXY_REDIRECT_URL
-              value: https://munchkinchat-friclu.duckdns.org/index.html
+              value: https://munchkinchat-friclu.duckdns.org/oauth2/callback
             - name: OAUTH2_PROXY_EMAIL_DOMAINS
               value: '*'
           image: quay.io/oauth2-proxy/oauth2-proxy:v7.9.0

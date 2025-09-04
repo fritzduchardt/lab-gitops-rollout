@@ -11,7 +11,7 @@ data:
       keepalive_timeout 65;
       server {
         # Bind to the configured UI port
-        listen 80;
+        listen 8080;
         # Catch-all server_name
         server_name _;
         # Document root for UI files
