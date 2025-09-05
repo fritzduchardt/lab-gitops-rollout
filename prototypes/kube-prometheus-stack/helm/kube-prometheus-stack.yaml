@@ -50,7 +50,7 @@ grafana:
       token_url: https://fricloak.duckdns.org/auth/realms/master/protocol/openid-connect/token
       api_url: https://fricloak.duckdns.org/auth/realms/master/protocol/openid-connect/userinfo
       role_attribute_path: "contains(roles[*], 'admin') && 'Admin' || contains(roles[*], 'editor') && 'Editor' || 'Viewer'"
-
+      allow_assign_grafana_admin: true
 prometheus:
   ingress:
     ingressClassName: "nginx"
