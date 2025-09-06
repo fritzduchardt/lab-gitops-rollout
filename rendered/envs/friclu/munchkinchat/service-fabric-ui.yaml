@@ -10,7 +10,7 @@ spec:
   ports:
     - name: http
       port: 80
-      targetPort: 8888
+      targetPort: 8080
   selector:
     app: fabric
     component: ui
