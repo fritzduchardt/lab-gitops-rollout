@@ -563,6 +563,13 @@ data:
       resizeObserver.observe(messagesEl);
     }
 
+    function autoScroll() {
+      const isScrolledNearBottom = messagesEl.scrollHeight - messagesEl.clientHeight - messagesEl.scrollTop < 300;
+      if (isScrolledNearBottom) {
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+      }
+    }
+
     // addMessage now accepts hideStore flag to suppress store button on show messages and full-width for Sw
     function addMessage(text, sender, isChat = false, view = false, hideStore = false,  hideShare = false, hideCopy = false, showPrompt = false) {
       const m = document.createElement('div');
@@ -613,7 +620,7 @@ data:
         addPromptButtonIfNeeded(b);
       }
       messagesEl.appendChild(m);
-      messagesEl.scrollTop = messagesEl.scrollHeight;
+      autoScroll();
     }
 
     function showLoading() {
@@ -621,7 +628,7 @@ data:
       loader.className = 'loader text-center py-2';
       loader.innerHTML = '<div class="spinner-border text-secondary" role="status"><span class="visually-hidden">Loading...</span></div>';
       messagesEl.appendChild(loader);
-      messagesEl.scrollTop = messagesEl.scrollHeight;
+      autoScroll();
       return loader;
     }
 
@@ -636,6 +643,7 @@ data:
       const chatBtn = document.getElementById('chat-button');
       const sendBtn = document.querySelector('.btn-send');
       const cancelBtn = document.getElementById('cancel-button');
+      cancelBtn.type = "button";
       chatBtn.disabled = true;
       sendBtn.disabled = false;
       cancelBtn.disabled = false;
@@ -653,6 +661,7 @@ data:
         isChatButtonPressed = false;
       }
       lastPrompt = text;
+      localStorage.setItem('lastPrompt', lastPrompt);
       const pattern = patternSelect.getValue() || 'journal';
       const model = modelSelect.getValue() || 'o3-mini';
       const obs = obsidianSelect.getValue() === '(no file)' ? '' : obsidianSelect.getValue();
@@ -710,7 +719,6 @@ data:
           b.dataset.markdown = '';
           m.appendChild(b);
           messagesEl.appendChild(m);
-          messagesEl.scrollTop = messagesEl.scrollHeight;
 
           const reader = res.body.getReader();
           const dec = new TextDecoder();
@@ -738,7 +746,6 @@ data:
                     a.setAttribute('target', '_blank');
                     a.setAttribute('rel', 'noopener noreferrer');
                   });
-                  messagesEl.scrollTop = messagesEl.scrollHeight;
                   addStoreButtonIfNeeded(b);
                   addPromptButtonIfNeeded(b);
                   addShareWithTelegramButton(b);
@@ -746,9 +753,10 @@ data:
               }
             }
           }
+          autoScroll();
 
-          if (b.dataset.markdown.trim() === '') {
-            throw new Error('No response from server. Check configuration and try again.');
+          if (b.dataset.markdown.trim() === '' || b.dataset.markdown.trim() === 'Error: empty response') {
+            throw new Error('No response from server. Try again.');
           }
 
           if (!b.classList.contains('error')) {
@@ -794,6 +802,12 @@ data:
     });
 
     document.addEventListener('DOMContentLoaded', () => {
+      const savedLastPrompt = localStorage.getItem('lastPrompt');
+      if (savedLastPrompt) {
+        lastPrompt = savedLastPrompt;
+        input.value = lastPrompt;
+      }
+
       const mdScript = document.createElement('script');
       mdScript.src = 'https://cdn.jsdelivr.net/npm/marked/marked.min.js';
       document.head.appendChild(mdScript);
@@ -848,6 +862,7 @@ data:
         }
         input.focus();
       });
+
     });
   index.html: |-
     <!DOCTYPE html>
@@ -1227,7 +1242,7 @@ data:
     }
   service-worker.js: |-
     // Service worker for offline support and asset caching
-    const CACHE_NAME = 'fabric-chat-cache-484eba753c2bdc65';
+    const CACHE_NAME = 'fabric-chat-cache-d0744524fd3751a1';
     const URLs_TO_CACHE = [
       './',
       './index.html',
