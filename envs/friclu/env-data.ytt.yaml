@@ -40,3 +40,5 @@ environment:
       proto: keycloak
     - name: cloudnative-pg
       proto: cloudnative-pg
+    - name: n8n
+      proto: n8n

@@ -1,0 +1,16 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: n8n-certificate
+spec:
+  dnsNames:
+    - frn8n.duckdns.org
+  duration: 2160h
+  issuerRef:
+    kind: ClusterIssuer
+    name: duckdns-github-2-production
+  renewBefore: 360h
+  secretName: n8n-certificate
+  subject:
+    organizations:
+      - friclu

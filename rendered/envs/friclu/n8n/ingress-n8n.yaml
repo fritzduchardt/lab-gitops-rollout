@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  labels:
+    app.kubernetes.io/instance: n8n
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: n8n
+    app.kubernetes.io/version: 1.109.1
+    helm.sh/chart: n8n-1.0.14
+  name: n8n
+  namespace: n8n
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: workflow.example.com
+      http:
+        paths: null
+  tls:
+    - hosts:
+        - frn8n.duckdns.org
+      secretName: n8n-certificate

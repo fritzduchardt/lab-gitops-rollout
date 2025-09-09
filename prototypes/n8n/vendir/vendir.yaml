@@ -1,0 +1,17 @@
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+directories:
+  - path: charts
+    contents:
+      - path: n8n
+        lazy: true
+        image:
+          # image URL; could be plain, tagged or digest reference (required)
+          url: 8gears.container-registry.com/library/n8n
+          # specifies a strategy to choose a tag (optional; v0.22.0+)
+          # if specified, do not include a tag in url key
+          tagSelection:
+            semver:
+              # list of semver constraints (see versions.md for details) (required)
+              constraints: ">1.0.0"
+        newRootPath: n8n
