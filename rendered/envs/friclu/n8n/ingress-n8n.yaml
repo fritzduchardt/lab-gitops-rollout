@@ -12,9 +12,16 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: workflow.example.com
+    - host: frn8n.duckdns.org
       http:
-        paths: null
+        paths:
+          - backend:
+              service:
+                name: n8n
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
   tls:
     - hosts:
         - frn8n.duckdns.org

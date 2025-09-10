@@ -564,10 +564,7 @@ data:
     }
 
     function autoScroll() {
-      const isScrolledNearBottom = messagesEl.scrollHeight - messagesEl.clientHeight - messagesEl.scrollTop < 300;
-      if (isScrolledNearBottom) {
         messagesEl.scrollTop = messagesEl.scrollHeight;
-      }
     }
 
     // addMessage now accepts hideStore flag to suppress store button on show messages and full-width for Sw
@@ -620,7 +617,7 @@ data:
         addPromptButtonIfNeeded(b);
       }
       messagesEl.appendChild(m);
-      autoScroll();
+
     }
 
     function showLoading() {
@@ -753,7 +750,6 @@ data:
               }
             }
           }
-          autoScroll();
 
           if (b.dataset.markdown.trim() === '' || b.dataset.markdown.trim() === 'Error: empty response') {
             throw new Error('No response from server. Try again.');
@@ -1242,7 +1238,7 @@ data:
     }
   service-worker.js: |-
     // Service worker for offline support and asset caching
-    const CACHE_NAME = 'fabric-chat-cache-d0744524fd3751a1';
+    const CACHE_NAME = 'fabric-chat-cache-51c3e98f9d62d5b5';
     const URLs_TO_CACHE = [
       './',
       './index.html',

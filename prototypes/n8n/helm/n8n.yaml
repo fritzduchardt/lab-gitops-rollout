@@ -2,8 +2,9 @@ ingress:
   enabled: true
   className: "nginx"
   hosts:
-    - host: workflow.example.com
-      paths: []
+    - host: frn8n.duckdns.org
+      paths:
+        - /
   tls:
     - hosts:
         - frn8n.duckdns.org
@@ -19,19 +20,19 @@ main:
     db:
       type: postgresdb
       postgresdb:
-        host: n8n
+        host: n8n-rw
 
   # Dictionary for secrets, unlike config:, the values here will end up in the secret file.
   # The YAML entry db.postgresdb.password: my_secret is transformed DB_POSTGRESDB_password=bXlfc2VjcmV0
   # See https://docs.n8n.io/hosting/configuration/environment-variables/
-  secret: {}
+  secret:
+    db:
+      postgresdb:
+        password: '5dT5DItu0fKPli3cEPgknrqBskuS0LdeKdhKZX1SkcbBTT7hhkkG53lGSoxqE5BC'
   #    n8n:
   #     if you run n8n stateless, you should provide an encryption key here.
   #      encryption_key:
   #
-  #    db:
-  #      postgresdb:
-  #        password: 'big secret'
 
   # Extra environmental variables, so you can reference other configmaps and secrets into n8n as env vars.
   extraEnv:

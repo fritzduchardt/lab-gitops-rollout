@@ -21,7 +21,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: d434cda8f85f2f5c4014ebd443b795eda4ed94a547b36f5fdd1768eb0276289e
+        checksum/config: 493be53ba88ec83d65b9fba0fb16018ab9b8e24cfb8d570e3b75373cdae9b983
       labels:
         app.kubernetes.io/instance: n8n
         app.kubernetes.io/name: n8n
@@ -32,6 +32,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: n8n-app-config
+            - secretRef:
+                name: n8n-app-secret
           image: n8nio/n8n:1.109.1
           imagePullPolicy: IfNotPresent
           lifecycle: {}
