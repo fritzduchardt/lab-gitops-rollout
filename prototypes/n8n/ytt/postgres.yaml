@@ -1,8 +1,22 @@
+#@ load("@ytt:data", "data")
+---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
+namespace: #@ data.values.helm.namespace
 metadata:
   name: n8n
 spec:
   instances: 1
   storage:
     size: 1Gi
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: n8n
+  namespace: #@ data.values.helm.namespace
+spec:
+  cluster:
+    name: n8n
+  name: n8n
+  owner: app

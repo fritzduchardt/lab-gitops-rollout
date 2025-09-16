@@ -21,7 +21,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: 493be53ba88ec83d65b9fba0fb16018ab9b8e24cfb8d570e3b75373cdae9b983
+        checksum/config: 5912bdb35439cd74227ad075cb946dcab54c3e1dea093f709970746a51279941
       labels:
         app.kubernetes.io/instance: n8n
         app.kubernetes.io/name: n8n
@@ -55,6 +55,10 @@ spec:
           volumeMounts:
             - mountPath: /home/node/.n8n
               name: data
+            - mountPath: /syncthing
+              name: syncthing
+      nodeSelector:
+        kubernetes.io/hostname: friclu-1
       securityContext:
         fsGroup: 1000
         runAsGroup: 1000
@@ -65,3 +69,6 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: n8n
+        - name: syncthing
+          persistentVolumeClaim:
+            claimName: syncthing

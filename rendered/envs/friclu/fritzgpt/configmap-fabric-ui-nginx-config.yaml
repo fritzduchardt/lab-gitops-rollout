@@ -22,6 +22,12 @@ data:
         location /api/ {
           # Forward requests to backend service defined by Helm values
           proxy_pass http://fabric-backend:80/;
+
+          # Settings for Server-Sent Events (SSE)
+          proxy_set_header Connection '';
+          proxy_set_header Cache-Control 'no-cache';
+          proxy_buffering off;
+
           # Preserve client information
           proxy_read_timeout 300s;
           proxy_http_version 1.1;

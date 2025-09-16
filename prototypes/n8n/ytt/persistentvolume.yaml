@@ -1,0 +1,32 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: syncthing
+  namespace: #@ data.values.helm.namespace
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 2Gi
+  hostPath:
+    path: /volumes/syncthing
+    type: ""
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: syncthing
+  namespace: #@ data.values.helm.namespace
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+  storageClassName: ""
+  volumeMode: Filesystem
+  volumeName: syncthing
