@@ -11,13 +11,11 @@ ui:
   defaultModel: "03-mini"
   defaultPattern: "general"
 ingress:
-  host: "fritzgpt.duckdns.org"
+  host: "duchardt.net"
   tls:
     secretName: fabric-certificate
 service:
   type: ClusterIP
 basicAuth:
-  create: false
+  create: true
   secretName: "fritzgpt-basic-auth"
-oauth2Proxy:
-  redirectUrl: "https://fritzgpt.duckdns.org/"

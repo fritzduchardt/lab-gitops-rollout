@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: transformers-inference
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: weaviate
+    name: transformers-inference
+  name: transformers-inference
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: transformers-inference
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: transformers-inference
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - weaviate
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+      containers:
+        - env:
+            - name: ENABLE_CUDA
+              value: "0"
+          image: cr.weaviate.io/semitechnologies/transformers-inference:sentence-transformers-paraphrase-multilingual-MiniLM-L12-v2
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            httpGet:
+              path: /.well-known/live
+              port: 8080
+            initialDelaySeconds: 120
+            periodSeconds: 3
+            timeoutSeconds: 3
+          name: transformers-inference
+          readinessProbe:
+            httpGet:
+              path: /.well-known/ready
+              port: 8080
+            initialDelaySeconds: 120
+            periodSeconds: 3
+          resources: {}
+      securityContext: {}

@@ -1,0 +1,167 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: weaviate
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: weaviate
+    name: weaviate
+  name: weaviate
+spec:
+  podManagementPolicy: Parallel
+  replicas: 1
+  selector:
+    matchLabels:
+      app: weaviate
+  serviceName: weaviate-headless
+  template:
+    metadata:
+      annotations:
+        checksum/config: 1410794c8bdd1429573cb490a10adb00af60e77db9e9e53e07915c8767faf5b6
+      labels:
+        app: weaviate
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: weaviate
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - weaviate
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+      containers:
+        - args:
+            - --host
+            - 0.0.0.0
+            - --port
+            - "8080"
+            - --scheme
+            - http
+            - --config-file
+            - /weaviate-config/conf.yaml
+            - --read-timeout=60s
+            - --write-timeout=60s
+          command:
+            - /bin/weaviate
+          env:
+            - name: CLUSTER_DATA_BIND_PORT
+              value: "7001"
+            - name: CLUSTER_GOSSIP_BIND_PORT
+              value: "7000"
+            - name: GOGC
+              value: "100"
+            - name: PROMETHEUS_MONITORING_ENABLED
+              value: "false"
+            - name: PROMETHEUS_MONITORING_GROUP
+              value: "false"
+            - name: QUERY_MAXIMUM_RESULTS
+              value: "100000"
+            - name: RAFT_BOOTSTRAP_TIMEOUT
+              value: "600"
+            - name: REINDEX_VECTOR_DIMENSIONS_AT_STARTUP
+              value: "false"
+            - name: TRACK_VECTOR_DIMENSIONS
+              value: "false"
+            - name: RUNTIME_OVERRIDES_ENABLED
+              value: "false"
+            - name: RUNTIME_OVERRIDES_PATH
+              value: /config/overrides.yaml
+            - name: RUNTIME_OVERRIDES_LOAD_INTERVAL
+              value: 2m
+            - name: CLUSTER_BASIC_AUTH_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: username
+                  name: weaviate-cluster-api-basic-auth
+            - name: CLUSTER_BASIC_AUTH_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: weaviate-cluster-api-basic-auth
+            - name: PERSISTENCE_DATA_PATH
+              value: /var/lib/weaviate
+            - name: DEFAULT_VECTORIZER_MODULE
+              value: none
+            - name: ENABLE_MODULES
+              value: text2vec-contextionary,text2vec-transformers,text2vec-gpt4all,text2vec-model2vec
+            - name: RAFT_JOIN
+              value: weaviate-0
+            - name: RAFT_BOOTSTRAP_EXPECT
+              value: "1"
+            - name: TRANSFORMERS_INFERENCE_API
+              value: http://transformers-inference.weaviate.svc.cluster.local.:8080
+            - name: GPT4ALL_INFERENCE_API
+              value: http://gpt4all-inference.weaviate.svc.cluster.local.:8080
+            - name: MODEL2VEC_INFERENCE_API
+              value: http://model2vec-inference.weaviate.svc.cluster.local.:8080
+            - name: CLUSTER_JOIN
+              value: weaviate-headless.weaviate.svc.cluster.local.
+          image: cr.weaviate.io/semitechnologies/weaviate:1.32.7
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 30
+            httpGet:
+              path: /v1/.well-known/live
+              port: 8080
+            initialDelaySeconds: 900
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 3
+          name: weaviate
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /v1/.well-known/ready
+              port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 3
+          resources: {}
+          securityContext: {}
+          volumeMounts:
+            - mountPath: /weaviate-config
+              name: weaviate-config
+            - mountPath: /var/lib/weaviate
+              name: weaviate-data
+      initContainers:
+        - command:
+            - sysctl
+            - -w
+            - vm.max_map_count=524288
+            - vm.overcommit_memory=1
+          image: docker.io/alpine:latest
+          imagePullPolicy: IfNotPresent
+          name: configure-sysctl
+          securityContext:
+            privileged: true
+            runAsUser: 0
+      securityContext: {}
+      terminationGracePeriodSeconds: 600
+      volumes:
+        - configMap:
+            name: weaviate-config
+          name: weaviate-config
+  updateStrategy:
+    type: RollingUpdate
+  volumeClaimTemplates:
+    - metadata:
+        labels:
+          app.kubernetes.io/managed-by: Helm
+          app.kubernetes.io/name: weaviate
+        name: weaviate-data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 32Gi
+        storageClassName: local-path

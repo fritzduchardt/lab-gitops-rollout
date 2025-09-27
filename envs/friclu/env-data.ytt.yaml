@@ -42,3 +42,5 @@ environment:
       proto: cloudnative-pg
     - name: n8n
       proto: n8n
+    - name: weaviate
+      proto: weaviate
