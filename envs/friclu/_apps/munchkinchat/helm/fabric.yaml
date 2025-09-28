@@ -10,9 +10,10 @@ ui:
   defaultModel: "claude-opus-4-20250514"
   defaultPattern: "journal"
 ingress:
-  host: munchkinchat-friclu.duckdns.org
+  host: munchkinchat.duchardt.net
   tls:
-    secretName: fabric-certificate
+    letsEncrypt:
+      enabled: false
 service:
   type: ClusterIP
 basicAuth:

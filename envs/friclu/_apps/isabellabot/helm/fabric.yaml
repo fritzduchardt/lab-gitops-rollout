@@ -10,9 +10,10 @@ ui:
   defaultModel: "o4-mini"
   defaultPattern: "general"
 ingress:
-  host: isabellabot.duckdns.org
+  host: isabellabot.duchardt.net
   tls:
-    secretName: fabric-certificate
+    letsEncrypt:
+      enabled: false
 service:
   type: ClusterIP
 basicAuth:
