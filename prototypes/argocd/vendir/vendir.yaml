@@ -8,6 +8,6 @@ directories:
         helmChart:
           # renovate: datasource=helm
           name: argo-cd
-          version: 8.1.2
+          version: 8.5.8
           repository:
             url: https://argoproj.github.io/argo-helm
