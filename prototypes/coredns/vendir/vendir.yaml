@@ -8,6 +8,6 @@ directories:
         helmChart:
           # renovate: datasource=helm
           name: coredns
-          version: 1.42.2
+          version: 1.44.3
           repository:
             url: https://coredns.github.io/helm
