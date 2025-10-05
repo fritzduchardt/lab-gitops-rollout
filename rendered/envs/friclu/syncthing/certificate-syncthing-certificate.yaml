@@ -5,11 +5,11 @@ metadata:
   namespace: syncthing
 spec:
   dnsNames:
-    - syncthing-friclu.duckdns.org
+    - sync.duchardt.net
   duration: 2160h
   issuerRef:
     kind: ClusterIssuer
-    name: duckdns-google-production
+    name: http01
   renewBefore: 360h
   secretName: syncthing-certificate
   subject:
