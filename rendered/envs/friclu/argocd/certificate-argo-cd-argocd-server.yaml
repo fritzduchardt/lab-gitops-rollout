@@ -7,17 +7,17 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.0.6
-    helm.sh/chart: argo-cd-8.1.2
+    app.kubernetes.io/version: v3.1.8
+    helm.sh/chart: argo-cd-8.5.8
   name: argo-cd-argocd-server
   namespace: argocd
 spec:
-  commonName: argo-friclu.duckdns.org
+  commonName: argo.duchardt.net
   dnsNames:
-    - argo-friclu.duckdns.org
+    - argo.duchardt.net
   issuerRef:
     kind: ClusterIssuer
-    name: duckdns-google-production
+    name: http01
   privateKey:
     algorithm: RSA
     encoding: PKCS1

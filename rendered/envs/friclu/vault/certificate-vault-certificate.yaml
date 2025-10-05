@@ -5,11 +5,11 @@ metadata:
   namespace: vault
 spec:
   dnsNames:
-    - frault.duckdns.org
+    - vault.duchardt.net
   duration: 2160h
   issuerRef:
     kind: ClusterIssuer
-    name: duckdns-github-2-production
+    name: http01
   renewBefore: 360h
   secretName: vault-certificate
   subject:

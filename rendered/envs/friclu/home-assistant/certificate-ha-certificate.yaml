@@ -5,11 +5,11 @@ metadata:
   namespace: home-assistant
 spec:
   dnsNames:
-    - ha-friclu.duckdns.org
+    - home.duchardt.net
   duration: 2160h
   issuerRef:
     kind: ClusterIssuer
-    name: duckdns-google-production
+    name: http01
   renewBefore: 360h
   secretName: ha-certificate
   subject:

@@ -10,7 +10,7 @@
       organizations:
         - friclu
     dnsNames:
-      - immich-friclu.duckdns.org
+      - immich.duchardt.net
     issuerRef:
-      name: duckdns-github-production
+      name: http01
       kind: ClusterIssuer

@@ -5,11 +5,11 @@ metadata:
   namespace: immich
 spec:
   dnsNames:
-    - immich-friclu.duckdns.org
+    - immich.duchardt.net
   duration: 2160h
   issuerRef:
     kind: ClusterIssuer
-    name: duckdns-github-production
+    name: http01
   renewBefore: 360h
   secretName: immich-certificate
   subject:

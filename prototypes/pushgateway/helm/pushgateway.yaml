@@ -1,8 +1,5 @@
 ingress:
-  enabled: true
-  className: "nginx"
-  hosts:
-    - pushgateway.friclu
+  enabled: false
 
 serviceMonitor:
   enabled: true

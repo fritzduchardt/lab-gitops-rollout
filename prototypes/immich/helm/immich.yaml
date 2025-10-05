@@ -5,7 +5,7 @@ immich:
 
 image:
   # renovate: datasource=github-releases depName="immich-app/immich"
-  tag: v2.0.1
+  tag: v1.134.0
 
 postgresql:
   enabled: true
@@ -27,6 +27,12 @@ redis:
   enabled: true
   global:
     storageClass: local-path
+    security:
+      allowInsecureImages: true
+  image:
+    registry: docker.io
+    repository: valkey/valkey
+    tag: 8.1.3-bookworm
 
 server:
   ingress:
@@ -34,12 +40,12 @@ server:
       enabled: true
       ingressClassName: nginx
       hosts:
-        - host: immich-friclu.duckdns.org
+        - host: immich.duchardt.net
           paths:
             - path: "/"
       tls:
         - hosts:
-            - immich-friclu.duckdns.org
+            - immich.duchardt.net
           secretName: immich-certificate
 
 useDeprecatedPostgresChart: true

@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-repo-server
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.0.6
-    helm.sh/chart: argo-cd-8.1.2
+    app.kubernetes.io/version: v3.1.8
+    helm.sh/chart: argo-cd-8.5.8
   name: argo-cd-argocd-repo-server
   namespace: argocd
 spec:
@@ -21,17 +21,17 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/cm: 3cf01a6eecd7923f15e301f895aaec56e67f512a35170c27fb3df237ec8fa900
-        checksum/cmd-params: 8c02c8ced7ba61d64c28d52118d9295de7dd04bb5ac2f953c48a3f6e76c449c5
-        checksum/cmp-cm: caa19cd8052e806083f9e776d93a40b7d29a17ae87dd24377f53c7bf8e3bbaa8
+        checksum/cm: b39e5dc7cd95a385ce85e4e78e846d4fb51cc5314a4b1ec2dede6ffafeb17980
+        checksum/cmd-params: 10447d2026171aa6052add1b933fecaa6cb224bd309fa36ea261e529f40322f1
+        checksum/cmp-cm: ac8aefe499abe2f2ae144e3c074d6b99e1fdf62c07842c25e076dccf17b05004
       labels:
         app.kubernetes.io/component: repo-server
         app.kubernetes.io/instance: argo-cd
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: argocd-repo-server
         app.kubernetes.io/part-of: argocd
-        app.kubernetes.io/version: v3.0.6
-        helm.sh/chart: argo-cd-8.1.2
+        app.kubernetes.io/version: v3.1.8
+        helm.sh/chart: argo-cd-8.5.8
     spec:
       affinity:
         podAntiAffinity:
@@ -261,6 +261,24 @@ spec:
                   key: reposerver.git.request.timeout
                   name: argocd-cmd-params-cm
                   optional: true
+            - name: ARGOCD_REPO_SERVER_OCI_MANIFEST_MAX_EXTRACTED_SIZE
+              valueFrom:
+                configMapKeyRef:
+                  key: reposerver.oci.manifest.max.extracted.size
+                  name: argocd-cmd-params-cm
+                  optional: true
+            - name: ARGOCD_REPO_SERVER_DISABLE_OCI_MANIFEST_MAX_EXTRACTED_SIZE
+              valueFrom:
+                configMapKeyRef:
+                  key: reposerver.disable.oci.manifest.max.extracted.size
+                  name: argocd-cmd-params-cm
+                  optional: true
+            - name: ARGOCD_REPO_SERVER_OCI_LAYER_MEDIA_TYPES
+              valueFrom:
+                configMapKeyRef:
+                  key: reposerver.oci.layer.media.types
+                  name: argocd-cmd-params-cm
+                  optional: true
             - name: ARGOCD_REVISION_CACHE_LOCK_TIMEOUT
               valueFrom:
                 configMapKeyRef:
@@ -282,7 +300,7 @@ spec:
           envFrom:
             - secretRef:
                 name: vault-configuration
-          image: quay.io/argoproj/argocd:v3.0.6
+          image: quay.io/argoproj/argocd:v3.1.8
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
@@ -364,7 +382,7 @@ spec:
             - -n
             - /usr/local/bin/argocd
             - /var/run/argocd/argocd-cmp-server
-          image: quay.io/argoproj/argocd:v3.0.6
+          image: quay.io/argoproj/argocd:v3.1.8
           imagePullPolicy: IfNotPresent
           name: copyutil
           resources: {}

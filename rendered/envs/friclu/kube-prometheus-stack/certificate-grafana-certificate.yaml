@@ -5,11 +5,11 @@ metadata:
   namespace: kube-prometheus-stack
 spec:
   dnsNames:
-    - frifana.duckdns.org
+    - grafana.duchardt.net
   duration: 2160h
   issuerRef:
     kind: ClusterIssuer
-    name: duckdns-github-2-production
+    name: http01
   renewBefore: 360h
   secretName: grafana-certificate
   subject:

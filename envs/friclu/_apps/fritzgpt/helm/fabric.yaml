@@ -12,9 +12,6 @@ ui:
   defaultPattern: "general"
 ingress:
   host: "fritzgpt.duchardt.net"
-  tls:
-    letsEncrypt:
-      enabled: false
 
 service:
   type: ClusterIP

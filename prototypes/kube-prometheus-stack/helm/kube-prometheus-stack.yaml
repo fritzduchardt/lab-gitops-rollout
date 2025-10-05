@@ -19,11 +19,11 @@ grafana:
     enabled: true
     ingressClassName: "nginx"
     hosts:
-      - frifana.duckdns.org
+      - grafana.duchardt.net
     tls:
      - secretName: grafana-certificate
        hosts:
-        - frifana.duckdns.org
+        - grafana.duchardt.net
   admin:
     existingSecret: grafana-secret
   persistence:
@@ -35,7 +35,7 @@ grafana:
         enabled: false
   grafana.ini:
     server:
-      root_url: https://frifana.duckdns.org
+      root_url: https://grafana.duchardt.net
     auth.generic_oauth:
       enabled: true
       name: Keycloak-OAuth

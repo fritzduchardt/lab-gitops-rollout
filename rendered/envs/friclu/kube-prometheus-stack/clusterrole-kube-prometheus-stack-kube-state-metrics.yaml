@@ -7,10 +7,11 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: kube-state-metrics
     app.kubernetes.io/part-of: kube-state-metrics
-    app.kubernetes.io/version: 2.15.0
-    helm.sh/chart: kube-state-metrics-5.33.1
+    app.kubernetes.io/version: 2.17.0
+    helm.sh/chart: kube-state-metrics-6.3.0
     release: kube-prometheus-stack
   name: kube-prometheus-stack-kube-state-metrics
+  namespace: kube-prometheus-stack
 rules:
   - apiGroups:
       - certificates.k8s.io
@@ -34,7 +35,6 @@ rules:
       - list
       - watch
   - apiGroups:
-      - extensions
       - apps
     resources:
       - daemonsets
@@ -42,7 +42,6 @@ rules:
       - list
       - watch
   - apiGroups:
-      - extensions
       - apps
     resources:
       - deployments
@@ -64,7 +63,6 @@ rules:
       - list
       - watch
   - apiGroups:
-      - extensions
       - networking.k8s.io
     resources:
       - ingresses
@@ -149,7 +147,6 @@ rules:
       - list
       - watch
   - apiGroups:
-      - extensions
       - apps
     resources:
       - replicasets

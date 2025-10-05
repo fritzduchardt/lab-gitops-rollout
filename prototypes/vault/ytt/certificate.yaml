@@ -13,7 +13,7 @@ spec:
     organizations:
       - friclu
   dnsNames:
-    - frault.duckdns.org
+    - vault.duchardt.net
   issuerRef:
-    name: duckdns-github-2-production
+    name: http01
     kind: ClusterIssuer

@@ -15,21 +15,18 @@ argocd:
 environment:
   id: friclu
   applications:
-    - proto: argocd
-    - proto: coredns
-    - proto: nginx
     - proto: local-path-provisioner
     - proto: cert-manager
-    - proto: registry
+    - proto: nginx
+    - proto: argocd
+    - name: fritzgpt
+      proto: fabric
     - proto: immich
     - proto: home-assistant
     - proto: syncthing
-    - proto: linkding
     - proto: kube-prometheus-stack
     - proto: pushgateway
     - proto: ollama
-    - name: fritzgpt
-      proto: fabric
     - name: munchkinchat
       proto: fabric
     - name: isabellabot
@@ -44,3 +41,4 @@ environment:
       proto: n8n
     - name: weaviate
       proto: weaviate
+    - proto: registry

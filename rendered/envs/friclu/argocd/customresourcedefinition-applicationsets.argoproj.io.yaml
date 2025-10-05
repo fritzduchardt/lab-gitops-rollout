@@ -7,6 +7,7 @@ metadata:
     app.kubernetes.io/name: applicationsets.argoproj.io
     app.kubernetes.io/part-of: argocd
   name: applicationsets.argoproj.io
+  namespace: argocd
 spec:
   group: argoproj.io
   names:
@@ -1419,6 +1420,8 @@ spec:
                           files:
                             items:
                               properties:
+                                exclude:
+                                  type: boolean
                                 path:
                                   type: string
                               required:
@@ -4129,6 +4132,8 @@ spec:
                                     files:
                                       items:
                                         properties:
+                                          exclude:
+                                            type: boolean
                                           path:
                                             type: string
                                         required:
@@ -6275,6 +6280,10 @@ spec:
                                           type: string
                                         insecure:
                                           type: boolean
+                                        labels:
+                                          items:
+                                            type: string
+                                          type: array
                                         owner:
                                           type: string
                                         repo:
@@ -9963,6 +9972,8 @@ spec:
                                     files:
                                       items:
                                         properties:
+                                          exclude:
+                                            type: boolean
                                           path:
                                             type: string
                                         required:
@@ -12109,6 +12120,10 @@ spec:
                                           type: string
                                         insecure:
                                           type: boolean
+                                        labels:
+                                          items:
+                                            type: string
+                                          type: array
                                         owner:
                                           type: string
                                         repo:
@@ -15234,6 +15249,10 @@ spec:
                                 type: string
                               insecure:
                                 type: boolean
+                              labels:
+                                items:
+                                  type: string
+                                type: array
                               owner:
                                 type: string
                               repo:

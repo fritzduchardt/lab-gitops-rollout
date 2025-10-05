@@ -18,13 +18,13 @@ ingress:
   enabled: true
   className: "nginx"
   hosts:
-    - host: ha-friclu.duckdns.org
+    - host: home.duchardt.net
       paths:
         - path: /
           pathType: ImplementationSpecific
   tls:
     - hosts:
-        - ha-friclu.duckdns.org
+        - home.duchardt.net
       secretName: ha-certificate
 
 nodeSelector:

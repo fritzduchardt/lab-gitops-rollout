@@ -4,5 +4,4 @@ stringData:
 kind: Secret
 metadata:
     name: alertmanager-smtp
-    namespace: kube-prometheus-stack
 type: Opaque

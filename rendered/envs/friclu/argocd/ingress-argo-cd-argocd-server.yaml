@@ -7,14 +7,14 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.0.6
-    helm.sh/chart: argo-cd-8.1.2
+    app.kubernetes.io/version: v3.1.8
+    helm.sh/chart: argo-cd-8.5.8
   name: argo-cd-argocd-server
   namespace: argocd
 spec:
   ingressClassName: nginx
   rules:
-    - host: argo-friclu.duckdns.org
+    - host: argo.duchardt.net
       http:
         paths:
           - backend:
@@ -26,5 +26,5 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - argo-friclu.duckdns.org
+        - argo.duchardt.net
       secretName: argocd-server-tls

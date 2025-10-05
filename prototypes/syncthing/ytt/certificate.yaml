@@ -10,7 +10,7 @@
       organizations:
         - friclu
     dnsNames:
-      - syncthing-friclu.duckdns.org
+      - sync.duchardt.net
     issuerRef:
-      name: duckdns-google-production
+      name: http01
       kind: ClusterIssuer

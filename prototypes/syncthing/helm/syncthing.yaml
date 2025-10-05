@@ -7,13 +7,13 @@ ingress:
 
     ## Configure the hosts for the ingress
     hosts:
-      - host: syncthing-friclu.duckdns.org
+      - host: sync.duchardt.net
         paths:
           - path: /
             pathType: Prefix
     tls:
       - hosts:
-          - syncthing-friclu.duckdns.org
+          - sync.duchardt.net
         secretName: syncthing-certificate
 
 nodeSelector:

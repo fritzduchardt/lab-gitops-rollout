@@ -3,7 +3,7 @@
 global:
   # -- Default domain used by all components
   ## Used for ingresses, certificates, SSO, notifications, etc.
-  domain: argo-friclu.duckdns.org
+  domain: argo.duchardt.net
 
 ## Argo Configs
 configs:
@@ -35,7 +35,7 @@ configs:
   cm:
      oidc.config: |
       name: Keycloak
-      issuer: https://fricloak.duckdns.org/auth/realms/master
+      issuer: https://fricloak.duchardt.net/auth/realms/master
       clientId: argocd
       clientSecret: $oidc.keycloak.clientSecret
       requestedScopes: ["openid", "profile", "email", "groups"]
@@ -114,7 +114,7 @@ server:
   certificate:
     enabled: true
     issuer:
-      name: duckdns-google-production
+      name: http01
       group: ""
       kind: ClusterIssuer
 

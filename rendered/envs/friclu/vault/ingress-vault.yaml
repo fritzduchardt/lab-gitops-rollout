@@ -7,13 +7,13 @@ metadata:
     app.kubernetes.io/instance: vault
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: vault
-    helm.sh/chart: vault-0.30.1
+    helm.sh/chart: vault-0.31.0
   name: vault
   namespace: vault
 spec:
   ingressClassName: nginx
   rules:
-    - host: frault.duckdns.org
+    - host: vault.duchardt.net
       http:
         paths:
           - backend:
@@ -25,5 +25,5 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - frault.duckdns.org
+        - vault.duchardt.net
       secretName: vault-certificate
