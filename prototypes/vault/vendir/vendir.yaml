@@ -8,6 +8,6 @@ directories:
         helmChart:
           # renovate: datasource=helm
           name: vault
-          version: 0.30.1
+          version: 0.31.0
           repository:
             url: https://helm.releases.hashicorp.com
