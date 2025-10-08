@@ -104,10 +104,10 @@ spec:
           securityContext:
             allowPrivilegeEscalation: false
           volumeMounts:
-            - mountPath: /vault/data
-              name: data
             - mountPath: /vault/config
               name: config
+            - mountPath: /vault/data
+              name: vault-data
             - mountPath: /home/vault
               name: home
       hostNetwork: false
@@ -122,16 +122,10 @@ spec:
         - configMap:
             name: vault-config
           name: config
+        - name: vault-data
+          persistentVolumeClaim:
+            claimName: vault-data
         - emptyDir: {}
           name: home
   updateStrategy:
     type: OnDelete
-  volumeClaimTemplates:
-    - metadata:
-        name: data
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 10Gi

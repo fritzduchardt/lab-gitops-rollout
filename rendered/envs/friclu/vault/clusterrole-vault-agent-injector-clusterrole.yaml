@@ -6,6 +6,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: vault-agent-injector
   name: vault-agent-injector-clusterrole
+  namespace: vault
 rules:
   - apiGroups:
       - admissionregistration.k8s.io

@@ -25,7 +25,7 @@ data:
         # Proxy API requests to backend service, stripping /api prefix
         location /api/ {
           # Forward requests to backend service defined by Helm values
-          proxy_pass http://10.233.29.96:80/;
+          proxy_pass http://fabric-backend:80/;
 
           # Settings for Server-Sent Events (SSE)
           proxy_set_header Connection '';

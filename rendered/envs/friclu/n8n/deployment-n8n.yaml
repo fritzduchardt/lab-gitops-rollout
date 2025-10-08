@@ -5,8 +5,8 @@ metadata:
     app.kubernetes.io/instance: n8n
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: n8n
-    app.kubernetes.io/version: 1.109.1
-    helm.sh/chart: n8n-1.0.14
+    app.kubernetes.io/version: 1.112.0
+    helm.sh/chart: n8n-1.0.15
   name: n8n
   namespace: n8n
 spec:
@@ -34,7 +34,7 @@ spec:
                 name: n8n-app-config
             - secretRef:
                 name: n8n-app-secret
-          image: n8nio/n8n:1.109.1
+          image: n8nio/n8n:1.112.0
           imagePullPolicy: IfNotPresent
           lifecycle: {}
           livenessProbe:

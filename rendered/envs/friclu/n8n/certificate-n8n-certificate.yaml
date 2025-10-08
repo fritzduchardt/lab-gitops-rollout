@@ -4,11 +4,11 @@ metadata:
   name: n8n-certificate
 spec:
   dnsNames:
-    - frn8n.duckdns.org
+    - n8n.duchardt.net
   duration: 2160h
   issuerRef:
     kind: ClusterIssuer
-    name: duckdns-github-2-production
+    name: http01
   renewBefore: 360h
   secretName: n8n-certificate
   subject:

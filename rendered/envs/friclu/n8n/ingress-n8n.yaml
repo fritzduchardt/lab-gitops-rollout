@@ -5,14 +5,14 @@ metadata:
     app.kubernetes.io/instance: n8n
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: n8n
-    app.kubernetes.io/version: 1.109.1
-    helm.sh/chart: n8n-1.0.14
+    app.kubernetes.io/version: 1.112.0
+    helm.sh/chart: n8n-1.0.15
   name: n8n
   namespace: n8n
 spec:
   ingressClassName: nginx
   rules:
-    - host: frn8n.duckdns.org
+    - host: n8n.duchardt.net
       http:
         paths:
           - backend:
@@ -24,5 +24,5 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - frn8n.duckdns.org
+        - n8n.duchardt.net
       secretName: n8n-certificate

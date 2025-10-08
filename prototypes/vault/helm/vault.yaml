@@ -1,4 +1,13 @@
 server:
+  dataStorage:
+    enabled: false
+  volumeMounts:
+     - mountPath: /vault/data
+       name: vault-data
+  volumes:
+    - name: vault-data
+      persistentVolumeClaim:
+        claimName: vault-data
   ingress:
     enabled: true
     annotations:

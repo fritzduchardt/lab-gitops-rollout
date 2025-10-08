@@ -10,7 +10,7 @@
       organizations:
         - friclu
     dnsNames:
-      - frn8n.duckdns.org
+      - n8n.duchardt.net
     issuerRef:
-      name: duckdns-github-2-production
+      name: http01
       kind: ClusterIssuer

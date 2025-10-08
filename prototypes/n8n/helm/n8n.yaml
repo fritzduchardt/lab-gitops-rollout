@@ -2,12 +2,12 @@ ingress:
   enabled: true
   className: "nginx"
   hosts:
-    - host: frn8n.duckdns.org
+    - host: n8n.duchardt.net
       paths:
         - /
   tls:
     - hosts:
-        - frn8n.duckdns.org
+        - n8n.duchardt.net
       secretName: n8n-certificate
 
 # the main (n8n) application related configuration + Kubernetes specific settings
