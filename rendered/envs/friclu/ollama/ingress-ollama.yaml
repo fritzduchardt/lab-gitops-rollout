@@ -12,7 +12,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: ollama-friclu.duckdns.org
+    - host: ollama.duchardt.net
       http:
         paths:
           - backend:

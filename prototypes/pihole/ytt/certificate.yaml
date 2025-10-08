@@ -10,7 +10,7 @@
       organizations:
         - friclu
     dnsNames:
-      - pihole-friclu.duckdns.org
+      - pihole.duchardt.net
     issuerRef:
-      name: duckdns-google-production
+      name: http01
       kind: ClusterIssuer

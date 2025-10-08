@@ -2,7 +2,6 @@
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
-namespace: #@ data.values.helm.namespace
 metadata:
   name: n8n
 spec:
@@ -14,7 +13,6 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Database
 metadata:
   name: n8n
-  namespace: #@ data.values.helm.namespace
 spec:
   cluster:
     name: n8n

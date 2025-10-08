@@ -5,11 +5,11 @@ metadata:
   namespace: keycloak
 spec:
   dnsNames:
-    - fricloak.duckdns.org
+    - keycloak.duchardt.net
   duration: 2160h
   issuerRef:
     kind: ClusterIssuer
-    name: duckdns-github-2-production
+    name: http01
   renewBefore: 360h
   secretName: keycloak-certificate
   subject:

@@ -5,7 +5,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: ld-friclu.duckdns.org
+  - host: links.duchardt.net
     http:
       paths:
       - backend:
@@ -17,5 +17,5 @@ spec:
         pathType: ImplementationSpecific
   tls:
   - hosts:
-    - ld-friclu.duckdns.org
+    - links.duchardt.net
     secretName: ld-certificate

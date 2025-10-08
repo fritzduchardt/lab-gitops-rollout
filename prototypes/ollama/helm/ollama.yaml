@@ -46,7 +46,7 @@ ingress:
   enabled: true
   className: "nginx"
   hosts:
-    - host: ollama-friclu.duckdns.org
+    - host: ollama.duchardt.net
       paths:
         - path: /
           pathType: Prefix

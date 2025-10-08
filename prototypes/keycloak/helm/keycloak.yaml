@@ -8,13 +8,13 @@ ingress:
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
   rules:
     -
-      host: 'fricloak.duckdns.org'
+      host: 'keycloak.duchardt.net'
       paths:
         - path: '{{ tpl .Values.http.relativePath $ | trimSuffix "/" }}'
           pathType: Prefix
   tls:
     - hosts:
-        - fricloak.duckdns.org
+        - keycloak.duchardt.net
       secretName: "keycloak-certificate"
 
 database:
@@ -29,7 +29,7 @@ command:
   - "/opt/keycloak/bin/kc.sh"
   - "start"
   - "--http-port=8080"
-  - "--hostname=https://fricloak.duckdns.org/auth"
+  - "--hostname=https://keycloak.duchardt.net/auth"
 extraEnv: |
   - name: KC_PROXY
     value: "passthrough"

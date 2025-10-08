@@ -4,7 +4,7 @@ basicAuth:
   enabled: true
 oauth2Proxy:
   enabled: false
-  issuerUrl: "https://fricloak.duckdns.org/auth/realms/master"
+  issuerUrl: "https://keycloak.duchardt.net/auth/realms/master"
   clientID: "fabric"
   clientSecret: "<path:kv/data/shared/fabric#clientSecret>"
   cookieSecret: "<path:kv/data/shared/fabric#cookieSecret>"

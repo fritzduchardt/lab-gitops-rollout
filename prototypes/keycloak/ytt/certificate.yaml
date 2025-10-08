@@ -10,7 +10,7 @@
       organizations:
         - friclu
     dnsNames:
-      - fricloak.duckdns.org
+      - keycloak.duchardt.net
     issuerRef:
-      name: duckdns-github-2-production
+      name: http01
       kind: ClusterIssuer

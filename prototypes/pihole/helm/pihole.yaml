@@ -9,10 +9,10 @@ ingress:
   ingressClassName: nginx
   tls:
     - hosts:
-        - pihole-friclu.duckdns.org
+        - pihole.duchardt.net
       secretName: pihole-certificate
   hosts:
-    - pihole-friclu.duckdns.org
+    - pihole.duchardt.net
 
 # -- default upstream DNS 1 server to use
 DNS1: "8.8.8.8"
