@@ -64,7 +64,7 @@ data:
     };
 
     async function loadModels() {
-      const defaults = ['gpt-5-mini','gemini-2.5-pro','claude-sonnet-4-20250514', 'grok-4-fast-reasoning'];
+      const defaults = ["gpt-5-mini","gemini-2.5-pro","claude-sonnet-4-20250514","claude-opus-4-1-20250805","grok-4-fast-reasoning","grok-4-fast-non-reasoning"];
       modelSelect.setItems(defaults, 'claude-opus-4-20250514');
     }
 
@@ -1236,7 +1236,7 @@ data:
     }
   service-worker.js: |-
     // Service worker for offline support and asset caching
-    const CACHE_NAME = 'fabric-chat-cache-90f7d1b1bd5c764c';
+    const CACHE_NAME = 'fabric-chat-cache-f4ede384cbe51f55';
     const URLs_TO_CACHE = [
       './',
       './index.html',

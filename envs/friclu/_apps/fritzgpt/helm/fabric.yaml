@@ -8,7 +8,7 @@ backend:
 ui:
   title: "FritzGPT"
   iconPath: "icons/turtle"
-  defaultModel: "03-mini"
+  defaultModel: "gpt-5-mini"
   defaultPattern: "general"
 ingress:
   host: "fritzgpt.duchardt.net"
