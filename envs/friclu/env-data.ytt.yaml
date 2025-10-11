@@ -42,3 +42,4 @@ environment:
     - name: weaviate
       proto: weaviate
     - proto: registry
+    - proto: linkding
