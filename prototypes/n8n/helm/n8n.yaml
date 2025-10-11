@@ -28,10 +28,6 @@ main:
   # The YAML entry db.postgresdb.password: my_secret is transformed DB_POSTGRESDB_password=bXlfc2VjcmV0
   # See https://docs.n8n.io/hosting/configuration/environment-variables/
   secret:
-    db:
-      postgresdb:
-        user: app
-        password: 'sP8V7bvyVrzCR3SY7Rvg3wVtiop8gYRmRDcNj3oNvihkuQj5sAQmF5HrHLhz2svW'
   #    n8n:
   #     if you run n8n stateless, you should provide an encryption key here.
   #      encryption_key:
@@ -39,11 +35,11 @@ main:
 
   # Extra environmental variables, so you can reference other configmaps and secrets into n8n as env vars.
   extraEnv:
-  #    N8N_DB_POSTGRESDB_NAME:
-  #      valueFrom:
-  #        secretKeyRef:
-  #          name: db-app
-  #          key: dbname
+#    N8N_DB_POSTGRESDB_NAME:
+#      valueFrom:
+#        secretKeyRef:
+#          name: n8n-app
+#          key: dbname
   #
   # N8n Kubernetes specific settings
   #
