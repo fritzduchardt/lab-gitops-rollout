@@ -1,10 +1,7 @@
-#@ load("@ytt:data", "data")
----
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: n8n-certificate
-  namespace: #@ data.values.helm.namespace
 spec:
   secretName: n8n-certificate
   duration: 2160h
