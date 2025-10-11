@@ -35,11 +35,17 @@ main:
 
   # Extra environmental variables, so you can reference other configmaps and secrets into n8n as env vars.
   extraEnv:
-#    N8N_DB_POSTGRESDB_NAME:
-#      valueFrom:
-#        secretKeyRef:
-#          name: n8n-app
-#          key: dbname
+    DB_POSTGRESDB_USER:
+      valueFrom:
+        secretKeyRef:
+          name: n8n-app-secret
+          key: DB_POSTGRESDB_USER
+    DB_POSTGRESDB_PASSWORD:
+      valueFrom:
+        secretKeyRef:
+          name: n8n-app-secret
+          key: DB_POSTGRESDB_PASSWORD
+
   #
   # N8n Kubernetes specific settings
   #

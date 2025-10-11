@@ -21,14 +21,24 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: e8f206da1490963c9fb907c04968e27d249a5074c2fd4ce180bf74bcecbb85e0
+        checksum/config: 0633974fc3577938ddc7461bb8a8267e1fbd388a132fd974a2cbc1412a5bea5d
       labels:
         app.kubernetes.io/instance: n8n
         app.kubernetes.io/name: n8n
         app.kubernetes.io/type: master
     spec:
       containers:
-        - env: []
+        - env:
+            - name: DB_POSTGRESDB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: DB_POSTGRESDB_PASSWORD
+                  name: n8n-app-secret
+            - name: DB_POSTGRESDB_USER
+              valueFrom:
+                secretKeyRef:
+                  key: DB_POSTGRESDB_USER
+                  name: n8n-app-secret
           envFrom:
             - configMapRef:
                 name: n8n-app-config
