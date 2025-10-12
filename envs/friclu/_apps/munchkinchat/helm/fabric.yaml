@@ -11,9 +11,6 @@ ui:
   defaultPattern: "journal"
 ingress:
   host: munchkinchat.duchardt.net
-  tls:
-    letsEncrypt:
-      enabled: false
 service:
   type: ClusterIP
 basicAuth:

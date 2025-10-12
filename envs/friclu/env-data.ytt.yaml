@@ -31,8 +31,6 @@ environment:
       proto: fabric
     - name: isabellabot
       proto: fabric
-    - name: catchat
-      proto: fabric
     - name: vault
       proto: vault
     - name: keycloak

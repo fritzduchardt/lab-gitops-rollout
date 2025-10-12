@@ -1101,7 +1101,14 @@ data:
   lib.js: |-
     // Transform Obsidian Markdown to HTML snippet, keeping filenames inline
     function transformObsidianMarkdown(md, model) {
-      let html = '';
+      let html = "";
+      if (model) {
+        html = `<div style="position: absolute; top: 5px; right: 10px; font-size: 0.7em; color: #6c757d;">${model}</div>`;
+      }
+      if (md.startsWith("<!-- HTML -->")) {
+        console.debug("html only");
+        return html + md;
+      }
       let sections = [];
       const regex = /FILENAME: (.+)\n([\s\S]*?)(?=FILENAME: |$)/g;
 
@@ -1133,11 +1140,6 @@ data:
         const escaped = text.replace(/'/g, "\\'");
         return `<a href="#" onclick="fillAndSend('${escaped}');return false;">${text}</a>`;
       });
-
-      if (model) {
-        const modelInfoHtml = `<div style="position: absolute; top: 5px; right: 10px; font-size: 0.7em; color: #6c757d;">${model}</div>`;
-        html = modelInfoHtml + html;
-      }
 
       return html;
     }
@@ -1236,7 +1238,7 @@ data:
     }
   service-worker.js: |-
     // Service worker for offline support and asset caching
-    const CACHE_NAME = 'fabric-chat-cache-f4ede384cbe51f55';
+    const CACHE_NAME = 'fabric-chat-cache-05fffef56cc3a886';
     const URLs_TO_CACHE = [
       './',
       './index.html',

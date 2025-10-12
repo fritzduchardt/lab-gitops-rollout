@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: Secret
-metadata:
-    name: catchat-basic-auth
-    namespace: catchat
-type: Opaque
-stringData:
-    auth: "<path:kv/data/catchat/catchat-basic-auth#auth>"
