@@ -1101,6 +1101,10 @@ data:
   lib.js: |-
     // Transform Obsidian Markdown to HTML snippet, keeping filenames inline
     function transformObsidianMarkdown(md, model) {
+      if (md.includes("<!-- HTML -->")) {
+        console.debug("html only");
+        return md;
+      }
       let html = '';
       let sections = [];
       const regex = /FILENAME: (.+)\n([\s\S]*?)(?=FILENAME: |$)/g;
@@ -1236,7 +1240,7 @@ data:
     }
   service-worker.js: |-
     // Service worker for offline support and asset caching
-    const CACHE_NAME = 'fabric-chat-cache-da2c1e595fec11b7';
+    const CACHE_NAME = 'fabric-chat-cache-845d8d584500c9c2';
     const URLs_TO_CACHE = [
       './',
       './index.html',
