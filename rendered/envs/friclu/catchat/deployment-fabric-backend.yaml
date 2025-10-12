@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: fabric
+    component: backend
+  name: fabric-backend
+  namespace: catchat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fabric
+      component: backend
+  template:
+    metadata:
+      labels:
+        app: fabric
+        component: backend
+    spec:
+      containers:
+        - env:
+            - name: FABRIC_CONFIG_HOME
+              value: /home/fabric/.config/fabric
+            - name: OBSIDIAN_VAULT_PATH_1
+              value: /home/fabric/sync/ElkeSync/private
+            - name: OBSIDIAN_VAULT_PATH_2
+              value: /home/fabric/sync/FritzElkeShare
+            - name: FABRIC_PATTERN_PATH
+              value: /home/fabric/sync/ElkeSync/patterns
+            - name: PERSONAL_NAME
+              value: Elke
+            - name: TELEGRAM_BOT_TOKEN
+              value: <path:kv/data/shared/telegram#botToken>
+            - name: JOURNAL_FILE_RETRO_MONTHS
+              value: "3"
+          image: ghcr.io/fritzduchardt/fabric:main
+          imagePullPolicy: Always
+          name: fabric-backend
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - mountPath: /home/fabric/.config/fabric/.env
+              name: fabric-env
+              subPath: .env
+            - mountPath: /home/fabric/sync
+              name: sync
+      nodeSelector:
+        kubernetes.io/hostname: friclu-1
+      volumes:
+        - name: fabric-env
+          secret:
+            secretName: fabric
+        - name: sync
+          persistentVolumeClaim:
+            claimName: sync
