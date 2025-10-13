@@ -5,10 +5,10 @@ metadata:
     app.kubernetes.io/controller: main
     app.kubernetes.io/instance: immich
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: server
+    app.kubernetes.io/name: valkey
     app.kubernetes.io/version: v2.0.0
     helm.sh/chart: immich-0.10.0
-  name: immich-server
+  name: immich-valkey
   namespace: immich
 spec:
   replicas: 1
@@ -17,15 +17,15 @@ spec:
     matchLabels:
       app.kubernetes.io/controller: main
       app.kubernetes.io/instance: immich
-      app.kubernetes.io/name: server
+      app.kubernetes.io/name: valkey
   strategy:
-    type: RollingUpdate
+    type: Recreate
   template:
     metadata:
       labels:
         app.kubernetes.io/controller: main
         app.kubernetes.io/instance: immich
-        app.kubernetes.io/name: server
+        app.kubernetes.io/name: valkey
     spec:
       automountServiceAccountToken: true
       containers:
@@ -34,37 +34,43 @@ spec:
               value: http://immich-machine-learning:3003
             - name: REDIS_HOSTNAME
               value: immich-valkey
-          image: ghcr.io/immich-app/immich-server:v2.0.0
+          image: docker.io/valkey/valkey:8.1-alpine@sha256:e706d1213aaba6896c162bb6a3a9e1894e1a435f28f8f856d14fab2e10aa098b
           imagePullPolicy: IfNotPresent
           livenessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - valkey-cli ping | grep PONG
             failureThreshold: 3
-            httpGet:
-              path: /api/server/ping
-              port: http
-            initialDelaySeconds: 0
+            initialDelaySeconds: 30
             periodSeconds: 10
-            timeoutSeconds: 1
+            timeoutSeconds: 5
           name: main
           ports:
-            - containerPort: 2283
-              name: http
+            - containerPort: 6379
+              name: redis
               protocol: TCP
           readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - valkey-cli ping | grep PONG
             failureThreshold: 3
-            httpGet:
-              path: /api/server/ping
-              port: http
-            initialDelaySeconds: 0
+            initialDelaySeconds: 5
             periodSeconds: 10
-            timeoutSeconds: 1
+            timeoutSeconds: 5
           startupProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - valkey-cli ping | grep PONG
             failureThreshold: 30
-            httpGet:
-              path: /api/server/ping
-              port: http
             initialDelaySeconds: 0
             periodSeconds: 10
-            timeoutSeconds: 1
+            timeoutSeconds: 5
           volumeMounts:
             - mountPath: /data
               name: data
@@ -75,6 +81,5 @@ spec:
       hostPID: false
       serviceAccountName: default
       volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: immich-library
+        - emptyDir: {}
+          name: data

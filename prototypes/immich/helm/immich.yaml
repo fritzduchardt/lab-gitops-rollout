@@ -1,51 +1,36 @@
-immich:
-  persistence:
-    library:
-      existingClaim: immich-library
-
-image:
-  # renovate: datasource=github-releases depName="immich-app/immich"
-  tag: v1.134.0
-
-postgresql:
-  enabled: true
-  global:
-    storageClass: local-path
-  primary:
-   resources:
-     requests:
-       cpu: 2
-       memory: 512Mi
-     limits:
-       memory: 1024Mi
-
 common:
   nodeSelector:
     kubernetes.io/hostname: friclu-1
 
-redis:
+immich:
+  metrics:
+    # Enabling this will create the service monitors needed to monitor immich with the prometheus operator
+    enabled: false
+  persistence:
+    # Main data store for all photos shared between different components.
+    library:
+      # Automatically creating the library volume is not supported by this chart
+      # You have to specify an existing PVC to use
+      existingClaim: immich-library
+
+valkey:
   enabled: true
-  global:
-    storageClass: local-path
-    security:
-      allowInsecureImages: true
-  image:
-    registry: docker.io
-    repository: valkey/valkey
-    tag: 8.1.3-bookworm
 
 server:
   ingress:
     main:
       enabled: true
+      annotations:
+        # proxy-body-size is set to 0 to remove the body limit on file uploads
+        nginx.ingress.kubernetes.io/proxy-body-size: "0"
       ingressClassName: nginx
       hosts:
         - host: immich.duchardt.net
           paths:
             - path: "/"
+              service:
+                identifier: main
       tls:
         - hosts:
             - immich.duchardt.net
           secretName: immich-certificate
-
-useDeprecatedPostgresChart: true

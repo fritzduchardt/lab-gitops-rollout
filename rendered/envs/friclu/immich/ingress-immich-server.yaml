@@ -7,12 +7,11 @@ metadata:
     app.kubernetes.io/instance: immich
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: server
-    app.kubernetes.io/version: v1.119.0
-    helm.sh/chart: immich-0.9.3
+    app.kubernetes.io/version: v2.0.0
+    helm.sh/chart: immich-0.10.0
   name: immich-server
   namespace: immich
 spec:
-  ingressClassName: nginx
   rules:
     - host: immich.duchardt.net
       http:
