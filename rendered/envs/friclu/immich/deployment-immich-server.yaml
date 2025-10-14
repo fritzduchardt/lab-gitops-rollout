@@ -93,6 +93,8 @@ spec:
       hostIPC: false
       hostNetwork: false
       hostPID: false
+      nodeSelector:
+        kubernetes.io/hostname: friclu-2
       serviceAccountName: default
       volumes:
         - name: data

@@ -1,6 +1,7 @@
 common:
-  nodeSelector:
-    kubernetes.io/hostname: friclu-1
+  defaultPodOptions:
+    nodeSelector:
+      kubernetes.io/hostname: friclu-2
 
 immich:
   metrics:
