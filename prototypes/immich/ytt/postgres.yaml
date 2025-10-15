@@ -10,9 +10,12 @@ spec:
 
   managed:
     roles:
-      - name: immich
-        superuser: true
+      - connectionLimit: -1
+        ensure: present
+        inherit: true
         login: true
+        name: immich
+        superuser: true
 
   imageName: ghcr.io/tensorchord/cloudnative-vectorchord:16.9-0.4.3
 
