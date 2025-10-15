@@ -35,7 +35,7 @@ configs:
   cm:
      oidc.config: |
       name: Keycloak
-      issuer: https://fricloak.duchardt.net/auth/realms/master
+      issuer: https://keycloak.duchardt.net/auth/realms/master
       clientId: argocd
       clientSecret: $oidc.keycloak.clientSecret
       requestedScopes: ["openid", "profile", "email", "groups"]
