@@ -5,8 +5,8 @@ data:
     let lastSession = '';  // store the previous session ID
     let lastPrompt = '';  // store last user prompt
     let isChatButtonPressed = false;  // track if chat button was pressed
-    let abortController = null;  // controller for cancelling requests
-    let isRequestCancelled = false; // flag for cancellation during retry waits
+    let abortControllers = new Map();  // map of requestId -> { controller, cancelled }
+    let isRequestCancelled = false; // legacy flag kept for backward compatibility but not used for per-request cancellation
 
     const funnyRetryMessages = [
         "Hang on, the hamsters are spinning up the wheel again...",
@@ -119,7 +119,7 @@ data:
             btn.disabled = true;
         } catch (err) {
             console.error(err);
-            addMessage(`Error storing message (${err.message})`, 'bot', false,  false, true, true, true);
+            addMessage(`Error storing message (${err.message})`, 'bot', false, false, true, true, true);
         } finally {
             spinner.remove();
         }
@@ -241,6 +241,14 @@ data:
         });
       }
 
+      if (id === 'pattern-input') {
+        const savedPattern = localStorage.getItem('lastPattern');
+        if (savedPattern) {
+          searchInput.dataset.value = savedPattern;
+          searchInput.value = savedPattern;
+        }
+      }
+
       const dropdownMenu = document.createElement('div');
       dropdownMenu.classList.add('dropdown-menu');
       dropdownMenu.id = `${id}-dropdown`;
@@ -324,12 +332,25 @@ data:
         }
       });
 
+      searchInput.addEventListener('change', () => {
+        if (id === 'pattern-input') {
+          const val = searchInput.dataset.value || searchInput.value || '';
+          localStorage.setItem('lastPattern', val);
+        }
+      });
+
       return {
         container,
         searchInput,
         dropdownMenu,
         setItems(items, defaultValue = '') {
           dropdownMenu.innerHTML = '';
+          if (id === 'pattern-input') {
+            const saved = localStorage.getItem('lastPattern');
+            if (saved && items.includes(saved)) {
+              defaultValue = saved;
+            }
+          }
           items.forEach(item => {
             const dropdownItem = document.createElement('a');
             dropdownItem.classList.add('dropdown-item');
@@ -356,8 +377,7 @@ data:
                   const res = await fetch(`${obsidianFileUrl}/${encodeURIComponent(item)}`);
                   await checkResponse(res);
                   const content = await res.text();
-                  addMessage(content, 'bot', false,  true, true, false, false);
-                  // Add Delete button to the message produced by Sw
+                  addMessage(content, 'bot', false,  true, true, true, true, false, '', false);
                   const lastMsg = messagesEl.querySelector('.message.bot:last-child');
                   const bubble = lastMsg.querySelector('.bubble');
                   const deleteBtn = document.createElement('button');
@@ -370,7 +390,6 @@ data:
                       const delRes = await fetch(`${obsidianFileUrl}/${encodeURIComponent(item)}`, { method: 'DELETE' });
                       await checkResponse(delRes);
                       await loadObsidianFiles();
-                      // remove the message bubble
                       lastMsg.remove();
                       addMessage(`Deleted file ${item}`, 'bot', false,  false, true, true, true);
                     } catch (err) {
@@ -405,7 +424,7 @@ data:
                   await checkResponse(res);
                   const data = await res.json();
                   const md = data.Pattern;
-                  addMessage(`${md}`, 'bot', false,  true, true, true, true);
+                  addMessage(`${md}`, 'bot', false,  true, true, true, true, false, '', false);
                   const lastMsg = messagesEl.querySelector('.message.bot:last-child');
                   const bubble = lastMsg.querySelector('.bubble');
                   const deletePatBtn = document.createElement('button');
@@ -418,7 +437,6 @@ data:
                       const delRes = await fetch(`${patternDeleteUrl}/${encodeURIComponent(item)}`, { method: 'DELETE' });
                       await checkResponse(delRes);
                       await generatePatterns();
-                      // remove the message bubble
                       lastMsg.remove();
                       addMessage(`Deleted pattern ${item}`, 'bot', false,  false, true, true, true);
                     } catch (err) {
@@ -565,10 +583,38 @@ data:
         messagesEl.scrollTop = messagesEl.scrollHeight;
     }
 
+    // Adds a small delete 'x' button to every message container
+    function addBubbleDeleteButton(messageEl) {
+      if (!messageEl || messageEl.querySelector('.bubble-delete-button')) return;
+      if (!messageEl.style.position) messageEl.style.position = 'relative';
+      const btn = document.createElement('button');
+      btn.className = 'bubble-delete-button';
+      btn.type = 'button';
+      btn.setAttribute('aria-label', 'Delete message');
+      btn.innerText = '✕';
+      btn.style.position = 'absolute';
+      btn.style.top = '6px';
+      btn.style.right = '6px';
+      btn.style.border = 'none';
+      btn.style.background = 'transparent';
+      btn.style.cursor = 'pointer';
+      btn.style.zIndex = '20';
+      btn.style.fontSize = '12px';
+      btn.style.lineHeight = '1';
+      btn.style.padding = '2px';
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        messageEl.remove();
+      });
+      messageEl.appendChild(btn);
+    }
+
     // addMessage now accepts hideStore flag to suppress store button on show messages and full-width for Sw
-    function addMessage(text, sender, isChat = false, view = false, hideStore = false,  hideShare = false, hideCopy = false, showPrompt = false) {
+    function addMessage(text, sender, isChat = false, view = false, hideStore = false,  hideShare = false, hideCopy = false, showPrompt = false, patternUsed = '', hideDelete = false) {
       const m = document.createElement('div');
       m.classList.add('message', sender);
+      m.style.position = 'relative';
       if (sender === 'user') {
         m.classList.add(isChat ? 'chat' : 'send');
       }
@@ -599,8 +645,40 @@ data:
           icon.style.marginLeft = '4px';
           a.replaceWith(icon);
         });
+        if (patternUsed) {
+          b.dataset.pattern = patternUsed;
+          const patternBadge = document.createElement('div');
+          patternBadge.className = 'pattern-used-badge';
+          patternBadge.textContent = `${patternUsed}`;
+          b.appendChild(patternBadge);
+        }
       }
       m.appendChild(b);
+
+      b.style.position = b.style.position || 'relative';
+      if (text.trim() === 'Request cancelled') {
+        const xBtn = document.createElement('button');
+        xBtn.className = 'request-cancelled-x';
+        xBtn.type = 'button';
+        xBtn.setAttribute('aria-label', 'Dismiss cancellation message');
+        xBtn.innerText = '✕';
+        xBtn.style.position = 'absolute';
+        xBtn.style.top = '6px';
+        xBtn.style.right = '6px';
+        xBtn.style.border = 'none';
+        xBtn.style.background = 'transparent';
+        xBtn.style.cursor = 'pointer';
+        xBtn.style.zIndex = '30';
+        xBtn.style.fontSize = '12px';
+        xBtn.style.lineHeight = '1';
+        xBtn.style.padding = '2px';
+        xBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          m.remove();
+        });
+        b.appendChild(xBtn);
+      }
 
       if (!hideStore) {
           addStoreButtonIfNeeded(b);
@@ -614,8 +692,12 @@ data:
       if (showPrompt) {
         addPromptButtonIfNeeded(b);
       }
-      messagesEl.appendChild(m);
 
+      if (!hideDelete) {
+        addBubbleDeleteButton(m);
+      }
+      messagesEl.appendChild(m);
+      return m;
     }
 
     function showLoading() {
@@ -637,13 +719,8 @@ data:
       e.preventDefault();
       const chatBtn = document.getElementById('chat-button');
       const sendBtn = document.querySelector('.btn-send');
-      const cancelBtn = document.getElementById('cancel-button');
-      cancelBtn.type = "button";
       chatBtn.disabled = true;
       sendBtn.disabled = false;
-      cancelBtn.disabled = false;
-      isRequestCancelled = false; // Reset cancellation flag on new submission
-
       let text = input.value.trim();
       if (text == "") {
         text = "No further instructions"
@@ -660,19 +737,41 @@ data:
       const pattern = patternSelect.getValue() || 'general';
       const model = modelSelect.getValue() || 'o3-mini';
       const obs = obsidianSelect.getValue() === '(no file)' ? '' : obsidianSelect.getValue();
-      addMessage(text, 'user', userIsChat,  false, true, true, false, true);
+      const requestId = `${Date.now()}-${Math.floor(Math.random()*100000)}`;
+      abortControllers.set(requestId, { controller: null, cancelled: false });
+      const userMsgEl = addMessage(text, 'user', userIsChat,  false, true, true, false, true, pattern);
+      const userBubble = userMsgEl.querySelector('.bubble');
+
+      const cancelBtn = document.createElement('button');
+      cancelBtn.id = `cancel-button-${requestId}`;
+      cancelBtn.textContent = 'Cancel';
+      cancelBtn.className = 'cancel-button-in-bubble';
+      cancelBtn.addEventListener('click', (ev) => {
+        ev.preventDefault();
+        ev.stopPropagation();
+        const entry = abortControllers.get(requestId);
+        if (!entry) return;
+        entry.cancelled = true;
+        if (entry.controller) {
+          try { entry.controller.abort(); } catch {}
+        }
+        cancelBtn.disabled = true;
+      });
+      userBubble.appendChild(cancelBtn);
+
       input.value = '';
       const loader = showLoading();
       let temperature = model === 'o4-mini' ? 1.0 : 0.7;
 
       let lastError;
       let success = false;
+      const entryRef = abortControllers.get(requestId);
 
       for (let attempt = 1; attempt <= 10 && !success; attempt++) {
-        if (isRequestCancelled) {
+        const entry = abortControllers.get(requestId);
+        if (entry && entry.cancelled) {
             break;
         }
-        abortController = new AbortController();
         let messageBubbleElement = null; // To track the created bubble for cleanup
 
         try {
@@ -694,6 +793,15 @@ data:
             presencePenalty: 0.0
           };
 
+          const abortController = new AbortController();
+          const currentEntry = abortControllers.get(requestId);
+          if (currentEntry) {
+            currentEntry.controller = abortController;
+            if (currentEntry.cancelled) {
+              abortController.abort();
+            }
+          }
+
           const res = await fetch(apiUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Accept': 'text/event-stream' },
@@ -714,6 +822,7 @@ data:
           b.dataset.markdown = '';
           m.appendChild(b);
           messagesEl.appendChild(m);
+          addBubbleDeleteButton(m);
 
           const reader = res.body.getReader();
           const dec = new TextDecoder();
@@ -756,6 +865,7 @@ data:
           if (!b.classList.contains('error')) {
             addCopyAndTopButtonsIfNeeded(b);
           }
+          addBubbleDeleteButton(m);
 
           success = true; // Mark as success to exit the loop
 
@@ -767,7 +877,7 @@ data:
           }
 
           if (err.name === 'AbortError') {
-            success = true; // Exit loop, will be handled by isRequestCancelled flag
+            success = true; // Exit loop, will be handled by entry.cancelled
           } else {
             console.error(`Attempt ${attempt} failed:`, err);
             if (attempt < 10) {
@@ -781,18 +891,18 @@ data:
       }
 
       hideLoading(loader);
-      if (isRequestCancelled) {
-        addMessage('Request cancelled', 'bot', false, false, true, true, true);
+      const finalEntry = abortControllers.get(requestId);
+      if (finalEntry && finalEntry.cancelled) {
+        addMessage('Request cancelled', 'bot', false, false, true, true, true, false, '', true);
       } else if (!success && lastError) {
         addMessage(`Error (${lastError.message})`, 'bot', false,  false, true, true, true);
       }
 
-      // Finally block
       chatBtn.disabled = false;
       sendBtn.disabled = false;
-      const cancelBtn2 = document.getElementById('cancel-button');
+      const cancelBtn2 = document.getElementById(`cancel-button-${requestId}`);
       if (cancelBtn2) cancelBtn2.disabled = true;
-      abortController = null;
+      abortControllers.delete(requestId);
     });
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -814,17 +924,6 @@ data:
       obsidianSelectOriginal.parentNode.replaceChild(obsidianSelect.container, obsidianSelectOriginal);
 
       const chatBtn = document.getElementById('chat-button');
-      const cancelBtn = document.createElement('button');
-      cancelBtn.id = 'cancel-button';
-      cancelBtn.textContent = 'Cancel';
-      cancelBtn.disabled = true;
-      cancelBtn.className = 'btn btn-secondary';
-      chatBtn.parentNode.insertBefore(cancelBtn, chatBtn.nextSibling);
-      cancelBtn.addEventListener('click', () => {
-        isRequestCancelled = true;
-        if (abortController) abortController.abort();
-      });
-
       const loader = showLoading();
       Promise.all([generatePatterns(), loadObsidianFiles()]).finally(() => hideLoading(loader));
       loadModels();
@@ -989,7 +1088,7 @@ data:
         a, a:visited { color: #000 !important; }
         a:hover, a:focus { color: #000 !important; text-decoration: underline; }
         .show-file-button, .show-pattern-button { float: right; font-size: 0.75rem; padding: 2px 4px; margin-left: 4px; }
-        .delete-file-message-button, .delete-pattern-message-button, .summarize-button, .top-button, .copy-button, .share-button, .store-message-button, .prompt-again-button { bottom: 4px; right: 8px; font-size: 0.75rem; padding: 2px 4px; margin-right:4px}
+        .delete-file-message-button, .delete-pattern-message-button, .summarize-button, .top-button, .copy-button, .share-button, .store-message-button, .prompt-again-button, .cancel-button-in-bubble { bottom: 4px; right: 8px; font-size: 0.75rem; padding: 2px 4px; margin-right:4px}
         .delete-file-message-button.pressed, .delete-pattern-message-button.pressed, .show-pattern-button.pressed, .show-file-button.pressed, .summarize-button.pressed, .top-button.pressed, .copy-button.pressed, .share-button.pressed, .store-message-button.pressed, .prompt-again-button.pressed { background-color: #ccc;  }
         .enhanced-select { position: relative; width: 100%; }
         .enhanced-select .form-control { width: 100%; }
@@ -1045,6 +1144,37 @@ data:
           right: 1.7rem;
           z-index: 1000;
           margin: 0;
+        }
+        /* Styles for displaying code snippets inline and in blocks */
+        code {
+          font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+          color: #f1fffa !important;
+          padding: 0.15rem 0.35rem;
+          border-radius: 6px;
+          font-size: 0.9rem;
+          white-space: pre-wrap;
+          word-break: break-word;
+        }
+        pre {
+          background-color: #3e4754 !important;;
+          padding: 0.75rem;
+          border-radius: 6px;
+          overflow: auto;
+          max-width: 100%;
+          white-space: pre;
+          word-break: normal;
+        }
+        .code-block {
+          margin: 0.5rem 0;
+          border: 1px solid rgba(0,0,0,0.06);
+        }
+        .pattern-used-badge {
+          font-size: 11px;
+          color: #fff;
+          margin-top: 6px;
+          margin-bottom: 5px;
+          text-align: right;
+          font-style: italic;
         }
       </style>
     </head>
@@ -1238,7 +1368,7 @@ data:
     }
   service-worker.js: |-
     // Service worker for offline support and asset caching
-    const CACHE_NAME = 'fabric-chat-cache-93a571484bc73260';
+    const CACHE_NAME = 'fabric-chat-cache-090607eeaf11df31';
     const URLs_TO_CACHE = [
       './',
       './index.html',
