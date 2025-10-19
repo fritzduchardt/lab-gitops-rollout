@@ -37,7 +37,7 @@ spec:
             - name: WEAVIATE_URL
               value: http://weaviate.weaviate
             - name: WEAVIATE_CERTAINTY
-              value: "0.7"
+              value: "0.5"
             - name: WEAVIATE_CLASS
               value: ObsidianFile
           image: ghcr.io/fritzduchardt/fabric:main
