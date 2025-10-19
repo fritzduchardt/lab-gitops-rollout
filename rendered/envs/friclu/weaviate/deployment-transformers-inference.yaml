@@ -36,7 +36,7 @@ spec:
         - env:
             - name: ENABLE_CUDA
               value: "0"
-          image: cr.weaviate.io/semitechnologies/transformers-inference:sentence-transformers-paraphrase-multilingual-MiniLM-L12-v2
+          image: cr.weaviate.io/semitechnologies/transformers-inference:sentence-transformers-multi-qa-MiniLM-L6-cos-v1-latest
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:

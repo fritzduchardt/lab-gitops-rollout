@@ -50,12 +50,6 @@ storage:
   size: 32Gi
   storageClassName: "local-path"
 
-# The service controls how weaviate is exposed to the outside world. If you
-# don't want a public load balancer, you can also choose 'ClusterIP' to make
-# weaviate only accessible within your cluster.
-service:
-  type: ClusterIP
-
 # The service controls how weaviate gRPC endpoint is exposed to the outside world.
 # If you don't want a public load balancer, you can also choose 'ClusterIP' or `NodePort`
 # to make weaviate gRPC port be only accessible within your cluster.
@@ -273,7 +267,7 @@ modules:
     # replace with model of choice, see
     # https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules/text2vec-transformers
     # for all supported models or build your own container.
-    tag: sentence-transformers-paraphrase-multilingual-MiniLM-L12-v2
+    tag: sentence-transformers-multi-qa-MiniLM-L6-cos-v1-latest
     repo: semitechnologies/transformers-inference
     registry: cr.weaviate.io
     envconfig:
@@ -358,14 +352,14 @@ modules:
   text2vec-gpt4all:
 
     # Enable deployment of this module
-    enabled: true
+    enabled: false
 
     # You can set directly an inference URL of this module without deploying it with this release.
     # You can do so by setting a value for the `inferenceUrl` here AND by setting the `enable` to `false`
     inferenceUrl: {}
 
     # The configuration below is ignored if enabled==false
-    tag: all-MiniLM-L6-v2
+    tag: all-MiniLM-L6-v2-latest
     repo: semitechnologies/gpt4all-inference
     registry: cr.weaviate.io
     replicas: 1

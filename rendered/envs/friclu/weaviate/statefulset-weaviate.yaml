@@ -90,15 +90,13 @@ spec:
             - name: DEFAULT_VECTORIZER_MODULE
               value: none
             - name: ENABLE_MODULES
-              value: text2vec-contextionary,text2vec-transformers,text2vec-gpt4all,text2vec-model2vec
+              value: text2vec-contextionary,text2vec-transformers,text2vec-model2vec
             - name: RAFT_JOIN
               value: weaviate-0
             - name: RAFT_BOOTSTRAP_EXPECT
               value: "1"
             - name: TRANSFORMERS_INFERENCE_API
               value: http://transformers-inference.weaviate.svc.cluster.local.:8080
-            - name: GPT4ALL_INFERENCE_API
-              value: http://gpt4all-inference.weaviate.svc.cluster.local.:8080
             - name: MODEL2VEC_INFERENCE_API
               value: http://model2vec-inference.weaviate.svc.cluster.local.:8080
             - name: CLUSTER_JOIN
