@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: weaviate-certificate
+  namespace: weaviate
+spec:
+  dnsNames:
+    - weaviate.duchardt.net
+  duration: 2160h
+  issuerRef:
+    kind: ClusterIssuer
+    name: http01
+  renewBefore: 360h
+  secretName: weaviate-certificate
+  subject:
+    organizations:
+      - friclu

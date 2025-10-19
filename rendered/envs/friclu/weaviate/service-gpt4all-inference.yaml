@@ -5,6 +5,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: weaviate
   name: gpt4all-inference
+  namespace: weaviate
 spec:
   ports:
     - port: 8080

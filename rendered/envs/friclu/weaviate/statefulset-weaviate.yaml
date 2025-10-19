@@ -7,6 +7,7 @@ metadata:
     app.kubernetes.io/name: weaviate
     name: weaviate
   name: weaviate
+  namespace: weaviate
 spec:
   podManagementPolicy: Parallel
   replicas: 1

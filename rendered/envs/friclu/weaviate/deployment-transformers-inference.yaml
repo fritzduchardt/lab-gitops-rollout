@@ -7,6 +7,7 @@ metadata:
     app.kubernetes.io/name: weaviate
     name: transformers-inference
   name: transformers-inference
+  namespace: weaviate
 spec:
   replicas: 1
   selector:

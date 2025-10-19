@@ -5,6 +5,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: weaviate
   name: weaviate
+  namespace: weaviate
 spec:
   ports:
     - name: http

@@ -25,3 +25,4 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: weaviate
   name: weaviate-config
+  namespace: weaviate

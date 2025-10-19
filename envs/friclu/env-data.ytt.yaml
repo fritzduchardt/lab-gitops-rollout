@@ -8,7 +8,6 @@ argocd:
   app:
     destination:
       name: "in-cluster"
-      namespace: argoapps
     source:
       repoURL: "https://github.com/fritzduchardt/lab-gitops-rollout.git"
       targetRevision: "HEAD"
