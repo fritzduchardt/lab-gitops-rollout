@@ -46,11 +46,18 @@ curl -X POST http://localhost:8082/v1/objects \
   }'
 ```
 
-# Query data
+# Query data nearText
 ```bash
 curl -X POST http://localhost:8082/v1/graphql \
   -H "Content-Type: application/json" \
-  -d '{"query":"{ Get { ObsidianFile(nearText: { concepts: [\"romans\"], certainty: 0.7  }) { name content _additional { distance } } } }"}'
+  -d '{"query":"{ Get { ObsidianFile(nearText: { concepts: [\"Recipe for salmon peppers\"], certainty: 0.7  }) { path content _additional { distance } } } }"}' | jq
+```
+
+# Query data hybrid
+```bash
+curl -X POST http://localhost:8082/v1/graphql \
+  -H "Content-Type: application/json" \
+  -d '{"query":"{ Get { ObsidianFile(limit: 3, hybrid: { query: \"Recipe for salmon peppers\", alpha: 0.5  }) { path content } } }"}' | jq
 ```
 
 # Delete collection
