@@ -25,9 +25,7 @@ spec:
             - name: OBSIDIAN_VAULT_PATH_1
               value: FritzSync/private
             - name: OBSIDIAN_VAULT_PATH_2
-              value: BubaFritzShare
-            - name: OBSIDIAN_VAULT_PATH_3
-              value: FritzElkeShare
+              value: BubaFritzShare/private
             - name: OBSIDIAN_BASE_PATH
               value: /home/fabric/sync
             - name: FABRIC_PATTERN_PATH

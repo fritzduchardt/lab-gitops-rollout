@@ -3,7 +3,7 @@ backend:
   patternFolder: "BubaSync/patterns"
   obsidianFolders:
     - "BubaSync/private"
-    - "BubaFritzShare"
+    - "BubaFritzShare/private"
 ui:
   title: "MunchkinChat"
   iconPath: "icons/munchkin"

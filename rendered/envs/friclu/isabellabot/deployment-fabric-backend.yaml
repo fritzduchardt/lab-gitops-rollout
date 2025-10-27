@@ -24,8 +24,6 @@ spec:
               value: /home/fabric/.config/fabric
             - name: OBSIDIAN_VAULT_PATH_1
               value: IsabellaSync/private
-            - name: OBSIDIAN_VAULT_PATH_2
-              value: IsabellaFritzShare
             - name: OBSIDIAN_BASE_PATH
               value: /home/fabric/sync
             - name: FABRIC_PATTERN_PATH
