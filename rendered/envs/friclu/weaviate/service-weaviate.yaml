@@ -14,4 +14,4 @@ spec:
       targetPort: 8080
   selector:
     app: weaviate
-  type: ClusterIP
+  type: LoadBalancer
