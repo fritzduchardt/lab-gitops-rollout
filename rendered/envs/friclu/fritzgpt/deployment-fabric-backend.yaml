@@ -31,7 +31,7 @@ spec:
             - name: OBSIDIAN_BASE_PATH
               value: /home/fabric/sync
             - name: FABRIC_PATTERN_PATH
-              value: /home/fabric/sync/FritzSync/patterns
+              value: FritzSync/patterns
             - name: PERSONAL_NAME
               value: Fritz
             - name: TELEGRAM_BOT_TOKEN

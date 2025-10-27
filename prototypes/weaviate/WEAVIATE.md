@@ -57,7 +57,7 @@ curl -X POST http://localhost:8082/v1/graphql \
 ```bash
 curl -X POST http://localhost:8082/v1/graphql \
   -H "Content-Type: application/json" \
-  -d '{"query":"{ Get { ObsidianFile(limit: 3, hybrid: { query: \"Recipe for salmon peppers\", alpha: 0.5  }) { path content } } }"}' | jq
+  -d '{"query":"{ Get { ObsidianFile(limit: 3, hybrid: { query: \"Add to balance protocol: I hate theft and people that break the system\", alpha: 0.5  }) { path content } } }"}' | jq
 ```
 
 # Delete collection

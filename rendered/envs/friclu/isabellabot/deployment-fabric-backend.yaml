@@ -29,7 +29,7 @@ spec:
             - name: OBSIDIAN_BASE_PATH
               value: /home/fabric/sync
             - name: FABRIC_PATTERN_PATH
-              value: /home/fabric/sync/IsabellaSync/patterns
+              value: IsabellaSync/patterns
             - name: PERSONAL_NAME
               value: Isabella
             - name: TELEGRAM_BOT_TOKEN
