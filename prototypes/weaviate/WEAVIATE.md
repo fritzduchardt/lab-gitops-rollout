@@ -52,7 +52,7 @@ curl -X POST http://localhost:8082/v1/graphql \
   -H "Content-Type: application/json" \
   -d '{"query":"{ Get { ObsidianFile(nearText: { concepts: [\"Recipe for salmon peppers\"], certainty: 0.7  }) { path content _additional { distance } } } }"}' | jq
 ```
-
+    
 # Query data hybrid
 ```bash
 curl -X POST http://localhost:8082/v1/graphql \
