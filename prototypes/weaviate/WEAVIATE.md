@@ -52,7 +52,28 @@ curl -X POST http://localhost:8082/v1/graphql \
   -H "Content-Type: application/json" \
   -d '{"query":"{ Get { ObsidianFile(nearText: { concepts: [\"Recipe for salmon peppers\"], certainty: 0.7  }) { path content _additional { distance } } } }"}' | jq
 ```
-    
+
+# Query data by path
+```bash
+echo '{
+  "query": "{
+    Get {
+      ObsidianFile(where: {
+        path: [\"path\"],
+        operator: Equal,
+        valueText: \"FritzSync/private/Health/Diet Journal.md\"
+      }) {
+        _additional { id }
+      }
+    }
+  }"
+}' | curl \
+  -X POST \
+  -H 'Content-Type: application/json' \
+  -d @- \
+  http://localhost:8082/v1/graphql
+```
+
 # Query data hybrid
 ```bash
 curl -X POST http://localhost:8082/v1/graphql \
@@ -63,6 +84,12 @@ curl -X POST http://localhost:8082/v1/graphql \
 # Delete collection
 ```bash
 curl -X DELETE "http://localhost:8082/v1/schema/ObsidianFile"
+```
+
+# Delete document
+```bash
+curl 'http://localhost:8082/v1/objects/ObsidianFile/e2c8fab2-9542-453d-a914-c74b1f6122df?consistency_level=&tenant=' \
+  --request DELETE
 ```
 
 # List all items in collection

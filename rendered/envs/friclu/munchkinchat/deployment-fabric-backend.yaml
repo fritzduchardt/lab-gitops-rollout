@@ -23,9 +23,11 @@ spec:
             - name: FABRIC_CONFIG_HOME
               value: /home/fabric/.config/fabric
             - name: OBSIDIAN_VAULT_PATH_1
-              value: /home/fabric/sync/BubaSync/private
+              value: BubaSync/private
             - name: OBSIDIAN_VAULT_PATH_2
-              value: /home/fabric/sync/BubaFritzShare
+              value: BubaFritzShare/private
+            - name: OBSIDIAN_BASE_PATH
+              value: /home/fabric/sync
             - name: FABRIC_PATTERN_PATH
               value: /home/fabric/sync/BubaSync/patterns
             - name: PERSONAL_NAME
@@ -34,6 +36,12 @@ spec:
               value: <path:kv/data/shared/telegram#botToken>
             - name: JOURNAL_FILE_RETRO_MONTHS
               value: "3"
+            - name: WEAVIATE_URL
+              value: http://weaviate.weaviate
+            - name: WEAVIATE_CERTAINTY
+              value: "0.5"
+            - name: WEAVIATE_CLASS
+              value: ObsidianFile
           image: ghcr.io/fritzduchardt/fabric:main
           imagePullPolicy: Always
           name: fabric-backend

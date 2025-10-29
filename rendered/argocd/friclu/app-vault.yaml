@@ -8,7 +8,7 @@ metadata:
 spec:
   destination:
     name: in-cluster
-    namespace: argoapps
+    namespace: vault
   project: friclu
   source:
     path: rendered/envs/friclu/vault

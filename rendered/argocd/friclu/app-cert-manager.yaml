@@ -8,7 +8,7 @@ metadata:
 spec:
   destination:
     name: in-cluster
-    namespace: argoapps
+    namespace: cert-manager
   project: friclu
   source:
     path: rendered/envs/friclu/cert-manager
