@@ -18,6 +18,10 @@ spec:
       port: 12345
       protocol: TCP
       targetPort: 12345
+    - name: otel-grpc
+      port: 4317
+      protocol: TCP
+      targetPort: 4317
   selector:
     app.kubernetes.io/instance: alloy
     app.kubernetes.io/name: alloy

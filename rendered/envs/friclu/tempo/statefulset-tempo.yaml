@@ -19,7 +19,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: cb4321f5bf8531bfd5e0879c992b8c7eb906e3b26e34a63e6c36971e0aafc8fe
+        checksum/config: 60776bdbed54f60814c2e18f3cb4bbd88c2742f6cf0cfb93af55c367ec714a0b
       labels:
         app.kubernetes.io/instance: tempo
         app.kubernetes.io/name: tempo

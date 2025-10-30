@@ -6,58 +6,11 @@ data:
     - access: proxy
       basicAuth: false
       jsonData:
-        nodeGraph:
-          enabled: true
-        search:
-          hide: false
-        serviceMap:
-          datasourceUid: prometheus
-        spanBar:
-          tag: http.path
-          type: Tag
-        streamingEnabled:
-          search: true
-        traceQuery:
-          spanEndTimeShift: 1h
-          spanStartTimeShift: -1h
-          timeShiftEnabled: true
-        tracesToLogsV2:
-          customQuery: true
-          datasourceUid: loki
-          filterBySpanID: false
-          filterByTraceID: false
-          query: method="$${__span.tags.method}"
-          spanEndTimeShift: 1h
-          spanStartTimeShift: -1h
-          tags:
-          - job
-          - instance
-          - pod
-          - namespace
-        tracesToMetrics:
-          datasourceUid: prom
-          queries:
-          - name: Sample query
-            query: sum(rate(traces_spanmetrics_latency_bucket{$$__tags}[5m]))
-          spanEndTimeShift: 1h
-          spanStartTimeShift: -1h
-          tags:
-          - key: service.name
-            value: service
-          - key: job
-        tracesToProfiles:
-          customQuery: true
-          datasourceUid: grafana-pyroscope-datasource
-          profileTypeId: process_cpu:cpu:nanoseconds:cpu:nanoseconds
-          query: method="$${__span.tags.method}"
-          tags:
-          - job
-          - instance
-          - pod
-          - namespace
+        httpMethod: POST
+        timeInterval: 30s
       name: Tempo
       type: tempo
-      uid: EbPG8fYoz
+      uid: tempo
       url: http://tempo.tempo:3200
   grafana.ini: |
     [analytics]

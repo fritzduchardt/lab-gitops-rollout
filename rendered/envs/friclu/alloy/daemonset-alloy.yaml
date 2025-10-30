@@ -45,6 +45,9 @@ spec:
           ports:
             - containerPort: 12345
               name: http-metrics
+            - containerPort: 4317
+              name: otel-grpc
+              protocol: TCP
           readinessProbe:
             httpGet:
               path: /-/ready
