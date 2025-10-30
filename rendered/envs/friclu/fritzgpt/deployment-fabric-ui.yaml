@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: fabric
+    component: ui
+  name: fabric-ui
+  namespace: fritzgpt
+spec:
+  replicas: null
+  selector:
+    matchLabels:
+      app: fabric
+      component: ui
+  template:
+    metadata:
+      annotations:
+        checksum/app-js: 790a2f6b0c6c96d86763f23184142cf452fb791f4ab6a9fa943dcfe23e6fd9bd
+        checksum/index-html: 58d8794fc04660d6d3e98ae9755ef517985dbcbb8eb253ceadbf69bd1e1d1e20
+        checksum/lib-js: 6c17cc5c1a8d3521d5b0d261d212f4ca2b9405d191b728f01a96a12fba6c8efe
+        checksum/service-worker-js: defaa6683c6f8b0a62de0b14b6528484344695f078aafc62685d3af6af4386bb
+      labels:
+        app: fabric
+        component: ui
+    spec:
+      containers:
+        - image: ghcr.io/fritzduchardt/fabric-ui:master
+          imagePullPolicy: Always
+          name: fabric-ui
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - mountPath: /usr/share/nginx/html/app.js
+              name: ui-scripts
+              subPath: app.js
+            - mountPath: /usr/share/nginx/html/lib.js
+              name: ui-scripts
+              subPath: lib.js
+            - mountPath: /usr/share/nginx/html/index.html
+              name: ui-scripts
+              subPath: index.html
+            - mountPath: /usr/share/nginx/html/manifest.json
+              name: ui-scripts
+              subPath: manifest.json
+            - mountPath: /usr/share/nginx/html/service-worker.js
+              name: ui-scripts
+              subPath: service-worker.js
+            - mountPath: /etc/nginx/nginx.conf
+              name: ui-nginx-config
+              subPath: nginx.conf
+      volumes:
+        - configMap:
+            defaultMode: 420
+            name: fabric-ui-scripts
+          name: ui-scripts
+        - configMap:
+            defaultMode: 420
+            name: fabric-ui-nginx-config
+          name: ui-nginx-config

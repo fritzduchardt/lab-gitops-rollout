@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: fabric-certificate
+  namespace: fritzgpt
+spec:
+  dnsNames:
+    - fritzgpt.duchardt.net
+  duration: 2160h
+  issuerRef:
+    kind: ClusterIssuer
+    name: http01
+  renewBefore: 360h
+  secretName: fabric-certificate
+  subject:
+    organizations:
+      - friclu

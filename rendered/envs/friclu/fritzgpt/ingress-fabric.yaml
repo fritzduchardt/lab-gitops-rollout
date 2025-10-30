@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/auth-realm: Authentication Required
+    nginx.ingress.kubernetes.io/auth-secret: fritzgpt-basic-auth
+    nginx.ingress.kubernetes.io/auth-type: basic
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+  labels:
+    app: fabric
+  name: fabric
+  namespace: fritzgpt
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: fritzgpt.duchardt.net
+      http:
+        paths:
+          - backend:
+              service:
+                name: fabric-ui
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - fritzgpt.duchardt.net
+      secretName: fabric-certificate
