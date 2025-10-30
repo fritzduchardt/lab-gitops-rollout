@@ -80,6 +80,8 @@ spec:
           volumeMounts:
             - mountPath: /conf
               name: tempo-conf
+            - mountPath: /var/tempo
+              name: storage
       securityContext:
         fsGroup: 10001
         runAsGroup: 10001
@@ -92,3 +94,14 @@ spec:
           name: tempo-conf
   updateStrategy:
     type: RollingUpdate
+  volumeClaimTemplates:
+    - metadata:
+        annotations: null
+        name: storage
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Gi
+        storageClassName: null
