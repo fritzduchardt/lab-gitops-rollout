@@ -48,7 +48,7 @@ data:
         location / {
           otel_trace         on;
           otel_trace_context inject;
-          otel_span_attr namespace isabellabot
+          otel_span_attr namespace isabellabot;
 
           try_files $uri $uri/ /index.html;
         }
