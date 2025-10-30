@@ -1,0 +1,13 @@
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+directories:
+  - path: charts
+    contents:
+      - path: tempo
+        lazy: true
+        helmChart:
+          # renovate: datasource=helm
+          name: tempo
+          version: 1.24.0
+          repository:
+            url: https://grafana.github.io/helm-charts
