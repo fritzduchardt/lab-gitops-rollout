@@ -61,7 +61,7 @@ echo '{
       ObsidianFile(where: {
         path: [\"path\"],
         operator: Equal,
-        valueText: \"FritzSync/private/Health/Diet Journal.md\"
+        valueText: \"FritzSync/private/Health/Sleep Journal.md\"
       }) {
         _additional { id }
       }
@@ -78,7 +78,7 @@ echo '{
 ```bash
 curl -X POST http://localhost:8082/v1/graphql \
   -H "Content-Type: application/json" \
-  -d '{"query":"{ Get { ObsidianFile(limit: 3, hybrid: { query: \"Add to balance protocol: I hate theft and people that break the system\", alpha: 0.5  }) { path content } } }"}' | jq
+  -d '{"query":"{ Get { ObsidianFile(limit: 3, hybrid: { query: \"Feeling a bit down\", alpha: 0.5  }) { path content } } }"}' | jq
 ```
 
 # Delete collection

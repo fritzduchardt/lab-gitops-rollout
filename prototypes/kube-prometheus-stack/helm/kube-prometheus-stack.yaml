@@ -63,6 +63,7 @@ prometheus:
     ruleSelector: {}
 
 defaultRules:
+  create: true
   rules:
     alertmanager: false
     etcd: false
@@ -72,7 +73,7 @@ defaultRules:
     k8sContainerMemoryCache: false
     k8sContainerMemoryRss: false
     k8sContainerMemorySwap: false
-    k8sContainerResource: true
+    k8sContainerResource: false
     k8sContainerMemoryWorkingSetBytes: false
     k8sPodOwner: false
     kubeApiserverAvailability: false
@@ -82,3 +83,19 @@ defaultRules:
     kubeControllerManager: false
     kubelet: false
     kubeProxy: false
+    kubePrometheusGeneral: false
+    kubePrometheusNodeRecording: false
+    kubernetesApps: true
+    kubernetesResources: true
+    kubernetesStorage: true
+    kubernetesSystem: false
+    kubeSchedulerAlerting: false
+    kubeSchedulerRecording: false
+    kubeStateMetrics: false
+    network: false
+    node: false
+    nodeExporterAlerting: false
+    nodeExporterRecording: false
+    prometheus: false
+    prometheusOperator: false
+    windows: false
