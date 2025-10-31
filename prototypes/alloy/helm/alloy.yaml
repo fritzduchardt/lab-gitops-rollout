@@ -7,6 +7,9 @@ alloy:
     create: true
     # -- Content to assign to the new ConfigMap.  This is passed into `tpl` allowing for templating from values.
     content: |
+      logging {
+        level = "debug"
+      }
       otelcol.receiver.otlp "default" {
         grpc {
           endpoint = "0.0.0.0:4317"
@@ -26,7 +29,14 @@ alloy:
       otelcol.exporter.otlp "default" {
         client {
           endpoint = "tempo.tempo:4317"
+          tls {
+            insecure = true
+          }
         }
+      }
+      
+      livedebugging {
+        enabled = true
       }
 
     # -- Name of existing ConfigMap to use. Used when create is false.
