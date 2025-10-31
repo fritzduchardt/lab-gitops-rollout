@@ -13,6 +13,7 @@ data:
       otel_exporter {
           endpoint alloy.alloy:4317;
       }
+      otel_service_name  fritzgpt:ui
       server {
         # Bind to the configured UI port
         listen 8080;
@@ -48,7 +49,6 @@ data:
         location / {
           otel_trace         on;
           otel_trace_context inject;
-          otel_service_name  fritzgpt:ui
           otel_span_attr namespace fritzgpt;
 
           try_files $uri $uri/ /index.html;

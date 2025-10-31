@@ -10,11 +10,11 @@ alloy:
       logging {
         level = "debug"
       }
+      
       otelcol.receiver.otlp "default" {
         grpc {
           endpoint = "0.0.0.0:4317"
         }
-      
         output {
           traces  = [otelcol.processor.batch.default.input]
         }
