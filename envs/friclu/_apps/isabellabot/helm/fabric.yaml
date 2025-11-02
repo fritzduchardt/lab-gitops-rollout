@@ -7,7 +7,7 @@ backend:
 ui:
   title: "IsabellaBot"
   iconPath: "icons/racoon"
-  defaultModel: "o4-mini"
+  defaultModel: "gpt-5-mini"
   defaultPattern: "general"
 ingress:
   host: isabellabot.duchardt.net
