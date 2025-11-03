@@ -533,8 +533,7 @@ data:
           }
         }
         const safeFiles = Array.isArray(files) ? files.filter(f => f != null) : [];
-        const dedupedFiles = safeFiles.filter(f => f !== 'weaviate');
-        const allOptions = ['(no file)', 'weaviate', ...dedupedFiles];
+        const allOptions = ['(no file)', ...safeFiles];
         const prevFile = obsidianSelect.getValue();
         const defaultFile = prevFile && allOptions.includes(prevFile) ? prevFile : '(no file)';
         obsidianSelect.setItems(allOptions, defaultFile);
@@ -1356,7 +1355,7 @@ data:
     }
   service-worker.js: |-
     // Service worker for offline support and asset caching
-    const CACHE_NAME = 'fabric-chat-cache-9d2731c54df4c9d0';
+    const CACHE_NAME = 'fabric-chat-cache-a33285c79a68c109';
     const URLs_TO_CACHE = [
       './',
       './index.html',
