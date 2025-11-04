@@ -106,13 +106,12 @@ alloy:
       
         forward_to = [loki.write.grafana_loki.receiver]
       }
-      
+
       loki.write "grafana_loki" {
         endpoint {
           url = "http://loki.loki:3100/loki/api/v1/push"
         }
       }
-      
       otelcol.receiver.otlp "default" {
         grpc {
           endpoint = "0.0.0.0:4317"
