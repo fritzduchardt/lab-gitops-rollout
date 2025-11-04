@@ -18,12 +18,17 @@ grafana:
     datasources.yaml:
       apiVersion: 1
       datasources:
-      - name: Tempo
+      - name: Tempo2
         type: tempo
         uid: tempo
         url: http://tempo.tempo:3200
         access: proxy
         basicAuth: false
+        tracesToLogs:
+          datasourceUid: 'loki'
+          tags: [{key: 'namespace'}]
+          spanStartTimeShift: '-10ms'
+          spanEndTimeShift: '10ms'
         jsonData:
           httpMethod: POST
           timeInterval: 30s
