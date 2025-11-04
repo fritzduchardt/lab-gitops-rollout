@@ -1,0 +1,13 @@
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+directories:
+  - path: charts
+    contents:
+      - path: vector
+        lazy: true
+        helmChart:
+          # renovate: datasource=helm
+          name: vector
+          version: 0.46.0
+          repository:
+            url: https://helm.vector.dev

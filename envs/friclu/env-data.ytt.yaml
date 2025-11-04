@@ -14,34 +14,35 @@ argocd:
 environment:
   id: friclu
   applications:
-    - proto: loki
     - proto: alloy
-    - proto: tempo
-    - proto: local-path-provisioner
-    - proto: cert-manager
-    - proto: nginx
     - proto: argocd
-    - name: fritzgpt
-      proto: fabric
-    - proto: immich
-    - proto: home-assistant
-    - proto: syncthing
-    - proto: kube-prometheus-stack
-    - proto: pushgateway
-    - proto: ollama
-    - name: munchkinchat
-      proto: fabric
-    - name: isabellabot
-      proto: fabric
-    - name: vault
-      proto: vault
-    - name: keycloak
-      proto: keycloak
+    - proto: cert-manager
     - name: cloudnative-pg
       proto: cloudnative-pg
+    - name: fritzgpt
+      proto: fabric
+    - proto: home-assistant
+    - name: isabellabot
+      proto: fabric
+    - proto: immich
+    - name: keycloak
+      proto: keycloak
+    - proto: kube-prometheus-stack
+    - proto: linkding
+    - proto: local-path-provisioner
+    - proto: loki
+    - name: munchkinchat
+      proto: fabric
+    - proto: nginx
     - name: n8n
       proto: n8n
-    - name: weaviate
-      proto: weaviate
+    - proto: ollama
+    - proto: proto
+    - proto: pushgateway
     - proto: registry
-    - proto: linkding
+    - proto: syncthing
+    - proto: tempo
+    - name: vault
+      proto: vault
+    - proto: vector
+    - proto: weaviate
