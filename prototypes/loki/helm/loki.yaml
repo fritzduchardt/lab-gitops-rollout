@@ -28,6 +28,7 @@ loki:
   storage:
     bucketNames:
       chunks: chunk-bucket
+  auth_enabled: false
 minio:
   enabled: true
 
@@ -62,3 +63,6 @@ bloomCompactor:
   replicas: 0
 bloomGateway:
   replicas: 0
+
+gateway:
+  enabled: false

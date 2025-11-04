@@ -24,12 +24,9 @@ spec:
     spec:
       containers:
         - args:
-            - -addr=loki-gateway.loki.svc.cluster.local.:80
+            - -addr=loki.loki.svc.cluster.local.:3100
             - -labelname=pod
             - -labelvalue=$(POD_NAME)
-            - -user=self-monitoring
-            - -tenant-id=self-monitoring
-            - -pass=
             - -push=true
           env:
             - name: POD_NAME

@@ -20,7 +20,7 @@ data:
       name: Loki
       type: loki
       uid: loki
-      url: http://loki-gateway.loki
+      url: http://loki.loki:3100
   grafana.ini: |
     [analytics]
     check_for_updates = true

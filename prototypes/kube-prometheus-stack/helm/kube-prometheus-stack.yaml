@@ -30,7 +30,7 @@ grafana:
       - name: Loki
         type: loki
         uid: loki
-        url: http://loki-gateway.loki
+        url: http://loki.loki:3100
         access: proxy
         basicAuth: false
         jsonData:
