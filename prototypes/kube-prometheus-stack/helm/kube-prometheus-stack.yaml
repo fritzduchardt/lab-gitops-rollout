@@ -27,11 +27,18 @@ grafana:
         jsonData:
           httpMethod: POST
           timeInterval: 30s
-          tracesToLogs:
+          tracesToLogsV2:
             datasourceUid: 'loki'
-            tags: [{key: 'namespace'}]
             spanStartTimeShift: '-10ms'
             spanEndTimeShift: '10ms'
+            tags: ['namespace']
+            filterByTraceID: false
+            filterBySpanID: false
+          tracesToMetrics:
+            datasourceUid: 'prom'
+            spanStartTimeShift: '-10ms'
+            spanEndTimeShift: '10ms'
+            tags: [{ key: 'namespace' }]
       - name: Loki
         type: loki
         uid: loki

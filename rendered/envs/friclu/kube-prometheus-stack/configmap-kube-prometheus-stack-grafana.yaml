@@ -8,8 +8,16 @@ data:
       jsonData:
         httpMethod: POST
         timeInterval: 30s
-        tracesToLogs:
+        tracesToLogsV2:
           datasourceUid: loki
+          filterBySpanID: false
+          filterByTraceID: false
+          spanEndTimeShift: 10ms
+          spanStartTimeShift: -10ms
+          tags:
+          - namespace
+        tracesToMetrics:
+          datasourceUid: prom
           spanEndTimeShift: 10ms
           spanStartTimeShift: -10ms
           tags:
