@@ -14,7 +14,7 @@ data:
           spanStartTimeShift: -10ms
           tags:
           - key: namespace
-      name: Tempo2
+      name: Tempo
       type: tempo
       uid: tempo
       url: http://tempo.tempo:3200

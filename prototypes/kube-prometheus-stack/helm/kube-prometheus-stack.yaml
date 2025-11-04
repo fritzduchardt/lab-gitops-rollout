@@ -18,7 +18,7 @@ grafana:
     datasources.yaml:
       apiVersion: 1
       datasources:
-      - name: Tempo2
+      - name: Tempo
         type: tempo
         uid: tempo
         url: http://tempo.tempo:3200
