@@ -17,16 +17,14 @@ environment:
     - proto: alloy
     - proto: argocd
     - proto: cert-manager
-    - name: cloudnative-pg
-      proto: cloudnative-pg
+    - proto: cloudnative-pg
     - name: fritzgpt
       proto: fabric
     - proto: home-assistant
     - name: isabellabot
       proto: fabric
     - proto: immich
-    - name: keycloak
-      proto: keycloak
+    - proto: keycloak
     - proto: kube-prometheus-stack
     - proto: linkding
     - proto: local-path-provisioner
@@ -34,15 +32,12 @@ environment:
     - name: munchkinchat
       proto: fabric
     - proto: nginx
-    - name: n8n
-      proto: n8n
+    - proto: n8n
     - proto: ollama
     - proto: proto
     - proto: pushgateway
     - proto: registry
     - proto: syncthing
     - proto: tempo
-    - name: vault
-      proto: vault
-    - proto: vector
+    - proto: vault
     - proto: weaviate
