@@ -27,6 +27,15 @@ grafana:
         jsonData:
           httpMethod: POST
           timeInterval: 30s
+      - name: Loki
+        type: loki
+        uid: loki
+        url: http://loki-gateway.loki
+        access: proxy
+        basicAuth: false
+        jsonData:
+          httpMethod: POST
+          timeInterval: 30s
   assertNoLeakedSecrets: false
   ingress:
     enabled: true

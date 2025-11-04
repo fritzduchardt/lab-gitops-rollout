@@ -12,6 +12,15 @@ data:
       type: tempo
       uid: tempo
       url: http://tempo.tempo:3200
+    - access: proxy
+      basicAuth: false
+      jsonData:
+        httpMethod: POST
+        timeInterval: 30s
+      name: Loki
+      type: loki
+      uid: loki
+      url: http://loki-gateway.loki
   grafana.ini: |
     [analytics]
     check_for_updates = true

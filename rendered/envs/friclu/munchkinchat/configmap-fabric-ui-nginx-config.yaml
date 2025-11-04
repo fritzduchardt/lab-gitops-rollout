@@ -13,6 +13,7 @@ data:
       otel_exporter {
           endpoint alloy.alloy:4317;
       }
+      otel_service_name  munchkinchat:ui;
       server {
         # Bind to the configured UI port
         listen 8080;

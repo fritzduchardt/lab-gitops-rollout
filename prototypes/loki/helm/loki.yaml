@@ -1,3 +1,11 @@
+global:
+  dnsService: "coredns"
+chunksCache:
+  resources:
+    requests:
+      memory: 1Gi
+    limit:
+      memory: 1Gi
 loki:
   commonConfig:
     replication_factor: 1
