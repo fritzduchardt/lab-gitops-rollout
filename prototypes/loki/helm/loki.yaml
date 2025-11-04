@@ -1,7 +1,7 @@
 global:
   dnsService: "coredns"
 chunksCache:
-  resources:
+  resource:
     requests:
       memory: 1Gi
     limit:

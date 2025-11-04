@@ -62,10 +62,11 @@ spec:
               port: client
             timeoutSeconds: 3
           resources:
-            limit:
-              memory: 1Gi
+            limits:
+              memory: 9830Mi
             requests:
-              memory: 1Gi
+              cpu: 500m
+              memory: 9830Mi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
