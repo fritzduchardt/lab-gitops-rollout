@@ -15,7 +15,7 @@ data:
           spanEndTimeShift: 10ms
           spanStartTimeShift: -10ms
           tags:
-          - namespace
+          - key: namespace
         tracesToMetrics:
           datasourceUid: prometheus
           spanEndTimeShift: 10ms

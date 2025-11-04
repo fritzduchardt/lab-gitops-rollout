@@ -31,7 +31,7 @@ grafana:
             datasourceUid: 'loki'
             spanStartTimeShift: '-10ms'
             spanEndTimeShift: '10ms'
-            tags: ['namespace']
+            tags: [{ key: 'namespace' }]
             filterByTraceID: false
             filterBySpanID: false
           tracesToMetrics:
