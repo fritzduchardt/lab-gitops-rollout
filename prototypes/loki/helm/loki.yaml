@@ -1,10 +1,10 @@
 global:
   dnsService: "coredns"
 chunksCache:
-  resource:
+  resources:
     requests:
       memory: 1Gi
-    limit:
+    limits:
       memory: 1Gi
 loki:
   commonConfig:
