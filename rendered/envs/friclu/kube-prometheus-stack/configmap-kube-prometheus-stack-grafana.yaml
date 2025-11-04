@@ -8,13 +8,13 @@ data:
       jsonData:
         httpMethod: POST
         timeInterval: 30s
+        tracesToLogs:
+          datasourceUid: loki
+          spanEndTimeShift: 10ms
+          spanStartTimeShift: -10ms
+          tags:
+          - key: namespace
       name: Tempo2
-      tracesToLogs:
-        datasourceUid: loki
-        spanEndTimeShift: 10ms
-        spanStartTimeShift: -10ms
-        tags:
-        - key: namespace
       type: tempo
       uid: tempo
       url: http://tempo.tempo:3200

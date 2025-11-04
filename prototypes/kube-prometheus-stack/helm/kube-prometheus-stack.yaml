@@ -24,14 +24,14 @@ grafana:
         url: http://tempo.tempo:3200
         access: proxy
         basicAuth: false
-        tracesToLogs:
-          datasourceUid: 'loki'
-          tags: [{key: 'namespace'}]
-          spanStartTimeShift: '-10ms'
-          spanEndTimeShift: '10ms'
         jsonData:
           httpMethod: POST
           timeInterval: 30s
+          tracesToLogs:
+            datasourceUid: 'loki'
+            tags: [{key: 'namespace'}]
+            spanStartTimeShift: '-10ms'
+            spanEndTimeShift: '10ms'
       - name: Loki
         type: loki
         uid: loki
