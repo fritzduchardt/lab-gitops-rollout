@@ -17,7 +17,7 @@ data:
           tags:
           - namespace
         tracesToMetrics:
-          datasourceUid: prom
+          datasourceUid: Prometheus
           spanEndTimeShift: 10ms
           spanStartTimeShift: -10ms
           tags:

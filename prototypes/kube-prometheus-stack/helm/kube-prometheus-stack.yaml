@@ -35,7 +35,7 @@ grafana:
             filterByTraceID: false
             filterBySpanID: false
           tracesToMetrics:
-            datasourceUid: 'prom'
+            datasourceUid: 'Prometheus'
             spanStartTimeShift: '-10ms'
             spanEndTimeShift: '10ms'
             tags: [{ key: 'namespace' }]
