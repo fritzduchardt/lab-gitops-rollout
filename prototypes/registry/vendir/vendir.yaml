@@ -8,6 +8,6 @@ directories:
         helmChart:
           # renovate: datasource=helm
           name: docker-registry
-          version: 2.2.3
+          version: 2.3.0
           repository:
             url: https://helm.twun.io
