@@ -74,9 +74,7 @@ spec:
       type: RuntimeDefault
   serviceAccountName: kube-prometheus-stack-prometheus
   serviceMonitorNamespaceSelector: {}
-  serviceMonitorSelector:
-    matchLabels:
-      release: kube-prometheus-stack
+  serviceMonitorSelector: {}
   shards: 1
   tsdb:
     outOfOrderTimeWindow: 0s

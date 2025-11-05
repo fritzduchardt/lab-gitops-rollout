@@ -95,7 +95,7 @@ prometheus:
     ruleNamespaceSelector: {}
     ruleSelectorNilUsesHelmValues: false
     ruleSelector: {}
-    serviceMonitorSelector: {}
+    serviceMonitorSelectorNilUsesHelmValues: false
 defaultRules:
   create: true
   rules:
