@@ -18,6 +18,9 @@ data:
           - key: namespace
         tracesToMetrics:
           datasourceUid: prometheus
+          queries:
+          - name: nginx_up
+            query: nginx_up{namespace=$__tags}
           spanEndTimeShift: 10ms
           spanStartTimeShift: -10ms
           tags:

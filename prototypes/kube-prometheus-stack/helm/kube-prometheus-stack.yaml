@@ -39,6 +39,9 @@ grafana:
             spanStartTimeShift: '-10ms'
             spanEndTimeShift: '10ms'
             tags: [{ key: 'namespace' }]
+            queries:
+              - name: 'nginx_up'
+                query: 'nginx_up{namespace=$__tags}'
       - name: Loki
         type: loki
         uid: loki
