@@ -41,7 +41,7 @@ grafana:
             tags: [{ key: 'namespace' }]
             queries:
               - name: 'nginx_up'
-                query: 'nginx_up{namespace=$$__tags}'
+                query: 'nginx_up{$$__tags}'
       - name: Loki
         type: loki
         uid: loki
