@@ -48,6 +48,15 @@ spec:
             - mountPath: /etc/nginx/nginx.conf
               name: ui-nginx-config
               subPath: nginx.conf
+        - env:
+            - name: SCRAPE_URI
+              value: http://127.0.0.1:8080/status
+          image: nginx/nginx-prometheus-exporter:latest
+          imagePullPolicy: Always
+          name: nginx-exporter
+          ports:
+            - containerPort: 9113
+              name: metrics
       volumes:
         - configMap:
             defaultMode: 420
