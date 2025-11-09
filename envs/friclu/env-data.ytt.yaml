@@ -11,6 +11,14 @@ argocd:
     source:
       repoURL: "https://github.com/fritzduchardt/lab-gitops-rollout.git"
       targetRevision: "HEAD"
+    syncPolicy:
+      prune: true
+      selfHeal: false
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - FailOnSharedResource=true
+      - ApplyOutOfSyncOnly=true
 environment:
   id: friclu
   applications:
@@ -33,8 +41,6 @@ environment:
       proto: fabric
     - proto: nginx
     - proto: n8n
-    - proto: ollama
-    - proto: proto
     - proto: pushgateway
     - proto: registry
     - proto: syncthing
