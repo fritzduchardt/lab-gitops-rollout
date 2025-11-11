@@ -5,3 +5,7 @@ controller:
     # don't restrict body size
     proxy-body-size: 0
   }
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true

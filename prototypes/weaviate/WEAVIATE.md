@@ -61,7 +61,7 @@ echo '{
       ObsidianFile(where: {
         path: [\"path\"],
         operator: Equal,
-        valueText: \"FritzSync/private/Health/Sleep Journal.md\"
+        valueText: \"FritzSync/private/FritzSync/private/Health/Sleep Journal.md \"
       }) {
         _additional { id }
       }
@@ -78,9 +78,9 @@ echo '{
 ```bash
 curl -X POST http://localhost:8082/v1/graphql \
   -H "Content-Type: application/json" \
-  -d '{"query":"{ Get { ObsidianFile(limit: 3, hybrid: { query: \"Feeling a bit down\", alpha: 0.5  }) { path content } } }"}' | jq
-```
+  -d '{"query":"{ Get { ObsidianFile(limit: 1, hybrid: {query: \"slept 7h. Feel rested\", alpha: 0.5}) { path content } } }"}' | jq
 
+```
 # Delete collection
 ```bash
 curl -X DELETE "http://localhost:8082/v1/schema/ObsidianFile"
@@ -88,7 +88,7 @@ curl -X DELETE "http://localhost:8082/v1/schema/ObsidianFile"
 
 # Delete document
 ```bash
-curl 'http://localhost:8082/v1/objects/ObsidianFile/e2c8fab2-9542-453d-a914-c74b1f6122df?consistency_level=&tenant=' \
+curl 'http://localhost:8082/v1/objects/ObsidianFile/1a564530-ae14-46c0-931f-8aff4e99dd69?consistency_level=&tenant=' \
   --request DELETE
 ```
 
