@@ -1130,9 +1130,8 @@ data:
           white-space: pre-wrap;
           word-break: break-word;
           background-color: #3e4754 !important;
-          padding: 5px 10px;
+          padding: 4px 10px;
         }
-
         pre {
           background-color: #3e4754 !important;
           padding: 0.75rem;
@@ -1142,7 +1141,9 @@ data:
           white-space: pre;
           word-break: normal;
         }
-
+        pre code {
+          padding: 0;
+        }
         .pattern-used-badge {
            position: absolute;
            top: 0px;
@@ -1154,7 +1155,6 @@ data:
             font-style: italic;
            z-index: 25;
         }
-
         .model-info {
             position: absolute;
             top: 5px;
@@ -1348,7 +1348,7 @@ data:
     }
   service-worker.js: |-
     // Service worker for offline support and asset caching
-    const CACHE_NAME = 'fabric-chat-cache-b16ade1fd8b8fcfb';
+    const CACHE_NAME = 'fabric-chat-cache-6182a7f49ff831be';
     const URLs_TO_CACHE = [
       './',
       './index.html',

@@ -4,6 +4,7 @@ backend:
   patternFolder: "IsabellaSync/patterns"
   obsidianFolders:
     - "IsabellaSync/private"
+    - "IsabellaCookingSync"
 ui:
   title: "IsabellaBot"
   iconPath: "icons/racoon"
