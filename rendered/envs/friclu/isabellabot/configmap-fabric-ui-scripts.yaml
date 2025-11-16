@@ -57,6 +57,7 @@ data:
     const modelVendorMap = {
       'gpt-5-mini': 'OpenAI',
       'gemini-2.5-flash': 'Gemini',
+      'mistral-large-latest': 'Mistral',
       'claude-sonnet-4-20250514': 'Anthropic',
       'claude-opus-4-1-20250805': 'Anthropic',
       'grok-4-fast-reasoning': 'GrokAI',
@@ -64,7 +65,7 @@ data:
     };
 
     async function loadModels() {
-      const defaults = ["gpt-5-mini","gemini-2.5-flash","claude-sonnet-4-20250514","claude-opus-4-1-20250805","grok-4-fast-reasoning","grok-4-fast-non-reasoning"];
+      const defaults = ["gpt-5-mini","gemini-2.5-flash","mistral-large-latest","claude-sonnet-4-20250514","claude-opus-4-1-20250805","grok-4-fast-reasoning","grok-4-fast-non-reasoning"];
       modelSelect.setItems(defaults, 'grok-4-fast-non-reasoning');
     }
 
@@ -1348,7 +1349,7 @@ data:
     }
   service-worker.js: |-
     // Service worker for offline support and asset caching
-    const CACHE_NAME = 'fabric-chat-cache-6182a7f49ff831be';
+    const CACHE_NAME = 'fabric-chat-cache-351813f5f8de0bb5';
     const URLs_TO_CACHE = [
       './',
       './index.html',
