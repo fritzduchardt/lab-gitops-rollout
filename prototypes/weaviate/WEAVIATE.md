@@ -57,7 +57,7 @@ curl -X POST http://localhost:8082/v1/graphql \
 ```bash
 curl -X POST http://localhost:8082/v1/graphql \
   -H "Content-Type: application/json" \
-  -d '{"query":"{ Get { ObsidianFile(limit: 1, hybrid: {query: \"Doctor protocol\", alpha: 0.5}) { path content _additional { id }} } }"}' | jq
+  -d '{"query":"{ Get { ObsidianFile(limit: 1, hybrid: {query: \"sleep journal\", alpha: 0.5}) { path content _additional { id }} } }"}' | jq
 ```
 
 # Query data by path
