@@ -1,0 +1,10 @@
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+directories:
+  - path: charts
+    contents:
+      - path: mkdocs
+        git:
+          ref: origin/main
+          url: https://github.com/fritzduchardt/mkdocs
+        newRootPath: charts/mkdocs

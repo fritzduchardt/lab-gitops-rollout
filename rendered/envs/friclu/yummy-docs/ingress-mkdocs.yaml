@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  labels:
+    app.kubernetes.io/instance: mkdocs
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: mkdocs
+    app.kubernetes.io/version: 0.1.0
+    helm.sh/chart: mkdocs-0.1.0
+  name: mkdocs
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: yummy.duchardt.net
+      http:
+        paths:
+          - backend:
+              service:
+                name: mkdocs
+                port:
+                  number: 8000
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - yummy.duchardt.net
+      secretName: mkdocs-certificate

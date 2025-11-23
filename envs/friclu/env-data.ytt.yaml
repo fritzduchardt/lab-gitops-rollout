@@ -47,3 +47,5 @@ environment:
     - proto: tempo
     - proto: vault
     - proto: weaviate
+    - name: yummy-docs
+      proto: mkdocs
