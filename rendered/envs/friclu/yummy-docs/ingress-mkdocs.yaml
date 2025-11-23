@@ -8,6 +8,7 @@ metadata:
     app.kubernetes.io/version: 0.1.0
     helm.sh/chart: mkdocs-0.1.0
   name: mkdocs
+  namespace: fritzgpt
 spec:
   ingressClassName: nginx
   rules:
