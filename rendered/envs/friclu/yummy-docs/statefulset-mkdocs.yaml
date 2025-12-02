@@ -24,9 +24,8 @@ spec:
     spec:
       containers:
         - args:
-            - server
             - --dev-addr
-            - ""
+            - mkdocs-0:8000
           command:
             - mkdocs
             - serve
