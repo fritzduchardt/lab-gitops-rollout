@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   labels:
     app.kubernetes.io/instance: mkdocs
@@ -15,6 +15,7 @@ spec:
     matchLabels:
       app.kubernetes.io/instance: mkdocs
       app.kubernetes.io/name: mkdocs
+  serviceName: mkdocs
   template:
     metadata:
       labels:
@@ -22,7 +23,14 @@ spec:
         app.kubernetes.io/name: mkdocs
     spec:
       containers:
-        - env: []
+        - args:
+            - server
+            - --dev-addr
+            - ""
+          command:
+            - mkdocs
+            - serve
+          env: []
           image: ghcr.io/fritzduchardt/mkdocs:main
           imagePullPolicy: Always
           livenessProbe:
