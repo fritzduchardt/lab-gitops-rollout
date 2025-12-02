@@ -178,7 +178,7 @@ data:
       shareBtn.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        const filenameMatch = b.dataset.markdown.match(/^FILENAME:\s*(.+)$/m);
+        const filenameMatch = b.dataset.markdown.match(/^\s*FILENAME:\s*(.+)$/m);
         if (filenameMatch) {
           let filename = filenameMatch[1].trim();
           const foodIndex = filename.indexOf('Food');
@@ -1372,7 +1372,7 @@ data:
     }
   service-worker.js: |-
     // Service worker for offline support and asset caching
-    const CACHE_NAME = 'fabric-chat-cache-577f508ed17d5d62';
+    const CACHE_NAME = 'fabric-chat-cache-281d6f910ec46a3b';
     const URLs_TO_CACHE = [
       './',
       './index.html',

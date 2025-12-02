@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/app-js: a78d8eabde53f2fcd94d6eca87db3236cabffe20d0bad484fe5c91846f70ac10
+        checksum/app-js: fe40c6dc1c0420b5d78364f30cb156399e265ab74f9e125cecab11813af7fa40
         checksum/index-html: ec6de9b9fc6724e56b50085aab389e647fb44e6411f817dfa2d202025fccc97e
         checksum/lib-js: 5ea4469ec4ac9f1bf4e4439073c19dc11413f392d2dc618727fd4bd70cf83c69
         checksum/service-worker-js: defaa6683c6f8b0a62de0b14b6528484344695f078aafc62685d3af6af4386bb
