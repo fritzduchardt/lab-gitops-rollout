@@ -1,1 +1,2 @@
-args: ["--dev-addr", "$(ip -4 -o addr show scope global | awk '{print $4}' | cut -d/ -f1):8000"]
+command: ["sh", "-c"]
+args: ["ADDR=$(ip -4 -o addr show scope global | awk '{print $4}' | cut -d/ -f1):8000 && mkdocs serve --dev-addr=$ADDR"]
