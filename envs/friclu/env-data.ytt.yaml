@@ -49,3 +49,7 @@ environment:
     - proto: weaviate
     - name: yummy-docs
       proto: mkdocs
+    - name: thanos
+      proto: thanos
+    - name: minio
+      proto: minio
