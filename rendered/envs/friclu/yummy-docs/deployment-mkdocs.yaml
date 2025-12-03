@@ -23,10 +23,11 @@ spec:
     spec:
       containers:
         - args:
-            - ADDR=$(ip -4 -o addr show scope global | awk '{print $4}' | cut -d/ -f1):80 && mkdocs serve --dev-addr=$ADDR
+            - --dev-addr
+            - 0.0.0.0:8000
           command:
-            - sh
-            - -c
+            - mkdocs
+            - serve
           env: []
           image: ghcr.io/fritzduchardt/mkdocs:main
           imagePullPolicy: Always
