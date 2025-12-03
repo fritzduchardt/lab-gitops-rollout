@@ -1,0 +1,12 @@
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+directories:
+  - path: charts
+    contents:
+      - path: minio
+        lazy: true
+        helmChart:
+          version: 7.1.1
+          name: operator
+          repository:
+            url: https://operator.min.io/

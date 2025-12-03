@@ -1,0 +1,12 @@
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+directories:
+  - path: charts
+    contents:
+      - path: karma
+        lazy: true
+        helmChart:
+          version: 2.11.0
+          name: karma
+          repository:
+            url: https://wiremind.github.io/wiremind-helm-charts

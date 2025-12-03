@@ -12,6 +12,18 @@ alertmanager:
       smtp_require_tls: false
       smtp_auth_username: 'fritz@duchardt.net'
       smtp_auth_password_file: /etc/alertmanager/secrets/alertmanager-smtp/smtp_auth_password
+  ingress:
+    enabled: true
+    ingressClassName: "nginx"
+    hosts:
+     - alertmanager.duchardt.net
+    annotations:
+      nginx.ingress.kubernetes.io/auth-type: basic
+      nginx.ingress.kubernetes.io/auth-secret: basic-auth
+    tls: []
+    # - secretName: alertmanager-general-tls
+    #   hosts:
+    #   - alertmanager.example.com
 
 grafana:
   datasources:
@@ -94,11 +106,16 @@ prometheus:
     enabled: false
     hosts:
       - prometheus.friclu
+  agentMode: true
   prometheusSpec:
     ruleNamespaceSelector: {}
     ruleSelectorNilUsesHelmValues: false
     ruleSelector: {}
     serviceMonitorSelectorNilUsesHelmValues: false
+    remoteWrite:
+     - url: http://thanos-receive.thanos.svc.cluster.local:19291/api/v1/receive
+       headers:
+         "THANOS-TENANT": "prometheus"
 defaultRules:
   create: true
   rules:

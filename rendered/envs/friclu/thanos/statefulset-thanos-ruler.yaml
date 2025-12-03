@@ -1,0 +1,155 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app.kubernetes.io/component: ruler
+    app.kubernetes.io/instance: thanos
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: thanos
+    app.kubernetes.io/version: 0.39.2
+    helm.sh/chart: thanos-17.3.1
+  name: thanos-ruler
+  namespace: thanos
+spec:
+  podManagementPolicy: OrderedReady
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: ruler
+      app.kubernetes.io/instance: thanos
+      app.kubernetes.io/name: thanos
+  serviceName: thanos-ruler-headless
+  template:
+    metadata:
+      annotations:
+        checksum/objstore-configuration: 02a9660bcca207a5d567779f4bb251043b4dcf4c7762b416b9b1da06c376fedd
+      labels:
+        app.kubernetes.io/component: ruler
+        app.kubernetes.io/instance: thanos
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/name: thanos
+        app.kubernetes.io/version: 0.39.2
+        helm.sh/chart: thanos-17.3.1
+    spec:
+      affinity:
+        nodeAffinity: null
+        podAffinity: null
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/component: ruler
+                    app.kubernetes.io/instance: thanos
+                    app.kubernetes.io/name: thanos
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+      automountServiceAccountToken: true
+      containers:
+        - args:
+            - rule
+            - --log.level=info
+            - --log.format=logfmt
+            - --grpc-address=0.0.0.0:10901
+            - --http-address=0.0.0.0:10902
+            - --data-dir=/data
+            - --eval-interval=1m
+            - --alertmanagers.url=http://alertmanager-operated.kube-prometheus-stack:9093
+            - --query=dnssrv+_http._tcp.thanos-query.thanos.svc.cluster.local
+            - --alert.query-url=https://thanos-query-frontend.duchardt.net
+            - --label=replica="$(POD_NAME)"
+            - --label=ruler_cluster=""
+            - --alert.label-drop=replica
+            - --objstore.config-file=/conf/objstore/objstore.yml
+            - --rule-file=/conf/rules/*.yaml
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          image: thanosio/thanos:v0.39.2
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /-/healthy
+              port: http
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 30
+          name: ruler
+          ports:
+            - containerPort: 10902
+              name: http
+              protocol: TCP
+            - containerPort: 10901
+              name: grpc
+              protocol: TCP
+          readinessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /-/ready
+              port: http
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 30
+          resources:
+            limits:
+              cpu: 150m
+              ephemeral-storage: 2Gi
+              memory: 192Mi
+            requests:
+              cpu: 100m
+              ephemeral-storage: 50Mi
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsGroup: 1001
+            runAsNonRoot: true
+            runAsUser: 1001
+            seLinuxOptions: {}
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - mountPath: /conf/rules
+              name: ruler-config
+            - mountPath: /conf/objstore
+              name: objstore-config
+            - mountPath: /data
+              name: data
+      securityContext:
+        fsGroup: 1001
+        fsGroupChangePolicy: Always
+        supplementalGroups: []
+        sysctls: []
+      serviceAccountName: thanos-ruler
+      volumes:
+        - configMap:
+            name: prometheus-kube-prometheus-stack-prometheus-rulefiles-0
+          name: ruler-config
+        - name: objstore-config
+          secret:
+            secretName: thanos-objstore-secret
+  updateStrategy:
+    type: RollingUpdate
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 8Gi

@@ -1,5 +1,5 @@
-apiVersion: monitoring.coreos.com/v1
-kind: Prometheus
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: PrometheusAgent
 metadata:
   labels:
     app: kube-prometheus-stack-prometheus
@@ -22,22 +22,14 @@ spec:
                 - key: app.kubernetes.io/name
                   operator: In
                   values:
-                    - prometheus
+                    - prometheus-agent
                 - key: app.kubernetes.io/instance
                   operator: In
                   values:
                     - kube-prometheus-stack-prometheus
             topologyKey: kubernetes.io/hostname
           weight: 100
-  alerting:
-    alertmanagers:
-      - apiVersion: v2
-        name: kube-prometheus-stack-alertmanager
-        namespace: kube-prometheus-stack
-        pathPrefix: /
-        port: http-web
   automountServiceAccountToken: true
-  enableAdminAPI: false
   enableOTLPReceiver: false
   externalUrl: http://kube-prometheus-stack-prometheus.kube-prometheus-stack:9090
   hostNetwork: false
@@ -56,11 +48,12 @@ spec:
   probeSelector:
     matchLabels:
       release: kube-prometheus-stack
+  remoteWrite:
+    - headers:
+        THANOS-TENANT: prometheus
+      url: http://thanos-receive.thanos.svc.cluster.local:19291/api/v1/receive
   replicas: 1
-  retention: 10d
   routePrefix: /
-  ruleNamespaceSelector: {}
-  ruleSelector: {}
   scrapeConfigNamespaceSelector: {}
   scrapeConfigSelector:
     matchLabels:

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/version: v7.1.1
+    helm.sh/chart: operator-7.1.1
+  name: sts
+  namespace: minio
+spec:
+  ports:
+    - name: https
+      port: 4223
+  selector:
+    app.kubernetes.io/instance: minio
+    app.kubernetes.io/name: operator
+  type: ClusterIP

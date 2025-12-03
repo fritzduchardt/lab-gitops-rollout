@@ -34,7 +34,7 @@ spec:
   alertmanagerConfigNamespaceSelector: {}
   alertmanagerConfigSelector: {}
   automountServiceAccountToken: true
-  externalUrl: http://kube-prometheus-stack-alertmanager.kube-prometheus-stack:9093
+  externalUrl: http://alertmanager.duchardt.net/
   image: quay.io/prometheus/alertmanager:v0.28.1
   imagePullPolicy: IfNotPresent
   listenLocal: false

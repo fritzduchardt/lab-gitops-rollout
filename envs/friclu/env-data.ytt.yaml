@@ -53,3 +53,5 @@ environment:
       proto: thanos
     - name: minio
       proto: minio
+    - name: karma
+      proto: karma

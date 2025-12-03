@@ -24,7 +24,7 @@ spec:
       targetPort: reloader-web
   publishNotReadyAddresses: false
   selector:
-    app.kubernetes.io/name: prometheus
+    app.kubernetes.io/name: prometheus-agent
     operator.prometheus.io/name: kube-prometheus-stack-prometheus
   sessionAffinity: None
   type: ClusterIP

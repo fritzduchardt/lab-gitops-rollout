@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/instance: karma
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: karma
+    helm.sh/chart: karma-2.11.0
+  name: karma
+  namespace: karma
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: karma
+      app.kubernetes.io/name: karma
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: karma
+        app.kubernetes.io/name: karma
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - env:
+            - name: CONFIG_FILE
+              value: /etc/karma/karma.conf
+          image: ghcr.io/prymitive/karma:v0.121
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          name: karma
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          resources: {}
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsUser: 2000
+          volumeMounts:
+            - mountPath: /etc/karma
+              name: karma-config
+      serviceAccountName: karma
+      volumes:
+        - name: karma-config
+          secret:
+            secretName: karma-config

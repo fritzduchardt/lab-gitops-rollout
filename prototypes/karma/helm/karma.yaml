@@ -1,0 +1,96 @@
+ingress:
+  enabled: true
+  hosts:
+    - karma.duchardt.net
+  ingressClassName: "nginx"
+  path: /
+  pathType: ImplementationSpecific
+  tls: []
+    # - secretName: chart-example-tls
+    #    hosts:
+  #      - chart-example.local
+
+serviceMonitor:
+  enabled: true
+
+existingSecretConfig:
+  enabled: true
+  secretName: "karma-config"
+
+#configMap:
+#  enabled: true
+#  rawConfig:
+#    history:
+#      enabled: false
+#    alertmanager:
+#      interval: 30s
+#      servers:
+#        - name: alertmanager
+#          uri: https://fritz@alertmanager.duchardt.net
+#          tls:
+#            insecureSkipVerify: true
+#          timeout: 10s
+#          proxy: true
+#          healthcheck:
+#            filters:
+#              Watchdog:
+#                - alertname=Watchdog
+
+## Names of secrets that will be mounted to `/etc/certs/<secret_name>` in the karma container.
+## These secrets can be used to configure TLS for Karma's Alertmanagers by passing their paths to
+## the appropriate Karma configuration parameters. For example, secret `foo` containing a `ca.crt`
+## will yield a file at `/etc/certs/foo/ca.crt`. That path can then be provided as the value to
+# `configMap.rawConfig.alertmanager.servers[].tls.ca`.
+## Ref: <https://github.com/prymitive/karma/blob/master/docs/CONFIGURATION.md#alertmanagers>.
+certSecretNames: []
+
+## kthxbye is a tiny daemon that can help with managing short lived acknowledged silences.
+## It will continuously extend short lived acknowledgement silences if there are alerts firing against those silences,
+## which means that the user doesn't need to worry about setting proper duration for such silences.
+kthxbyeSidecar:
+  enabled: false
+  image:
+    repository: ghcr.io/prymitive/kthxbye
+    tag: v0.14
+    pullPolicy: IfNotPresent
+  alertmanagerServiceName: prometheus-alertmanager
+  alertmanagerServicePort: 80
+  extraArgs: {}
+    # alertmanager.timeout: <duration> #Alertmanager request timeout (default 1m0s)
+    # extend-by: <duration> # Extend silences by adding DURATION seconds (default 15m0s)
+    # extend-if-expiring-in: <duration> # Extend silences that are about to expire in the next DURATION seconds (default 5m0s)
+    # extend-with-prefix: <string> # Extend silences with comment starting with PREFIX string (default "ACK!")
+    # interval: <duration> # Silence check interval (default 45s)
+  # max-duration: <duration> # Maximum duration of a silence, it won't be extended anymore after reaching it
+  logJson: false
+  securityContext: {}
+  resources:
+    {}
+    ## We usually recommend not to specify default resources and to leave this as a conscious
+    ## choice for the user. This also increases chances charts run on environments with little
+    ## resources, such as Minikube. If you do want to specify resources, uncomment the following
+    ## lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #  cpu: 100m
+    #  memory: 128Mi
+    # requests:
+    #  cpu: 100m
+  #  memory: 128Mi
+
+# additional sidecar containers array which will be added to the deployment
+sidecarContainers: []
+
+# additional initContainers array which will be added to the deployment
+initContainers: []
+
+# extra volumes for the deployment
+extraVolumes: []
+
+# extra volumeMounts for the deployment
+extraVolumeMounts: []
+
+# extra manifests
+extraManifests: []
+
+# override command args of karma container
+args: []

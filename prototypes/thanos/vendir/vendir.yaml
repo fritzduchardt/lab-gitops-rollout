@@ -1,0 +1,12 @@
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+directories:
+  - path: charts
+    contents:
+      - path: thanos
+        lazy: true
+        helmChart:
+          version: 17.3.1
+          name: thanos
+          repository:
+            url: oci://registry-1.docker.io/bitnamicharts
