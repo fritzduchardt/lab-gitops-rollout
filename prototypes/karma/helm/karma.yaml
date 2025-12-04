@@ -26,7 +26,7 @@ configMap:
       interval: 30s
       servers:
         - name: alertmanager
-          uri: https://fritz:$apr1$uOXNRip1$3o9ZvboSmjwIMAPQY3ZHP1@alertmanager.duchardt.net
+          uri: https://<path:kv/data/shared/basicauth#authplain>@alertmanager.duchardt.net
           tls:
             insecureSkipVerify: true
           timeout: 10s

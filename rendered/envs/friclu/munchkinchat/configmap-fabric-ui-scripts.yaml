@@ -17,7 +17,7 @@ data:
         "Our carrier pigeon seems to have gotten lost. Resending...",
         "Don't worry, we've dispatched a team of highly trained monkeys.",
         "Trying to reconnect to the Matrix...",
-        "The server is playing hard to get. Let's be persistent.",
+        "The server is probably just shy. Let's try again.",
         "Poking the server with a stick...",
         "It's not you, it's me... I mean, the server. Retrying.",
         "Let's give it another go. Third time's the charm, right?",
@@ -26,18 +26,18 @@ data:
         "Waking up the server from its nap...",
         "Sending positive vibes to the server... and another request.",
         "Hold tight, we're trying a different magic spell.",
-        "The server is probably just shy. Let's try again.",
+        "The server seems to be running on dial-up. Patience, young padawan.",
         "I think the server is on a coffee break. Let's wait and retry.",
         "Re-calibrating the flux capacitor...",
         "The server is busy watching cat videos. Retrying.",
         "Maybe if we ask nicely this time? Retrying...",
         "Our intern tripped over the server cable. Fixing and retrying.",
         "Just a glitch in the simulation. We're on it.",
-        "The server is checking its horoscope. Let's try again in a sec.",
+        "The server seems to be checking its horoscope. Let's try again.",
         "I've got a good feeling about this next attempt.",
         "Is this thing on? *taps mic* Retrying...",
         "We're sending in the backup squirrels. Stand by.",
-        "The server seems to be running on dial-up. Patience, young padawan.",
+        "The server is probably running on dial-up. Patience, young padawan.",
         "Okay, deep breaths. We can do this. Retrying..."
     ];
 
@@ -56,16 +56,29 @@ data:
     // Model to vendor mapping
     const modelVendorMap = {
       'gpt-5-mini': 'OpenAI',
-      'gemini-2.5-flash': 'Gemini',
-      'claude-sonnet-4-20250514': 'Anthropic',
+      'gpt-5.1': 'OpenAI',
+      'gemini-3-pro-preview': 'Gemini',
+      'mistral-large-latest': 'Mistral',
+      'claude-sonnet-4-5-20250929': 'Anthropic',
       'claude-opus-4-1-20250805': 'Anthropic',
       'grok-4-fast-reasoning': 'GrokAI',
       'grok-4-fast-non-reasoning': 'GrokAI',
     };
 
     async function loadModels() {
-      const defaults = ["gpt-5-mini","gemini-2.5-flash","claude-sonnet-4-20250514","claude-opus-4-1-20250805","grok-4-fast-reasoning","grok-4-fast-non-reasoning"];
-      modelSelect.setItems(defaults, 'grok-4-fast-non-reasoning');
+      const models = Object.keys(modelVendorMap);
+      const saved = localStorage.getItem('lastModel');
+      let defaultModel = 'gpt-5-mini';
+      if (saved && models.includes(saved)) {
+        defaultModel = saved;
+      } else if (!models.includes(defaultModel)) {
+        defaultModel = models.length ? models[0] : '';
+      }
+      modelSelect.setItems(models, defaultModel);
+      modelSelect.searchInput.addEventListener('change', () => {
+        const val = modelSelect.getValue();
+        if (val) localStorage.setItem('lastModel', val);
+      });
     }
 
 
@@ -165,7 +178,18 @@ data:
       shareBtn.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        shareWithTelegram(telegramUrl, markdownToPlainText(b.dataset.markdown));
+        const filenameMatch = b.dataset.markdown.match(/^\s*FILENAME:\s*(.+)$/m);
+        if (filenameMatch) {
+          let filename = filenameMatch[1].trim();
+          const foodIndex = filename.indexOf('Food');
+          if (foodIndex !== -1) {
+            filename = filename.substring(foodIndex);
+          }
+          const link = filename.replace(/\.md$/, '.html');
+          shareWithTelegram(telegramUrl, `https://yummy.duchardt.net/${link}`);
+        } else {
+          shareWithTelegram(telegramUrl, markdownToPlainText(b.dataset.markdown));
+        }
         shareBtn.disabled = true;
       });
       b.appendChild(shareBtn);
@@ -1125,14 +1149,13 @@ data:
         code {
           font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
           color: #f1fffa !important;
-          padding: 0.15rem 0.35rem;
           border-radius: 6px;
           font-size: 0.9rem;
           white-space: pre-wrap;
           word-break: break-word;
           background-color: #3e4754 !important;
+          padding: 4px 10px;
         }
-
         pre {
           background-color: #3e4754 !important;
           padding: 0.75rem;
@@ -1142,7 +1165,9 @@ data:
           white-space: pre;
           word-break: normal;
         }
-
+        pre code {
+          padding: 0;
+        }
         .pattern-used-badge {
            position: absolute;
            top: 0px;
@@ -1154,7 +1179,6 @@ data:
             font-style: italic;
            z-index: 25;
         }
-
         .model-info {
             position: absolute;
             top: 5px;
@@ -1348,7 +1372,7 @@ data:
     }
   service-worker.js: |-
     // Service worker for offline support and asset caching
-    const CACHE_NAME = 'fabric-chat-cache-0c845e24084665eb';
+    const CACHE_NAME = 'fabric-chat-cache-fb4f937359ccd687';
     const URLs_TO_CACHE = [
       './',
       './index.html',

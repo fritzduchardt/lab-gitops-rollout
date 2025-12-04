@@ -13,7 +13,7 @@ data:
         timeout: 10s
         tls:
           insecureSkipVerify: true
-        uri: https://fritz:$apr1$uOXNRip1$3o9ZvboSmjwIMAPQY3ZHP1@alertmanager.duchardt.net
+        uri: https://<path:kv/data/shared/basicauth#authplain>@alertmanager.duchardt.net
     history:
       enabled: false
 kind: ConfigMap
