@@ -3,6 +3,3 @@
 ---
 helm:
   namespace: weaviate
-application:
-  namespace:
-    create: true

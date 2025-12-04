@@ -4,6 +4,3 @@
 ---
 helm:
   namespace: minio
-application:
-  namespace:
-    create: true

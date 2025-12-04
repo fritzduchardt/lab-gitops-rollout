@@ -3,6 +3,3 @@
 ---
 helm:
   namespace: syncthing
-application:
-  namespace:
-    create: true

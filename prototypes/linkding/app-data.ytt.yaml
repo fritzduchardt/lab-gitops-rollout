@@ -3,6 +3,3 @@
 ---
 helm:
   namespace: linkding
-application:
-  namespace:
-    create: true

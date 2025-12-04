@@ -4,6 +4,3 @@
 ---
 helm:
   namespace: thanos
-application:
-  namespace:
-    create: true

@@ -4,7 +4,7 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   name: friclu-home-assistant
-  namespace: argocd
+  namespace: argo
 spec:
   destination:
     name: in-cluster

@@ -3,6 +3,3 @@
 ---
 helm:
   namespace: home-assistant
-application:
-  namespace:
-    create: true

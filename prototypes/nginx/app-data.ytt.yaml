@@ -3,6 +3,3 @@
 ---
 helm:
   namespace: nginx
-application:
-  namespace:
-    create: true

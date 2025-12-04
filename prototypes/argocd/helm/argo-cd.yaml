@@ -1,4 +1,3 @@
-
 ## Globally shared configuration
 global:
   # -- Default domain used by all components
@@ -27,7 +26,7 @@ configs:
     plugins:
       argocd-vault-plugin:
         generate:
-          command: [sh, -c, "argocd-vault-plugin generate . -s vault-configuration"]
+          command: [sh, -c, "argocd-vault-plugin generate . -s argo:vault-configuration"]
         discover:
           find:
             glob: "**/*.yaml"

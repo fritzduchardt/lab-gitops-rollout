@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/version: v3.1.8
     helm.sh/chart: argo-cd-8.6.4
   name: argo-cd-argocd-application-controller-metrics
-  namespace: argocd
+  namespace: argo
 spec:
   ports:
     - name: http-metrics

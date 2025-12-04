@@ -3,6 +3,3 @@
 ---
 helm:
   namespace: tempo
-application:
-  namespace:
-    create: true

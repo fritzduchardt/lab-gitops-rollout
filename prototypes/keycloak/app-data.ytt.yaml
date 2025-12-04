@@ -3,6 +3,3 @@
 ---
 helm:
   namespace: keycloak
-application:
-  namespace:
-    create: true

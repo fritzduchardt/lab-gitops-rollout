@@ -3,6 +3,3 @@
 ---
 helm:
   namespace: cloudnative-pg
-application:
-  namespace:
-    create: true

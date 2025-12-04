@@ -4,6 +4,3 @@
 helm:
   #! immich helm chart is not consistently supporting namespace
   namespace: immich
-application:
-  namespace:
-    create: true

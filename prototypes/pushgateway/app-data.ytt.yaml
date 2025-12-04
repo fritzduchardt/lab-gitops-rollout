@@ -4,6 +4,3 @@
 ---
 helm:
   namespace: pushgateway
-application:
-  namespace:
-    create: true

@@ -3,6 +3,3 @@
 ---
 helm:
   namespace: registry
-application:
-  namespace:
-    create: true

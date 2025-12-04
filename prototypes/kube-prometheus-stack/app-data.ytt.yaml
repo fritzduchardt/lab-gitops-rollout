@@ -4,8 +4,5 @@
 ---
 helm:
   namespace: kube-prometheus-stack
-application:
-  namespace:
-    create: true
 certificate:
     enabled: true

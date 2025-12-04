@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/version: v3.1.8
     helm.sh/chart: argo-cd-8.6.4
   name: argo-cd-argocd-application-controller
-  namespace: argocd
+  namespace: argo
 spec:
   replicas: 1
   revisionHistoryLimit: 5
@@ -22,8 +22,8 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/cm: f1759d965234a3c5bf35aaa035e4d174d4d4d3f9066fdf17e8f3a8cd5a85be22
-        checksum/cmd-params: 707a4dd5f3fd2df50345af50db5187a13c8fb12810c214086554cc1fb1387632
+        checksum/cm: e030633952f3126e5715279eb33ac843d9b0713dc4e7d58ecedbc046fa779dcd
+        checksum/cmd-params: 7f0719fbd0cd10cb943ba3c3c55c260428a7e45d2a760ec619037c1edcaee49e
       labels:
         app.kubernetes.io/component: application-controller
         app.kubernetes.io/instance: argo-cd

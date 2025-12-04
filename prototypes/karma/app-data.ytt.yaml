@@ -3,6 +3,3 @@
 ---
 helm:
   namespace: karma
-application:
-  namespace:
-    create: true

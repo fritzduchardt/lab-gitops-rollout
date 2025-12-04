@@ -3,6 +3,3 @@
 ---
 helm:
   namespace: vault
-application:
-  namespace:
-    create: true

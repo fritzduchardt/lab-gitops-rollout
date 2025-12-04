@@ -3,6 +3,3 @@
 ---
 helm:
   namespace: vector
-application:
-  namespace:
-    create: true

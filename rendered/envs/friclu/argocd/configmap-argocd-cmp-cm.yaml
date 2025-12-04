@@ -17,7 +17,7 @@ data:
         command:
         - sh
         - -c
-        - argocd-vault-plugin generate . -s vault-configuration
+        - argocd-vault-plugin generate . -s argo:vault-configuration
 kind: ConfigMap
 metadata:
   labels:
@@ -29,4 +29,4 @@ metadata:
     app.kubernetes.io/version: v3.1.8
     helm.sh/chart: argo-cd-8.6.4
   name: argocd-cmp-cm
-  namespace: argocd
+  namespace: argo

@@ -3,6 +3,3 @@
 ---
 helm:
   namespace: loki
-application:
-  namespace:
-    create: true

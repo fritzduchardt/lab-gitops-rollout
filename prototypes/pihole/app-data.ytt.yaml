@@ -3,6 +3,3 @@
 ---
 helm:
   namespace: pihole
-application:
-  namespace:
-    create: true

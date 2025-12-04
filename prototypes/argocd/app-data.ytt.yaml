@@ -2,7 +2,4 @@
 #@overlay/match-child-defaults missing_ok=True
 ---
 helm:
-  namespace: argocd
-application:
-  namespace:
-    create: true
+  namespace: argo

@@ -4,6 +4,3 @@
 ---
 helm:
   namespace: local-path-provisioner
-application:
-  namespace:
-    create: true

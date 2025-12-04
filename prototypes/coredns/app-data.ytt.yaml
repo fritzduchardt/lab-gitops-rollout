@@ -4,6 +4,3 @@
 ---
 helm:
   namespace: coredns
-application:
-  namespace:
-    create: true

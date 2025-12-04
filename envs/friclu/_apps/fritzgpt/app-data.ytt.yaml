@@ -3,6 +3,3 @@
 ---
 helm:
   namespace: fritzgpt
-application:
-  namespace:
-    create: true

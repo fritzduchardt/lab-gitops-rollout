@@ -3,6 +3,3 @@
 ---
 helm:
   namespace: alloy
-application:
-  namespace:
-    create: true

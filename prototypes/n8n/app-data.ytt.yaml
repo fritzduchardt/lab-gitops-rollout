@@ -3,6 +3,3 @@
 ---
 helm:
   namespace: n8n
-application:
-  namespace:
-    create: true
