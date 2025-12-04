@@ -11,6 +11,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   hostPath:
     path: /volumes/immich
+  storageClassName: "immich"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -19,7 +20,7 @@ metadata:
   labels:
     name: immich-library
 spec:
-  storageClassName: ""
+  storageClassName: "immich"
   accessModes:
     - ReadWriteOnce
   resources:

@@ -11,3 +11,4 @@ spec:
   hostPath:
     path: /volumes/immich
   persistentVolumeReclaimPolicy: Retain
+  storageClassName: immich
