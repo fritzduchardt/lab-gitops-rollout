@@ -3,6 +3,7 @@ kind: PersistentVolume
 metadata:
   name: syncthing
 spec:
+  storageClassName: "n8n"
   accessModes:
     - ReadWriteOnce
   capacity:
@@ -23,6 +24,6 @@ spec:
   resources:
     requests:
       storage: 2Gi
-  storageClassName: ""
+  storageClassName: "n8n"
   volumeMode: Filesystem
   volumeName: syncthing

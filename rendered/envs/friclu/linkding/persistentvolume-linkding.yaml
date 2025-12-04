@@ -11,3 +11,4 @@ spec:
   hostPath:
     path: /volumes/linkding
   persistentVolumeReclaimPolicy: Retain
+  storageClassName: linkding

@@ -4,6 +4,7 @@ kind: PersistentVolume
 metadata:
   name: linkding
 spec:
+  storageClassName: "linkding"
   capacity:
     storage: 5Gi
   accessModes:
@@ -19,7 +20,7 @@ metadata:
   labels:
     name: linkding
 spec:
-  storageClassName: ""
+  storageClassName: "linkding"
   accessModes:
     - ReadWriteOnce
   resources:

@@ -9,6 +9,6 @@ spec:
   resources:
     requests:
       storage: 2Gi
-  storageClassName: ""
+  storageClassName: n8n
   volumeMode: Filesystem
   volumeName: syncthing

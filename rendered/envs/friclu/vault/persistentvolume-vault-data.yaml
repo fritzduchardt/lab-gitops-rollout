@@ -11,3 +11,4 @@ spec:
   hostPath:
     path: /volumes/vault
   persistentVolumeReclaimPolicy: Retain
+  storageClassName: vault

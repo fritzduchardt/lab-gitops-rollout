@@ -12,4 +12,5 @@ spec:
     path: /volumes/syncthing
     type: ""
   persistentVolumeReclaimPolicy: Retain
+  storageClassName: n8n
   volumeMode: Filesystem
