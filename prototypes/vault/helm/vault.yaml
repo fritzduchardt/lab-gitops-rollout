@@ -20,3 +20,5 @@ server:
       - secretName: vault-certificate
         hosts:
           - vault.duchardt.net
+  nodeSelector:
+    kubernetes.io/hostname: friclu-1

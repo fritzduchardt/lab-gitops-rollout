@@ -111,6 +111,8 @@ spec:
             - mountPath: /home/vault
               name: home
       hostNetwork: false
+      nodeSelector:
+        kubernetes.io/hostname: friclu-1
       securityContext:
         fsGroup: 1000
         runAsGroup: 1000
