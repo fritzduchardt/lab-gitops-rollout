@@ -16,6 +16,8 @@ spec:
       app.kubernetes.io/name: karma
   template:
     metadata:
+      annotations:
+        checksum/config: f2e0a7856f152a23f289d39d8a47c27f8d11e5be1f5b4f8ed667bf029f36686b
       labels:
         app.kubernetes.io/instance: karma
         app.kubernetes.io/name: karma
@@ -53,6 +55,6 @@ spec:
               name: karma-config
       serviceAccountName: karma
       volumes:
-        - name: karma-config
-          secret:
-            secretName: karma-config
+        - configMap:
+            name: karma-config
+          name: karma-config

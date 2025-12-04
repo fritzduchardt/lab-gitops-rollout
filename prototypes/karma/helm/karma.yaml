@@ -13,28 +13,28 @@ ingress:
 serviceMonitor:
   enabled: true
 
-existingSecretConfig:
-  enabled: true
-  secretName: "karma-config"
-
-#configMap:
+#existingSecretConfig:
 #  enabled: true
-#  rawConfig:
-#    history:
-#      enabled: false
-#    alertmanager:
-#      interval: 30s
-#      servers:
-#        - name: alertmanager
-#          uri: https://fritz@alertmanager.duchardt.net
-#          tls:
-#            insecureSkipVerify: true
-#          timeout: 10s
-#          proxy: true
-#          healthcheck:
-#            filters:
-#              Watchdog:
-#                - alertname=Watchdog
+#  secretName: "karma-config"
+
+configMap:
+  enabled: true
+  rawConfig:
+    history:
+      enabled: false
+    alertmanager:
+      interval: 30s
+      servers:
+        - name: alertmanager
+          uri: https://fritz:$apr1$uOXNRip1$3o9ZvboSmjwIMAPQY3ZHP1@alertmanager.duchardt.net
+          tls:
+            insecureSkipVerify: true
+          timeout: 10s
+          proxy: true
+          healthcheck:
+            filters:
+              Watchdog:
+                - alertname=Watchdog
 
 ## Names of secrets that will be mounted to `/etc/certs/<secret_name>` in the karma container.
 ## These secrets can be used to configure TLS for Karma's Alertmanagers by passing their paths to

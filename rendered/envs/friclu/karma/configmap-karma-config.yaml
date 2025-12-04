@@ -1,0 +1,27 @@
+apiVersion: v1
+data:
+  karma.conf: |
+    alertmanager:
+      interval: 30s
+      servers:
+      - healthcheck:
+          filters:
+            Watchdog:
+            - alertname=Watchdog
+        name: alertmanager
+        proxy: true
+        timeout: 10s
+        tls:
+          insecureSkipVerify: true
+        uri: https://fritz:$apr1$uOXNRip1$3o9ZvboSmjwIMAPQY3ZHP1@alertmanager.duchardt.net
+    history:
+      enabled: false
+kind: ConfigMap
+metadata:
+  labels:
+    app: karma
+    chart: karma-2.11.0
+    heritage: Helm
+    release: karma
+  name: karma-config
+  namespace: karma
