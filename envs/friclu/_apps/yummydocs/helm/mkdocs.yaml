@@ -1,0 +1,7 @@
+service:
+  port: 80
+
+ingress:
+  host: yummy.duchardt.net
+
+hostPath: /volumes/syncthing/BubaFritzShare/private

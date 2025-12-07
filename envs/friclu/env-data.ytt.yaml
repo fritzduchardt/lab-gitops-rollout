@@ -29,9 +29,13 @@ environment:
     - proto: cloudnative-pg
     - name: fritzgpt
       proto: fabric
+    - name: yummydocs
+      proto: mkdocs
     - proto: home-assistant
     - name: isabellabot
       proto: fabric
+    - name: balkandocs
+      proto: mkdocs
     - proto: immich
     - proto: keycloak
     - proto: kube-prometheus-stack
@@ -48,8 +52,6 @@ environment:
     - proto: tempo
     - proto: vault
     - proto: weaviate
-    - name: yummy-docs
-      proto: mkdocs
     - name: thanos
       proto: thanos
     - name: minio

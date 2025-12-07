@@ -1,0 +1,7 @@
+service:
+  port: 80
+
+ingress:
+  host: balkan.duchardt.net
+
+hostPath: /volumes/syncthing/IsabellaCookingSync
