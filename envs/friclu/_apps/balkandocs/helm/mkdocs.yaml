@@ -5,3 +5,20 @@ ingress:
   host: balkan.duchardt.net
 
 hostPath: /volumes/syncthing/IsabellaCookingSync
+
+mkdocsConfig:
+  site_name: Isabella's Balkan Kitchen
+  site_url: "https://balkan.duchardt.net/"
+
+  theme:
+    name: readthedocs
+  docs_dir: docs
+
+  copyright: ""
+  use_directory_urls: false
+
+  strict: true
+  plugins:
+    - search:
+        lang: en
+        prebuild_index: true

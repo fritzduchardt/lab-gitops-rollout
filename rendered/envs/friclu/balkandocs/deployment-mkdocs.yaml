@@ -48,9 +48,15 @@ spec:
           volumeMounts:
             - mountPath: /docs
               name: docs
+            - mountPath: /mkdocs.yml
+              name: config
+              subPath: mkdocs.yml
       nodeSelector:
         kubernetes.io/hostname: friclu-1
       volumes:
         - hostPath:
             path: /volumes/syncthing/IsabellaCookingSync
           name: docs
+        - configMap:
+            name: mkdocs-config
+          name: config

@@ -1,0 +1,22 @@
+apiVersion: v1
+data:
+  mkdocs.yml: |
+    copyright: ""
+    docs_dir: docs
+    plugins:
+    - exclude:
+        glob:
+        - Food/*Journal.md
+    - search:
+        lang: en
+        prebuild_index: true
+    site_name: Yummy Stuff
+    site_url: https://yummy.duchardt.net/
+    strict: true
+    theme:
+      name: readthedocs
+    use_directory_urls: false
+kind: ConfigMap
+metadata:
+  name: mkdocs-config
+  namespace: fritzgpt

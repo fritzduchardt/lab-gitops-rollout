@@ -1,0 +1,19 @@
+apiVersion: v1
+data:
+  mkdocs.yml: |
+    copyright: ""
+    docs_dir: docs
+    plugins:
+    - search:
+        lang: en
+        prebuild_index: true
+    site_name: Isabella's Balkan Kitchen
+    site_url: https://balkan.duchardt.net/
+    strict: true
+    theme:
+      name: readthedocs
+    use_directory_urls: false
+kind: ConfigMap
+metadata:
+  name: mkdocs-config
+  namespace: isabellabot
