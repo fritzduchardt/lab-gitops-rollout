@@ -652,4 +652,4 @@ data:
 kind: ConfigMap
 metadata:
   name: prometheus-kube-prometheus-stack-prometheus-rulefiles-0
-  namespace: thanos
+  namespace: monitoring

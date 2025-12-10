@@ -3,6 +3,6 @@
 #@overlay/match-child-defaults missing_ok=True
 ---
 helm:
-  namespace: kube-prometheus-stack
+  namespace: monitoring
 certificate:
     enabled: true

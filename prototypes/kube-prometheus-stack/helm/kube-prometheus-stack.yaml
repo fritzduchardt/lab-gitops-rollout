@@ -113,7 +113,7 @@ prometheus:
     ruleSelector: {}
     serviceMonitorSelectorNilUsesHelmValues: false
     remoteWrite:
-     - url: http://thanos-receive.thanos.svc.cluster.local:19291/api/v1/receive
+     - url: http://thanos-receive.monitoring.svc.cluster.local:19291/api/v1/receive
        headers:
          "THANOS-TENANT": "prometheus"
 defaultRules:

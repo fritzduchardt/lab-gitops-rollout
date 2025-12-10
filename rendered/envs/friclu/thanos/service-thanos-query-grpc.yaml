@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/version: 0.39.2
     helm.sh/chart: thanos-17.3.1
   name: thanos-query-grpc
-  namespace: thanos
+  namespace: monitoring
 spec:
   ports:
     - name: grpc

@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/version: 0.39.2
     helm.sh/chart: thanos-17.3.1
   name: thanos-query
-  namespace: thanos
+  namespace: monitoring
 spec:
   replicas: 1
   revisionHistoryLimit: 10
@@ -52,8 +52,8 @@ spec:
             - --grpc-address=0.0.0.0:10901
             - --http-address=0.0.0.0:10902
             - --query.replica-label=replica
-            - --endpoint=dnssrv+_grpc._tcp.thanos-ruler.thanos.svc.cluster.local
-            - --endpoint=dnssrv+_grpc._tcp.thanos-receive.thanos.svc.cluster.local
+            - --endpoint=dnssrv+_grpc._tcp.thanos-ruler.monitoring.svc.cluster.local
+            - --endpoint=dnssrv+_grpc._tcp.thanos-receive.monitoring.svc.cluster.local
             - --alert.query-url=https://thanos-query-frontend.duchardt.net
           image: thanosio/thanos:v0.39.2
           imagePullPolicy: IfNotPresent

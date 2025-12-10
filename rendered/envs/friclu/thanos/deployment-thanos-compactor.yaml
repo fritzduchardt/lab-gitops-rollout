@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/version: 0.39.2
     helm.sh/chart: thanos-17.3.1
   name: thanos-compactor
-  namespace: thanos
+  namespace: monitoring
 spec:
   replicas: 1
   revisionHistoryLimit: 10
@@ -23,7 +23,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/objstore-configuration: 02a9660bcca207a5d567779f4bb251043b4dcf4c7762b416b9b1da06c376fedd
+        checksum/objstore-configuration: f2695fd5c5d9ee09a9920d79c560ba5edab2117113dbf5560dc3ebf891532247
       labels:
         app.kubernetes.io/component: compactor
         app.kubernetes.io/instance: thanos

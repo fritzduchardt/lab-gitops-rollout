@@ -23,7 +23,7 @@ argocd:
 environment:
   id: friclu
   applications:
-    # monitoring stack
+    #! monitoring
     - name: thanos
       proto: thanos
 
