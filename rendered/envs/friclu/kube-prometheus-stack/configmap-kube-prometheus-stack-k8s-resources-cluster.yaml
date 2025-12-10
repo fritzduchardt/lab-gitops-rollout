@@ -15,4 +15,4 @@ metadata:
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-stack-k8s-resources-cluster
-  namespace: kube-prometheus-stack
+  namespace: monitoring

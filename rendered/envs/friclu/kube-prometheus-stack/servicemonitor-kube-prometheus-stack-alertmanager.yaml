@@ -11,7 +11,7 @@ metadata:
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-stack-alertmanager
-  namespace: kube-prometheus-stack
+  namespace: monitoring
 spec:
   endpoints:
     - enableHttp2: true
@@ -21,7 +21,7 @@ spec:
       port: reloader-web
   namespaceSelector:
     matchNames:
-      - kube-prometheus-stack
+      - monitoring
   selector:
     matchLabels:
       app: kube-prometheus-stack-alertmanager

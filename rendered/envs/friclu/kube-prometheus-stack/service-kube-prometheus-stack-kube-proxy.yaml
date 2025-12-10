@@ -12,7 +12,7 @@ metadata:
     jobLabel: kube-proxy
     release: kube-prometheus-stack
   name: kube-prometheus-stack-kube-proxy
-  namespace: kube-prometheus-stack
+  namespace: monitoring
 spec:
   clusterIP: None
   ports:

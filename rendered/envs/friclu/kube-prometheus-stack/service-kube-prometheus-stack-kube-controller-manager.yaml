@@ -12,7 +12,7 @@ metadata:
     jobLabel: kube-controller-manager
     release: kube-prometheus-stack
   name: kube-prometheus-stack-kube-controller-manager
-  namespace: kube-prometheus-stack
+  namespace: monitoring
 spec:
   clusterIP: None
   ports:

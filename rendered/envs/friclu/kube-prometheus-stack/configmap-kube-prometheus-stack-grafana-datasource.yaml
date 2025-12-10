@@ -25,4 +25,4 @@ metadata:
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-stack-grafana-datasource
-  namespace: kube-prometheus-stack
+  namespace: monitoring

@@ -12,7 +12,7 @@ metadata:
     release: kube-prometheus-stack
     self-monitor: "true"
   name: kube-prometheus-stack-alertmanager
-  namespace: kube-prometheus-stack
+  namespace: monitoring
 spec:
   ports:
     - name: http-web

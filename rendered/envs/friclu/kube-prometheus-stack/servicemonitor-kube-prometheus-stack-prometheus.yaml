@@ -11,7 +11,7 @@ metadata:
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-stack-prometheus
-  namespace: kube-prometheus-stack
+  namespace: monitoring
 spec:
   endpoints:
     - path: /metrics
@@ -20,7 +20,7 @@ spec:
       port: reloader-web
   namespaceSelector:
     matchNames:
-      - kube-prometheus-stack
+      - monitoring
   selector:
     matchLabels:
       app: kube-prometheus-stack-prometheus

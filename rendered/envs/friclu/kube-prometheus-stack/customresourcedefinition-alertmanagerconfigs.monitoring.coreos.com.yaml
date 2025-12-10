@@ -5,7 +5,7 @@ metadata:
     controller-gen.kubebuilder.io/version: v0.18.0
     operator.prometheus.io/version: 0.85.0
   name: alertmanagerconfigs.monitoring.coreos.com
-  namespace: kube-prometheus-stack
+  namespace: monitoring
 spec:
   group: monitoring.coreos.com
   names:

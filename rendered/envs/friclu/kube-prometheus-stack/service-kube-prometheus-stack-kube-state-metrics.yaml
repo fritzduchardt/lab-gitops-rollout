@@ -12,7 +12,7 @@ metadata:
     helm.sh/chart: kube-state-metrics-6.3.0
     release: kube-prometheus-stack
   name: kube-prometheus-stack-kube-state-metrics
-  namespace: kube-prometheus-stack
+  namespace: monitoring
 spec:
   ports:
     - name: http

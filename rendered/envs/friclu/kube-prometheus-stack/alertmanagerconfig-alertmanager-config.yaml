@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1alpha1
 kind: AlertmanagerConfig
 metadata:
   name: alertmanager-config
-  namespace: kube-prometheus-stack
+  namespace: monitoring
 spec:
   receivers:
     - name: SilenceAlert

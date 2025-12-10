@@ -142,4 +142,4 @@ metadata:
   labels:
     grafana_dashboard: "1"
   name: backup-dashboard
-  namespace: kube-prometheus-stack
+  namespace: monitoring

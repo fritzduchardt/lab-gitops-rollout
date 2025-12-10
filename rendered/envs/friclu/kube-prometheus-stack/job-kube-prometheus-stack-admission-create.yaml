@@ -16,7 +16,7 @@ metadata:
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-stack-admission-create
-  namespace: kube-prometheus-stack
+  namespace: monitoring
 spec:
   template:
     metadata:
@@ -36,8 +36,8 @@ spec:
       containers:
         - args:
             - create
-            - --host=kube-prometheus-stack-operator,kube-prometheus-stack-operator.kube-prometheus-stack.svc
-            - --namespace=kube-prometheus-stack
+            - --host=kube-prometheus-stack-operator,kube-prometheus-stack-operator.monitoring.svc
+            - --namespace=monitoring
             - --secret-name=kube-prometheus-stack-admission
           image: registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.6.3
           imagePullPolicy: IfNotPresent

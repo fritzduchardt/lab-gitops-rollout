@@ -11,7 +11,7 @@ metadata:
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-stack-prometheus
-  namespace: kube-prometheus-stack
+  namespace: monitoring
 spec:
   affinity:
     podAntiAffinity:
@@ -31,7 +31,7 @@ spec:
           weight: 100
   automountServiceAccountToken: true
   enableOTLPReceiver: false
-  externalUrl: http://kube-prometheus-stack-prometheus.kube-prometheus-stack:9090
+  externalUrl: http://kube-prometheus-stack-prometheus.monitoring:9090
   hostNetwork: false
   image: quay.io/prometheus/prometheus:v3.6.0
   imagePullPolicy: IfNotPresent
@@ -51,7 +51,7 @@ spec:
   remoteWrite:
     - headers:
         THANOS-TENANT: prometheus
-      url: http://thanos-receive.thanos.svc.cluster.local:19291/api/v1/receive
+      url: http://thanos-receive.monitoring.svc.cluster.local:19291/api/v1/receive
   replicas: 1
   routePrefix: /
   scrapeConfigNamespaceSelector: {}

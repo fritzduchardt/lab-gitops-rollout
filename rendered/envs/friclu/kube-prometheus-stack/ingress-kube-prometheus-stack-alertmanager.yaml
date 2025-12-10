@@ -14,7 +14,7 @@ metadata:
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-stack-alertmanager
-  namespace: kube-prometheus-stack
+  namespace: monitoring
 spec:
   ingressClassName: nginx
   rules:

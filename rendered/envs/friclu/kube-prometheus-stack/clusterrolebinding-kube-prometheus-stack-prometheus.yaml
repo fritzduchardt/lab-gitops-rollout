@@ -11,7 +11,7 @@ metadata:
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-stack-prometheus
-  namespace: kube-prometheus-stack
+  namespace: monitoring
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -19,4 +19,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: kube-prometheus-stack-prometheus
-    namespace: kube-prometheus-stack
+    namespace: monitoring

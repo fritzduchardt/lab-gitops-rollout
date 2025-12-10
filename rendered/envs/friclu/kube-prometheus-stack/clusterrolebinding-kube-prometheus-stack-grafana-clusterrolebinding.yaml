@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/version: 12.1.1
     helm.sh/chart: grafana-10.0.0
   name: kube-prometheus-stack-grafana-clusterrolebinding
-  namespace: kube-prometheus-stack
+  namespace: monitoring
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -15,4 +15,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: kube-prometheus-stack-grafana
-    namespace: kube-prometheus-stack
+    namespace: monitoring

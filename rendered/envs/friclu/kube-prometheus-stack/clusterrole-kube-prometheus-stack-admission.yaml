@@ -16,7 +16,7 @@ metadata:
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-stack-admission
-  namespace: kube-prometheus-stack
+  namespace: monitoring
 rules:
   - apiGroups:
       - admissionregistration.k8s.io

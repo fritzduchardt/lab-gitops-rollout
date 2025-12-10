@@ -13,7 +13,7 @@ metadata:
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-stack-operator
-  namespace: kube-prometheus-stack
+  namespace: monitoring
 spec:
   ports:
     - name: https

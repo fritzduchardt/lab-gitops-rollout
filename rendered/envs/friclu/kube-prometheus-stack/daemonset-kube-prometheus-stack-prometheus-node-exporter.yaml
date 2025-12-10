@@ -11,7 +11,7 @@ metadata:
     helm.sh/chart: prometheus-node-exporter-4.48.0
     release: kube-prometheus-stack
   name: kube-prometheus-stack-prometheus-node-exporter
-  namespace: kube-prometheus-stack
+  namespace: monitoring
 spec:
   revisionHistoryLimit: 10
   selector:

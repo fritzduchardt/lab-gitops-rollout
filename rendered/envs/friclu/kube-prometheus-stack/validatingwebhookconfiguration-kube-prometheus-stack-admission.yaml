@@ -14,7 +14,7 @@ metadata:
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-stack-admission
-  namespace: kube-prometheus-stack
+  namespace: monitoring
 webhooks:
   - admissionReviewVersions:
       - v1
@@ -22,7 +22,7 @@ webhooks:
     clientConfig:
       service:
         name: kube-prometheus-stack-operator
-        namespace: kube-prometheus-stack
+        namespace: monitoring
         path: /admission-prometheusrules/validate
     failurePolicy: Ignore
     name: prometheusrulemutate.monitoring.coreos.com

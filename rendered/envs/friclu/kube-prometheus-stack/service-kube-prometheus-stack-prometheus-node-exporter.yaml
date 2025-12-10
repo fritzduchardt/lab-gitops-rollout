@@ -14,7 +14,7 @@ metadata:
     jobLabel: node-exporter
     release: kube-prometheus-stack
   name: kube-prometheus-stack-prometheus-node-exporter
-  namespace: kube-prometheus-stack
+  namespace: monitoring
 spec:
   ports:
     - name: http-metrics

@@ -16,7 +16,7 @@ metadata:
     heritage: Helm
     release: kube-prometheus-stack
   name: kube-prometheus-stack-admission-patch
-  namespace: kube-prometheus-stack
+  namespace: monitoring
 spec:
   template:
     metadata:
@@ -37,7 +37,7 @@ spec:
         - args:
             - patch
             - --webhook-name=kube-prometheus-stack-admission
-            - --namespace=kube-prometheus-stack
+            - --namespace=monitoring
             - --secret-name=kube-prometheus-stack-admission
             - --patch-failure-policy=
           image: registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.6.3
