@@ -8,7 +8,7 @@ metadata:
 spec:
   destination:
     name: in-cluster
-    namespace: kube-prometheus-stack
+    namespace: monitoring
   project: friclu
   source:
     path: rendered/envs/friclu/kube-prometheus-stack

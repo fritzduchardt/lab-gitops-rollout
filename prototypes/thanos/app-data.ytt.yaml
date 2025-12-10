@@ -4,3 +4,7 @@
 ---
 helm:
   namespace: monitoring
+argocd:
+  app:
+    destination:
+      namespace: monitoring

@@ -6,3 +6,7 @@ helm:
   namespace: monitoring
 certificate:
     enabled: true
+argocd:
+  app:
+    destination:
+      namespace: monitoring

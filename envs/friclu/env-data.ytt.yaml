@@ -26,7 +26,6 @@ environment:
     #! monitoring
     - name: thanos
       proto: thanos
-
     - proto: alloy
     - proto: argocd
     - proto: cert-manager
