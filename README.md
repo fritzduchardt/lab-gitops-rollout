@@ -30,8 +30,3 @@ vault write auth/oidc/role/admin \
       user_claim="sub" \
       token_policies="admin"
 ```
-
-## Automation TODOs
-
-- Paperless-nx
-- Starbase80

@@ -23,6 +23,10 @@ argocd:
 environment:
   id: friclu
   applications:
+    # monitoring stack
+    - name: thanos
+      proto: thanos
+
     - proto: alloy
     - proto: argocd
     - proto: cert-manager
@@ -52,8 +56,6 @@ environment:
     - proto: tempo
     - proto: vault
     - proto: weaviate
-    - name: thanos
-      proto: thanos
     - name: minio
       proto: minio
     - name: karma

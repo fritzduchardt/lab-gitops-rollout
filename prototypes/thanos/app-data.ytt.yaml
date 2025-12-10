@@ -3,4 +3,4 @@
 #@overlay/match-child-defaults missing_ok=True
 ---
 helm:
-  namespace: thanos
+  namespace: monitoring
