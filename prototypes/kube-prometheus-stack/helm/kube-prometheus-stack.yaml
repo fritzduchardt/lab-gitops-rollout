@@ -30,6 +30,12 @@ grafana:
     datasources.yaml:
       apiVersion: 1
       datasources:
+      - name: Thanos
+        type: prometheus
+        uid: thanos
+        url: http://thanos-query:9090
+        access: proxy
+        basicAuth: false
       - name: Tempo
         type: tempo
         uid: tempo

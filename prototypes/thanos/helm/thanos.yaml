@@ -6,7 +6,7 @@ image:
   repository: thanosio/thanos
   tag: v0.39.2
   pullPolicy: IfNotPresent
-objstoreConfig: "type: S3\nconfig:\n  bucket: \"friclu-thanos\"\n  endpoint: \"s3.eu-central-3.ionoscloud.com\"\n  region: \"eu-central-3 (Berlin, Germany)\"\n  access_key: \"<path:kv/data/shared/ionos-s3#access-key>\"\n  secret_key: \"<path:kv/data/shared/ionos-s3#secret-key>\""
+objstoreConfig: "type: S3\nconfig:\n  bucket: \"friclu-thanos\"\n  endpoint: \"s3.eu-central-3.ionoscloud.com\"\n  region: \"eu-central-3\"\n  access_key: \"<path:kv/data/shared/ionos-s3#access-key>\"\n  secret_key: \"<path:kv/data/shared/ionos-s3#secret-key>\"\n  insecure: false"
 query:
   ## @param query.enabled Set to true to enable Thanos Query component
   ##
