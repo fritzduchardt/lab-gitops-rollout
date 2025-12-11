@@ -32,6 +32,10 @@ spec:
               value: /home/fabric/sync/FritzSync/patterns
             - name: PERSONAL_NAME
               value: Fritz
+            - name: GENDER
+              value: male
+            - name: BIRTH_YEAR
+              value: "1976"
             - name: TELEGRAM_BOT_TOKEN
               value: <path:kv/data/shared/telegram#botToken>
             - name: JOURNAL_FILE_RETRO_MONTHS

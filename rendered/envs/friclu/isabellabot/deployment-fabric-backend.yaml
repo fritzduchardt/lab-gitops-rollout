@@ -32,6 +32,10 @@ spec:
               value: /home/fabric/sync/IsabellaSync/patterns
             - name: PERSONAL_NAME
               value: Isabella
+            - name: GENDER
+              value: female
+            - name: BIRTH_YEAR
+              value: "2008"
             - name: TELEGRAM_BOT_TOKEN
               value: <path:kv/data/shared/telegram#botToken>
             - name: JOURNAL_FILE_RETRO_MONTHS

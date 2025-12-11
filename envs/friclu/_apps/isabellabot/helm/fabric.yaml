@@ -1,6 +1,9 @@
 backendIp: http://10.233.29.96
 backend:
-  personalName: "Isabella"
+  personal:
+    name: "Isabella"
+    birthYear: "2008"
+    gender: "female"
   patternFolder: "IsabellaSync/patterns"
   obsidianFolders:
     - "IsabellaSync/private"
