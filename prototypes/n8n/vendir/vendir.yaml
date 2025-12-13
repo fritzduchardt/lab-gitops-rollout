@@ -4,7 +4,7 @@ directories:
   - path: charts
     contents:
       - path: n8n
-        lazy: true
+        lazy: false
         image:
           # image URL; could be plain, tagged or digest reference (required)
           url: 8gears.container-registry.com/library/n8n
