@@ -5,6 +5,7 @@ data:
     datasources:
     - access: proxy
       basicAuth: false
+      isDefault: true
       name: Thanos
       type: prometheus
       uid: thanos

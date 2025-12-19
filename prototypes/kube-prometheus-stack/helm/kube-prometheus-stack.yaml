@@ -36,6 +36,7 @@ grafana:
         url: http://thanos-query:9090
         access: proxy
         basicAuth: false
+        isDefault: true
       - name: Tempo
         type: tempo
         uid: tempo
