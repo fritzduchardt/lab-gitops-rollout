@@ -7,9 +7,8 @@ metadata:
     app.kubernetes.io/name: prometheus-pushgateway
     app.kubernetes.io/version: v1.11.1
     helm.sh/chart: prometheus-pushgateway-3.4.1
-    release: kube-prometheus-stack
   name: pushgateway-prometheus-pushgateway
-  namespace: kube-prometheus-stack
+  namespace: monitoring
 spec:
   endpoints:
     - honorLabels: true
@@ -17,7 +16,7 @@ spec:
       port: http
   namespaceSelector:
     matchNames:
-      - pushgateway
+      - monitoring
   selector:
     matchLabels:
       app.kubernetes.io/instance: pushgateway

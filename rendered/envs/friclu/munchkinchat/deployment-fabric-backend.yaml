@@ -31,7 +31,11 @@ spec:
             - name: FABRIC_PATTERN_PATH
               value: /home/fabric/sync/BubaSync/patterns
             - name: PERSONAL_NAME
-              value: Buba
+              value: Fritz
+            - name: GENDER
+              value: male
+            - name: BIRTH_YEAR
+              value: "1976"
             - name: TELEGRAM_BOT_TOKEN
               value: <path:kv/data/shared/telegram#botToken>
             - name: JOURNAL_FILE_RETRO_MONTHS
