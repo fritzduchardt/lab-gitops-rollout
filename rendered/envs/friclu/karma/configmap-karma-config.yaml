@@ -11,8 +11,6 @@ data:
         name: alertmanager
         proxy: true
         timeout: 10s
-        tls:
-          insecureSkipVerify: true
         uri: https://<path:kv/data/shared/basicauth#authplain>@alertmanager.duchardt.net
     history:
       enabled: false

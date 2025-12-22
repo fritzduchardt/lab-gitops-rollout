@@ -27,8 +27,6 @@ configMap:
       servers:
         - name: alertmanager
           uri: https://<path:kv/data/shared/basicauth#authplain>@alertmanager.duchardt.net
-          tls:
-            insecureSkipVerify: true
           timeout: 10s
           proxy: true
           healthcheck:

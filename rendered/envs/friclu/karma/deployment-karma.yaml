@@ -17,7 +17,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: 8080f412444ccab1caa4f6deab679da69bc3e6d9d5ba293f147b71de089e8155
+        checksum/config: 2e34bf4cb41f09f89581ea5e242c472f80514e1f27d5eb911d92bff14533aa8d
       labels:
         app.kubernetes.io/instance: karma
         app.kubernetes.io/name: karma
