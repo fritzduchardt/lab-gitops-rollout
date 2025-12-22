@@ -30,15 +30,17 @@ data:
       path_prefix: /var/loki
       replication_factor: 1
       storage:
-        s3:
-          access_key_id: <path:kv/data/shared/ionos-s3#access-key>
-          bucketName: friclu-loki
-          bucketnames: friclu-loki-chunks
-          endpoint: s3.eu-central-3.ionoscloud.com
-          insecure: false
-          region: eu-central-3
-          s3forcepathstyle: false
-          secret_access_key: <path:kv/data/shared/ionos-s3#secret-key>
+        object_store:
+          s3:
+            access_key_id: <path:kv/data/shared/ionos-s3#access-key>
+            bucket_name: friclu-loki-chunks
+            endpoint: s3.eu-central-3.ionoscloud.com
+            http: {}
+            insecure: false
+            region: eu-central-3
+            secret_access_key: <path:kv/data/shared/ionos-s3#secret-key>
+            sse: {}
+          storage_prefix: null
     frontend:
       scheduler_address: ""
       tail_proxy_url: ""
@@ -77,17 +79,24 @@ data:
     ruler:
       storage:
         s3:
-          access_key_id: <path:kv/data/shared/ionos-s3#access-key>
-          bucketName: friclu-loki
           bucketnames: friclu-loki-ruler
-          endpoint: s3.eu-central-3.ionoscloud.com
           insecure: false
-          region: eu-central-3
           s3forcepathstyle: false
-          secret_access_key: <path:kv/data/shared/ionos-s3#secret-key>
         type: s3
       wal:
         dir: /var/loki/ruler-wal
+    ruler_storage:
+      backend: s3
+      s3:
+        access_key_id: <path:kv/data/shared/ionos-s3#access-key>
+        bucket_name: friclu-loki-ruler
+        endpoint: s3.eu-central-3.ionoscloud.com
+        http: {}
+        insecure: false
+        region: eu-central-3
+        secret_access_key: <path:kv/data/shared/ionos-s3#secret-key>
+        sse: {}
+      storage_prefix: null
     runtime_config:
       file: /etc/loki/runtime-config/runtime-config.yaml
     schema_config:
@@ -117,7 +126,7 @@ data:
       tsdb_shipper:
         index_gateway_client:
           server_address: ""
-      use_thanos_objstore: false
+      use_thanos_objstore: true
     tracing:
       enabled: false
 kind: ConfigMap
