@@ -6,9 +6,12 @@ ingress:
   path: /
   pathType: ImplementationSpecific
   tls:
-  - secretName: karma-certificate
-    hosts:
-    - karma.duchardt.net
+    - secretName: karma-certificate
+      hosts:
+        - karma.duchardt.net
+  annotations:
+    nginx.ingress.kubernetes.io/auth-type: basic
+    nginx.ingress.kubernetes.io/auth-secret: basic-auth
 
 serviceMonitor:
   enabled: true
