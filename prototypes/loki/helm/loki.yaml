@@ -26,11 +26,16 @@ loki:
   ruler:
     enable_api: true
   storage:
+    s3:
+      bucketName: friclu-loki
+      endpoint: s3.eu-central-3.ionoscloud.com
+      region: eu-central-3
+      secretAccessKey: <path:kv/data/shared/ionos-s3#secret-key>
+      accessKeyId: <path:kv/data/shared/ionos-s3#access-key>
     bucketNames:
-      chunks: chunk-bucket
+       chunks: friclu-loki-chunks
+       ruler: friclu-loki-ruler
   auth_enabled: false
-minio:
-  enabled: true
 
 deploymentMode: SingleBinary
 

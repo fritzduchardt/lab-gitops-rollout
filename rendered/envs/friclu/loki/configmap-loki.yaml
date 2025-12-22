@@ -31,12 +31,14 @@ data:
       replication_factor: 1
       storage:
         s3:
-          access_key_id: root-user
-          bucketnames: chunks
-          endpoint: loki-minio.loki.svc:9000
-          insecure: true
-          s3forcepathstyle: true
-          secret_access_key: supersecretpassword
+          access_key_id: <path:kv/data/shared/ionos-s3#access-key>
+          bucketName: friclu-loki
+          bucketnames: friclu-loki-chunks
+          endpoint: s3.eu-central-3.ionoscloud.com
+          insecure: false
+          region: eu-central-3
+          s3forcepathstyle: false
+          secret_access_key: <path:kv/data/shared/ionos-s3#secret-key>
     frontend:
       scheduler_address: ""
       tail_proxy_url: ""
@@ -75,7 +77,14 @@ data:
     ruler:
       storage:
         s3:
-          bucketnames: ruler
+          access_key_id: <path:kv/data/shared/ionos-s3#access-key>
+          bucketName: friclu-loki
+          bucketnames: friclu-loki-ruler
+          endpoint: s3.eu-central-3.ionoscloud.com
+          insecure: false
+          region: eu-central-3
+          s3forcepathstyle: false
+          secret_access_key: <path:kv/data/shared/ionos-s3#secret-key>
         type: s3
       wal:
         dir: /var/loki/ruler-wal
