@@ -5,10 +5,10 @@ ingress:
   ingressClassName: "nginx"
   path: /
   pathType: ImplementationSpecific
-  tls: []
-    # - secretName: chart-example-tls
-    #    hosts:
-  #      - chart-example.local
+  tls:
+  - secretName: karma-certificate
+    hosts:
+    - karma.duchardt.net
 
 serviceMonitor:
   enabled: true
