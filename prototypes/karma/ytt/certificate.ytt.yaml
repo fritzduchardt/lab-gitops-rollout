@@ -1,0 +1,18 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: karma-certificate
+spec:
+  secretName: karma-certificate
+  duration: 2160h
+  renewBefore: 360h
+  subject:
+    organizations:
+      - friclu
+  dnsNames:
+    - karma.duchardt.net
+  issuerRef:
+    name: http01
+    kind: ClusterIssuer

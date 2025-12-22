@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: karma-certificate
+  namespace: monitoring
+spec:
+  dnsNames:
+    - karma.duchardt.net
+  duration: 2160h
+  issuerRef:
+    kind: ClusterIssuer
+    name: http01
+  renewBefore: 360h
+  secretName: karma-certificate
+  subject:
+    organizations:
+      - friclu
