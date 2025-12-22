@@ -28,13 +28,13 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 194,
+      "id": 30,
       "links": [],
       "panels": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "thanos"
           },
           "fieldConfig": {
             "defaults": {
@@ -79,7 +79,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": 0
                   },
                   {
                     "color": "red",
@@ -110,12 +111,12 @@ data:
               "sort": "none"
             }
           },
-          "pluginVersion": "12.0.0",
+          "pluginVersion": "12.1.1",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "prometheus"
+                "uid": "thanos"
               },
               "editorMode": "code",
               "expr": "restic_backup_success",

@@ -17,4 +17,21 @@ spec:
   issuerRef:
     name: http01
     kind: ClusterIssuer
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: alertmanager-certificate
+spec:
+  secretName: alertmanager-certificate
+  duration: 2160h
+  renewBefore: 360h
+  subject:
+    organizations:
+      - friclu
+  dnsNames:
+    - alertmanager.duchardt.net
+  issuerRef:
+    name: http01
+    kind: ClusterIssuer
 #@ end

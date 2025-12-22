@@ -20,10 +20,10 @@ alertmanager:
     annotations:
       nginx.ingress.kubernetes.io/auth-type: basic
       nginx.ingress.kubernetes.io/auth-secret: basic-auth
-    tls: []
-    # - secretName: alertmanager-general-tls
-    #   hosts:
-    #   - alertmanager.example.com
+    tls:
+     - secretName: alertmanager-certificate
+       hosts:
+       - alertmanager.duchardt.net
 
 grafana:
   datasources:

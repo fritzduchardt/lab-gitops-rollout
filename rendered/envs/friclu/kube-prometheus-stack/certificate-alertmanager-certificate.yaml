@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: alertmanager-certificate
+  namespace: monitoring
+spec:
+  dnsNames:
+    - alertmanager.duchardt.net
+  duration: 2160h
+  issuerRef:
+    kind: ClusterIssuer
+    name: http01
+  renewBefore: 360h
+  secretName: alertmanager-certificate
+  subject:
+    organizations:
+      - friclu

@@ -55,7 +55,7 @@ spec:
             - --http-address=0.0.0.0:10902
             - --data-dir=/data
             - --eval-interval=1m
-            - --alertmanagers.url=http://alertmanager-operated.kube-prometheus-stack:9093
+            - --alertmanagers.url=http://alertmanager-operated.monitoring:9093
             - --query=dnssrv+_http._tcp.thanos-query.monitoring.svc.cluster.local
             - --alert.query-url=https://thanos-query-frontend.duchardt.net
             - --label=replica="$(POD_NAME)"
