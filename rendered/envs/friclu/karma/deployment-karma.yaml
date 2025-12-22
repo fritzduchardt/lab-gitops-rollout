@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/name: karma
     helm.sh/chart: karma-2.11.0
   name: karma
-  namespace: karma
+  namespace: monitoring
 spec:
   replicas: 1
   selector:
@@ -17,7 +17,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: 2e34bf4cb41f09f89581ea5e242c472f80514e1f27d5eb911d92bff14533aa8d
+        checksum/config: c0767af21b677c42cd0a259369660a01386b3d3dc0577895b57ff8a45d9a54bb
       labels:
         app.kubernetes.io/instance: karma
         app.kubernetes.io/name: karma

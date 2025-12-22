@@ -22,4 +22,4 @@ metadata:
     heritage: Helm
     release: karma
   name: karma-config
-  namespace: karma
+  namespace: monitoring
