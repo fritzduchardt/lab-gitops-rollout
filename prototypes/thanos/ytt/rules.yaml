@@ -639,16 +639,16 @@ data:
             expr: restic_backup_success == 1
             labels:
               severity: critical
-  testing.yaml: |
-    groups:
-      - name: test.rules
-        rules:
-          - alert: AlwaysFire
-            annotations:
-              description: Always fires
-            expr: absent(does_not_exist)
-            labels:
-              severity: critical
+#  testing.yaml: |
+#    groups:
+#      - name: test.rules
+#        rules:
+#          - alert: AlwaysFire
+#            annotations:
+#              description: Always fires
+#            expr: absent(does_not_exist)
+#            labels:
+#              severity: critical
 kind: ConfigMap
 metadata:
   name: prometheus-kube-prometheus-stack-prometheus-rulefiles-0
