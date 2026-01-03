@@ -147,24 +147,6 @@ data:
       }
     }
 
-    function addPromptButtonIfNeeded(b) {
-      const mdTrim = b.dataset.markdown.trim();
-      if (mdTrim && mdTrim.toLowerCase() !== 'no further instructions') {
-        const promptBtn = document.createElement('button');
-        promptBtn.className = 'prompt-again-button';
-        promptBtn.textContent = 'Prompt';
-        promptBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          input.value = b.dataset.markdown;
-          input.focus();
-          const pos = input.value.length;
-          input.setSelectionRange(pos, pos);
-        });
-        b.appendChild(promptBtn);
-      }
-    }
-
     function addShareWithTelegramButton(b) {
       const shareBtn = document.createElement('button');
       shareBtn.className = 'share-button';
@@ -231,6 +213,31 @@ data:
         });
         pre.appendChild(btn);
       });
+    }
+
+    function addCopyRawButtonIfNeeded(bubble) {
+        const text = bubble.dataset.markdown;
+        if (bubble.querySelector('.copy-raw-button') || text.startsWith('Error') || text === 'Request cancelled' || text.startsWith('Deleted')) {
+            return;
+        }
+        const copyRawBtn = document.createElement('button');
+        copyRawBtn.className = 'copy-raw-button copy-button';
+        copyRawBtn.textContent = 'Copy (r)';
+        copyRawBtn.addEventListener('mousedown', () => copyRawBtn.classList.add('pressed'));
+        copyRawBtn.addEventListener('mouseup', () => copyRawBtn.classList.remove('pressed'));
+        copyRawBtn.addEventListener('mouseleave', () => copyRawBtn.classList.remove('pressed'));
+        copyRawBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            navigator.clipboard.writeText(bubble.dataset.markdown).catch(console.error);
+        });
+
+        const copyBtn = bubble.querySelector('.copy-button');
+        if (copyBtn) {
+            bubble.insertBefore(copyRawBtn, copyBtn.nextSibling);
+        } else {
+            bubble.appendChild(copyRawBtn);
+        }
     }
 
     function addCopyAndTopButtonsIfNeeded(bubble) {
@@ -715,12 +722,12 @@ data:
       }
       if (!hideCopy) {
         addCopyAndTopButtonsIfNeeded(b);
+        if (sender === 'bot') {
+          addCopyRawButtonIfNeeded(b);
+        }
       }
       if (!hideShare) {
         addShareWithTelegramButton(b);
-      }
-      if (showPrompt) {
-        addPromptButtonIfNeeded(b);
       }
 
       addBubbleDeleteButton(b);
@@ -769,7 +776,7 @@ data:
       const obs = obsidianSelect.getValue() === '(no file)' ? '' : obsidianSelect.getValue();
       const requestId = `${Date.now()}-${Math.floor(Math.random()*100000)}`;
       abortControllers.set(requestId, { controller: null, cancelled: false });
-      const userMsgEl = addMessage(text, 'user', userIsChat,  false, true, true, false, true, pattern);
+      const userMsgEl = addMessage(text, 'user', userIsChat,  false, true, true, false, false, pattern);
       const userBubble = userMsgEl.querySelector('.bubble');
 
       const cancelBtn = document.createElement('button');
@@ -881,7 +888,6 @@ data:
                     a.setAttribute('rel', 'noopener noreferrer');
                   });
                   addStoreButtonIfNeeded(b);
-                  addPromptButtonIfNeeded(b);
                   addShareWithTelegramButton(b);
                   ensureCodeBlockCopyButtons(b);
                 } catch {}
@@ -895,6 +901,7 @@ data:
 
           if (!b.classList.contains('error')) {
             addCopyAndTopButtonsIfNeeded(b);
+            addCopyRawButtonIfNeeded(b);
           }
           success = true;
 
@@ -1117,7 +1124,7 @@ data:
         a, a:visited { color: #000 !important; }
         a:hover, a:focus { color: #000 !important; text-decoration: underline; }
         .show-file-button, .show-pattern-button { float: right; font-size: 0.75rem; padding: 2px 4px; margin-left: 4px; }
-        .delete-file-message-button, .delete-pattern-message-button, .summarize-button, .top-button, .copy-button, .share-button, .store-message-button, .prompt-again-button, .cancel-button-in-bubble { bottom: 4px; right: 8px; font-size: 0.75rem; padding: 2px 4px; margin-right:4px}
+        .delete-file-message-button, .delete-pattern-message-button, .summarize-button, .top-button, .copy-button, .share-button, .store-message-button, .prompt-again-button, .cancel-button-in-bubble, .copy-raw-button { bottom: 4px; right: 8px; font-size: 0.75rem; padding: 2px 4px; margin-right:4px}
         .delete-file-message-button.pressed, .delete-pattern-message-button.pressed, .show-pattern-button.pressed, .show-file-button.pressed, .summarize-button.pressed, .top-button.pressed, .copy-button.pressed, .share-button.pressed, .store-message-button.pressed, .prompt-again-button.pressed { background-color: #ccc;  }
         .enhanced-select { position: relative; width: 100%; }
         .enhanced-select .form-control { width: 100%; }
@@ -1436,7 +1443,7 @@ data:
     }
   service-worker.js: |-
     // Service worker for offline support and asset caching
-    const CACHE_NAME = 'fabric-chat-cache-34d0c6870077656c';
+    const CACHE_NAME = 'fabric-chat-cache-91192c78b64eb08a';
     const URLs_TO_CACHE = [
       './',
       './index.html',
