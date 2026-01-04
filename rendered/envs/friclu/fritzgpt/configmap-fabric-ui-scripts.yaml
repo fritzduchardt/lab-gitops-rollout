@@ -147,6 +147,24 @@ data:
       }
     }
 
+    function addPromptButton(b) {
+        const mdTrim = b.dataset.markdown.trim();
+        if (mdTrim && mdTrim.toLowerCase() !== 'no further instructions') {
+            const promptBtn = document.createElement('button');
+            promptBtn.className = 'prompt-again-button';
+            promptBtn.textContent = 'Prompt';
+            promptBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                input.value = b.dataset.markdown;
+                input.focus();
+                const pos = input.value.length;
+                input.setSelectionRange(pos, pos);
+            });
+            b.appendChild(promptBtn);
+        }
+    }
+
     function addShareWithTelegramButton(b) {
       const shareBtn = document.createElement('button');
       shareBtn.className = 'share-button';
@@ -795,6 +813,7 @@ data:
         cancelBtn.disabled = true;
       });
       userBubble.appendChild(cancelBtn);
+      addPromptButton(userBubble);
 
       input.value = '';
       const loader = showLoading();
@@ -1443,7 +1462,7 @@ data:
     }
   service-worker.js: |-
     // Service worker for offline support and asset caching
-    const CACHE_NAME = 'fabric-chat-cache-91192c78b64eb08a';
+    const CACHE_NAME = 'fabric-chat-cache-eef2248391459aa8';
     const URLs_TO_CACHE = [
       './',
       './index.html',
