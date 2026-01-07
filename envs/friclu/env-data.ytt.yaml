@@ -55,7 +55,5 @@ environment:
     - proto: tempo
     - proto: vault
     - proto: weaviate
-    - name: minio
-      proto: minio
     - name: karma
       proto: karma
