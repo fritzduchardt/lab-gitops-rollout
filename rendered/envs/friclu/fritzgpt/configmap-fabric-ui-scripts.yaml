@@ -1192,6 +1192,9 @@ data:
         .delete-file-message-button.pressed, .delete-pattern-message-button.pressed, .show-pattern-button.pressed, .show-file-button.pressed, .summarize-button.pressed, .top-button.pressed, .copy-button.pressed, .table-copy-button.pressed, .share-button.pressed, .store-message-button.pressed, .prompt-again-button.pressed { background-color: #ccc;  }
         .enhanced-select { position: relative; width: 100%; }
         .enhanced-select .form-control { width: 100%; }
+        .table-copy-button {
+          margin-bottom: 20px;
+        }
         .enhanced-select .dropdown-menu {
           position: absolute;
           bottom: 100%;
@@ -1524,7 +1527,7 @@ data:
     }
   service-worker.js: |-
     // Service worker for offline support and asset caching
-    const CACHE_NAME = 'fabric-chat-cache-f97531b27a8ad1c2';
+    const CACHE_NAME = 'fabric-chat-cache-454450c9f5f4f88a';
     const URLs_TO_CACHE = [
       './',
       './index.html',
