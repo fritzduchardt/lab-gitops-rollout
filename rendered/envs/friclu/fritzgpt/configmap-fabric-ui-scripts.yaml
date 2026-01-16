@@ -233,6 +233,38 @@ data:
       });
     }
 
+    function ensureTableCopyButtons(bubble) {
+      if (!bubble) return;
+      const tables = bubble.querySelectorAll('table');
+      tables.forEach(table => {
+        if (table.querySelector('.table-copy-button')) return;
+        const wrapper = document.createElement('div');
+        wrapper.style.position = 'relative';
+        wrapper.style.display = 'inline-block';
+        table.parentNode.insertBefore(wrapper, table);
+        wrapper.appendChild(table);
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'table-copy-button';
+        btn.textContent = 'Copy Table';
+        btn.addEventListener('mousedown', () => btn.classList.add('pressed'));
+        btn.addEventListener('mouseup', () => btn.classList.remove('pressed'));
+        btn.addEventListener('mouseleave', () => btn.classList.remove('pressed'));
+        btn.addEventListener('click', async (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const markdown = htmlTableToMarkdown(table);
+          const ok = await writeToClipboard(markdown);
+          if (ok) {
+            const prev = btn.textContent;
+            btn.textContent = 'Copied';
+            setTimeout(() => { btn.textContent = prev; }, 1200);
+          }
+        });
+        wrapper.appendChild(btn);
+      });
+    }
+
     function stripFilenameHeaderForCopy(text) {
       if (typeof text !== 'string' || text.length === 0) return '';
       const s = text.replace(/^\uFEFF/, '');
@@ -763,6 +795,7 @@ data:
       messagesEl.appendChild(m);
 
       ensureCodeBlockCopyButtons(b);
+      ensureTableCopyButtons(b);
       return m;
     }
 
@@ -920,6 +953,7 @@ data:
                   addStoreButtonIfNeeded(b);
                   addShareWithTelegramButton(b);
                   ensureCodeBlockCopyButtons(b);
+                  ensureTableCopyButtons(b);
                 } catch {}
               }
             }
@@ -1154,8 +1188,8 @@ data:
         a, a:visited { color: #000 !important; }
         a:hover, a:focus { color: #000 !important; text-decoration: underline; }
         .show-file-button, .show-pattern-button { float: right; font-size: 0.75rem; padding: 2px 4px; margin-left: 4px; }
-        .delete-file-message-button, .delete-pattern-message-button, .summarize-button, .top-button, .copy-button, .share-button, .store-message-button, .prompt-again-button, .cancel-button-in-bubble, .copy-raw-button { bottom: 4px; right: 8px; font-size: 0.75rem; padding: 2px 4px; margin-right:4px}
-        .delete-file-message-button.pressed, .delete-pattern-message-button.pressed, .show-pattern-button.pressed, .show-file-button.pressed, .summarize-button.pressed, .top-button.pressed, .copy-button.pressed, .share-button.pressed, .store-message-button.pressed, .prompt-again-button.pressed { background-color: #ccc;  }
+        .delete-file-message-button, .delete-pattern-message-button, .summarize-button, .top-button, .copy-button, .share-button, .store-message-button, .prompt-again-button, .cancel-button-in-bubble, .table-copy-button, .copy-raw-button { bottom: 4px; right: 8px; font-size: 0.75rem; padding: 2px 4px; margin-right:4px}
+        .delete-file-message-button.pressed, .delete-pattern-message-button.pressed, .show-pattern-button.pressed, .show-file-button.pressed, .summarize-button.pressed, .top-button.pressed, .copy-button.pressed, .table-copy-button.pressed, .share-button.pressed, .store-message-button.pressed, .prompt-again-button.pressed { background-color: #ccc;  }
         .enhanced-select { position: relative; width: 100%; }
         .enhanced-select .form-control { width: 100%; }
         .enhanced-select .dropdown-menu {
@@ -1387,6 +1421,23 @@ data:
       return modifiedHtml;
     }
 
+    // Convert HTML table to markdown table
+    function htmlTableToMarkdown(tableEl) {
+      const rows = Array.from(tableEl.querySelectorAll('tr'));
+      if (rows.length === 0) return '';
+      const markdownRows = rows.map(row => {
+        const cells = Array.from(row.querySelectorAll('td, th')).map(cell => cell.textContent.trim());
+        return '| ' + cells.join(' | ') + ' |';
+      });
+      // Add header separator if first row has th
+      const firstRowCells = rows[0].querySelectorAll('td, th');
+      if (firstRowCells.length > 0 && rows[0].querySelector('th')) {
+        const headerCount = firstRowCells.length;
+        markdownRows.splice(1, 0, '|' + ' --- |'.repeat(headerCount));
+      }
+      return markdownRows.join('\n');
+    }
+
     // Convert markdown to plain text for clipboard
     function markdownToPlainText(md) {
       let text = md;
@@ -1473,7 +1524,7 @@ data:
     }
   service-worker.js: |-
     // Service worker for offline support and asset caching
-    const CACHE_NAME = 'fabric-chat-cache-df385c6d01fa0096';
+    const CACHE_NAME = 'fabric-chat-cache-f97531b27a8ad1c2';
     const URLs_TO_CACHE = [
       './',
       './index.html',
