@@ -128,7 +128,7 @@ data:
             btn.disabled = true;
         } catch (err) {
             console.error(err);
-            addMessage(`Error storing message (${err.message})`, 'bot', false, false, true, true, true);
+            addMessage(`Error storing message (${err.message})`, 'bot', false, false, true, true, true, true, true);
         } finally {
             spinner.remove();
         }
@@ -1005,6 +1005,30 @@ data:
       abortControllers.delete(requestId);
     });
 
+    function isEditableElement(el) {
+      if (!el) return false;
+      const tag = (el.tagName || '').toLowerCase();
+      if (tag === 'textarea' || tag === 'input' || tag === 'select') return true;
+      if (el.isContentEditable) return true;
+      return false;
+    }
+
+    function triggerFormSubmit() {
+      if (form.requestSubmit) {
+        form.requestSubmit();
+      } else {
+        form.dispatchEvent(new Event('submit', { cancelable: true }));
+      }
+    }
+
+    function isSendShortcut(e) {
+      return (e.ctrlKey || e.metaKey) && !e.shiftKey && !e.altKey && (e.key === 's' || e.key === 'S');
+    }
+
+    function isChatShortcut(e) {
+      return (e.ctrlKey || e.metaKey) && e.shiftKey && !e.altKey && (e.key === 's' || e.key === 'S');
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       const savedLastPrompt = localStorage.getItem('lastPrompt');
       if (savedLastPrompt) {
@@ -1035,12 +1059,30 @@ data:
       input.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
           e.preventDefault();
-          if (form.requestSubmit) {
-            form.requestSubmit();
-          } else {
-            form.dispatchEvent(new Event('submit', { cancelable: true }));
-          }
+          triggerFormSubmit();
         }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.defaultPrevented) return;
+        if (!isSendShortcut(e) && !isChatShortcut(e)) return;
+
+        const active = document.activeElement;
+        if (active && active !== input && isEditableElement(active)) return;
+
+        e.preventDefault();
+
+        if (isSendShortcut(e)) {
+          isChatButtonPressed = false;
+          input.focus();
+          triggerFormSubmit();
+          return;
+        }
+
+        if (!lastPrompt) return;
+        isChatButtonPressed = true;
+        input.focus();
+        triggerFormSubmit();
       });
 
       chatBtn.id = 'chat-button';
@@ -1048,11 +1090,7 @@ data:
       chatBtn.addEventListener('click', () => {
         if (!lastPrompt) return;
         isChatButtonPressed = true;
-        if (form.requestSubmit) {
-          form.requestSubmit();
-        } else {
-          form.dispatchEvent(new Event('submit', { cancelable: true }));
-        }
+        triggerFormSubmit();
         input.focus();
       });
 
@@ -1527,7 +1565,7 @@ data:
     }
   service-worker.js: |-
     // Service worker for offline support and asset caching
-    const CACHE_NAME = 'fabric-chat-cache-454450c9f5f4f88a';
+    const CACHE_NAME = 'fabric-chat-cache-79e4e8ef190e568a';
     const URLs_TO_CACHE = [
       './',
       './index.html',
