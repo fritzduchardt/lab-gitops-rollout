@@ -18,6 +18,9 @@ windmill:
       resources:
         limits:
           memory: "2Gi"
+      extraEnv:
+        - name: DISABLE_JEMALLOC
+          value: false
     - name: "native"
       # -- Controller to use. Valid options are "Deployment" and "StatefulSet"
       controller: "Deployment"
@@ -31,6 +34,8 @@ windmill:
           value: "8"
         - name: "SLEEP_QUEUE"
           value: "200"
+        - name: DISABLE_JEMALLOC
+          value: false
       # -- Extra sidecar containers
 
   # app configuration
@@ -38,6 +43,10 @@ windmill:
     resources:
       limits:
         memory: "2Gi"
+
+    extraEnv:
+      - name: DISABLE_JEMALLOC
+        value: false
 
   # indexer configuration
   indexer:
