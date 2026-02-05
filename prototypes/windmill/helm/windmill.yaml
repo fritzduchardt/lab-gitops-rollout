@@ -6,7 +6,7 @@ minio:
   enabled: false
 
 windmill:
-  databaseUrl: postgres://app:<<path:kv/data/windmill/postgres#password>@windmill-rw/windmill?sslmode=disable
+  databaseUrl: postgres://app:<path:kv/data/windmill/postgres#password>@windmill-rw/windmill?sslmode=disable
   databaseSecret: false
   baseDomain: windmill.duchardt.net
   baseProtocol: https

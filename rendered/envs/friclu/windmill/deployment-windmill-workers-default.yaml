@@ -32,7 +32,7 @@ spec:
       containers:
         - env:
             - name: DATABASE_URL
-              value: postgres://app:<<path:kv/data/windmill/postgres#password>@windmill-rw/windmill?sslmode=disable
+              value: postgres://app:<path:kv/data/windmill/postgres#password>@windmill-rw/windmill?sslmode=disable
             - name: BASE_URL
               value: https://windmill.duchardt.net
             - name: RUST_LOG
