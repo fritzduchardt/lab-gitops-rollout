@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: windmill-app
+    app.kubernetes.io/name: windmill-app
+    chart: windmill-4.0.63
+    heritage: Helm
+    release: windmill
+  name: windmill-app
+  namespace: windmill
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: windmill-app
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: windmill-app
+        app.kubernetes.io/name: windmill-app
+        release: windmill
+    spec:
+      containers:
+        - env:
+            - name: DATABASE_URL
+              value: postgres://app:<<path:kv/data/windmill/postgres#password>@windmill-rw/windmill?sslmode=disable
+            - name: BASE_URL
+              value: https://windmill.duchardt.net
+            - name: RUST_LOG
+              value: info
+            - name: MODE
+              value: server
+            - name: JSON_FMT
+              value: "true"
+          image: ghcr.io/windmill-labs/windmill:1.625.0
+          imagePullPolicy: Always
+          lifecycle:
+            preStop:
+              exec:
+                command:
+                  - /bin/sh
+                  - -c
+                  - sleep 30
+          name: windmill-app
+          ports:
+            - containerPort: 8000
+            - containerPort: 8001
+          readinessProbe:
+            failureThreshold: 1
+            httpGet:
+              host: null
+              httpHeaders:
+                - name: Host
+                  value: localhost
+              path: /
+              port: 8000
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              memory: 2Gi
+          securityContext: null
+      securityContext:
+        runAsNonRoot: false
+        runAsUser: 0
+      serviceAccountName: windmill
+      terminationGracePeriodSeconds: 40

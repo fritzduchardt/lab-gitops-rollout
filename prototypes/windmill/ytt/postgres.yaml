@@ -1,0 +1,20 @@
+#@ load("@ytt:data", "data")
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: windmill
+spec:
+  instances: 1
+  storage:
+    size: 2Gi
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: windmill
+spec:
+  cluster:
+    name: windmill
+  name: windmill
+  owner: app

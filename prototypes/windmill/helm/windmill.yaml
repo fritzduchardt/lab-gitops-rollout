@@ -1,0 +1,60 @@
+postgresql:
+  enabled: false
+
+minio:
+  # -- enabled included Minio operator for s3 resource demo purposes
+  enabled: false
+
+windmill:
+  databaseUrl: postgres://app:<<path:kv/data/windmill/postgres#password>@windmill-rw/windmill?sslmode=disable
+  databaseSecret: false
+  baseDomain: windmill.duchardt.net
+  baseProtocol: https
+
+  # worker groups
+  workerGroups:
+    - name: "default"
+      replicas: 1
+      resources:
+        limits:
+          memory: "2Gi"
+    - name: "native"
+      # -- Controller to use. Valid options are "Deployment" and "StatefulSet"
+      controller: "Deployment"
+      replicas: 1
+      resources:
+        limits:
+          memory: "2Gi"
+      # -- Extra environment variables to apply to the pods
+      extraEnv:
+        - name: "NUM_WORKERS"
+          value: "8"
+        - name: "SLEEP_QUEUE"
+          value: "200"
+      # -- Extra sidecar containers
+
+  # app configuration
+  app:
+    resources:
+      limits:
+        memory: "2Gi"
+
+  # indexer configuration
+  indexer:
+    # -- enable or disable indexer
+    enabled: true
+    resources:
+      limits:
+        memory: "2Gi"
+        ephemeral-storage: "50Gi"
+
+ingress:
+  # -- enable/disable included ingress resource
+  enabled: true
+  className: "nginx"
+  annotations: {}
+  # -- TLS config for the ingress resource. Useful when using cert-manager and nginx-ingress
+  tls:
+    - hosts:
+        - windmill.duchardt.net
+      secretName: windmill-certificate

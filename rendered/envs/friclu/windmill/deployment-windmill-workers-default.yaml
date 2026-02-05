@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: windmill-workers
+    app.kubernetes.io/name: windmill-workers
+    chart: windmill-4.0.63
+    heritage: Helm
+    release: windmill
+    workerGroup: default
+  name: windmill-workers-default
+  namespace: windmill
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: windmill-workers
+      workerGroup: default
+  strategy:
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: windmill-workers
+        app.kubernetes.io/name: windmill-workers
+        release: windmill
+        workerGroup: default
+    spec:
+      containers:
+        - env:
+            - name: DATABASE_URL
+              value: postgres://app:<<path:kv/data/windmill/postgres#password>@windmill-rw/windmill?sslmode=disable
+            - name: BASE_URL
+              value: https://windmill.duchardt.net
+            - name: RUST_LOG
+              value: info
+            - name: MODE
+              value: worker
+            - name: JSON_FMT
+              value: "true"
+            - name: WORKER_GROUP
+              value: default
+          image: ghcr.io/windmill-labs/windmill:1.625.0
+          imagePullPolicy: Always
+          name: windmill-worker
+          ports:
+            - containerPort: 8001
+          resources:
+            limits:
+              memory: 2Gi
+          securityContext:
+            privileged: true
+          volumeMounts: null
+      serviceAccountName: windmill
+      terminationGracePeriodSeconds: 604800
+      volumes: null

@@ -1,0 +1,13 @@
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+directories:
+  - path: charts
+    contents:
+      - path: windmill
+        lazy: true
+        helmChart:
+          # renovate: datasource=helm
+          name: windmill
+          version: 4.0.63
+          repository:
+            url: https://windmill-labs.github.io/windmill-helm-charts/

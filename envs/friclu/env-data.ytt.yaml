@@ -57,3 +57,5 @@ environment:
     - proto: weaviate
     - name: karma
       proto: karma
+    - name: windmill
+      proto: windmill
