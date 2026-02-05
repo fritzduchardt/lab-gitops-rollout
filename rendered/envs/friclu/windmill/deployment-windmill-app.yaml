@@ -29,7 +29,7 @@ spec:
       containers:
         - env:
             - name: DISABLE_JEMALLOC
-              value: false
+              value: "false"
             - name: DATABASE_URL
               value: postgres://app:<path:kv/data/windmill/postgres#password>@windmill-rw/windmill?sslmode=disable
             - name: BASE_URL
