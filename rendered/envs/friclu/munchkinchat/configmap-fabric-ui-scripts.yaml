@@ -66,6 +66,51 @@ data:
       'grok-4-1-fast-non-reasoning': 'GrokAI',
     };
 
+    let successAudioContext = null;
+
+    function ensureSuccessAudioContext() {
+      if (successAudioContext && successAudioContext.state !== 'closed') return successAudioContext;
+      const Ctx = window.AudioContext || window.webkitAudioContext;
+      if (!Ctx) return null;
+      successAudioContext = new Ctx();
+      return successAudioContext;
+    }
+
+    function primeSuccessSoundFromUserGesture() {
+      try {
+        const ctx = ensureSuccessAudioContext();
+        if (!ctx) return;
+        if (ctx.state === 'suspended') {
+          ctx.resume().catch(() => {});
+        }
+      } catch {}
+    }
+
+    function playSuccessSound() {
+      try {
+        const ctx = ensureSuccessAudioContext();
+        if (!ctx) return;
+
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(880, now);
+        osc.frequency.exponentialRampToValueAtTime(1320, now + 0.08);
+
+        gain.gain.setValueAtTime(0.0001, now);
+        gain.gain.exponentialRampToValueAtTime(0.08, now + 0.01);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.14);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(now);
+        osc.stop(now + 0.16);
+      } catch {}
+    }
+
     async function loadModels() {
       const models = Object.keys(modelVendorMap);
       const saved = localStorage.getItem('lastModel');
@@ -816,6 +861,7 @@ data:
 
     form.addEventListener('submit', async e => {
       e.preventDefault();
+      primeSuccessSoundFromUserGesture();
       const chatBtn = document.getElementById('chat-button');
       const sendBtn = document.querySelector('.btn-send');
       chatBtn.disabled = true;
@@ -910,6 +956,7 @@ data:
           });
 
           await checkResponse(res);
+          playSuccessSound();
 
           hideLoading(loader);
           const m = document.createElement('div');
@@ -1021,12 +1068,8 @@ data:
       }
     }
 
-    function isSendShortcut(e) {
-      return (e.ctrlKey || e.metaKey) && !e.shiftKey && !e.altKey && (e.key === 's' || e.key === 'S');
-    }
-
     function isChatShortcut(e) {
-      return (e.ctrlKey || e.metaKey) && e.shiftKey && !e.altKey && (e.key === 's' || e.key === 'S');
+      return (e.ctrlKey || e.metaKey) && !e.shiftKey && !e.altKey && (e.key === 's' || e.key === 'S');
     }
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -1065,19 +1108,12 @@ data:
 
       document.addEventListener('keydown', (e) => {
         if (e.defaultPrevented) return;
-        if (!isSendShortcut(e) && !isChatShortcut(e)) return;
+        if (!isChatShortcut(e)) return;
 
         const active = document.activeElement;
         if (active && active !== input && isEditableElement(active)) return;
 
         e.preventDefault();
-
-        if (isSendShortcut(e)) {
-          isChatButtonPressed = false;
-          input.focus();
-          triggerFormSubmit();
-          return;
-        }
 
         if (!lastPrompt) return;
         isChatButtonPressed = true;
@@ -1088,6 +1124,7 @@ data:
       chatBtn.id = 'chat-button';
       chatBtn.textContent = 'Chat';
       chatBtn.addEventListener('click', () => {
+        primeSuccessSoundFromUserGesture();
         if (!lastPrompt) return;
         isChatButtonPressed = true;
         triggerFormSubmit();
@@ -1444,6 +1481,15 @@ data:
         placeholderIndex++;
       });
 
+      // Ensure tables have a light gray border
+      doc.querySelectorAll('table').forEach(table => {
+        table.style.border = '1px solid #d3d3d3';
+        table.style.borderCollapse = 'collapse';
+        table.querySelectorAll('th, td').forEach(cell => {
+          cell.style.border = '1px solid #d3d3d3';
+        });
+      });
+
       // Get the modified HTML string
       let modifiedHtml = doc.body.innerHTML;
 
@@ -1565,7 +1611,7 @@ data:
     }
   service-worker.js: |-
     // Service worker for offline support and asset caching
-    const CACHE_NAME = 'fabric-chat-cache-b582e7bcbb0146ea';
+    const CACHE_NAME = 'fabric-chat-cache-952e7ec4b87ed4ca';
     const URLs_TO_CACHE = [
       './',
       './index.html',
