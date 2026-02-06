@@ -48,7 +48,7 @@ data:
     const patternsUrl = `${apiDomain}/patterns`;
     const patternsGenerateUrl = `${apiDomain}/patterns/generate`;
     const obsidianUrl = `${apiDomain}/obsidian/files`;
-    const patternDeleteUrl = `${apiDomain}/deletepattern`;
+    const patternDeleteUrl = `${apiDomain}/patterns/delete`;
     const obsidianFileUrl = `${apiDomain}/obsidian/file`;
     const telegramUrl = `${apiDomain}/telegram/send`;
     const storeUrl = `${apiDomain}/store`;
@@ -87,6 +87,7 @@ data:
     }
 
     function playSuccessSound() {
+      if (!soundEnabled) return;
       try {
         const ctx = ensureSuccessAudioContext();
         if (!ctx) return;
@@ -859,6 +860,9 @@ data:
       }
     }
 
+    let promptHistory = [];
+    let historyIndex = -1;
+
     form.addEventListener('submit', async e => {
       e.preventDefault();
       primeSuccessSoundFromUserGesture();
@@ -869,6 +873,13 @@ data:
       let text = input.value.trim();
       if (text == "") {
         text = "No further instructions"
+      }
+      if (text && text !== promptHistory[promptHistory.length - 1]) {
+        promptHistory.push(text);
+        if (promptHistory.length > 200) {
+          promptHistory.shift();
+        }
+        localStorage.setItem('promptHistory', JSON.stringify(promptHistory));
       }
       const userIsChat = isChatButtonPressed;
       if (!isChatButtonPressed) {
@@ -1076,7 +1087,11 @@ data:
       const savedLastPrompt = localStorage.getItem('lastPrompt');
       if (savedLastPrompt) {
         lastPrompt = savedLastPrompt;
-        input.value = lastPrompt;
+        input.value = savedLastPrompt;
+      }
+      const savedHistory = localStorage.getItem('promptHistory');
+      if (savedHistory) {
+        promptHistory = JSON.parse(savedHistory);
       }
 
       const mdScript = document.createElement('script');
@@ -1099,10 +1114,35 @@ data:
         input.select();
       });
 
+      input.addEventListener('input', () => {
+        historyIndex = -1;
+      });
+
       input.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
           e.preventDefault();
           triggerFormSubmit();
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          if (promptHistory.length === 0) return;
+          if (historyIndex === -1) {
+            historyIndex = promptHistory.length - 1;
+          } else {
+            historyIndex = Math.max(0, historyIndex - 1);
+          }
+          input.value = promptHistory[historyIndex];
+          input.setSelectionRange(input.value.length, input.value.length);
+        } else if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          if (historyIndex === -1) return;
+          historyIndex++;
+          if (historyIndex >= promptHistory.length) {
+            historyIndex = -1;
+            input.value = '';
+          } else {
+            input.value = promptHistory[historyIndex];
+            input.setSelectionRange(input.value.length, input.value.length);
+          }
         }
       });
 
@@ -1132,6 +1172,8 @@ data:
       });
 
     });
+
+    let soundEnabled = localStorage.getItem('soundEnabled') !== 'false';
   index.html: |-
     <!DOCTYPE html>
     <html lang="en">
@@ -1316,12 +1358,13 @@ data:
           font-size: 0.6rem !important;
           padding: 0.2rem 0.4rem !important;
         }
-        #toggle-input {
+        #toggle-buttons {
           position: fixed;
           bottom: 1.7rem;
           right: 1.7rem;
           z-index: 1000;
-          margin: 0;
+          display: flex;
+          gap: 0.5rem;
         }
         /* Styles for displaying code snippets inline and in blocks */
         code {
@@ -1383,7 +1426,10 @@ data:
     <body>
       <div id="chat-container" class="container-fluid d-flex flex-column">
         <div id="messages">
-          <button id="toggle-input" class="btn btn-secondary btn-tiny">Hide Input</button>
+          <div id="toggle-buttons">
+            <button id="toggle-sound" class="btn btn-secondary btn-tiny">Mute Sound</button>
+            <button id="toggle-input" class="btn btn-secondary btn-tiny">Hide Input</button>
+          </div>
         </div>
         <div id="input-section" class="p-2">
           <form id="chat-form" autocomplete="off">
@@ -1414,6 +1460,13 @@ data:
       <script src="app.js"></script>
       <script>
         document.addEventListener('DOMContentLoaded', () => {
+          const toggleSoundBtn = document.getElementById('toggle-sound');
+          toggleSoundBtn.textContent = soundEnabled ? 'Mute Sound' : 'Unmute Sound';
+          toggleSoundBtn.addEventListener('click', () => {
+            soundEnabled = !soundEnabled;
+            localStorage.setItem('soundEnabled', soundEnabled);
+            toggleSoundBtn.textContent = soundEnabled ? 'Mute Sound' : 'Unmute Sound';
+          });
           const toggleBtn = document.getElementById('toggle-input');
           const inputSection = document.getElementById('input-section');
           toggleBtn.addEventListener('click', () => {
@@ -1487,6 +1540,7 @@ data:
         table.style.borderCollapse = 'collapse';
         table.querySelectorAll('th, td').forEach(cell => {
           cell.style.border = '1px solid #d3d3d3';
+          cell.style.padding = '2px';
         });
       });
 
@@ -1611,7 +1665,7 @@ data:
     }
   service-worker.js: |-
     // Service worker for offline support and asset caching
-    const CACHE_NAME = 'fabric-chat-cache-952e7ec4b87ed4ca';
+    const CACHE_NAME = 'fabric-chat-cache-6e9ab06849634f4d';
     const URLs_TO_CACHE = [
       './',
       './index.html',
