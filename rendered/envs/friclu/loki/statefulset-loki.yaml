@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: loki
     app.kubernetes.io/name: loki
     app.kubernetes.io/part-of: memberlist
-    app.kubernetes.io/version: 3.5.7
-    helm.sh/chart: loki-6.45.2
+    app.kubernetes.io/version: 3.6.4
+    helm.sh/chart: loki-6.52.0
   name: loki
   namespace: loki
 spec:
@@ -26,7 +26,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: a10db46ac8296614ac79809ee1dbfc86a002c057216b15df7a545aa8cb94921e
+        checksum/config: f19985a102ff77f2c6de660b0b46e2df838460c1ae354e527ff3e4139d363022
         kubectl.kubernetes.io/default-container: loki
         storage/size: 10Gi
       labels:
@@ -49,7 +49,7 @@ spec:
         - args:
             - -config.file=/etc/loki/config/config.yaml
             - -target=all
-          image: docker.io/grafana/loki:3.5.7
+          image: docker.io/grafana/loki:3.6.4
           imagePullPolicy: IfNotPresent
           name: loki
           ports:
@@ -104,7 +104,7 @@ spec:
               value: "60"
             - name: LOG_LEVEL
               value: INFO
-          image: docker.io/kiwigrid/k8s-sidecar:1.30.10
+          image: docker.io/kiwigrid/k8s-sidecar:1.30.9
           imagePullPolicy: IfNotPresent
           name: loki-sc-rules
           securityContext:
@@ -119,6 +119,7 @@ spec:
       enableServiceLinks: true
       securityContext:
         fsGroup: 10001
+        fsGroupChangePolicy: OnRootMismatch
         runAsGroup: 10001
         runAsNonRoot: true
         runAsUser: 10001

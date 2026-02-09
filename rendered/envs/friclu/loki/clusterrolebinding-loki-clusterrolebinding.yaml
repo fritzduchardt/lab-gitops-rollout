@@ -4,8 +4,8 @@ metadata:
   labels:
     app.kubernetes.io/instance: loki
     app.kubernetes.io/name: loki
-    app.kubernetes.io/version: 3.5.7
-    helm.sh/chart: loki-6.45.2
+    app.kubernetes.io/version: 3.6.4
+    helm.sh/chart: loki-6.52.0
   name: loki-clusterrolebinding
   namespace: loki
 roleRef:

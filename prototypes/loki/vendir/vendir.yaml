@@ -8,6 +8,6 @@ directories:
         helmChart:
           # renovate: datasource=helm
           name: loki
-          version: 6.45.2
+          version: 6.52.0
           repository:
             url: https://grafana.github.io/helm-charts
