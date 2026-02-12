@@ -42,6 +42,8 @@ spec:
               value: "3"
             - name: WEAVIATE_URL
               value: weaviate.weaviate
+            - name: MCP_SERVER
+              value: http://finclaw.finclaw:8000/mcp
             - name: WEAVIATE_CERTAINTY
               value: "0.8"
             - name: WEAVIATE_CLASS
