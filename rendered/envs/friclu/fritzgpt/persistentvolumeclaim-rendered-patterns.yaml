@@ -11,4 +11,4 @@ spec:
       storage: 2Gi
   storageClassName: ""
   volumeMode: Filesystem
-  volumeName: fritzgpt
+  volumeName: fritzgpt-rendered-patterns
