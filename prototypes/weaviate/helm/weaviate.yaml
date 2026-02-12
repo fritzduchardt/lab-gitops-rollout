@@ -216,7 +216,7 @@ modules:
   text2vec-contextionary:
 
     # Enable deployment of this module
-    enabled: true
+    enabled: false
 
     # The configuration below is ignored if enabled==false
     fullnameOverride: contextionary
@@ -256,7 +256,7 @@ modules:
   text2vec-transformers:
 
     # Enable deployment of this module
-    enabled: true
+    enabled: false
 
     # You can set directly an inference URL of this module without deploying it with this release.
     # You can do so by setting a value for the `inferenceUrl` here AND by setting the `enable` to `false`
@@ -370,7 +370,7 @@ modules:
   text2vec-model2vec:
 
     # Enable deployment of this module
-    enabled: true
+    enabled: false
 
     # You can set directly an inference URL of this module without deploying it with this release.
     # You can do so by setting a value for the `inferenceUrl` here AND by setting the `enable` to `false`

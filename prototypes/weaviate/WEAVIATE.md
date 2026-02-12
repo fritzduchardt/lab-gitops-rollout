@@ -5,7 +5,7 @@ curl -X POST http://localhost:8082/v1/schema \
   -d '{
     "class": "PatternFile",
     "description": "File with fabric pattern",
-    "vectorizer": "ttext2vec-openai",
+    "vectorizer": "text2vec-openai",
     "moduleConfig": {
       "text2vec-transformers": {
         "vectorizeClassName": true
@@ -25,6 +25,11 @@ curl -X POST http://localhost:8082/v1/schema \
     ]
   }'
 
+```
+
+# Delete collection
+```bash
+curl -X DELETE "http://localhost:8082/v1/schema/PatternFile"
 ```
 
 # List all collections
@@ -81,10 +86,6 @@ echo '{
   http://localhost:8082/v1/graphql
 ```
 
-# Delete collection
-```bash
-curl -X DELETE "http://localhost:8082/v1/schema/PatternFile"
-```
 
 # Delete document
 ```bash

@@ -13,9 +13,6 @@ data:
       rbac:
         enabled: false
 
-    contextionary:
-      url: contextionary.weaviate.svc.cluster.local.:9999
-
     query_defaults:
       limit: 100
     debug: false

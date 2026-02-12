@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: 1410794c8bdd1429573cb490a10adb00af60e77db9e9e53e07915c8767faf5b6
+        checksum/config: 15f76df24b3ba12ab00dd7ca32228ea77506d8a7de79d71380c71250e1173898
       labels:
         app: weaviate
         app.kubernetes.io/managed-by: Helm
@@ -90,15 +90,11 @@ spec:
             - name: DEFAULT_VECTORIZER_MODULE
               value: none
             - name: ENABLE_MODULES
-              value: text2vec-contextionary,text2vec-transformers,text2vec-model2vec,text2vec-openai
+              value: text2vec-openai
             - name: RAFT_JOIN
               value: weaviate-0
             - name: RAFT_BOOTSTRAP_EXPECT
               value: "1"
-            - name: TRANSFORMERS_INFERENCE_API
-              value: http://transformers-inference.weaviate.svc.cluster.local.:8080
-            - name: MODEL2VEC_INFERENCE_API
-              value: http://model2vec-inference.weaviate.svc.cluster.local.:8080
             - name: OPENAI_APIKEY
               valueFrom:
                 secretKeyRef:
