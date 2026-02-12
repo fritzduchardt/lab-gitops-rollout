@@ -313,6 +313,19 @@ data:
 
     function stripFilenameHeaderForCopy(text) {
       if (typeof text !== 'string' || text.length === 0) return '';
+        // remove tags
+        const keyValueLineRegex = /^\s*\@([A-Za-z0-9_.-]{1,64})\s*:\s*(.+?)\s*$/gm;
+        text = text.replace(keyValueLineRegex, (_m, key, value) => {
+            return '';
+        });
+
+        if (text[0] === '\n') {
+            text = text.slice(1);
+        } else if (text.startsWith('\r\n')) {
+            text = text.slice(2);
+        }
+
+        // remove filename
       const s = text.replace(/^\uFEFF/, '');
       const m = s.match(/^\s*FILENAME:\s*[^\r\n]*\r?\n/);
       if (!m) return text;
@@ -532,99 +545,6 @@ data:
             dropdownItem.dataset.value = item;
             dropdownItem.style.display = 'flex';
             dropdownItem.style.alignItems = 'center';
-
-            if (id === 'obsidian-select' && item !== '(no file)' && item !== 'weaviate') {
-              const showBtn = document.createElement('button');
-              showBtn.className = 'show-file-button';
-              showBtn.textContent = 'Sw';
-              showBtn.style.marginLeft = 'auto';
-              showBtn.addEventListener('click', async (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                searchInput.value = item;
-                searchInput.dataset.value = item;
-                const changeEvent = new Event('change', { bubbles: true });
-                searchInput.dispatchEvent(changeEvent);
-                dropdownMenu.classList.remove('show');
-                try {
-                  const res = await fetch(`${obsidianFileUrl}/${encodeURIComponent(item)}`);
-                  await checkResponse(res);
-                  const content = await res.text();
-                  addMessage(content, 'bot', false,  true, true, false, true, false, '', false);
-                  const lastMsg = messagesEl.querySelector('.message.bot:last-child');
-                  const bubble = lastMsg.querySelector('.bubble');
-                  const deleteBtn = document.createElement('button');
-                  deleteBtn.className = 'delete-file-message-button';
-                  deleteBtn.textContent = 'Delete';
-                  deleteBtn.addEventListener('click', async (ev) => {
-                    ev.preventDefault();
-                    ev.stopPropagation();
-                    try {
-                      const delRes = await fetch(`${obsidianFileUrl}/${encodeURIComponent(item)}`, { method: 'DELETE' });
-                      await checkResponse(delRes);
-                      await loadObsidianFiles();
-                      lastMsg.remove();
-                      addMessage(`Deleted file ${item}`, 'bot', false,  false, true, true, true);
-                    } catch (err) {
-                      console.error(err);
-                      addMessage(`Error deleting file (${err.message})`, 'bot', false,  false, true, true, true);
-                    }
-                  });
-                  bubble.appendChild(deleteBtn);
-                } catch (err) {
-                  console.error(err);
-                  addMessage(`Error loading file (${err.message})`, 'bot', false,  false, true, true, true);
-                }
-              });
-              dropdownItem.appendChild(showBtn);
-            }
-
-            if (id === 'pattern-input') {
-              const showPatternBtn = document.createElement('button');
-              showPatternBtn.className = 'show-pattern-button';
-              showPatternBtn.textContent = 'Sw';
-              showPatternBtn.style.marginLeft = 'auto';
-              showPatternBtn.addEventListener('click', async (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                searchInput.value = item;
-                searchInput.dataset.value = item;
-                const changeEvent = new Event('change', { bubbles: true });
-                searchInput.dispatchEvent(changeEvent);
-                dropdownMenu.classList.remove('show');
-                try {
-                  const res = await fetch(`${patternsUrl}/${encodeURIComponent(item)}`);
-                  await checkResponse(res);
-                  const data = await res.json();
-                  const md = data.Pattern;
-                  addMessage(`${md}`, 'bot', false,  true, true, true, true, false, '', false);
-                  const lastMsg = messagesEl.querySelector('.message.bot:last-child');
-                  const bubble = lastMsg.querySelector('.bubble');
-                  const deletePatBtn = document.createElement('button');
-                  deletePatBtn.className = 'delete-pattern-message-button';
-                  deletePatBtn.textContent = 'Delete';
-                  deletePatBtn.addEventListener('click', async (ev) => {
-                    ev.preventDefault();
-                    ev.stopPropagation();
-                    try {
-                      const delRes = await fetch(`${patternDeleteUrl}/${encodeURIComponent(item)}`, { method: 'DELETE' });
-                      await checkResponse(delRes);
-                      await generatePatterns();
-                      lastMsg.remove();
-                      addMessage(`Deleted pattern ${item}`, 'bot', false,  false, true, true, true);
-                    } catch (err) {
-                      console.error(err);
-                      addMessage(`Error deleting pattern (${err.message})`, 'bot', false,  false, true, true, true);
-                    }
-                  });
-                  bubble.appendChild(deletePatBtn);
-                } catch (err) {
-                  console.error(err);
-                  addMessage(`Error loading pattern (${err.message})`, 'bot', false,  false, true, true, true);
-                }
-              });
-              dropdownItem.appendChild(showPatternBtn);
-            }
 
             dropdownItem.addEventListener('click', (e) => {
               if (e.target.tagName === 'BUTTON') return;
@@ -968,7 +888,6 @@ data:
 
           await checkResponse(res);
           playSuccessSound();
-
           hideLoading(loader);
           const m = document.createElement('div');
           messageBubbleElement = m;
@@ -1001,7 +920,7 @@ data:
                   const obj = JSON.parse(d);
                   const c = obj.content || '';
                   b.dataset.markdown += c;
-                  b.innerHTML = transformObsidianMarkdown(b.dataset.markdown, model);
+                  b.innerHTML = transformObsidianMarkdown(b.dataset.markdown);
                   b.classList.add('full-width');
                   b.querySelectorAll('a').forEach(a => {
                     if (a.querySelector('img') || /\.(png|jpe?g|gif|svg)(\?.*)?$/i.test(a.href)) return;
@@ -1421,6 +1340,31 @@ data:
             font-style: italic;
             color: #6c757d;
         }
+        .bubble-info-tags {
+          position: absolute;
+          top: 6px;
+          left: 10px;
+          display: flex;
+          gap: 6px;
+          flex-wrap: wrap;
+          align-items: center;
+          z-index: 26;
+          max-width: calc(100% - 20px);
+          pointer-events: none;
+          margin-bottom: 0.5rem;
+        }
+        .bubble-info-tag {
+          font-size: 0.7em;
+          line-height: 1.2;
+          padding: 2px 6px;
+          border-radius: 999px;
+          background-color: #496e3f;
+          border: 1px solid rgba(0, 0, 0, 0.08);
+          color: #fff;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
       </style>
     </head>
     <body>
@@ -1485,16 +1429,89 @@ data:
     </html>
   lib.js: |-
     // Transform Obsidian Markdown to HTML snippet, keeping filenames inline
-    function transformObsidianMarkdown(md, model) {
+    function transformObsidianMarkdown(md) {
       let html = "";
-      console.debug("Model:" + model);
-      if (model) {
-        html = `<div class="model-info">${model}</div>`;
-      }
       if (md.startsWith("<!-- HTML -->")) {
         console.debug("html only");
         return html + md;
       }
+
+      function escapeHtml(text) {
+        return String(text)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function extractFrontmatter(mdText) {
+        const normalized = String(mdText).replace(/\r\n/g, "\n");
+        if (!normalized.startsWith("---\n")) {
+          return { frontmatter: null, body: mdText };
+        }
+
+        const endIndex = normalized.indexOf("\n---", 4);
+        if (endIndex === -1) {
+          return { frontmatter: null, body: mdText };
+        }
+
+        const after = normalized.slice(endIndex + 1);
+        if (!after.startsWith("---")) {
+          return { frontmatter: null, body: mdText };
+        }
+
+        const afterRest = after.slice(3);
+        if (afterRest.length > 0 && afterRest[0] !== "\n") {
+          return { frontmatter: null, body: mdText };
+        }
+
+        const frontmatterRaw = normalized.slice(4, endIndex);
+        const body = afterRest.startsWith("\n") ? afterRest.slice(1) : afterRest;
+
+        return { frontmatter: frontmatterRaw, body };
+      }
+
+      function parseFrontmatterTags(frontmatterRaw) {
+        if (!frontmatterRaw) return [];
+        const tags = [];
+        const lines = String(frontmatterRaw).split("\n");
+
+        for (let i = 0; i < lines.length; i++) {
+          const line = lines[i];
+
+          const keyMatch = line.match(/^([A-Za-z0-9_-]+)\s*:\s*(.*)\s*$/);
+          if (!keyMatch) continue;
+
+          const key = keyMatch[1];
+          let value = keyMatch[2] || "";
+
+          if (value === "" && i + 1 < lines.length && lines[i + 1].match(/^\s*-\s+/)) {
+            const items = [];
+            while (i + 1 < lines.length) {
+              const itemMatch = lines[i + 1].match(/^\s*-\s*(.+?)\s*$/);
+              if (!itemMatch) break;
+              items.push(itemMatch[1]);
+              i++;
+            }
+            value = items.join(", ");
+          }
+
+          const trimmed = value.trim();
+          if (!trimmed) continue;
+          tags.push(`${key}: ${trimmed}`);
+        }
+
+        return tags;
+      }
+
+      function buildFrontmatterTagsHtml(frontmatterRaw) {
+        const tags = parseFrontmatterTags(frontmatterRaw);
+        if (tags.length === 0) return "";
+        const inner = tags.map(t => `<span class="bubble-info-tag">${escapeHtml(t)}</span>`).join("");
+        return `<div class="bubble-info-tags">${inner}</div>`;
+      }
+
       let sections = [];
       const regex = /FILENAME: (.+)\n([\s\S]*?)(?=FILENAME: |$)/g;
 
@@ -1502,22 +1519,29 @@ data:
       for (const [, filename, content] of md.matchAll(regex)) {
         sections.push({ filename, content });
       }
+
       if (sections.length > 0) {
         sections.forEach((section, index) => {
-          const htmlContent = window.marked ? marked.parse(section.content) : section.content.replace(/\n/g, '<br>');
+          const extracted = extractFrontmatter(section.content);
+          const tagsHtml = buildFrontmatterTagsHtml(extracted.frontmatter);
+          const htmlContent = window.marked ? marked.parse(extracted.body) : extracted.body.replace(/\n/g, '<br>');
           html += `
             <details class="file-section" ${index === 0 ? 'open' : ''}>
               <summary class="filename-info" onclick="document.querySelectorAll('.file-section').forEach(s=>{ if(s!==this.parentNode){ s.open = false; } });">
                 FILENAME: ${section.filename}
               </summary>
               <div class="file-content">
+                ${tagsHtml}
                 ${htmlContent}
               </div>
             </details>
           `;
         });
       } else {
-        html += window.marked ? marked.parse(md) : md.replace(/\n/g, '<br>');
+        const extracted = extractFrontmatter(md);
+        const tagsHtml = buildFrontmatterTagsHtml(extracted.frontmatter);
+        const rendered = window.marked ? marked.parse(extracted.body) : extracted.body.replace(/\n/g, '<br>');
+        html += `${tagsHtml}${rendered}`;
       }
 
       // Parse HTML to handle code blocks
@@ -1665,7 +1689,7 @@ data:
     }
   service-worker.js: |-
     // Service worker for offline support and asset caching
-    const CACHE_NAME = 'fabric-chat-cache-926c668ff0d6e192';
+    const CACHE_NAME = 'fabric-chat-cache-c8a825e08b47097a';
     const URLs_TO_CACHE = [
       './',
       './index.html',

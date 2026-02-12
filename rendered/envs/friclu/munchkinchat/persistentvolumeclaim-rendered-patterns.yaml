@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rendered-patterns
+  namespace: munchkinchat
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+  storageClassName: ""
+  volumeMode: Filesystem
+  volumeName: munchkinchat

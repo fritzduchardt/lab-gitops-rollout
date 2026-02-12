@@ -55,6 +55,8 @@ spec:
             - mountPath: /home/fabric/.config/fabric/.env
               name: fabric-env
               subPath: .env
+            - mountPath: /home/fabric/.config/fabric/patterns
+              name: rendered-patterns
             - mountPath: /home/fabric/sync
               name: sync
       nodeSelector:
@@ -66,3 +68,6 @@ spec:
         - name: sync
           persistentVolumeClaim:
             claimName: sync
+        - name: rendered-patterns
+          persistentVolumeClaim:
+            claimName: rendered-patterns
