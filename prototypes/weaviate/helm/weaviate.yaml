@@ -394,7 +394,7 @@ modules:
     # Set your OpenAI API Key to be passed to Weaviate pod as
     # an environment variable. You can set either the OpenAI's Service API key
     # OR the Azure OpenAI's Service Key. Note that you cannot set both of the at the same time.
-    apiKey: '<path:data/shared/openai#apiKey>'
+    apiKey: '<path:kv/data/shared/openai#apiKey>'
     azureApiKey: ''
 
 

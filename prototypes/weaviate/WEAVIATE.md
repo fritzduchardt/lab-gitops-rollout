@@ -5,7 +5,7 @@ curl -X POST http://localhost:8082/v1/schema \
   -d '{
     "class": "PatternFile",
     "description": "File with fabric pattern",
-    "vectorizer": "text2vec-transformers",
+    "vectorizer": "ttext2vec-openai",
     "moduleConfig": {
       "text2vec-transformers": {
         "vectorizeClassName": true
