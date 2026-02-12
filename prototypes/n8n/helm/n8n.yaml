@@ -61,10 +61,15 @@ main:
     - name: syncthing
       persistentVolumeClaim:
         claimName: syncthing
+    - name: fabric-rendered-patterns
+      persistentVolumeClaim:
+        claimName: fabric-rendered-patterns
 
   extraVolumeMounts:
     - name: syncthing
       mountPath: /syncthing
+    - name: fabric-rendered-patterns
+      mountPath: /rendered-patterns
 
 # # # # # # # # # # # # # # # #
 #

@@ -21,7 +21,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: f6f32c3801a1044ce701ddcf06d5097026f1ff33446aa5289f22e5c05f07a336
+        checksum/config: fcf6c5369768bc91a665a9d3d233cb1af07d5d2d4dbebbe1719bbfd880cb1788
       labels:
         app.kubernetes.io/instance: n8n
         app.kubernetes.io/name: n8n
@@ -65,6 +65,8 @@ spec:
               name: data
             - mountPath: /syncthing
               name: syncthing
+            - mountPath: /rendered-patterns
+              name: fabric-rendered-patterns
       nodeSelector:
         kubernetes.io/hostname: friclu-1
       securityContext:
@@ -81,3 +83,6 @@ spec:
         - name: syncthing
           persistentVolumeClaim:
             claimName: syncthing
+        - name: fabric-rendered-patterns
+          persistentVolumeClaim:
+            claimName: fabric-rendered-patterns

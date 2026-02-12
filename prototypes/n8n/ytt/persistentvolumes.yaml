@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: syncthing
+spec:
+  storageClassName: "n8n"
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 2Gi
+  hostPath:
+    path: /volumes/syncthing
+    type: ""
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: syncthing
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+  storageClassName: "n8n"
+  volumeMode: Filesystem
+  volumeName: syncthing
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: fabric-rendered-patterns
+spec:
+  storageClassName: "n8n"
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 2Gi
+  hostPath:
+    path: /volumes/fabric/rendered-patterns/
+    type: ""
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: fabric-rendered-patterns
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+  storageClassName: "n8n"
+  volumeMode: Filesystem
+  volumeName: fabric-rendered-patterns
