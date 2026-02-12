@@ -90,7 +90,7 @@ spec:
             - name: DEFAULT_VECTORIZER_MODULE
               value: none
             - name: ENABLE_MODULES
-              value: text2vec-contextionary,text2vec-transformers,text2vec-model2vec
+              value: text2vec-contextionary,text2vec-transformers,text2vec-model2vec,text2vec-openai
             - name: RAFT_JOIN
               value: weaviate-0
             - name: RAFT_BOOTSTRAP_EXPECT
@@ -99,6 +99,11 @@ spec:
               value: http://transformers-inference.weaviate.svc.cluster.local.:8080
             - name: MODEL2VEC_INFERENCE_API
               value: http://model2vec-inference.weaviate.svc.cluster.local.:8080
+            - name: OPENAI_APIKEY
+              valueFrom:
+                secretKeyRef:
+                  key: apiKey
+                  name: weaviate-openai
             - name: CLUSTER_JOIN
               value: weaviate-headless.weaviate.svc.cluster.local.
           image: cr.weaviate.io/semitechnologies/weaviate:1.32.7
