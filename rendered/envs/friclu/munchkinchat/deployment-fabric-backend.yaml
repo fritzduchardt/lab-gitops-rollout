@@ -41,11 +41,11 @@ spec:
             - name: JOURNAL_FILE_RETRO_MONTHS
               value: "3"
             - name: WEAVIATE_URL
-              value: http://weaviate.weaviate
+              value: weaviate.weaviate
             - name: WEAVIATE_CERTAINTY
-              value: "0.5"
+              value: "0.8"
             - name: WEAVIATE_CLASS
-              value: ObsidianFile
+              value: PatternFile
           image: ghcr.io/fritzduchardt/fabric:main
           imagePullPolicy: Always
           name: fabric-backend

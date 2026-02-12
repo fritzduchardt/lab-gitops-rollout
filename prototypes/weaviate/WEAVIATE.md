@@ -50,14 +50,14 @@ curl -X POST http://localhost:8082/v1/objects \
 ```bash
 curl -X POST http://localhost:8082/v1/graphql \
   -H "Content-Type: application/json" \
-  -d '{"query":"{ Get { PatternFile(nearText: { concepts: [\"ai\"], certainty: 0.7  }) { path content _additional { distance } } } }"}' | jq
+  -d '{"query":"{ Get { PatternFile(limit: 2, nearText: { concepts: [\"help me with Python\"], distance: 0.8  }) { path content _additional { distance } } } }"}' | jq
 ```
 
 # Query data hybrid
 ```bash
 curl -X POST http://localhost:8082/v1/graphql \
   -H "Content-Type: application/json" \
-  -d '{"query":"{ Get { PatternFile(limit: 1, hybrid: {query: \"how to do this in golang\", alpha: 0.5}) { path content _additional { id }} } }"}' | jq
+  -d '{"query":"{ Get { PatternFile(limit: 1, hybrid: {query: \"In weaviate explain the difference between neartext and hybrid search\", alpha: 0.9}) { path content _additional { distance }} } }"}' | jq
 ```
 
 # Query data by path
