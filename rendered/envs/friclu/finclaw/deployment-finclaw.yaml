@@ -28,7 +28,7 @@ spec:
             - name: TWELVE_DATA
               value: <path:kv/data/finclaw#twelveData>
           image: ghcr.io/fritzduchardt/finclaw:main
-          imagePullPolicy: always
+          imagePullPolicy: Always
           name: finclaw
           ports:
             - containerPort: 8000
