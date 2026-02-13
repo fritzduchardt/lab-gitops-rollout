@@ -1318,7 +1318,7 @@ data:
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-          max-width: 90px;
+          max-width: 100px;
           display: inline-block;
           cursor: pointer;
         }
@@ -1427,9 +1427,7 @@ data:
       if (metadataTags.length > 0) {
         html = `<div class="bubble-info-tags">`;
         for (const tag of metadataTags) {
-          const keyLower = tag.key.toLowerCase();
-          const shouldRemovePrefix = keyLower === 'pattern' || keyLower === 'model';
-          const text = shouldRemovePrefix ? `${tag.value}` : `${tag.key}: ${tag.value}`;
+          const text = `${tag.key}: ${tag.value}`;
           const escaped = text.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
           html += `<span class="bubble-info-tag" title="${escaped}" data-full-text="${escaped}">${escaped}</span>`;
         }
@@ -1619,7 +1617,7 @@ data:
     }
   service-worker.js: |-
     // Service worker for offline support and asset caching
-    const CACHE_NAME = 'fabric-chat-cache-5c645b50a207d0a7';
+    const CACHE_NAME = 'fabric-chat-cache-da44ac0b4ef60c53';
     const URLs_TO_CACHE = [
       './',
       './index.html',
