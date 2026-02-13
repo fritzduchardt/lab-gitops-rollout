@@ -6,40 +6,6 @@ data:
     let lastPrompt = '';  // store last user prompt
     let isChatButtonPressed = false;  // track if chat button was pressed
     let abortControllers = new Map();  // map of requestId -> { controller, cancelled }
-    let isRequestCancelled = false; // legacy flag kept for backward compatibility but not used for per-request cancellation
-
-    const funnyRetryMessages = [
-        "Hang on, the hamsters are spinning up the wheel again...",
-        "Just a moment, we're negotiating with the server gnomes...",
-        "Reticulating splines...",
-        "The server is having a moment. Let's try that again.",
-        "Attempting to summon the digital spirits... Again.",
-        "Our carrier pigeon seems to have gotten lost. Resending...",
-        "Don't worry, we've dispatched a team of highly trained monkeys.",
-        "Trying to reconnect to the Matrix...",
-        "The server seems to be running on dial-up. Patience, young padawan.",
-        "Poking the server with a stick...",
-        "It's not you, it's me... I mean, the server. Retrying.",
-        "Let's give it another go. Third time's the charm, right?",
-        "The bits are flowing, just a little upstream. Trying again.",
-        "Our AI is contemplating the meaning of life. One more try.",
-        "Waking up the server from its nap...",
-        "Sending positive vibes to the server... and another request.",
-        "Hold tight, we're trying a different magic spell.",
-        "The server seems to be running on dial-up. Patience, young padawan.",
-        "I think the server is on a coffee break. Let's wait and retry.",
-        "Re-calibrating the flux capacitor...",
-        "The server is busy watching cat videos. Retrying.",
-        "Maybe if we ask nicely this time? Retrying...",
-        "Our intern tripped over the server cable. Fixing and retrying.",
-        "Just a glitch in the simulation. We're on it.",
-        "The server seems to be checking its horoscope. Let's try again.",
-        "I've got a good feeling about this next attempt.",
-        "Is this thing on? *taps mic* Retrying...",
-        "We're sending in the backup squirrels. Stand by.",
-        "The server seems to be running on dial-up. Patience, young padawan.",
-        "Okay, deep breaths. We can do this. Retrying..."
-    ];
 
     // API domain configuration
     const apiDomain = 'https://munchkinchat.duchardt.net/api'; // Hardcoded default since process.env isn't available in browser
@@ -48,8 +14,6 @@ data:
     const patternsUrl = `${apiDomain}/patterns`;
     const patternsGenerateUrl = `${apiDomain}/patterns/generate`;
     const obsidianUrl = `${apiDomain}/obsidian/files`;
-    const patternDeleteUrl = `${apiDomain}/patterns/delete`;
-    const obsidianFileUrl = `${apiDomain}/obsidian/file`;
     const telegramUrl = `${apiDomain}/telegram/send`;
     const storeUrl = `${apiDomain}/store`;
 
@@ -713,10 +677,6 @@ data:
         b.classList.add('error');
       }
 
-      if (funnyRetryMessages.some(msg => text.startsWith(msg))) {
-        b.style.backgroundColor = '#FFDAB9';
-      }
-
       b.dataset.markdown = text;
       b.innerHTML = transformObsidianMarkdown(text);
       if (sender === 'user') {
@@ -842,15 +802,12 @@ data:
 
       let lastError;
       let success = false;
-      const entryRef = abortControllers.get(requestId);
 
-      for (let attempt = 1; attempt <= 10 && !success; attempt++) {
-        const entry = abortControllers.get(requestId);
-        if (entry && entry.cancelled) {
-            break;
-        }
+      const entry = abortControllers.get(requestId);
+      if (entry && entry.cancelled) {
+        success = true;
+      } else {
         let messageBubbleElement = null;
-
         try {
           const payload = {
             prompts: [{
@@ -871,6 +828,7 @@ data:
           };
 
           const abortController = new AbortController();
+          const timeoutId = setTimeout(() => abortController.abort(), 60000);
           const currentEntry = abortControllers.get(requestId);
           if (currentEntry) {
             currentEntry.controller = abortController;
@@ -885,6 +843,7 @@ data:
             body: JSON.stringify(payload),
             signal: abortController.signal
           });
+          clearTimeout(timeoutId);
 
           await checkResponse(res);
           playSuccessSound();
@@ -956,13 +915,7 @@ data:
           if (err.name === 'AbortError') {
             success = true;
           } else {
-            console.error(`Attempt ${attempt} failed:`, err);
-            if (attempt < 10) {
-              const randomIndex = Math.floor(Math.random() * funnyRetryMessages.length);
-              const retryMessage = funnyRetryMessages[randomIndex];
-              addMessage(`${retryMessage} (${attempt})`, 'bot', false, false, true, true, true);
-              await new Promise(resolve => setTimeout(resolve, 5000));
-            }
+            console.error(err);
           }
         }
       }
@@ -1145,6 +1098,7 @@ data:
         }
         .message.bot .bubble {
           background: #e9ecef;
+          padding-top: 40px !important;
           color: #000;
         }
         .bubble.error {
@@ -1350,7 +1304,7 @@ data:
           align-items: center;
           z-index: 26;
           max-width: calc(100% - 20px);
-          pointer-events: none;
+          pointer-events: auto;
           margin-bottom: 0.5rem;
         }
         .bubble-info-tag {
@@ -1364,6 +1318,9 @@ data:
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
+          max-width: 100px;
+          display: inline-block;
+          cursor: pointer;
         }
       </style>
     </head>
@@ -1417,6 +1374,21 @@ data:
             inputSection.classList.toggle('d-none');
             toggleBtn.textContent = inputSection.classList.contains('d-none') ? 'Show Input' : 'Hide Input';
           });
+
+          document.addEventListener('click', (e) => {
+            const tag = e.target.closest('.bubble-info-tag');
+            if (!tag) return;
+
+            if (tag.dataset.expanded === 'true') {
+              tag.dataset.expanded = 'false';
+              if (tag.dataset.collapsedText !== undefined) {
+                tag.textContent = tag.dataset.collapsedText;
+              }
+            } else {
+              tag.dataset.expanded = 'true';
+              tag.textContent = tag.dataset.fullText || tag.textContent;
+            }
+          }, true);
         });
         if ('serviceWorker' in navigator) {
           window.addEventListener('load', () => {
@@ -1455,7 +1427,9 @@ data:
       if (metadataTags.length > 0) {
         html = `<div class="bubble-info-tags">`;
         for (const tag of metadataTags) {
-          html += `<span class="bubble-info-tag">${tag.key}: ${tag.value}</span>`;
+          const text = `${tag.key}: ${tag.value}`;
+          const escaped = text.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+          html += `<span class="bubble-info-tag" title="${escaped}" data-full-text="${escaped}">${escaped}</span>`;
         }
         html += `</div>`;
       }
@@ -1502,6 +1476,13 @@ data:
         codeBlocks.push({ placeholder, content: el.innerHTML });
         el.innerHTML = placeholder;
         placeholderIndex++;
+      });
+
+      doc.querySelectorAll('.bubble-info-tag').forEach(el => {
+        const fullText = el.textContent || '';
+        el.dataset.fullText = fullText;
+        el.dataset.collapsedText = fullText;
+        el.setAttribute('title', fullText);
       });
 
       // Ensure tables have a light gray border
@@ -1636,7 +1617,7 @@ data:
     }
   service-worker.js: |-
     // Service worker for offline support and asset caching
-    const CACHE_NAME = 'fabric-chat-cache-f61cd4978a793762';
+    const CACHE_NAME = 'fabric-chat-cache-3e4167cc6678410f';
     const URLs_TO_CACHE = [
       './',
       './index.html',
