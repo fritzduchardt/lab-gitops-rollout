@@ -27,6 +27,8 @@ spec:
               value: <path:kv/data/finclaw#rapid>
             - name: TWELVE_DATA
               value: <path:kv/data/finclaw#twelveData>
+            - name: WEATHER_API
+              value: <path:kv/data/finclaw#weatherAPI>
           image: ghcr.io/fritzduchardt/finclaw:main
           imagePullPolicy: Always
           name: finclaw

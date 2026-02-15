@@ -661,6 +661,23 @@ data:
       messageEl.appendChild(btn);
     }
 
+    function executeScripts(element) {
+      const scripts = element.querySelectorAll('script');
+      scripts.forEach(script => {
+        if (script.src) {
+          const newScript = document.createElement('script');
+          newScript.src = script.src;
+          document.head.appendChild(newScript);
+        } else if (script.textContent.trim()) {
+          try {
+            eval(script.textContent);
+          } catch (e) {
+            console.error('Error executing script:', e);
+          }
+        }
+      });
+    }
+
     function addMessage(text, sender, isChat = false, view = false, hideStore = false,  hideShare = false, hideCopy = false, showPrompt = false, patternUsed = '') {
       const m = document.createElement('div');
       m.classList.add('message', sender);
@@ -722,6 +739,14 @@ data:
 
       ensureCodeBlockCopyButtons(b);
       ensureTableCopyButtons(b);
+      const allButtons = b.querySelectorAll('button:not(.bubble-delete-button):not(.code-copy-button):not(.table-copy-button)');
+      allButtons.forEach(btn => {
+        btn.style.display = 'inline-block';
+        btn.style.marginRight = '4px';
+      });
+      if (allButtons.length > 0) {
+        allButtons[allButtons.length - 1].style.marginRight = '0';
+      }
       return m;
     }
 
@@ -828,7 +853,7 @@ data:
           };
 
           const abortController = new AbortController();
-          const timeoutId = setTimeout(() => abortController.abort(), 60000);
+          const timeoutId = setTimeout(() => abortController.abort(), 320000);
           const currentEntry = abortControllers.get(requestId);
           if (currentEntry) {
             currentEntry.controller = abortController;
@@ -857,7 +882,6 @@ data:
           b.style.maxWidth = '100%';
           b.dataset.markdown = '';
           m.appendChild(b);
-          messagesEl.appendChild(m);
           addBubbleDeleteButton(m);
 
           const reader = res.body.getReader();
@@ -880,7 +904,9 @@ data:
                   const c = obj.content || '';
                   b.dataset.markdown += c;
                   b.innerHTML = transformObsidianMarkdown(b.dataset.markdown);
-                  if (!b._paddingIncreased && b.innerHTML.includes('bubble-info-tags')) {
+                    executeScripts(b);
+
+                    if (!b._paddingIncreased && b.innerHTML.includes('bubble-info-tags')) {
                     b.style.paddingTop = (parseInt(b.style.paddingTop || '0') + 40) + 'px';
                     b._paddingIncreased = true;
                   }
@@ -1060,6 +1086,7 @@ data:
       <meta name="theme-color" content="#0d6efd">
       <link rel="manifest" href="manifest.json">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+
       <style>
         /* Set full-height and light blue background */
         body, html {
@@ -1362,6 +1389,9 @@ data:
       </div>
       <script src="lib.js"></script>
       <script src="app.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vega@6.2.0"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vega-lite@6.4.2"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vega-embed@7.1.0"></script>
       <script>
         document.addEventListener('DOMContentLoaded', () => {
           const toggleSoundBtn = document.getElementById('toggle-sound');
@@ -1405,10 +1435,10 @@ data:
   lib.js: |-
     // Transform Obsidian Markdown to HTML snippet, keeping filenames inline
     function transformObsidianMarkdown(md) {
+
       let html = "";
       let contentWithoutMetadata = md;
       let metadataTags = [];
-
       const { contentWithoutMetadata: extractedContent, metadata } = extractMetadata(md);
       contentWithoutMetadata = extractedContent;
 
@@ -1436,6 +1466,10 @@ data:
           html += `<span class="bubble-info-tag" title="${escaped}" data-full-text="${escaped}">${escaped}</span>`;
         }
         html += `</div>`;
+      }
+
+      if (md.startsWith("<!-- HTML -->")) {
+        return html + contentWithoutMetadata;
       }
 
       let sections = [];
@@ -1645,7 +1679,7 @@ data:
     }
   service-worker.js: |-
     // Service worker for offline support and asset caching
-    const CACHE_NAME = 'fabric-chat-cache-e15d2f763cfc131b';
+    const CACHE_NAME = 'fabric-chat-cache-96895de61a475a82';
     const URLs_TO_CACHE = [
       './',
       './index.html',
