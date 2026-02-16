@@ -853,7 +853,7 @@ data:
           };
 
           const abortController = new AbortController();
-          const timeoutId = setTimeout(() => abortController.abort(), 320000);
+          const timeoutId = setTimeout(() => abortController.abort(), 600000);
           const currentEntry = abortControllers.get(requestId);
           if (currentEntry) {
             currentEntry.controller = abortController;
@@ -882,6 +882,7 @@ data:
           b.style.maxWidth = '100%';
           b.dataset.markdown = '';
           m.appendChild(b);
+          messagesEl.appendChild(m);
           addBubbleDeleteButton(m);
 
           const reader = res.body.getReader();
@@ -905,7 +906,6 @@ data:
                   b.dataset.markdown += c;
                   b.innerHTML = transformObsidianMarkdown(b.dataset.markdown);
                     executeScripts(b);
-
                     if (!b._paddingIncreased && b.innerHTML.includes('bubble-info-tags')) {
                     b.style.paddingTop = (parseInt(b.style.paddingTop || '0') + 40) + 'px';
                     b._paddingIncreased = true;
@@ -1443,6 +1443,7 @@ data:
       contentWithoutMetadata = extractedContent;
 
       if (metadata) {
+        console.debug("Metadata: " + JSON.stringify(metadata));
         const lines = metadata.split('\n');
         for (const line of lines) {
           const colonIndex = line.indexOf(':');
@@ -1679,7 +1680,7 @@ data:
     }
   service-worker.js: |-
     // Service worker for offline support and asset caching
-    const CACHE_NAME = 'fabric-chat-cache-96895de61a475a82';
+    const CACHE_NAME = 'fabric-chat-cache-66da59ffbdee524b';
     const URLs_TO_CACHE = [
       './',
       './index.html',
