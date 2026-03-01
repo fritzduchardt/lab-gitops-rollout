@@ -4,14 +4,14 @@ metadata:
   labels:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: weaviate
-  name: weaviate
+  name: weaviate-grpc
   namespace: weaviate
 spec:
   ports:
-    - name: http
-      port: 80
+    - name: grpc
+      port: 50051
       protocol: TCP
-      targetPort: 8080
+      targetPort: 50051
   selector:
     app: weaviate
   type: ClusterIP

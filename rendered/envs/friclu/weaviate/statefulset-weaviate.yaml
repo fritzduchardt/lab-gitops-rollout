@@ -116,6 +116,9 @@ spec:
           name: weaviate
           ports:
             - containerPort: 8080
+            - containerPort: 50051
+              name: grpc
+              protocol: TCP
           readinessProbe:
             failureThreshold: 3
             httpGet:
