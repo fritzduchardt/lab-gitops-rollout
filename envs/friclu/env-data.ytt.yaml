@@ -30,13 +30,9 @@ environment:
     - proto: argocd
     - proto: cert-manager
     - proto: cloudnative-pg
-    - name: fritzgpt
-      proto: fabric
     - name: yummydocs
       proto: mkdocs
     - proto: home-assistant
-    - name: isabellabot
-      proto: fabric
     - name: balkandocs
       proto: mkdocs
     - proto: immich
@@ -45,8 +41,6 @@ environment:
     - proto: linkding
     - proto: local-path-provisioner
     - proto: loki
-    - name: munchkinchat
-      proto: fabric
     - proto: nginx
     - proto: n8n
     - proto: pushgateway
@@ -57,7 +51,3 @@ environment:
     - proto: weaviate
     - name: karma
       proto: karma
-    - name: windmill
-      proto: windmill
-    - name: finclaw
-      proto: finclaw
