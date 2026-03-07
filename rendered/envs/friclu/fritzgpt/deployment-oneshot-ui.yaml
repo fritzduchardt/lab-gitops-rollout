@@ -22,7 +22,10 @@ spec:
         - env:
             - name: PORT
               value: "3000"
+            - name: API_URL
+              value: http://oneshot:8000
           image: ghcr.io/fritzduchardt/oneshot-ui:main
+          imagePullPolicy: Always
           name: oneshot-ui
           ports:
             - containerPort: 3000

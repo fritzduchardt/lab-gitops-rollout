@@ -20,6 +20,7 @@ spec:
     spec:
       containers:
         - image: nginx:1.29
+          imagePullPolicy: Always
           name: nginx
           ports:
             - containerPort: 8080

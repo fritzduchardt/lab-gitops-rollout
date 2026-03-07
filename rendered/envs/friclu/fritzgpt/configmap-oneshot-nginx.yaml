@@ -13,7 +13,7 @@ data:
         proxy_http_version 1.1;
         proxy_read_timeout 300;
         proxy_send_timeout 300;
-        proxy_pass http://oneshot:8080/;
+        proxy_pass http://oneshot:8000/;
       }
 
       location / {
