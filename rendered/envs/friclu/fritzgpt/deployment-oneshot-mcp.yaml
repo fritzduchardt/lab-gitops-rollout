@@ -34,4 +34,5 @@ spec:
           name: oneshot-mcp
           ports:
             - containerPort: 9000
-      nodeSelector: friclu-1
+      nodeSelector:
+        kubernetes.io/hostname: friclu-1
