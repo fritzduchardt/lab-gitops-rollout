@@ -23,7 +23,7 @@ spec:
             - name: PORT
               value: "3000"
             - name: API_URL
-              value: http://oneshot:8000
+              value: http://oneshot:8000/backend
           image: ghcr.io/fritzduchardt/oneshot-ui:main
           imagePullPolicy: Always
           name: oneshot-ui
