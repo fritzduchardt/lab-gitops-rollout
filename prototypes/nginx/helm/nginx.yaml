@@ -9,3 +9,4 @@ controller:
     enabled: true
     serviceMonitor:
       enabled: true
+  allowSnippetAnnotations: true
