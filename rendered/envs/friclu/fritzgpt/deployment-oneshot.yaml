@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/component: oneshot
+    app.kubernetes.io/name: oneshot
+  name: oneshot
+  namespace: fritzgpt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: oneshot
+      app.kubernetes.io/name: oneshot
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: oneshot
+        app.kubernetes.io/name: oneshot
+    spec:
+      containers:
+        - env:
+            - name: OS_CONFIG_ENV_FILE
+              value: /app/.oneshot/.env
+            - name: OS_CONFIG_PATTERN_DIR
+              value: /app/.oneshot/patterns
+            - name: OS_MARKDOWN_BASE_DIR
+              value: /sync
+            - name: OS_MARKDOWN_VAULT_DIR_1
+              value: FritzSync/private
+            - name: OS_MARKDOWN_VAULT_DIR_2
+              value: BubaFritzShare/private
+            - name: OS_PATTERN_TEMPLATE_DIR
+              value: /sync/FritzSync/patterns
+            - name: LOG_LEVEL
+              value: info
+            - name: MCP_URL
+              value: http://oneshot-mcp:8081
+            - name: WEAVIATE_HOST
+              value: weaviate.weaviate
+            - name: WEAVIATE_PORT
+              value: 80
+            - name: WEAVIATE_GRPC_PORT
+              value: 50051
+          image: fritzduchardt/oneshot:main
+          name: oneshot
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - mountPath: /sync
+              name: sync-dir
+            - mountPath: /app/.oneshot/.env
+              name: oneshot-env-file
+              subPath: .env
+      nodeSelector: friclu-1
+      volumes:
+        - name: sync-dir
+          persistentVolumeClaim:
+            claimName: sync-dir
+        - name: oneshot-env-file
+          secret:
+            defaultMode: 420
+            secretName: oneshot-env-file

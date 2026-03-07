@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/component: oneshot-ui
+    app.kubernetes.io/name: oneshot
+  name: oneshot-ui
+  namespace: fritzgpt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: oneshot-ui
+      app.kubernetes.io/name: oneshot
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: oneshot-ui
+        app.kubernetes.io/name: oneshot
+    spec:
+      containers:
+        - env:
+            - name: PORT
+              value: 3000
+          image: fritzduchardt/oneshot-ui:main
+          name: oneshot-ui
+          ports:
+            - containerPort: 3000

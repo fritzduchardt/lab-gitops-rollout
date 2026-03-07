@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/component: oneshot-ui
+    app.kubernetes.io/name: oneshot
+  name: oneshot-ui
+  namespace: fritzgpt
+spec:
+  ports:
+    - name: http
+      port: 3000
+      targetPort: 3000
+  selector:
+    app.kubernetes.io/component: oneshot-ui
+    app.kubernetes.io/name: oneshot
+  type: ClusterIP
