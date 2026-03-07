@@ -22,7 +22,7 @@ spec:
         - env:
             - name: PORT
               value: "3000"
-          image: fritzduchardt/oneshot-ui:main
+          image: ghcr.io/fritzduchardt/oneshot-ui:main
           name: oneshot-ui
           ports:
             - containerPort: 3000

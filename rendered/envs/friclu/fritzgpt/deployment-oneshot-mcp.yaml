@@ -30,7 +30,7 @@ spec:
               value: BubaFritzShare/private
             - name: LOG_LEVEL
               value: info
-          image: fritzduchardt/oneshot-mcp:main
+          image: ghcr.io/fritzduchardt/oneshot-mcp:main
           name: oneshot-mcp
           ports:
             - containerPort: 9000
