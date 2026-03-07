@@ -55,6 +55,8 @@ spec:
             - mountPath: /app/.oneshot/.env
               name: oneshot-env-file
               subPath: .env
+            - mountPath: /app/.oneshot/patterns
+              name: oneshot-pattern-path
       nodeSelector:
         kubernetes.io/hostname: friclu-1
       volumes:
@@ -65,3 +67,5 @@ spec:
           secret:
             defaultMode: 420
             secretName: oneshot-env-file
+        - emptyDir: {}
+          name: oneshot-pattern-path
