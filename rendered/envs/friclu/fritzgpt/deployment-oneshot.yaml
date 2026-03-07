@@ -42,6 +42,8 @@ spec:
               value: "80"
             - name: WEAVIATE_GRPC_PORT
               value: "50051"
+            - name: PORT
+              value: "8000"
           image: ghcr.io/fritzduchardt/oneshot:main
           imagePullPolicy: Always
           name: oneshot
