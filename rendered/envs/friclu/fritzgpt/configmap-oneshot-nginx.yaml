@@ -19,7 +19,7 @@ data:
         proxy_pass http://oneshot:8000/;
       }
 
-      location = /js/sw.js {
+      location ~* ^/(manifest\.json|js/sw\.js)$ {
         auth_basic off;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
