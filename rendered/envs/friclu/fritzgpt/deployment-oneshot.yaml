@@ -20,6 +20,8 @@ spec:
     spec:
       containers:
         - env:
+            - name: PORT
+              value: "8000"
             - name: OS_CONFIG_ENV_FILE
               value: /app/.oneshot/.env
             - name: OS_CONFIG_PATTERN_DIR
@@ -40,10 +42,10 @@ spec:
               value: weaviate.weaviate
             - name: WEAVIATE_PORT
               value: "80"
+            - name: WEAVIATE_GRPC_HOST
+              value: weaviate-grpc.weaviate
             - name: WEAVIATE_GRPC_PORT
               value: "50051"
-            - name: PORT
-              value: "8000"
           image: ghcr.io/fritzduchardt/oneshot:main
           imagePullPolicy: Always
           name: oneshot
