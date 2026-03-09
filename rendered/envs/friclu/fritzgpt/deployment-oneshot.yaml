@@ -34,6 +34,8 @@ spec:
               value: BubaFritzShare/private
             - name: OS_PATTERN_TEMPLATE_DIR
               value: /sync/FritzSync/patterns
+            - name: OS_SYNC_PATTERN_DIR
+              value: /sync/oneshot/patterns
             - name: LOG_LEVEL
               value: info
             - name: MCP_URL

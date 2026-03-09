@@ -23,7 +23,7 @@ spec:
             - name: PORT
               value: "9000"
             - name: OS_CONFIG_PATTERN_DIR
-              value: /app/src/.oneshot/patterns
+              value: /sync/oneshot/patterns
             - name: OS_MARKDOWN_BASE_DIR
               value: /sync
             - name: OS_MARKDOWN_VAULT_DIR_1
@@ -45,5 +45,12 @@ spec:
           name: oneshot-mcp
           ports:
             - containerPort: 9000
+          volumeMounts:
+            - mountPath: /sync
+              name: sync-dir
       nodeSelector:
         kubernetes.io/hostname: friclu-1
+      volumes:
+        - name: sync-dir
+          persistentVolumeClaim:
+            claimName: sync-dir
