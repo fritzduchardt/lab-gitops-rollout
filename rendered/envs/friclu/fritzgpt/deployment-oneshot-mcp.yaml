@@ -20,6 +20,8 @@ spec:
     spec:
       containers:
         - env:
+            - name: PORT
+              value: "9000"
             - name: OS_CONFIG_PATTERN_DIR
               value: /app/src/.oneshot/patterns
             - name: OS_MARKDOWN_BASE_DIR
