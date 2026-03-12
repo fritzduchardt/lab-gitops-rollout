@@ -40,6 +40,31 @@ spec:
               value: weaviate-grpc.weaviate
             - name: WEAVIATE_GRPC_PORT
               value: "50051"
+            - name: PGHOST
+              valueFrom:
+                secretKeyRef:
+                  key: host
+                  name: oneshot-app
+            - name: PGPORT
+              valueFrom:
+                secretKeyRef:
+                  key: port
+                  name: oneshot-app
+            - name: PGDATABASE
+              valueFrom:
+                secretKeyRef:
+                  key: dbname
+                  name: oneshot-app
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  key: user
+                  name: oneshot-app
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: oneshot-app
           image: ghcr.io/fritzduchardt/oneshot-mcp:main
           imagePullPolicy: Always
           name: oneshot-mcp
