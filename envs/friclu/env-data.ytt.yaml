@@ -53,3 +53,5 @@ environment:
       proto: karma
     - name: fritzgpt
       proto: oneshot
+    - name: fritzgptmongo
+      proto: mongodb

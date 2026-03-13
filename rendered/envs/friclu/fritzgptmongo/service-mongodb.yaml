@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/component: mongodb
+    app.kubernetes.io/instance: mongodb
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: mongodb
+    app.kubernetes.io/version: 8.2.5
+    helm.sh/chart: mongodb-18.6.11
+  name: mongodb
+  namespace: fritzgpt
+spec:
+  ports:
+    - name: mongodb
+      nodePort: null
+      port: 27017
+      targetPort: mongodb
+  publishNotReadyAddresses: false
+  selector:
+    app.kubernetes.io/component: mongodb
+    app.kubernetes.io/instance: mongodb
+    app.kubernetes.io/name: mongodb
+  type: ClusterIP
