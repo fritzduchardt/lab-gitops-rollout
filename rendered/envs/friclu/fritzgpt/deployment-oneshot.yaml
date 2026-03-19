@@ -22,7 +22,9 @@ spec:
         - env:
             - name: LOG_LEVEL
               value: info
-            - name: MCP_URL
+            - name: MCP_URL_FINCLAW
+              value: http://finclaw:9000
+            - name: MCP_URL_ONESHOT
               value: http://oneshot-mcp:9000
             - name: OS_CONFIG_ENV_FILE
               value: /app/.oneshot/.env
