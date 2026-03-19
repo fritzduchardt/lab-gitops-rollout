@@ -20,10 +20,10 @@ spec:
     spec:
       containers:
         - env:
-            - name: PORT
-              value: "3000"
             - name: API_URL
               value: https://fritzgpt.duchardt.net/backend
+            - name: PORT
+              value: "3000"
           image: ghcr.io/fritzduchardt/oneshot-ui:main
           imagePullPolicy: Always
           name: oneshot-ui

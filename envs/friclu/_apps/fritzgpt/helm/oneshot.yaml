@@ -1,0 +1,4 @@
+oneshot:
+  env:
+    TELEGRAM_BOT_TOKEN: "<path:kv/data/shared/telegram#botToken>"
+    TELEGRAM_CHAT_ID: "<path:kv/data/shared/telegram#chatId>"
