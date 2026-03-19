@@ -24,7 +24,7 @@ spec:
               value: info
             - name: PORT
               value: "9001"
-          image: ghcr.io/fritzduchardt/finclaw:master
+          image: ghcr.io/fritzduchardt/finclaw:main
           imagePullPolicy: Always
           name: finclaw
           ports:
