@@ -23,7 +23,7 @@ spec:
             - name: LOG_LEVEL
               value: info
             - name: PORT
-              value: "9001"
+              value: "9000"
           image: ghcr.io/fritzduchardt/finclaw:main
           imagePullPolicy: Always
           name: finclaw
