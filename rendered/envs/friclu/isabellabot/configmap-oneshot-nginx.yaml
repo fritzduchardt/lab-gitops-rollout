@@ -14,8 +14,8 @@ data:
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_http_version 1.1;
-        proxy_read_timeout 300;
-        proxy_send_timeout 300;
+        proxy_read_timeout 300s;
+        proxy_send_timeout 300s;
         rewrite ^/backend/(.*)$ /$1 break;
         proxy_pass http://oneshot:8000;
       }
@@ -26,8 +26,8 @@ data:
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_http_version 1.1;
-        proxy_read_timeout 300;
-        proxy_send_timeout 300;
+        proxy_read_timeout 300s;
+        proxy_send_timeout 300s;
         proxy_pass http://oneshot:8000;
       }
 
@@ -38,8 +38,8 @@ data:
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_http_version 1.1;
-        proxy_read_timeout 300;
-        proxy_send_timeout 300;
+        proxy_read_timeout 300s;
+        proxy_send_timeout 300s;
         proxy_pass http://oneshot-ui:3000;
       }
 
@@ -49,8 +49,8 @@ data:
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_http_version 1.1;
-        proxy_read_timeout 300;
-        proxy_send_timeout 300;
+        proxy_read_timeout 300s;
+        proxy_send_timeout 300s;
         proxy_pass http://oneshot-ui:3000;
       }
     }
