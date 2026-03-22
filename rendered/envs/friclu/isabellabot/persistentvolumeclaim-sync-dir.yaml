@@ -11,4 +11,4 @@ spec:
       storage: 2Gi
   storageClassName: ""
   volumeMode: Filesystem
-  volumeName: sync-dir
+  volumeName: oneshot-sync-dir
