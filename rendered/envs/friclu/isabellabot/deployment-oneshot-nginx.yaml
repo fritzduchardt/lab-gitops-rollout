@@ -25,9 +25,9 @@ spec:
           ports:
             - containerPort: 8080
           volumeMounts:
-            - mountPath: /etc/nginx/conf.d/default.conf
+            - mountPath: /etc/nginx/nginx.conf
               name: nginx-config
-              subPath: default.conf
+              subPath: nginx.conf
             - mountPath: /etc/nginx/auth/.htpasswd
               name: nginx-basic-auth
               subPath: auth
