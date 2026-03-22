@@ -11,4 +11,4 @@ spec:
       storage: 2Gi
   storageClassName: ""
   volumeMode: Filesystem
-  volumeName: oneshot-sync-dir
+  volumeName: isabellabot-sync-dir
