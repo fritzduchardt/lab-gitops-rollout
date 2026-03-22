@@ -5,14 +5,6 @@ data:
       listen 8080;
       server_name _;
 
-      client_body_timeout 300s;
-      client_header_timeout 300s;
-      keepalive_timeout 300s;
-      send_timeout 300s;
-      proxy_connect_timeout 60s;
-      proxy_read_timeout 300s;
-      proxy_send_timeout 300s;
-
       auth_basic "Authentication Required";
       auth_basic_user_file /etc/nginx/auth/.htpasswd;
 
@@ -22,6 +14,11 @@ data:
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_http_version 1.1;
+        client_body_timeout 300s;
+        client_header_timeout 300s;
+        keepalive_timeout 300s;
+        send_timeout 300s;
+        proxy_connect_timeout 60s;
         proxy_read_timeout 300s;
         proxy_send_timeout 300s;
         rewrite ^/backend/(.*)$ /$1 break;
@@ -34,8 +31,6 @@ data:
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_http_version 1.1;
-        proxy_read_timeout 300s;
-        proxy_send_timeout 300s;
         proxy_pass http://oneshot:8000;
       }
 
@@ -46,8 +41,6 @@ data:
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_http_version 1.1;
-        proxy_read_timeout 300s;
-        proxy_send_timeout 300s;
         proxy_pass http://oneshot-ui:3000;
       }
 
@@ -57,8 +50,6 @@ data:
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_http_version 1.1;
-        proxy_read_timeout 300s;
-        proxy_send_timeout 300s;
         proxy_pass http://oneshot-ui:3000;
       }
     }
