@@ -25,9 +25,9 @@ spec:
           ports:
             - containerPort: 8080
           volumeMounts:
-            - mountPath: /etc/nginx/nginx.conf
+            - mountPath: /etc/nginx/conf.d/oneshot.conf
               name: nginx-config
-              subPath: nginx.conf
+              subPath: oneshot.conf
             - mountPath: /etc/nginx/auth/.htpasswd
               name: nginx-basic-auth
               subPath: auth
