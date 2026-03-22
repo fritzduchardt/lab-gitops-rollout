@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/component: oneshot-mcp
+    app.kubernetes.io/name: oneshot
+  name: oneshot-mcp
+  namespace: isabellabot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: oneshot-mcp
+      app.kubernetes.io/name: oneshot
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: oneshot-mcp
+        app.kubernetes.io/name: oneshot
+    spec:
+      containers:
+        - env:
+            - name: LOG_LEVEL
+              value: info
+            - name: MONGO_HOST
+              value: mongodb
+            - name: OS_CONFIG_PATTERN_DIR
+              value: /sync/oneshot/patterns
+            - name: OS_MARKDOWN_BASE_DIR
+              value: /sync
+            - name: OS_MARKDOWN_VAULT_DIR_1
+              value: FritzSync/private
+            - name: OS_MARKDOWN_VAULT_DIR_2
+              value: BubaFritzShare/private
+            - name: PORT
+              value: "9000"
+            - name: WEAVIATE_GRPC_HOST
+              value: weaviate-grpc.weaviate
+            - name: WEAVIATE_GRPC_PORT
+              value: "50051"
+            - name: WEAVIATE_HOST
+              value: weaviate.weaviate
+            - name: WEAVIATE_PORT
+              value: "80"
+          image: ghcr.io/fritzduchardt/oneshot-mcp:main
+          imagePullPolicy: Always
+          name: oneshot-mcp
+          ports:
+            - containerPort: 9000
+          volumeMounts:
+            - mountPath: /sync
+              name: sync-dir
+      nodeSelector:
+        kubernetes.io/hostname: friclu-1
+      volumes:
+        - name: sync-dir
+          persistentVolumeClaim:
+            claimName: sync-dir

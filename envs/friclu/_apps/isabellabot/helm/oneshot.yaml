@@ -1,0 +1,18 @@
+nginx:
+  ingress:
+    host: isabellabot.duchardt.net
+
+oneshotUi:
+  env:
+    API_URL: https://isabellabot.duchardt.net/backend
+
+oneshot:
+  env:
+    OS_MARKDOWN_VAULT_DIR_1: IsabellaSync/private
+    OS_PATTERN_TEMPLATE_DIR: /sync/IsabellaSync/patterns
+
+oneshotMcp:
+  enabled: false
+
+finclaw:
+  enabled: false

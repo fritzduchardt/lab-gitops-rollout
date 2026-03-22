@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: oneshot-certificate
+  namespace: isabellabot
+spec:
+  dnsNames:
+    - isabellabot.duchardt.net
+  duration: 2160h
+  issuerRef:
+    kind: ClusterIssuer
+    name: http01
+  renewBefore: 360h
+  secretName: oneshot-certificate
+  subject:
+    organizations:
+      - friclu

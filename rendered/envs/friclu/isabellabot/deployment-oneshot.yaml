@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/component: oneshot
+    app.kubernetes.io/name: oneshot
+  name: oneshot
+  namespace: isabellabot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: oneshot
+      app.kubernetes.io/name: oneshot
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: oneshot
+        app.kubernetes.io/name: oneshot
+    spec:
+      containers:
+        - env:
+            - name: LOG_LEVEL
+              value: info
+            - name: MCP_URL_FINCLAW
+              value: http://finclaw:9000
+            - name: MCP_URL_ONESHOT
+              value: http://oneshot-mcp:9000
+            - name: OS_CONFIG_ENV_FILE
+              value: /app/.oneshot/.env
+            - name: OS_CONFIG_PATTERN_DIR
+              value: /app/.oneshot/patterns
+            - name: OS_MARKDOWN_BASE_DIR
+              value: /sync
+            - name: OS_MARKDOWN_VAULT_DIR_1
+              value: IsabellaSync/private
+            - name: OS_MARKDOWN_VAULT_DIR_2
+              value: BubaFritzShare/private
+            - name: OS_PATTERN_TEMPLATE_DIR
+              value: /sync/IsabellaSync/patterns
+            - name: OS_SYNC_PATTERN_DIR
+              value: /sync/oneshot/patterns
+            - name: PORT
+              value: "8000"
+            - name: TELEGRAM_BOT_TOKEN
+              value: ""
+            - name: TELEGRAM_CHAT_ID
+              value: ""
+            - name: WEAVIATE_GRPC_HOST
+              value: weaviate-grpc.weaviate
+            - name: WEAVIATE_GRPC_PORT
+              value: "50051"
+            - name: WEAVIATE_HOST
+              value: weaviate.weaviate
+            - name: WEAVIATE_PORT
+              value: "80"
+          image: ghcr.io/fritzduchardt/oneshot:main
+          imagePullPolicy: Always
+          name: oneshot
+          ports:
+            - containerPort: 8000
+          volumeMounts:
+            - mountPath: /sync
+              name: sync-dir
+            - mountPath: /app/.oneshot/.env
+              name: oneshot-env-file
+              subPath: .env
+            - mountPath: /app/.oneshot/patterns
+              name: oneshot-pattern-path
+      nodeSelector:
+        kubernetes.io/hostname: friclu-1
+      volumes:
+        - name: sync-dir
+          persistentVolumeClaim:
+            claimName: sync-dir
+        - name: oneshot-env-file
+          secret:
+            defaultMode: 420
+            secretName: oneshot-env-file
+        - emptyDir: {}
+          name: oneshot-pattern-path

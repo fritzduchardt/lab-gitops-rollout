@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  labels:
+    app.kubernetes.io/component: nginx
+    app.kubernetes.io/name: oneshot
+  name: oneshot-nginx
+  namespace: isabellabot
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: isabellabot.duchardt.net
+      http:
+        paths:
+          - backend:
+              service:
+                name: oneshot-nginx
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - isabellabot.duchardt.net
+      secretName: oneshot-certificate

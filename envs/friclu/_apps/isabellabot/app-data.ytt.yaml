@@ -3,6 +3,3 @@
 ---
 helm:
   namespace: isabellabot
-application:
-  namespace:
-    create: true
