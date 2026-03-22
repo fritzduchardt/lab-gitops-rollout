@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: oneshot-sync-dir
+  name: isabellabot-sync-dir
   namespace: isabellabot
 spec:
   accessModes:
