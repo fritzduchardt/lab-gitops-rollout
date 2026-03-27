@@ -22,6 +22,14 @@ spec:
         - env:
             - name: LOG_LEVEL
               value: info
+            - name: PGDATABASE
+              value: oneshot
+            - name: PGHOST
+              value: oneshot-rw
+            - name: PGPASSWORD
+              value: <path:kv/data/fritzgpt/finclaw#pgpassword>
+            - name: PGUSER
+              value: app
             - name: PORT
               value: "9000"
           image: ghcr.io/fritzduchardt/finclaw:main
