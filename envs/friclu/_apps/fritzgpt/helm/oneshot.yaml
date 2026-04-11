@@ -6,3 +6,11 @@ oneshot:
 finclaw:
   env:
     PGPASSWORD: "<path:kv/data/fritzgpt/finclaw#pgpassword>"
+    POLYGON_API_KEY: "<path:kv/data/fritzgpt/finclaw#polygonApiKey>"
+    TRUTHSOCIAL_TOKEN: "<path:kv/data/fritzgpt/finclaw#truthsocialToken>"
+    ALPACA_API_KEY: "<path:kv/data/fritzgpt/finclaw#alpacaApiKey>"
+    ALPACA_API_SECRET: "<path:kv/data/fritzgpt/finclaw#alpacaApiSecret>"
+
+  scrapers:
+    - name: trump
+      entry_cmd: 'python -m src.finclaw.cli trump scrape'
