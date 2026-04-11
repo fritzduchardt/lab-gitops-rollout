@@ -10,6 +10,7 @@ finclaw:
     TRUTHSOCIAL_TOKEN: "<path:kv/data/fritzgpt/finclaw#truthsocialToken>"
     ALPACA_API_KEY: "<path:kv/data/fritzgpt/finclaw#alpacaApiKey>"
     ALPACA_API_SECRET: "<path:kv/data/fritzgpt/finclaw#alpacaApiSecret>"
+    DEEPSEEK_API_KEY: "<path:kv/data/fritzgpt/finclaw#deepseekApiKey>"
 
   scrapers:
     - name: trump
