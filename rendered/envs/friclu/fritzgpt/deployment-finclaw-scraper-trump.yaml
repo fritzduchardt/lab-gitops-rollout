@@ -51,3 +51,10 @@ spec:
           image: ghcr.io/fritzduchardt/finclaw:main
           imagePullPolicy: Always
           name: finclaw-scraper-trump
+          volumeMounts:
+            - mountPath: /sync
+              name: sync-dir
+      volumes:
+        - name: sync-dir
+          persistentVolumeClaim:
+            claimName: sync-dir
