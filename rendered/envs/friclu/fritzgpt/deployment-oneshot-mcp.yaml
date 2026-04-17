@@ -24,14 +24,16 @@ spec:
               value: info
             - name: MONGO_HOST
               value: mongodb
-            - name: OS_CONFIG_PATTERN_DIR
-              value: /sync/oneshot/patterns
             - name: OS_MARKDOWN_BASE_DIR
               value: /sync
             - name: OS_MARKDOWN_VAULT_DIR_1
               value: FritzSync/private
             - name: OS_MARKDOWN_VAULT_DIR_2
               value: BubaFritzShare/private
+            - name: OS_PATTERN_TEMPLATE_DIR
+              value: /sync/FritzSync/patterns
+            - name: OS_SYNC_PATTERN_DIR
+              value: /sync/oneshot/patterns
             - name: PORT
               value: "9000"
             - name: WEAVIATE_GRPC_HOST

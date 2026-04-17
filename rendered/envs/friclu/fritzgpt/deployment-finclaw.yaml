@@ -28,7 +28,7 @@ spec:
               value: <path:kv/data/fritzgpt/finclaw#deepseekApiKey>
             - name: LOG_LEVEL
               value: info
-            - name: OS_CONFIG_PATTERN_DIR
+            - name: OS_SYNC_PATTERN_DIR
               value: /sync/oneshot/patterns
             - name: PGDATABASE
               value: oneshot
