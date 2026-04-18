@@ -51,3 +51,10 @@ spec:
           name: finclaw
           ports:
             - containerPort: 9000
+          volumeMounts:
+            - mountPath: /sync
+              name: sync-dir
+      volumes:
+        - name: sync-dir
+          persistentVolumeClaim:
+            claimName: sync-dir
