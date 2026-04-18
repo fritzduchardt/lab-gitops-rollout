@@ -48,6 +48,8 @@ spec:
               value: "9000"
             - name: TRUTHSOCIAL_TOKEN
               value: <path:kv/data/fritzgpt/finclaw#truthsocialToken>
+            - name: POST_INTERPRET_PATTERN
+              value: finclaw_trump_scrape
           image: ghcr.io/fritzduchardt/finclaw:main
           imagePullPolicy: Always
           name: finclaw-scraper-trump

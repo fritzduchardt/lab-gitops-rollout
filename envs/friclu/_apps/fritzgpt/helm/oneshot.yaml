@@ -15,3 +15,5 @@ finclaw:
   scrapers:
     - name: trump
       entry_cmd: 'python -m src.finclaw.cli trump scrape'
+      env:
+        POST_INTERPRET_PATTERN: finclaw_trump_scrape
