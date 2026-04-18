@@ -11,9 +11,8 @@ finclaw:
     ALPACA_API_KEY: "<path:kv/data/fritzgpt/finclaw#alpacaApiKey>"
     ALPACA_API_SECRET: "<path:kv/data/fritzgpt/finclaw#alpacaApiSecret>"
     DEEPSEEK_API_KEY: "<path:kv/data/fritzgpt/finclaw#deepseekApiKey>"
+    POST_INTERPRET_PATTERN: finclaw_trump_scrape_iran
 
   scrapers:
     - name: trump
       entry_cmd: 'python -m src.finclaw.cli trump scrape'
-      env:
-        POST_INTERPRET_PATTERN: finclaw_trump_scrape
