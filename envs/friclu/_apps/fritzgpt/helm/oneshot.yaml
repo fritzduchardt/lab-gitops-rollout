@@ -11,8 +11,14 @@ finclaw:
     ALPACA_API_KEY: "<path:kv/data/fritzgpt/finclaw#alpacaApiKey>"
     ALPACA_API_SECRET: "<path:kv/data/fritzgpt/finclaw#alpacaApiSecret>"
     DEEPSEEK_API_KEY: "<path:kv/data/fritzgpt/finclaw#deepseekApiKey>"
+    SCRAPE_TICKER: CC.D.LCO.UME.IP
     POST_INTERPRET_PATTERN: finclaw_trump_scrape_iran
-
+    SCRAPE_ORDER_SIZE: 0.25
+    SCRAPE_ORDER_CLOSE_DELAY_SECONDS: 180
+    IG_API_KEY: "<path:kv/data/fritzgpt/finclaw#igApiKey>"
+    IG_USERNAME: "<path:kv/data/fritzgpt/finclaw#igUsername>"
+    IG_PASSWORD: "<path:kv/data/fritzgpt/finclaw#igPassword>"
+    IG_BASE_URL: "<path:kv/data/fritzgpt/finclaw#igBaseUrl>"
   scrapers:
     - name: trump
       entry_cmd: 'python -m src.finclaw.cli trump scrape'
