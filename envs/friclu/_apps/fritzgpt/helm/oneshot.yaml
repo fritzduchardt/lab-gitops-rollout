@@ -19,8 +19,8 @@ finclaw:
     IG_USERNAME: "<path:kv/data/fritzgpt/finclaw#igUsername>"
     IG_PASSWORD: "<path:kv/data/fritzgpt/finclaw#igPassword>"
     IG_BASE_URL: "<path:kv/data/fritzgpt/finclaw#igBaseUrl>"
-    TELEGRAM_CHAT_ID: "<path:kv/data/shared/telegram#finclawTelegramChatId>"
-    TELEGRAM_BOT_TOKEN: "<path:kv/data/shared/telegram#finclawTelegramBotToken>"
+    TELEGRAM_CHAT_ID: "<path:kv/data/fritzgpt/finclaw#finclawTelegramChatId>"
+    TELEGRAM_BOT_TOKEN: "<path:kv/data/fritzgpt/finclaw#finclawTelegramBotToken>"
     RELEVANCY_THRESHOLD: 6
   scrapers:
     - name: trump
