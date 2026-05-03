@@ -21,6 +21,7 @@ finclaw:
     IG_BASE_URL: "<path:kv/data/fritzgpt/finclaw#igBaseUrl>"
     TELEGRAM_CHAT_ID: "<path:kv/data/shared/telegram#finclawTelegramChatId>"
     TELEGRAM_BOT_TOKEN: "<path:kv/data/shared/telegram#finclawTelegramBotToken>"
+    RELEVANCY_THRESHOLD: 6
   scrapers:
     - name: trump
       entry_cmd: 'python -m src.finclaw.cli trump scrape'
