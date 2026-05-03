@@ -62,6 +62,10 @@ spec:
               value: "0.25"
             - name: SCRAPE_TICKER
               value: CC.D.LCO.UME.IP
+            - name: TELEGRAM_BOT_TOKEN
+              value: <path:kv/data/shared/telegram#finclawTelegramBotToken>
+            - name: TELEGRAM_CHAT_ID
+              value: <path:kv/data/shared/telegram#finclawTelegramChatId>
             - name: TRUTHSOCIAL_TOKEN
               value: <path:kv/data/fritzgpt/finclaw#truthsocialToken>
           image: ghcr.io/fritzduchardt/finclaw:main
