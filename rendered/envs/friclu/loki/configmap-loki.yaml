@@ -32,13 +32,13 @@ data:
       storage:
         object_store:
           s3:
-            access_key_id: <path:kv/data/shared/ionos-s3#access-key>
+            access_key_id: <path:kv/data/shared/contabo-s3#access-key>
             bucket_name: friclu-loki-chunks
-            endpoint: s3.eu-central-3.ionoscloud.com
+            endpoint: eu2.contabostorage.com
             http: {}
             insecure: false
-            region: eu-central-3
-            secret_access_key: <path:kv/data/shared/ionos-s3#secret-key>
+            region: eu
+            secret_access_key: <path:kv/data/shared/contabo-s3#secret-key>
             sse: {}
           storage_prefix: null
     frontend:
@@ -88,13 +88,13 @@ data:
     ruler_storage:
       backend: s3
       s3:
-        access_key_id: <path:kv/data/shared/ionos-s3#access-key>
+        access_key_id: <path:kv/data/shared/contabo-s3#access-key>
         bucket_name: friclu-loki-ruler
-        endpoint: s3.eu-central-3.ionoscloud.com
+        endpoint: eu2.contabostorage.com
         http: {}
         insecure: false
-        region: eu-central-3
-        secret_access_key: <path:kv/data/shared/ionos-s3#secret-key>
+        region: eu
+        secret_access_key: <path:kv/data/shared/contabo-s3#secret-key>
         sse: {}
       storage_prefix: null
     runtime_config:

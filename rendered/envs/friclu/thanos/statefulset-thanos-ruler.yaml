@@ -23,7 +23,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/objstore-configuration: 3f7131e1fc92bc19b4b08f63a738eb4d195cf0553a530a48a737bb96da34ef8d
+        checksum/objstore-configuration: 187b84720369f144f0958ade4e742022fb62a8d4717cb976d1ac27f7be9f4b8a
       labels:
         app.kubernetes.io/component: ruler
         app.kubernetes.io/instance: thanos

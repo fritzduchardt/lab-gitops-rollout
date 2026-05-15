@@ -31,10 +31,10 @@ loki:
       # Type of object store. Valid options are: s3, gcs, azure
       type: s3
       s3:
-        endpoint: s3.eu-central-3.ionoscloud.com
-        region: eu-central-3
-        access_key_id: <path:kv/data/shared/ionos-s3#access-key>
-        secret_access_key: <path:kv/data/shared/ionos-s3#secret-key>
+        endpoint: eu2.contabostorage.com
+        region: eu
+        access_key_id: <path:kv/data/shared/contabo-s3#access-key>
+        secret_access_key: <path:kv/data/shared/contabo-s3#secret-key>
     bucketNames:
        chunks: friclu-loki-chunks
        ruler: friclu-loki-ruler

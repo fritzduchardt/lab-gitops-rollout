@@ -26,6 +26,8 @@ spec:
               value: http://finclaw:9000
             - name: MCP_URL_ONESHOT
               value: http://oneshot-mcp:9000
+            - name: ME
+              value: Fritz
             - name: OS_CONFIG_ENV_FILE
               value: /app/.oneshot/.env
             - name: OS_CONFIG_PATTERN_DIR
