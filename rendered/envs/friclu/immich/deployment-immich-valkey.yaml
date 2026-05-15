@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: immich
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: valkey
-    app.kubernetes.io/version: v2.0.0
-    helm.sh/chart: immich-0.10.0
+    app.kubernetes.io/version: v2.6.3
+    helm.sh/chart: immich-0.12.0
   name: immich-valkey
   namespace: immich
 spec:
@@ -27,14 +27,14 @@ spec:
         app.kubernetes.io/instance: immich
         app.kubernetes.io/name: valkey
     spec:
-      automountServiceAccountToken: true
+      automountServiceAccountToken: false
       containers:
         - env:
             - name: IMMICH_MACHINE_LEARNING_URL
               value: http://immich-machine-learning:3003
             - name: REDIS_HOSTNAME
               value: immich-valkey
-          image: docker.io/valkey/valkey:8.1-alpine@sha256:e706d1213aaba6896c162bb6a3a9e1894e1a435f28f8f856d14fab2e10aa098b
+          image: docker.io/valkey/valkey:9.1-alpine@sha256:34f4f659e02a67cfdf3995d11ae432219c936005055b2cd39a042e86280e053e
           imagePullPolicy: IfNotPresent
           livenessProbe:
             exec:
@@ -81,7 +81,7 @@ spec:
       hostPID: false
       nodeSelector:
         kubernetes.io/hostname: friclu-1
-      serviceAccountName: default
+      serviceAccountName: immich-valkey
       volumes:
         - emptyDir: {}
           name: data
