@@ -23,7 +23,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/objstore-configuration: 187b84720369f144f0958ade4e742022fb62a8d4717cb976d1ac27f7be9f4b8a
+        checksum/objstore-configuration: a19bf3e4aff227e9c14c860db429665de13e530acfde77b2eefad10b40f52d2a
       labels:
         app.kubernetes.io/component: compactor
         app.kubernetes.io/instance: thanos
