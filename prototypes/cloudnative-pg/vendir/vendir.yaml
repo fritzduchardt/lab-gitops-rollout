@@ -8,6 +8,6 @@ directories:
         helmChart:
           # renovate: datasource=helm
           name: cloudnative-pg
-          version: 0.26.0
+          version: 0.28.2
           repository:
             url: https://cloudnative-pg.github.io/charts
