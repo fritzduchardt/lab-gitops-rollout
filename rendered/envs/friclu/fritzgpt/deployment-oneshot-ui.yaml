@@ -24,8 +24,6 @@ spec:
               value: https://fritzgpt.duchardt.net/backend
             - name: PORT
               value: "3000"
-            - name: STREAM_URL
-              value: https://fritzgptstream.duchardt.net/
           image: ghcr.io/fritzduchardt/oneshot-ui:main
           imagePullPolicy: Always
           name: oneshot-ui
