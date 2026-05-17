@@ -21,6 +21,12 @@ loki:
   pattern_ingester:
     enabled: true
   limits_config:
+    ingestion_rate_mb: 4              # Max MB/s per tenant
+    ingestion_burst_size_mb: 6        # Burst allowance
+    per_stream_rate_limit: 3MB        # Per stream rate
+    per_stream_rate_limit_burst: 15MB
+    max_streams_per_user: 10000
+    max_line_size: 256kb
     allow_structured_metadata: true
     volume_enabled: true
   ruler:
