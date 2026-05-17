@@ -6,6 +6,7 @@ metadata:
 spec:
   dnsNames:
     - fritzgpt.duchardt.net
+    - fritzgptstream.duchardt.net
   duration: 2160h
   issuerRef:
     kind: ClusterIssuer
