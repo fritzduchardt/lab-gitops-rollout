@@ -16,6 +16,12 @@ data:
         proxy_http_version 1.1;
         proxy_read_timeout 300s;
         proxy_send_timeout 300s;
+        # Disable buffering for SSE: prevents nginx from holding response data
+        # until buffer fills, which stalls event-stream and blocks other requests
+        proxy_buffering off;
+        proxy_cache off;
+        # Flush partial responses immediately to the client
+        proxy_set_header X-Accel-Buffering no;
         rewrite ^/backend/(.*)$ /$1 break;
         proxy_pass http://oneshot:8000;
       }
