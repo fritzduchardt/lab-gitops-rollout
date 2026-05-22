@@ -19,6 +19,7 @@ finclaw:
     IG_USERNAME: "<path:kv/data/fritzgpt/finclaw#igUsername>"
     IG_PASSWORD: "<path:kv/data/fritzgpt/finclaw#igPassword>"
     IG_BASE_URL: "<path:kv/data/fritzgpt/finclaw#igBaseUrl>"
+    X_BEARER_TOKEN: "<path:kv/data/fritzgpt/finclaw#xBearerToken>"
     TELEGRAM_CHAT_ID: "<path:kv/data/fritzgpt/finclaw#finclawTelegramChatId>"
     TELEGRAM_BOT_TOKEN: "<path:kv/data/fritzgpt/finclaw#finclawTelegramBotToken>"
     RELEVANCY_THRESHOLD: 6
