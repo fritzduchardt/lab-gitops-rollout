@@ -11,6 +11,7 @@ finclaw:
     ALPACA_API_KEY: "<path:kv/data/fritzgpt/finclaw#alpacaApiKey>"
     ALPACA_API_SECRET: "<path:kv/data/fritzgpt/finclaw#alpacaApiSecret>"
     DEEPSEEK_API_KEY: "<path:kv/data/fritzgpt/finclaw#deepseekApiKey>"
+    GOOGLE_API_KEY: "<path:kv/data/fritzgpt/finclaw#googleApiKey>"
     SCRAPE_TICKER: CC.D.LCO.UME.IP
     POST_INTERPRET_PATTERN: finclaw_trump_scrape_iran
     SCRAPE_ORDER_SIZE: 0.25
