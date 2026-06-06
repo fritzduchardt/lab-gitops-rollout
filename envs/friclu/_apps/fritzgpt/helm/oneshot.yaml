@@ -13,6 +13,7 @@ finclaw:
     DEEPSEEK_API_KEY: "<path:kv/data/fritzgpt/finclaw#deepseekApiKey>"
     GOOGLE_API_KEY: "<path:kv/data/fritzgpt/finclaw#googleApiKey>"
     SCRAPE_TICKER: CC.D.LCO.UME.IP
+    SCRAPE_TICKER_CURRENCY: EUR
     POST_INTERPRET_PATTERN: finclaw_trump_scrape_iran
     SCRAPE_ORDER_SIZE: 0.25
     SCRAPE_ORDER_CLOSE_DELAY_SECONDS: 180
@@ -24,6 +25,7 @@ finclaw:
     TELEGRAM_CHAT_ID: "<path:kv/data/fritzgpt/finclaw#finclawTelegramChatId>"
     TELEGRAM_BOT_TOKEN: "<path:kv/data/fritzgpt/finclaw#finclawTelegramBotToken>"
     RELEVANCY_THRESHOLD: 6
+    INTERPRETATION_MODEL: "deepseek-v4-flash"
   scrapers:
     - name: trump
       entry_cmd: 'python -m src.finclaw.cli trump scrape'
