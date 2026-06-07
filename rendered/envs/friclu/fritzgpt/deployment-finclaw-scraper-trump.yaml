@@ -60,6 +60,8 @@ spec:
               value: "9000"
             - name: POST_INTERPRET_PATTERN
               value: finclaw_trump_scrape_iran
+            - name: RAPIDAPI_KEY
+              value: <path:kv/data/fritzgpt/finclaw#rapidAPIKey>
             - name: RELEVANCY_THRESHOLD
               value: "6"
             - name: SCRAPE_ORDER_CLOSE_DELAY_SECONDS

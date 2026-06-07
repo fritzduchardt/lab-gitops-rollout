@@ -26,6 +26,7 @@ finclaw:
     TELEGRAM_BOT_TOKEN: "<path:kv/data/fritzgpt/finclaw#finclawTelegramBotToken>"
     RELEVANCY_THRESHOLD: 6
     INTERPRETATION_MODEL: "deepseek-v4-flash"
+    RAPIDAPI_KEY: "<path:kv/data/fritzgpt/finclaw#rapidAPIKey>"
   scrapers:
     - name: trump
       entry_cmd: 'python -m src.finclaw.cli trump scrape'
