@@ -67,11 +67,11 @@ spec:
             - name: SCRAPE_ORDER_CLOSE_DELAY_SECONDS
               value: "180"
             - name: SCRAPE_ORDER_SIZE
-              value: "0.25"
+              value: "0.2"
             - name: SCRAPE_TICKER
-              value: CC.D.LCO.UME.IP
+              value: CC.D.LCO.UNC.IP
             - name: SCRAPE_TICKER_CURRENCY
-              value: EUR
+              value: USD
             - name: TELEGRAM_BOT_TOKEN
               value: <path:kv/data/fritzgpt/finclaw#finclawTelegramBotToken>
             - name: TELEGRAM_CHAT_ID
