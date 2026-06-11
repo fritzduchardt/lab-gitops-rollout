@@ -25,7 +25,7 @@ finclaw:
     TELEGRAM_CHAT_ID: "<path:kv/data/fritzgpt/finclaw#finclawTelegramChatId>"
     TELEGRAM_BOT_TOKEN: "<path:kv/data/fritzgpt/finclaw#finclawTelegramBotToken>"
     RELEVANCY_THRESHOLD: 6
-    INTERPRETATION_MODEL: "deepseek-v4-flash"
+    INTERPRETATION_MODEL: "gemini-3.1-flash-lite"
     RAPIDAPI_KEY: "<path:kv/data/fritzgpt/finclaw#rapidAPIKey>"
   scrapers:
     - name: trump

@@ -41,7 +41,7 @@ spec:
             - name: IG_USERNAME
               value: <path:kv/data/fritzgpt/finclaw#igUsername>
             - name: INTERPRETATION_MODEL
-              value: deepseek-v4-flash
+              value: gemini-3.1-flash-lite
             - name: LOG_LEVEL
               value: info
             - name: OS_SYNC_PATTERN_DIR
