@@ -3,6 +3,11 @@ data:
   mkdocs.yml: |
     copyright: ""
     docs_dir: docs
+    markdown_extensions:
+    - nl2br
+    - admonition
+    - pymdownx.details
+    - pymdownx.superfences
     plugins:
     - exclude:
         glob:
@@ -10,6 +15,7 @@ data:
     - search:
         lang: en
         prebuild_index: true
+    - callouts
     site_name: Yummy Stuff
     site_url: https://yummy.duchardt.net/
     strict: true
