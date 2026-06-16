@@ -2,20 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app.kubernetes.io/component: finclaw-scraper-trump
+    app.kubernetes.io/component: finclaw-scraper-parser-in-chief
     app.kubernetes.io/name: oneshot
-  name: finclaw-scraper-trump
+  name: finclaw-scraper-parser-in-chief
   namespace: fritzgpt
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/component: finclaw-scraper-trump
+      app.kubernetes.io/component: finclaw-scraper-parser-in-chief
       app.kubernetes.io/name: oneshot
   template:
     metadata:
       labels:
-        app.kubernetes.io/component: finclaw-scraper-trump
+        app.kubernetes.io/component: finclaw-scraper-parser-in-chief
         app.kubernetes.io/name: oneshot
     spec:
       containers:
@@ -82,12 +82,10 @@ spec:
               value: <path:kv/data/fritzgpt/finclaw#xBearerToken>
           image: ghcr.io/fritzduchardt/finclaw:main
           imagePullPolicy: Always
-          name: finclaw-scraper-trump
+          name: finclaw-scraper-parser-in-chief
           volumeMounts:
             - mountPath: /sync
               name: sync-dir
-      nodeSelector:
-        kubernetes.io/hostname: friclu-1
       volumes:
         - name: sync-dir
           persistentVolumeClaim:
