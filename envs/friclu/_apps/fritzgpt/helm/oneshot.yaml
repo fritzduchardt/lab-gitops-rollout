@@ -32,10 +32,10 @@ finclaw:
       entry_cmd: 'python -m src.finclaw.cli trump scrape'
       env:
         POLL_OFFSET: 0
-        LOG_LEVEL: DEBUG
+        LOG_LEVEL: INFO
     - name: the-best-scraper-in-the-world
       entry_cmd: 'python -m src.finclaw.cli trump scrape'
       nodeName: friclu-2
       env:
         POLL_OFFSET: 5
-        LOG_LEVEL: DEBUG
+        LOG_LEVEL: INFO
