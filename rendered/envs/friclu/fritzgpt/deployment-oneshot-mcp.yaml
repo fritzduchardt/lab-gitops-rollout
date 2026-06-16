@@ -20,8 +20,6 @@ spec:
     spec:
       containers:
         - env:
-            - name: LOG_LEVEL
-              value: info
             - name: MONGO_HOST
               value: mongodb
             - name: OS_MARKDOWN_BASE_DIR

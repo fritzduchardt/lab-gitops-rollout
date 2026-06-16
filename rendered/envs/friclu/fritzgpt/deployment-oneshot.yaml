@@ -20,8 +20,6 @@ spec:
     spec:
       containers:
         - env:
-            - name: LOG_LEVEL
-              value: info
             - name: MCP_URL_FINCLAW
               value: http://finclaw:9000
             - name: MCP_URL_ONESHOT

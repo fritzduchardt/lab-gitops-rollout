@@ -38,8 +38,6 @@ spec:
               value: <path:kv/data/fritzgpt/finclaw#igUsername>
             - name: INTERPRETATION_MODEL
               value: gemini-3.1-flash-lite
-            - name: LOG_LEVEL
-              value: info
             - name: OS_SYNC_PATTERN_DIR
               value: /sync/oneshot/patterns
             - name: PGDATABASE
