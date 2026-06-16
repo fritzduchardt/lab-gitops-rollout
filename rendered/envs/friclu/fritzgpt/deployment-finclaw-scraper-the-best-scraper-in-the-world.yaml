@@ -84,7 +84,7 @@ spec:
               value: "5"
           image: ghcr.io/fritzduchardt/finclaw:main
           imagePullPolicy: Always
-          name: finclaw-scraper-the-best-scraper-in-the-world
+          name: finclaw-scraper
           volumeMounts:
             - mountPath: /sync
               name: sync-dir
