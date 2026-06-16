@@ -32,6 +32,6 @@ finclaw:
       entry_cmd: 'python -m src.finclaw.cli trump scrape'
     - name: the-best-scraper-in-the-world
       entry_cmd: 'python -m src.finclaw.cli trump scrape'
-      nodeSelector: friclu-3
+      nodeName: friclu-3
       env:
         POLL_OFFSET: 5
