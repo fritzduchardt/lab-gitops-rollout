@@ -79,7 +79,7 @@ spec:
             - name: X_BEARER_TOKEN
               value: <path:kv/data/fritzgpt/finclaw#xBearerToken>
             - name: LOG_LEVEL
-              value: DEBUG
+              value: INFO
             - name: POLL_INTERVAL
               value: "5"
             - name: POLL_OFFSET

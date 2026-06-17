@@ -33,4 +33,4 @@ finclaw:
       env:
         POLL_OFFSET: 0
         POLL_INTERVAL: 5
-        LOG_LEVEL: DEBUG
+        LOG_LEVEL: INFO
