@@ -79,7 +79,9 @@ spec:
             - name: X_BEARER_TOKEN
               value: <path:kv/data/fritzgpt/finclaw#xBearerToken>
             - name: LOG_LEVEL
-              value: INFO
+              value: DEBUG
+            - name: POLL_INTERVAL
+              value: "5"
             - name: POLL_OFFSET
               value: "0"
           image: ghcr.io/fritzduchardt/finclaw:main
