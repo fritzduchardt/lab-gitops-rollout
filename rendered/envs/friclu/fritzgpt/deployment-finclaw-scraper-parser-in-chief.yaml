@@ -90,6 +90,7 @@ spec:
           volumeMounts:
             - mountPath: /sync
               name: sync-dir
+      nodeName: friclu-1
       volumes:
         - name: sync-dir
           persistentVolumeClaim:
