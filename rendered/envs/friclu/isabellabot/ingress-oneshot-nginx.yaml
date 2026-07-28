@@ -2,7 +2,10 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: 300s
+    nginx.ingress.kubernetes.io/proxy-keepalive-timeout: 300s
+    nginx.ingress.kubernetes.io/proxy-read-timeout: 300s
+    nginx.ingress.kubernetes.io/proxy-send-timeout: 300s
   labels:
     app.kubernetes.io/component: nginx
     app.kubernetes.io/name: oneshot
