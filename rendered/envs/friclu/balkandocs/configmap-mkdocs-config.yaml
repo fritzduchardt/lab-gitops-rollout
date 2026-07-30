@@ -3,6 +3,11 @@ data:
   mkdocs.yml: |
     copyright: ""
     docs_dir: docs
+    markdown_extensions:
+    - nl2br
+    - admonition
+    - pymdownx.details
+    - pymdownx.superfences
     plugins:
     - search:
         lang: en
