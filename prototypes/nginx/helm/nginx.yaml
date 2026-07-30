@@ -1,10 +1,11 @@
 controller:
   service:
     type: NodePort
-  config: {
+  config:
     # don't restrict body size
     proxy-body-size: 0
-  }
+    proxy_read_timeout: 300s;
+    proxy_connect_timeout: 300s;
   metrics:
     enabled: true
     serviceMonitor:
