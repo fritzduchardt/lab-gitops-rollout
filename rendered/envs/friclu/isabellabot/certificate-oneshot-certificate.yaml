@@ -5,7 +5,7 @@ metadata:
   namespace: isabellabot
 spec:
   dnsNames:
-    - isabellabot.duchardt.net
+    - fritzgpt.duchardt.net
   duration: 2160h
   issuerRef:
     kind: ClusterIssuer
