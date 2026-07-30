@@ -1,6 +1,5 @@
-nginx:
-  ingress:
-    host: isabellabot.duchardt.net
+ingress:
+  host: isabellabot.duchardt.net
 
 oneshotUi:
   env:

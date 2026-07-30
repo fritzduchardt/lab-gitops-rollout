@@ -19,7 +19,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: fritzgpt.duchardt.net
+    - host: isabellabot.duchardt.net
       http:
         paths:
           - backend:
@@ -45,5 +45,5 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - fritzgpt.duchardt.net
+        - isabellabot.duchardt.net
       secretName: oneshot-certificate
