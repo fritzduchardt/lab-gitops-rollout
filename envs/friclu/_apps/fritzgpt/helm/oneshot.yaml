@@ -27,11 +27,3 @@ finclaw:
     RELEVANCY_THRESHOLD: 6
     INTERPRETATION_MODEL: "gemini-3.1-flash-lite"
     RAPIDAPI_KEY: "<path:kv/data/fritzgpt/finclaw#rapidAPIKey>"
-  scrapers:
-    - name: parser-in-chief
-      nodeName: friclu-1
-      entry_cmd: 'python -m src.finclaw.cli trump scrape'
-      env:
-        POLL_OFFSET: 0
-        POLL_INTERVAL: 5
-        LOG_LEVEL: INFO
