@@ -8,6 +8,6 @@ directories:
         helmChart:
           # renovate: datasource=helm
           name: weaviate
-          version: 17.6.0
+          version: 17.8.3
           repository:
             url: https://weaviate.github.io/weaviate-helm
