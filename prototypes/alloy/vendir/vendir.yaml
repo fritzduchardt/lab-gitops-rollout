@@ -8,6 +8,6 @@ directories:
         helmChart:
           # renovate: datasource=helm
           name: alloy
-          version: 1.4.0
+          version: 1.12.1
           repository:
             url: https://grafana.github.io/helm-charts
