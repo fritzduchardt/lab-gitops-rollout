@@ -8,6 +8,6 @@ directories:
         helmChart:
           # renovate: datasource=helm
           name: home-assistant
-          version: 0.3.24
+          version: 0.3.80
           repository:
             url: http://pajikos.github.io/home-assistant-helm-chart/
