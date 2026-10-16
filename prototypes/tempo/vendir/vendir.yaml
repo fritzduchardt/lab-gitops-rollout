@@ -8,6 +8,6 @@ directories:
         helmChart:
           # renovate: datasource=helm
           name: tempo
-          version: 1.24.0
+          version: 1.24.4
           repository:
             url: https://grafana.github.io/helm-charts
