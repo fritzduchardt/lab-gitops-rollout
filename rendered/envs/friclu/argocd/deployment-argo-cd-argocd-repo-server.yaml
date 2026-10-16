@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-repo-server
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.8
-    helm.sh/chart: argo-cd-8.6.4
+    app.kubernetes.io/version: v3.5.5
+    helm.sh/chart: argo-cd-10.10.5
   name: argo-cd-argocd-repo-server
   namespace: argo
 spec:
@@ -21,17 +21,17 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/cm: e030633952f3126e5715279eb33ac843d9b0713dc4e7d58ecedbc046fa779dcd
-        checksum/cmd-params: 7f0719fbd0cd10cb943ba3c3c55c260428a7e45d2a760ec619037c1edcaee49e
-        checksum/cmp-cm: 2f87d072d3285a6a3a2a671cf02ed214c159ca59d28bf94e74988e63b46cacc2
+        checksum/cm: a78aaa7c95b9398ddfbeb6d9fadf71572c954f217015f65b3e9f36d17ec0b6c6
+        checksum/cmd-params: 85c24385aa0cdcda803f43c748e20cc7dcfb2f99e4f33d78ff10a0deaaadfcec
+        checksum/cmp-cm: 794b3b5c2573ac55a9c90c7c448f84e530de162d7a4c0a1fbe8dbdbf1269dec2
       labels:
         app.kubernetes.io/component: repo-server
         app.kubernetes.io/instance: argo-cd
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: argocd-repo-server
         app.kubernetes.io/part-of: argocd
-        app.kubernetes.io/version: v3.1.8
-        helm.sh/chart: argo-cd-8.6.4
+        app.kubernetes.io/version: v3.5.5
+        helm.sh/chart: argo-cd-10.10.5
     spec:
       affinity:
         podAntiAffinity:
@@ -49,6 +49,12 @@ spec:
             - --port=8081
             - --metrics-port=8084
           env:
+            - name: GRPC_ENABLE_TXT_SERVICE_CONFIG
+              valueFrom:
+                configMapKeyRef:
+                  key: reposerver.grpc.enable.txt.service.config
+                  name: argocd-cmd-params-cm
+                  optional: true
             - name: ARGOCD_REPO_SERVER_NAME
               value: argo-cd-argocd-repo-server
             - name: ARGOCD_RECONCILIATION_TIMEOUT
@@ -285,6 +291,18 @@ spec:
                   key: reposerver.revision.cache.lock.timeout
                   name: argocd-cmd-params-cm
                   optional: true
+            - name: ARGOCD_REPO_SERVER_ENABLE_BUILTIN_GIT_CONFIG
+              valueFrom:
+                configMapKeyRef:
+                  key: reposerver.enable.builtin.git.config
+                  name: argocd-cmd-params-cm
+                  optional: true
+            - name: ARGOCD_GRPC_MAX_SIZE_MB
+              valueFrom:
+                configMapKeyRef:
+                  key: reposerver.grpc.max.size
+                  name: argocd-cmd-params-cm
+                  optional: true
             - name: ARGOCD_REPO_SERVER_INCLUDE_HIDDEN_DIRECTORIES
               valueFrom:
                 configMapKeyRef:
@@ -300,7 +318,7 @@ spec:
           envFrom:
             - secretRef:
                 name: vault-configuration
-          image: quay.io/argoproj/argocd:v3.1.8
+          image: quay.io/argoproj/argocd:v3.5.5
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
@@ -377,12 +395,12 @@ spec:
               name: tmp
       dnsPolicy: ClusterFirst
       initContainers:
-        - command:
-            - /bin/cp
-            - -n
-            - /usr/local/bin/argocd
-            - /var/run/argocd/argocd-cmp-server
-          image: quay.io/argoproj/argocd:v3.1.8
+        - args:
+            - /bin/cp --update=none /usr/local/bin/argocd /var/run/argocd/argocd && /bin/ln -sf /var/run/argocd/argocd /var/run/argocd/argocd-cmp-server
+          command:
+            - sh
+            - -c
+          image: quay.io/argoproj/argocd:v3.5.5
           imagePullPolicy: IfNotPresent
           name: copyutil
           resources: {}
@@ -434,6 +452,7 @@ spec:
           name: ssh-known-hosts
         - configMap:
             name: argocd-tls-certs-cm
+            optional: true
           name: tls-certs
         - configMap:
             name: argocd-gpg-keys-cm

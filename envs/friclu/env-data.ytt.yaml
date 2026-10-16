@@ -23,37 +23,35 @@ argocd:
 environment:
   id: friclu
   applications:
-    #! monitoring
-    - name: thanos
-      proto: thanos
-    - proto: alloy
+#!    - proto: alloy
     - proto: argocd
-    - proto: cert-manager
-    - proto: cloudnative-pg
-    - name: yummydocs
-      proto: mkdocs
-    - proto: home-assistant
-    - name: balkandocs
-      proto: mkdocs
-    - proto: immich
-    - proto: keycloak
-    - proto: kube-prometheus-stack
-    - proto: linkding
-    - proto: local-path-provisioner
-    - proto: loki
+#!    - name: balkandocs
+#!      proto: mkdocs
+#!    - proto: cert-manager
+#!    - proto: cloudnative-pg
+#!    - name: fritzgpt
+#!      proto: oneshot
+#!    - name: fritzgptmongo
+#!      proto: mongodb
+#!    - proto: home-assistant
+#!    - proto: immich
+#!    - name: isabellabot
+#!      proto: oneshot
+#!    - name: karma
+#!      proto: karma
+#!    - proto: keycloak
+#!    - proto: kube-prometheus-stack
+#!    - proto: linkding
+#!    - proto: local-path-provisioner
+#!    - proto: loki
+#!    - proto: n8n
     - proto: nginx
-    - proto: n8n
-    - proto: pushgateway
-    - proto: registry
-    - proto: syncthing
-    - proto: tempo
-    - proto: vault
-    - proto: weaviate
-    - name: karma
-      proto: karma
-    - name: fritzgpt
-      proto: oneshot
-    - name: isabellabot
-      proto: oneshot
-    - name: fritzgptmongo
-      proto: mongodb
+#!    - proto: pushgateway
+#!    - proto: registry
+#!    - proto: syncthing
+#!    - proto: tempo
+#!    - proto: thanos
+#!    - proto: vault
+#!    - proto: weaviate
+#!    - name: yummydocs
+#!      proto: mkdocs

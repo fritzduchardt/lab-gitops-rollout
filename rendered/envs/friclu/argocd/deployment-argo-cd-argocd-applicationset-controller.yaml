@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-applicationset-controller
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.1.8
-    helm.sh/chart: argo-cd-8.6.4
+    app.kubernetes.io/version: v3.5.5
+    helm.sh/chart: argo-cd-10.10.5
   name: argo-cd-argocd-applicationset-controller
   namespace: argo
 spec:
@@ -21,15 +21,15 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/cmd-params: 7f0719fbd0cd10cb943ba3c3c55c260428a7e45d2a760ec619037c1edcaee49e
+        checksum/cmd-params: 85c24385aa0cdcda803f43c748e20cc7dcfb2f99e4f33d78ff10a0deaaadfcec
       labels:
         app.kubernetes.io/component: applicationset-controller
         app.kubernetes.io/instance: argo-cd
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: argocd-applicationset-controller
         app.kubernetes.io/part-of: argocd
-        app.kubernetes.io/version: v3.1.8
-        helm.sh/chart: argo-cd-8.6.4
+        app.kubernetes.io/version: v3.5.5
+        helm.sh/chart: argo-cd-10.10.5
     spec:
       affinity:
         podAntiAffinity:
@@ -52,6 +52,12 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
+            - name: GRPC_ENABLE_TXT_SERVICE_CONFIG
+              valueFrom:
+                configMapKeyRef:
+                  key: applicationsetcontroller.grpc.enable.txt.service.config
+                  name: argocd-cmd-params-cm
+                  optional: true
             - name: ARGOCD_APPLICATIONSET_CONTROLLER_GLOBAL_PRESERVED_ANNOTATIONS
               valueFrom:
                 configMapKeyRef:
@@ -214,7 +220,7 @@ spec:
                   key: applicationsetcontroller.status.max.resources.count
                   name: argocd-cmd-params-cm
                   optional: true
-          image: quay.io/argoproj/argocd:v3.1.8
+          image: quay.io/argoproj/argocd:v3.5.5
           imagePullPolicy: IfNotPresent
           name: applicationset-controller
           ports:
@@ -248,6 +254,8 @@ spec:
               name: gpg-keyring
             - mountPath: /app/config/reposerver/tls
               name: argocd-repo-server-tls
+            - mountPath: /home/argocd/params
+              name: argocd-cmd-params-cm
             - mountPath: /tmp
               name: tmp
       dnsPolicy: ClusterFirst
@@ -261,6 +269,7 @@ spec:
           name: ssh-known-hosts
         - configMap:
             name: argocd-tls-certs-cm
+            optional: true
           name: tls-certs
         - configMap:
             name: argocd-gpg-keys-cm
@@ -280,3 +289,10 @@ spec:
                 path: ca.crt
             optional: true
             secretName: argocd-repo-server-tls
+        - configMap:
+            items:
+              - key: applicationsetcontroller.profile.enabled
+                path: profiler.enabled
+            name: argocd-cmd-params-cm
+            optional: true
+          name: argocd-cmd-params-cm
