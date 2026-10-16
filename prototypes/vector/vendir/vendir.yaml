@@ -8,6 +8,6 @@ directories:
         helmChart:
           # renovate: datasource=helm
           name: vector
-          version: 0.46.0
+          version: 0.59.0
           repository:
             url: https://helm.vector.dev
