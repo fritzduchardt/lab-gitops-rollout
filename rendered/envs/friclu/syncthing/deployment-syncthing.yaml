@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/instance: syncthing
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: syncthing
+    app.kubernetes.io/version: 1.23.5
+    helm.sh/chart: syncthing-4.0.0
+  name: syncthing
+  namespace: syncthing
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: syncthing
+      app.kubernetes.io/name: syncthing
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: syncthing
+        app.kubernetes.io/name: syncthing
+    spec:
+      automountServiceAccountToken: true
+      containers:
+        - image: syncthing/syncthing:1.23.5
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 0
+            periodSeconds: 10
+            tcpSocket:
+              port: 8384
+            timeoutSeconds: 1
+          name: syncthing
+          ports:
+            - containerPort: 21027
+              name: discovery
+              protocol: UDP
+            - containerPort: 22000
+              name: listen
+              protocol: TCP
+            - containerPort: 8384
+              name: http
+              protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 0
+            periodSeconds: 10
+            tcpSocket:
+              port: 8384
+            timeoutSeconds: 1
+          startupProbe:
+            failureThreshold: 30
+            initialDelaySeconds: 0
+            periodSeconds: 5
+            tcpSocket:
+              port: 8384
+            timeoutSeconds: 1
+          volumeMounts:
+            - mountPath: /var/syncthing
+              name: data
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      nodeSelector:
+        kubernetes.io/hostname: friclu-1
+      serviceAccountName: default
+      volumes:
+        - hostPath:
+            path: /volumes/syncthing
+          name: data

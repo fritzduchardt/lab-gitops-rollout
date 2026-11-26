@@ -48,7 +48,7 @@ environment:
     - proto: nginx
 #!    - proto: pushgateway
 #!    - proto: registry
-#!    - proto: syncthing
+    - proto: syncthing
 #!    - proto: tempo
 #!    - proto: thanos
     - proto: vault
