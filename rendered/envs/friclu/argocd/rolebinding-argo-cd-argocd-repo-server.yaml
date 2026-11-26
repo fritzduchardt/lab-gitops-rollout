@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/version: v3.5.5
     helm.sh/chart: argo-cd-10.10.5
   name: argo-cd-argocd-repo-server
-  namespace: argo
+  namespace: argocd
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -18,4 +18,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: argo-cd-argocd-repo-server
-    namespace: argo
+    namespace: argocd

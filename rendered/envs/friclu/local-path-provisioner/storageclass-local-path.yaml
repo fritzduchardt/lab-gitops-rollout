@@ -1,0 +1,17 @@
+allowVolumeExpansion: true
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  annotations:
+    defaultVolumeType: local
+    storageclass.kubernetes.io/is-default-class: "true"
+  labels:
+    app.kubernetes.io/instance: local-path-provisioner
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: local-path-provisioner
+    app.kubernetes.io/version: v0.0.31
+    helm.sh/chart: local-path-provisioner-0.0.31
+  name: local-path
+provisioner: cluster.local/local-path-provisioner
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer

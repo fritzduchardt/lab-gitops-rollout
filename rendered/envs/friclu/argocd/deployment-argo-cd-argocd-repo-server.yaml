@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/version: v3.5.5
     helm.sh/chart: argo-cd-10.10.5
   name: argo-cd-argocd-repo-server
-  namespace: argo
+  namespace: argocd
 spec:
   replicas: 1
   revisionHistoryLimit: 3
@@ -23,7 +23,7 @@ spec:
       annotations:
         checksum/cm: a78aaa7c95b9398ddfbeb6d9fadf71572c954f217015f65b3e9f36d17ec0b6c6
         checksum/cmd-params: 85c24385aa0cdcda803f43c748e20cc7dcfb2f99e4f33d78ff10a0deaaadfcec
-        checksum/cmp-cm: 794b3b5c2573ac55a9c90c7c448f84e530de162d7a4c0a1fbe8dbdbf1269dec2
+        checksum/cmp-cm: 10733adf3d3bef1b7a7852d9c5e33240990b4993901262d082f0d5bc25b4962a
       labels:
         app.kubernetes.io/component: repo-server
         app.kubernetes.io/instance: argo-cd

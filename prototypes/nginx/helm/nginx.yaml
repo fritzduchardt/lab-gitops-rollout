@@ -9,5 +9,5 @@ controller:
   metrics:
     enabled: true
     serviceMonitor:
-      enabled: true
+      enabled: false
   allowSnippetAnnotations: true

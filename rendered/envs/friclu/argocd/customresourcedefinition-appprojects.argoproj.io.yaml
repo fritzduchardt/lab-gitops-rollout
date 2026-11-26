@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: appprojects.argoproj.io
     app.kubernetes.io/part-of: argocd
   name: appprojects.argoproj.io
-  namespace: argo
+  namespace: argocd
 spec:
   group: argoproj.io
   names:

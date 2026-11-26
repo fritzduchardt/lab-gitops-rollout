@@ -1,7 +1,7 @@
 #@data/values
 ---
 argocd:
-  namespace: argo
+  namespace: argocd
   env:
     generateSecret: false
   project:
@@ -27,10 +27,10 @@ environment:
     - proto: argocd
 #!    - name: balkandocs
 #!      proto: mkdocs
-#!    - proto: cert-manager
-#!    - proto: cloudnative-pg
-#!    - name: fritzgpt
-#!      proto: oneshot
+    - proto: cert-manager
+    - proto: cloudnative-pg
+    - name: fritzgpt
+      proto: oneshot
 #!    - name: fritzgptmongo
 #!      proto: mongodb
 #!    - proto: home-assistant
@@ -40,9 +40,9 @@ environment:
 #!    - name: karma
 #!      proto: karma
 #!    - proto: keycloak
-#!    - proto: kube-prometheus-stack
+    - proto: kube-prometheus-stack
 #!    - proto: linkding
-#!    - proto: local-path-provisioner
+    - proto: local-path-provisioner
 #!    - proto: loki
 #!    - proto: n8n
     - proto: nginx
@@ -51,7 +51,7 @@ environment:
 #!    - proto: syncthing
 #!    - proto: tempo
 #!    - proto: thanos
-#!    - proto: vault
+    - proto: vault
 #!    - proto: weaviate
-#!    - name: yummydocs
-#!      proto: mkdocs
+    - name: yummydocs
+      proto: mkdocs
