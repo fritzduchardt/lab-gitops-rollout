@@ -41,7 +41,7 @@ environment:
 #!      proto: karma
 #!    - proto: keycloak
     - proto: kube-prometheus-stack
-#!    - proto: linkding
+    - proto: linkding
     - proto: local-path-provisioner
 #!    - proto: loki
 #!    - proto: n8n
